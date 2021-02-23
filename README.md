@@ -1,2 +1,2 @@
 # PES
-Projecte X
+Projecte FitHaus
