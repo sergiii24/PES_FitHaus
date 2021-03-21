@@ -10,4 +10,19 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+    <string name="DadesPersonals">Dades personals</string>
+    <string name="Nom">Nom</string>
+    <string name="Usuari">Usuari</string>
+    <string name="Contrasenya">Contrasenya</string>
+    <string name="Sexe">Sexe</string>
+    <string name="DataNaixement">Data naixement</string>
+    <string name="Logo">Logo</string>
+    <string name="SegüentPantalla">Següent pantalla</string>
+    <string name="DadesEsportives">Dades esportives</string>
+    <string name="NumActivitats">Nº activitats fetes</string>
+    <string name="Assoliments">Assoliments</string>
+    <string name="Punts">Punts</string>
+    <string name="Nivell">Nivell</string>
+    <string name="Objectiu">Objectiu</string>
+    <string name="CategoriesInterès">Categories d\'interès</string>
 </resources>

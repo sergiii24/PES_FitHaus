@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ConsultarPerfil2Activity">
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="92dp"
+        android:text="@string/SegüentPantalla"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/DataNaixement_bd" />
+
+    <TextView
+        android:id="@+id/DadesEsportives"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="150dp"
+        android:text="@string/DadesEsportives"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/Logo2"
+        android:layout_width="@dimen/LogoAmplada"
+        android:layout_height="@dimen/LogoAltura"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@string/Logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo_fithaus" />
+
+    <TextView
+        android:id="@+id/NumActivitats"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/NumActivitats"
+        app:layout_constraintStart_toStartOf="@+id/DadesEsportives"
+        app:layout_constraintTop_toBottomOf="@+id/DadesEsportives" />
+
+    <TextView
+        android:id="@+id/Assoliments"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/Assoliments"
+        app:layout_constraintStart_toStartOf="@+id/NumActivitats"
+        app:layout_constraintTop_toBottomOf="@+id/NumActivitats" />
+
+    <TextView
+        android:id="@+id/Punts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/Punts"
+        app:layout_constraintStart_toStartOf="@+id/Assoliments"
+        app:layout_constraintTop_toBottomOf="@+id/Assoliments" />
+
+    <TextView
+        android:id="@+id/Nivell"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/Nivell"
+        app:layout_constraintStart_toStartOf="@+id/Punts"
+        app:layout_constraintTop_toBottomOf="@+id/Punts" />
+
+    <TextView
+        android:id="@+id/Objectiu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/Objectiu"
+        app:layout_constraintStart_toStartOf="@+id/Nivell"
+        app:layout_constraintTop_toBottomOf="@+id/Nivell" />
+
+    <TextView
+        android:id="@+id/CategoriesInterès"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/CategoriesInterès"
+        app:layout_constraintStart_toStartOf="@+id/Objectiu"
+        app:layout_constraintTop_toBottomOf="@+id/Objectiu" />
+
+    <TextView
+        android:id="@+id/NumActivitats_bd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="148dp"
+        android:text="@string/NumActivitats"
+        app:layout_constraintStart_toStartOf="@+id/NumActivitats"
+        app:layout_constraintTop_toTopOf="@+id/NumActivitats" />
+
+    <TextView
+        android:id="@+id/Assoliments_bd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/Assoliments"
+        app:layout_constraintStart_toStartOf="@+id/NumActivitats_bd"
+        app:layout_constraintTop_toBottomOf="@+id/NumActivitats_bd" />
+
+    <TextView
+        android:id="@+id/Punts_bd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/Punts"
+        app:layout_constraintStart_toStartOf="@+id/Assoliments_bd"
+        app:layout_constraintTop_toBottomOf="@+id/Assoliments_bd" />
+
+    <TextView
+        android:id="@+id/Nivell_bd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/Nivell"
+        app:layout_constraintStart_toStartOf="@+id/Punts_bd"
+        app:layout_constraintTop_toBottomOf="@+id/Punts_bd" />
+
+    <TextView
+        android:id="@+id/Objectiu_bd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/Objectiu"
+        app:layout_constraintStart_toStartOf="@+id/Nivell_bd"
+        app:layout_constraintTop_toBottomOf="@+id/Nivell_bd" />
+
+    <TextView
+        android:id="@+id/CategoriesInterès_bd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/CategoriesInterès"
+        app:layout_constraintStart_toStartOf="@+id/Objectiu_bd"
+        app:layout_constraintTop_toBottomOf="@+id/Objectiu_bd" />
+</androidx.constraintlayout.widget.ConstraintLayout>

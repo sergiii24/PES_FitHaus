@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ConsultarPerfilActivity">
+
+    <ImageView
+        android:id="@+id/Logo"
+        android:layout_width="100dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@string/Logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo_fithaus" />
+
+    <TextView
+        android:id="@+id/DadesPersonals"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="150dp"
+        android:text="@string/DadesPersonals"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/Sexe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/Sexe"
+        app:layout_constraintStart_toStartOf="@+id/Contrasenya"
+        app:layout_constraintTop_toBottomOf="@+id/Contrasenya" />
+
+    <TextView
+        android:id="@+id/Contrasenya"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/Contrasenya"
+        app:layout_constraintStart_toStartOf="@+id/Usuari"
+        app:layout_constraintTop_toBottomOf="@+id/Usuari" />
+
+    <TextView
+        android:id="@+id/Usuari"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/Usuari"
+        app:layout_constraintStart_toStartOf="@+id/Nom"
+        app:layout_constraintTop_toBottomOf="@+id/Nom" />
+
+    <TextView
+        android:id="@+id/Nom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/Nom"
+        app:layout_constraintStart_toStartOf="@+id/DadesPersonals"
+        app:layout_constraintTop_toBottomOf="@+id/DadesPersonals" />
+
+    <TextView
+        android:id="@+id/DataNaixement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/DataNaixement"
+        app:layout_constraintStart_toStartOf="@+id/Sexe"
+        app:layout_constraintTop_toBottomOf="@+id/Sexe" />
+
+    <TextView
+        android:id="@+id/Nom_bd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="150dp"
+        android:text="@string/Nom"
+        app:layout_constraintStart_toStartOf="@+id/Nom"
+        app:layout_constraintTop_toTopOf="@+id/Nom" />
+
+    <TextView
+        android:id="@+id/Usuari_bd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/Usuari"
+        app:layout_constraintStart_toEndOf="@+id/Usuari"
+        app:layout_constraintStart_toStartOf="@+id/Nom_bd"
+        app:layout_constraintTop_toBottomOf="@+id/Nom_bd" />
+
+    <TextView
+        android:id="@+id/Contrasenya_bd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/Contrasenya"
+        app:layout_constraintStart_toEndOf="@+id/Contrasenya"
+        app:layout_constraintStart_toStartOf="@+id/Usuari_bd"
+        app:layout_constraintTop_toBottomOf="@+id/Usuari_bd" />
+
+    <TextView
+        android:id="@+id/Sexe_bd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/Sexe"
+        app:layout_constraintStart_toEndOf="@+id/Sexe"
+        app:layout_constraintStart_toStartOf="@+id/Contrasenya_bd"
+        app:layout_constraintTop_toBottomOf="@+id/Contrasenya_bd" />
+
+    <TextView
+        android:id="@+id/DataNaixement_bd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/DataNaixement"
+        app:layout_constraintStart_toEndOf="@+id/DataNaixement"
+        app:layout_constraintStart_toStartOf="@+id/Sexe_bd"
+        app:layout_constraintTop_toBottomOf="@+id/Sexe_bd" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/SegüentPantalla"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/DataNaixement_bd" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
