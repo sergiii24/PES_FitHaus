@@ -1,0 +1,136 @@
+package cat.fib.fithaus
+
+import android.app.DatePickerDialog
+import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.provider.MediaStore
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
+import android.util.Patterns
+import android.view.View
+import android.widget.CheckBox
+import android.widget.EditText
+import android.widget.RadioButton
+import android.widget.Toast
+import cat.fib.fithaus.ui.dialog.DatePickerFragment
+import java.util.*
+
+class CrearPerfilActivity : AppCompatActivity() {
+    var Nom: EditText? = null
+    var PrimerCognom: EditText? = null
+    var SegonCognom: EditText? = null
+    var NomUsuari: EditText? = null
+    var CorreuElectronic: EditText? = null
+    var Contrasenya: EditText? = null
+    var DataNaixement: EditText? = null
+    var Sexe_Dona: RadioButton? = null
+    var Sexe_Home: RadioButton? = null
+    var Sexe_Altre: RadioButton? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_crear_perfil)
+        //Asignem els valors de cada component de la interfície a les variables
+        Nom = findViewById (R.id.Nom)
+        PrimerCognom = findViewById (R.id.PrimerCognom)
+        SegonCognom = findViewById (R.id.SegonCognom)
+        NomUsuari = findViewById (R.id.NomUsuari)
+        CorreuElectronic = findViewById (R.id.CorreuElectronic)
+        Contrasenya = findViewById (R.id.Contrasenya)
+        DataNaixement = findViewById (R.id.DataNaixement)
+        DataNaixement?.setOnClickListener {
+            showDatePickerDialog()
+        }
+        Sexe_Dona = findViewById (R.id.Sexe_Dona)
+        Sexe_Home = findViewById (R.id.Sexe_Home)
+        Sexe_Altre = findViewById (R.id.Sexe_Altre)
+    }
+    //Definim un nou mètode per executar-lo al prémer el botó "Crear perfil"
+    fun Enviar(view: View) {
+
+        if (Nom?.text.toString().isEmpty()) Toast.makeText(this, "El camp Nom està buit", Toast.LENGTH_LONG).show();
+        else {
+            if (PrimerCognom?.text.toString().isEmpty()) Toast.makeText(this, "El camp Primer Cognom està buit", Toast.LENGTH_LONG).show()
+            else {
+                if (SegonCognom?.text.toString().isEmpty()) Toast.makeText(this, "El camp Segon Cognom està buit", Toast.LENGTH_LONG).show()
+                else {
+                    if (NomUsuari?.text.toString().isEmpty()) Toast.makeText(this, "El camp Nom Usuari està buit", Toast.LENGTH_LONG).show()
+                    else {
+                        if (CorreuElectronic?.text.toString().isEmpty()) Toast.makeText(this, "El camp Correu Electrònic està buit", Toast.LENGTH_LONG).show()
+                        else {
+                            if (!ContrasenyaValida(Contrasenya?.text.toString())) Toast.makeText(this, "La contrasenya ha de contenir com a mínim 8 caràcters amb una lletra mayúscula, una minúscula, un número i un símbol", Toast.LENGTH_LONG).show()
+                            else {
+                                if (Sexe_Dona?.isChecked == false && Sexe_Home?.isChecked == false && Sexe_Altre?.isChecked == false) Toast.makeText(this, "El Sexe no està seleccionat", Toast.LENGTH_LONG).show()
+                                else {
+                                    if (DataNaixement?.text.toString().isEmpty()) Toast.makeText(this, "El camp Data Naixement està buit", Toast.LENGTH_LONG).show()
+                                    else {
+                                        if (NomUsuari?.text.toString().isNotEmpty() && NomUsuari?.text.toString().length < 4) Toast.makeText(this, "El nom d'usuari ha de tenir 4 caràcters com a mínim", Toast.LENGTH_LONG).show()
+                                        else {
+                                            if (!Patterns.EMAIL_ADDRESS.matcher(CorreuElectronic?.text).matches()) Toast.makeText(this, "El correu electrònic no té el format correcte (fit@fithaus.com)", Toast.LENGTH_LONG).show()
+                                            else {
+                                                Toast.makeText(this, "Formulari complet!", Toast.LENGTH_LONG).show();
+                                                //Anar a la pantalla d'iniciar sessió amb el formulari complet
+                                                // val intent = Intent(this, LogInActivity::class.java).apply
+                                                //startActivity(intent)
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+    fun ContrasenyaValida (password: String): Boolean {
+        var valida: Boolean = true;
+        var minuscula: Int = 0
+        var mayuscula: Int = 0
+        var numero: Int = 0
+        var caracterespecial: Int = 0
+
+        if (password.length < 8) return false
+        var i: Int = 0
+        while (i < password.length) {
+            var c = password[i].toChar()
+            if (c <= ' ' || c > '~') {
+                valida = false
+                break
+            }
+            if ((c > ' ' && c < '0') || (c >= ':' && c < 'A') || (c >= '[' && c < 'a') || (c >= '{' && c < 127.toChar())) {
+                caracterespecial++;
+            }
+            if (c >= '0' && c < ':') numero++;
+            if (c >= 'A' && c < '[') mayuscula++;
+            if (c >= 'a' && c < '{') minuscula++;
+            i++
+        }
+        valida = valida && caracterespecial > 0 && numero > 0 && minuscula > 0 && mayuscula > 0;
+        return valida;
+    }
+
+
+    private fun showDatePickerDialog() {
+        val newFragment = DatePickerFragment.newInstance(DatePickerDialog.OnDateSetListener { _, year, month, day ->
+            val dayStr = day.twoDigits()
+            val monthStr = (month + 1).twoDigits() // +1 because January is zero
+            val selectedDate = "$dayStr/$monthStr/$year"
+            DataNaixement?.setText(selectedDate)
+        })
+
+        newFragment.show(supportFragmentManager, "datePicker")
+    }
+
+    fun Int.twoDigits() = if (this <= 9) "0$this" else this.toString()
+
+    /* fun Enrere(view: View) {
+         //Anar a la pantalla d'iniciar sessió sense omplir el formulari
+         val intent = Intent(this, LogInActivity::class.java).apply
+         startActivity(intent)
+     }*/
+
+}
