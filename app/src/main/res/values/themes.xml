@@ -22,4 +22,8 @@
     <style name="Theme.FitHaus.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.FitHaus.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="Theme.FitHaus.SplashScreen" parent="Theme.FitHaus">
+        <item name="android:windowBackground">@drawable/splashscreen</item>
+    </style>
 </resources>

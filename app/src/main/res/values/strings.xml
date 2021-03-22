@@ -10,4 +10,9 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+    <string name="button_google">Continuar amb Google</string>
+    <string name="button_facebook">Continuar amb Facebook</string>
+
+    <string name="facebook_app_id">344349210333001</string>
+    <string name="fb_login_protocol_scheme">fb344349210333001</string>
 </resources>
