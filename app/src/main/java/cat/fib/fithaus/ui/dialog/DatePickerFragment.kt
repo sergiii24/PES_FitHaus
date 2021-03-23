@@ -6,10 +6,25 @@ import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 import java.util.*
 
+/** Classe DatePickerFragment
+ *
+ *  Classe que implementa el calendari per seleccionar la data de naixement de l'usuari
+ *
+ *  @constructor Crea un listener amb valor nul
+ *  @author Daniel Cárdenas.
+ */
 class DatePickerFragment : DialogFragment() {
 
     private var listener: DatePickerDialog.OnDateSetListener? = null
 
+    /** Funció inicialitzadora
+     *
+     *  Funció que inicialitza un calendari en un rang desde fa 110 anys fins fa 7 anys i retorna un dialog.
+     *
+     *  @param savedInstanceState
+     *  @return Retorna un Dialog.
+     *  @author Daniel Cárdenas.
+     */
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val c = Calendar.getInstance()
         val year = c.get(Calendar.YEAR)
@@ -21,7 +36,6 @@ class DatePickerFragment : DialogFragment() {
         datePickerDialog.datePicker.minDate = c.timeInMillis
         c.set(Calendar.YEAR, year - 7)
         datePickerDialog.datePicker.maxDate = c.timeInMillis
-       // return DatePickerDialog(requireActivity(), listener, year, month, day)
         return datePickerDialog
     }
 

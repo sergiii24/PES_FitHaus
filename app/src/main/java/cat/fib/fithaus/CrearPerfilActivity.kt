@@ -16,6 +16,14 @@ import android.widget.Toast
 import cat.fib.fithaus.ui.dialog.DatePickerFragment
 import java.util.*
 
+
+/** Classe CrearPerfil
+ *
+ *  Classe on es crea el perfil d'un usuari amb els camps principals necessaris.
+ *
+ *  @constructor Crea un perfil d'usuari amb tots els camps amb valor nul.
+ *  @author Daniel Cárdenas.
+*/
 class CrearPerfilActivity : AppCompatActivity() {
     var Nom: EditText? = null
     var PrimerCognom: EditText? = null
@@ -28,6 +36,13 @@ class CrearPerfilActivity : AppCompatActivity() {
     var Sexe_Home: RadioButton? = null
     var Sexe_Altre: RadioButton? = null
 
+    /** Funció inicialitzadora
+     *
+     *  Funció que fa que es mostri la pantalla a l'usuari i que inicialitza totes les variables.
+     *
+     *  @param savedInstanceState
+     *  @author Daniel Cárdenas.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_crear_perfil)
@@ -46,6 +61,14 @@ class CrearPerfilActivity : AppCompatActivity() {
         Sexe_Home = findViewById (R.id.Sexe_Home)
         Sexe_Altre = findViewById (R.id.Sexe_Altre)
     }
+
+    /** Funció Enviar
+     *
+     *  Funció que comprova tots els possibles errors dels camps a omplir.
+     *
+     *  @param view
+     *  @author Daniel Cárdenas.
+     */
     //Definim un nou mètode per executar-lo al prémer el botó "Crear perfil"
     fun Enviar(view: View) {
 
@@ -86,6 +109,14 @@ class CrearPerfilActivity : AppCompatActivity() {
     }
 
 
+    /** Funció ContrasenyaValida
+     *
+     *  Funció que comprova si una contrasenya és vàlida o no, comprovant que tingui com a mínim 8 caràcters amb una lletra majúscula, una minúscula, un número i un símbol.
+     *
+     *  @param password
+     *  @return Retorna el booleà valida si es compleixen les condicions
+     *  @author Daniel Cárdenas.
+     */
     fun ContrasenyaValida (password: String): Boolean {
         var valida: Boolean = true;
         var minuscula: Int = 0
@@ -114,6 +145,12 @@ class CrearPerfilActivity : AppCompatActivity() {
     }
 
 
+    /** Funció showDatePickerDialog
+     *
+     *  Funció que selecciona la data marcada en el fragment del calendari i l'assigna a la data de naixement de l'usuari.
+     *
+     *  @author Daniel Cárdenas.
+     */
     private fun showDatePickerDialog() {
         val newFragment = DatePickerFragment.newInstance(DatePickerDialog.OnDateSetListener { _, year, month, day ->
             val dayStr = day.twoDigits()
@@ -125,8 +162,21 @@ class CrearPerfilActivity : AppCompatActivity() {
         newFragment.show(supportFragmentManager, "datePicker")
     }
 
+    /** Funció twoDigits
+     *
+     *  Funció que afegeix el dígit '0' davant d'un nombre menor que 10.
+     *
+     *  @author Daniel Cárdenas.
+     */
     fun Int.twoDigits() = if (this <= 9) "0$this" else this.toString()
 
+    /** Funció Enrere
+     *
+     *  Funció que mostra la interfície d'inici de sessió.
+     *
+     *  @param view
+     *  @author Daniel Cárdenas.
+     */
     /* fun Enrere(view: View) {
          //Anar a la pantalla d'iniciar sessió sense omplir el formulari
          val intent = Intent(this, LogInActivity::class.java).apply
