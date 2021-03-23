@@ -25,4 +25,12 @@
     <string name="Nivell">Nivell</string>
     <string name="Objectiu">Objectiu</string>
     <string name="CategoriesInterès">Categories d\'interès</string>
+    <string name="Anterior_Pantalla">Anterior pantalla</string>
+    <string name="TancaSessio">Tanca sessió</string>
+    <string name="DadesFísiques">Dades físiques</string>
+    <string name="Pes">Pes</string>
+    <string name="Alçada">Alçada</string>
+    <string name="IMC">IMC</string>
+    <string name="IGC">IGC</string>
+    <string name="Històric">Històric</string>
 </resources>

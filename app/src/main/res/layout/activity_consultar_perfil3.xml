@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ConsultarPerfil3Activity">
+
+    <Button
+        android:id="@+id/AnteriorPantalla2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Anterior_Pantalla"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Històric"
+        app:layout_constraintVertical_bias="0.52" />
+
+    <TextView
+        android:id="@+id/Pes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/Pes"
+        app:layout_constraintStart_toStartOf="@+id/DadesFísiques"
+        app:layout_constraintTop_toBottomOf="@+id/DadesFísiques" />
+
+    <TextView
+        android:id="@+id/Alçada"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/Alçada"
+        app:layout_constraintStart_toStartOf="@+id/DadesFísiques"
+        app:layout_constraintTop_toBottomOf="@+id/Pes" />
+
+    <TextView
+        android:id="@+id/IMC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/IMC"
+        app:layout_constraintStart_toStartOf="@+id/DadesFísiques"
+        app:layout_constraintTop_toBottomOf="@+id/Alçada" />
+
+    <TextView
+        android:id="@+id/IGC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/IGC"
+        app:layout_constraintStart_toStartOf="@+id/DadesFísiques"
+        app:layout_constraintTop_toBottomOf="@+id/IMC" />
+
+    <TextView
+        android:id="@+id/Històric"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/Històric"
+        app:layout_constraintStart_toStartOf="@+id/DadesFísiques"
+        app:layout_constraintTop_toBottomOf="@+id/IGC" />
+
+    <TextView
+        android:id="@+id/DadesFísiques"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="150dp"
+        android:text="@string/DadesFísiques"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="@dimen/LogoAmplada"
+        android:layout_height="@dimen/LogoAltura"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@string/Logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo_fithaus" />
+
+    <TextView
+        android:id="@+id/Pes_bd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="150dp"
+        android:text="@string/Pes"
+        app:layout_constraintStart_toStartOf="@+id/Pes"
+        app:layout_constraintTop_toTopOf="@+id/Pes" />
+
+    <TextView
+        android:id="@+id/alçada_bd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/Alçada"
+        app:layout_constraintStart_toStartOf="@+id/Pes_bd"
+        app:layout_constraintTop_toBottomOf="@+id/Pes_bd" />
+
+    <TextView
+        android:id="@+id/igc_bd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/IGC"
+        app:layout_constraintStart_toStartOf="@+id/imc_bd"
+        app:layout_constraintTop_toBottomOf="@+id/imc_bd" />
+
+    <TextView
+        android:id="@+id/imc_bd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/IMC"
+        app:layout_constraintStart_toStartOf="@+id/alçada_bd"
+        app:layout_constraintTop_toBottomOf="@+id/alçada_bd" />
+</androidx.constraintlayout.widget.ConstraintLayout>

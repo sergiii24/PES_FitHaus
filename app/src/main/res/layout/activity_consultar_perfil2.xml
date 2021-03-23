@@ -7,17 +7,15 @@
     tools:context=".ConsultarPerfil2Activity">
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/SegüentPantalla"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="92dp"
         android:text="@string/SegüentPantalla"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/DataNaixement_bd" />
+        app:layout_constraintStart_toEndOf="@+id/AnteriorPantalla"
+        app:layout_constraintTop_toBottomOf="@+id/CategoriesInterès_bd"
+        app:layout_constraintVertical_bias="0.507" />
 
     <TextView
         android:id="@+id/DadesEsportives"
@@ -98,7 +96,7 @@
         android:id="@+id/NumActivitats_bd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="148dp"
+        android:layout_marginStart="150dp"
         android:text="@string/NumActivitats"
         app:layout_constraintStart_toStartOf="@+id/NumActivitats"
         app:layout_constraintTop_toTopOf="@+id/NumActivitats" />
@@ -147,4 +145,13 @@
         android:text="@string/CategoriesInterès"
         app:layout_constraintStart_toStartOf="@+id/Objectiu_bd"
         app:layout_constraintTop_toBottomOf="@+id/Objectiu_bd" />
+
+    <Button
+        android:id="@+id/AnteriorPantalla"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Anterior_Pantalla"
+        app:layout_constraintEnd_toStartOf="@+id/SegüentPantalla"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/SegüentPantalla" />
 </androidx.constraintlayout.widget.ConstraintLayout>
