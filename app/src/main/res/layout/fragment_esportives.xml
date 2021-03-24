@@ -4,39 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ConsultarPerfil2Activity">
-
-    <Button
-        android:id="@+id/SegüentPantalla"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/SegüentPantalla"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/AnteriorPantalla"
-        app:layout_constraintTop_toBottomOf="@+id/CategoriesInterès_bd"
-        app:layout_constraintVertical_bias="0.507" />
+    tools:context=".ConsultarPerfilActivity">
 
     <TextView
         android:id="@+id/DadesEsportives"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="150dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="24dp"
         android:text="@string/DadesEsportives"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/Logo2"
-        android:layout_width="@dimen/LogoAmplada"
-        android:layout_height="@dimen/LogoAltura"
-        android:layout_marginTop="16dp"
-        android:contentDescription="@string/Logo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo_fithaus" />
 
     <TextView
         android:id="@+id/NumActivitats"
@@ -146,12 +124,4 @@
         app:layout_constraintStart_toStartOf="@+id/Objectiu_bd"
         app:layout_constraintTop_toBottomOf="@+id/Objectiu_bd" />
 
-    <Button
-        android:id="@+id/AnteriorPantalla"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/Anterior_Pantalla"
-        app:layout_constraintEnd_toStartOf="@+id/SegüentPantalla"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/SegüentPantalla" />
 </androidx.constraintlayout.widget.ConstraintLayout>
