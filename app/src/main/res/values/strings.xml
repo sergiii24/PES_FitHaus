@@ -10,4 +10,8 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+    <string name="PreguntaTancarSessió">Estàs segur que vols tancar sessió?</string>
+    <string name="IniciarSessio">Iniciar sessió</string>
+    <string name="Logo">Logo</string>
+    <string name="TancarSessió">Tancar sessió</string>
 </resources>
