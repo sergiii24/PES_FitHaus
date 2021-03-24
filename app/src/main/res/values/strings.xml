@@ -34,4 +34,10 @@
     <string name="IGC">IGC</string>
     <string name="Històric">Històric</string>
     <string name="ModificarPerfil">Modificar perfil</string>
+    <string name="title_activity_main2">MainActivity2</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="Fragment1">Fragment 1</string>
+    <string name="PantallaInciarSessió">Iniciar Sessió</string>
+    <string name="PantallaModificarPerfil">Modificar perfil</string>
 </resources>

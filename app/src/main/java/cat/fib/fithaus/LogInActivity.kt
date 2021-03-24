@@ -1,11 +1,11 @@
 package cat.fib.fithaus
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 
-class ConsultarPerfil3Activity : AppCompatActivity() {
+class LogInActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.fragment_fisiques)
+        setContentView(R.layout.activity_log_in)
     }
 }
