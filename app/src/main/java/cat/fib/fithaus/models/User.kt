@@ -1,0 +1,49 @@
+package cat.fib.fithaus.models
+
+import com.google.gson.annotations.SerializedName
+import java.time.Instant
+import java.util.*
+
+class User(
+        @SerializedName("id")
+        var id: Int = -1,
+        @SerializedName("firstname")
+        var firstname: String = "",
+        @SerializedName("lastname")
+        var lastname: String = "",
+        @SerializedName("username")
+        var username: String = "",
+        @SerializedName("achievements")
+        var achievements: String = "",
+        @SerializedName("password")
+        var password: String = "",
+        @SerializedName("activitiesdone")
+        var activitiesdone: Int = 0,
+        @SerializedName("points")
+        var points: Int = 0,
+        @SerializedName("level")
+        var level: Int = 0,
+        @SerializedName("objectives")
+        var objectives: Int = 0,
+        @SerializedName("interestcategories")
+        var interestcategories: String = "",
+        @SerializedName("weight")
+        var weight: Int = 0,
+        @SerializedName("height")
+        var height: Int = 0,
+        @SerializedName("imc")
+        var imc: Int = 0,
+        @SerializedName("igc")
+        var igc: Int = 0,
+        @SerializedName("historic")
+        var historic: Int = 0,
+        @SerializedName("email")
+        var email: String = "",
+        @SerializedName("gender")
+        var gender: String = "",
+        @SerializedName("birthdate")
+        var birthdate: Date = Date.from(Instant.now())
+
+){
+
+}
