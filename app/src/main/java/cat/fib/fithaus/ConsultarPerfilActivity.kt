@@ -3,6 +3,7 @@ package cat.fib.fithaus
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import cat.fib.fithaus.models.User
 import cat.fib.fithaus.ui.*
@@ -88,8 +89,8 @@ class ConsultarPerfilActivity : AppCompatActivity() {
             val user: TextView = findViewById(R.id.Usuari_bd)
             user.text = response.username
 
-            val pass: TextView = findViewById(R.id.Contrasenya_bd)
-            pass.text = response.password
+            val mai: TextView = findViewById(R.id.Mail_bd)
+            mai.text = response.email
 
             val sex: TextView = findViewById(R.id.Sexe_bd)
             sex.text = response.gender

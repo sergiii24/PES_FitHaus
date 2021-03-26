@@ -41,5 +41,7 @@
     <string name="PantallaInciarSessió">Iniciar Sessió</string>
     <string name="PantallaModificarPerfil">Modificar perfil</string>
     <string name="Històric_bd">Històric IMC i IGC</string>
+    <string name="Mail">Correu electrònic</string>
+    <string name="Mail_bd">Correu electrònic</string>
 
 </resources>

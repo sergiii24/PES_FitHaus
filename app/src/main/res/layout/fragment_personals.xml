@@ -25,15 +25,15 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="@string/Sexe"
-        app:layout_constraintStart_toStartOf="@+id/Contrasenya"
-        app:layout_constraintTop_toBottomOf="@+id/Contrasenya" />
+        app:layout_constraintStart_toStartOf="@+id/Mail"
+        app:layout_constraintTop_toBottomOf="@+id/Mail" />
 
     <TextView
-        android:id="@+id/Contrasenya"
+        android:id="@+id/Mail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="@string/Contrasenya"
+        android:text="@string/Mail"
         app:layout_constraintStart_toStartOf="@+id/Usuari"
         app:layout_constraintTop_toBottomOf="@+id/Usuari" />
 
@@ -84,13 +84,12 @@
         app:layout_constraintTop_toBottomOf="@+id/Nom_bd" />
 
     <TextView
-        android:id="@+id/Contrasenya_bd"
+        android:id="@+id/Mail_bd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:password="true"
-        android:text="@string/Contrasenya"
-        app:layout_constraintStart_toEndOf="@+id/Contrasenya"
+        android:text="@string/Mail_bd"
+        app:layout_constraintStart_toEndOf="@+id/Mail"
         app:layout_constraintStart_toStartOf="@+id/Usuari_bd"
         app:layout_constraintTop_toBottomOf="@+id/Usuari_bd" />
 
@@ -101,8 +100,8 @@
         android:layout_marginTop="24dp"
         android:text="@string/Sexe"
         app:layout_constraintStart_toEndOf="@+id/Sexe"
-        app:layout_constraintStart_toStartOf="@+id/Contrasenya_bd"
-        app:layout_constraintTop_toBottomOf="@+id/Contrasenya_bd" />
+        app:layout_constraintStart_toStartOf="@+id/Mail_bd"
+        app:layout_constraintTop_toBottomOf="@+id/Mail_bd" />
 
     <TextView
         android:id="@+id/DataNaixement_bd"
