@@ -2,14 +2,10 @@ package cat.fib.fithaus
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import cat.fib.fithaus.api.ApiServices
 import cat.fib.fithaus.models.User
 import cat.fib.fithaus.ui.*
-import com.android.volley.Response
 import com.google.android.gms.security.ProviderInstaller
 
 class ConsultarPerfilActivity : AppCompatActivity() {
@@ -30,7 +26,6 @@ class ConsultarPerfilActivity : AppCompatActivity() {
         val btnFragmentPersonals: Button = findViewById(R.id.DadesPersonals)
         val btnFragmentEsportives: Button = findViewById(R.id.DadesEsportives)
         val btnFragmentFisiques: Button = findViewById(R.id.DadesFísiques)
-        val btnTancarSessio: Button = findViewById(R.id.TancarSessio)
         val btnModificarPerfil: Button = findViewById(R.id.ModificarPerfil)
 
 
@@ -66,19 +61,13 @@ class ConsultarPerfilActivity : AppCompatActivity() {
             }
         }
 
-        //Quan cliquem al botó de tancar sessió anem a la pantalla de Log In
-        btnTancarSessio.setOnClickListener {
-            val intent = Intent(this@ConsultarPerfilActivity, LogInActivity::class.java)
-            startActivity(intent)
-        }
-
         //Quan cliquem al botó de modificar perfil anem a la pantalla d'aquesta activitat
         btnModificarPerfil.setOnClickListener {
             val intent = Intent(this@ConsultarPerfilActivity, ModificarPerfilActivity::class.java)
             startActivity(intent)
         }
-
     }
+
 
     fun getUserData() {
         //TODO: get id user
@@ -122,7 +111,7 @@ class ConsultarPerfilActivity : AppCompatActivity() {
             lvl.text = response.level
 
             val obj: TextView = findViewById(R.id.Objectiu_bd)
-            obj.text = response.objective
+            obj.text = response.objectives
 
             val cat: TextView = findViewById(R.id.CategoriesInterès_bd)
             cat.text = response.interestcategories
@@ -140,10 +129,9 @@ class ConsultarPerfilActivity : AppCompatActivity() {
             val igc: TextView = findViewById(R.id.Igc_bd)
             igc.text = response.igc
 
-            /*TODO extreure la info de l'històric i afegir-la al seu camp
             val hist: TextView = findViewById(R.id.Històric_bd)
-            hist.text = response.history
-            */
+            hist.text = response.historic
+
         }
 
     }
@@ -151,6 +139,6 @@ class ConsultarPerfilActivity : AppCompatActivity() {
     fun errorListener(): Response.ErrorListener {
         return Response.ErrorListener { it ->
             Log.println(Log.ERROR, "API", it.toString())
-         }
         }
     }
+}

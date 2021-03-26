@@ -62,22 +62,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/ModificarPerfil"
-        app:layout_constraintBottom_toTopOf="@+id/TancarSessio"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/flFragment"
-        app:layout_constraintVertical_bias="0.16000003" />
+        app:layout_constraintTop_toBottomOf="@+id/flFragment" />
 
-    <Button
-        android:id="@+id/TancarSessio"
+    <fragment
+        android:id="@+id/fragment"
+        android:name="cat.fib.fithaus.ui.TancarSessioFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/TancarSessio"
+        android:tag="@string/Fragment1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ModificarPerfil"
-        app:layout_constraintVertical_bias="0.204" />
+        app:layout_constraintVertical_bias="0.271" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
