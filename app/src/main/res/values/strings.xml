@@ -62,4 +62,12 @@
     <string name="Data_Naixement">Data Naixement</string>
     <string name="Checkbox_Contrasenya">Mostrar</string>
     <string name="BotonTitulo">CrearPerfil</string>
+    <string name="button_programes">Programes</string>
+    <string name="button_rutines">Rutines</string>
+    <string name="button_colleccio">Col·lecció</string>
+    <string name="edit_email">Email</string>
+    <string name="enter_password">Password</string>
+    <string name="registrar_button">Registra\'t</string>
+    <string name="login_button">Iniciar sessió</string>
+    <string name="RegisterQuestion">Et vols registrar?</string>
 </resources>
