@@ -49,4 +49,17 @@
     <string name="TancarSessió">Tancar sessió</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="Títol">Crea el teu perfil</string>
+    <string name="Text_Botó">Crear perfil</string>
+    <string name="Cognom1">Primer cognom</string>
+    <string name="Cognom2">Segon Cognom</string>
+    <string name="Email">Correu Electrònic</string>
+    <string name="Password">Contrasenya</string>
+    <string name="Sexe_home">Home</string>
+    <string name="Sexe_Dona">Dona</string>
+    <string name="Sexe_Altre">Altre</string>
+    <string name="Username">Nom Usuari</string>
+    <string name="Data_Naixement">Data Naixement</string>
+    <string name="Checkbox_Contrasenya">Mostrar</string>
+    <string name="BotonTitulo">CrearPerfil</string>
 </resources>
