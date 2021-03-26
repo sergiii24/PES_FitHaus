@@ -43,7 +43,6 @@ class User(
         var gender: String = "",
         @SerializedName("birthdate")
         var birthdate: Date = Date.from(Instant.now())
-
 ){
 
 }
