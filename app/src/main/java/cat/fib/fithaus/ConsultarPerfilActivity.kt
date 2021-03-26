@@ -2,11 +2,14 @@ package cat.fib.fithaus
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import cat.fib.fithaus.api.ApiServices
 import cat.fib.fithaus.models.User
 import cat.fib.fithaus.ui.*
+import com.android.volley.Response
 import com.google.android.gms.security.ProviderInstaller
 
 class ConsultarPerfilActivity : AppCompatActivity() {
@@ -96,42 +99,42 @@ class ConsultarPerfilActivity : AppCompatActivity() {
             sex.text = response.gender
 
             val bdate: TextView = findViewById(R.id.DataNaixement_bd)
-            bdate.text = response.birthdate
+            bdate.text = response.birthdate.toString()
 
             //dades esportives
             val act: TextView = findViewById(R.id.NumActivitats_bd)
-            act.text = response.activitiesdone
+            act.text = response.activitiesdone.toString()
 
             val ass: TextView = findViewById(R.id.Assoliments_bd)
             ass.text = response.achievements
 
             val pts: TextView = findViewById(R.id.Punts_bd)
-            pts.text = response.points
+            pts.text = response.points.toString()
 
             val lvl: TextView = findViewById(R.id.Nivell_bd)
-            lvl.text = response.level
+            lvl.text = response.level.toString()
 
             val obj: TextView = findViewById(R.id.Objectiu_bd)
-            obj.text = response.objectives
+            obj.text = response.objectives.toString()
 
             val cat: TextView = findViewById(R.id.CategoriesInterès_bd)
             cat.text = response.interestcategories
 
             //dades físiques
             val pes: TextView = findViewById(R.id.Pes_bd)
-            pes.text = response.weight
+            pes.text = response.weight.toString()
 
             val alt: TextView = findViewById(R.id.Alçada_bd)
-            alt.text = response.height
+            alt.text = response.height.toString()
 
             val imc: TextView = findViewById(R.id.Imc_bd)
-            imc.text = response.imc
+            imc.text = response.imc.toString()
 
             val igc: TextView = findViewById(R.id.Igc_bd)
-            igc.text = response.igc
+            igc.text = response.igc.toString()
 
             val hist: TextView = findViewById(R.id.Històric_bd)
-            hist.text = response.historic
+            hist.text = response.historic.toString()
 
         }
 
