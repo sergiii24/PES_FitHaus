@@ -3,8 +3,13 @@ package cat.fib.fithaus
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 
-//Està creada només per a poder posar el fragment, no té cap més utilitat
-
+/** Classe Tancar Sessió
+ *
+ *  Classe on es tanca la sessió d'un usuari.
+ *
+ *  @constructor Mostra el fragment de tancar sessió.
+ *  @author Oriol Prat.
+ */
 class TancarSessioActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

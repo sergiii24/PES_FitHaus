@@ -10,7 +10,22 @@ import androidx.fragment.app.Fragment
 import cat.fib.fithaus.LogInActivity
 import cat.fib.fithaus.R
 
+/** Classe Fragment Tancar Sessió
+ *
+ *  Classe on hi ha el fragment de tancar la sessió d'un usuari.
+ *
+ *  @author Oriol Prat.
+ */
 class TancarSessioFragment : Fragment(R.layout.fragment_tancar_sessio) {
+
+    /** Funció onViewCreated
+     *
+     *  Funció que inicialitza la variable del botó i de la barra de progrés i treballa amb el listener del botó.
+     *
+     *  @param view
+     *  @param savedInstanceState
+     *  @author Oriol Prat.
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
