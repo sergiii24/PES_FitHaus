@@ -1,19 +1,45 @@
 package cat.fib.fithaus
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
 import android.view.View
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import com.android.volley.toolbox.*
 import kotlinx.android.synthetic.main.activity_log_in.*
+import java.util.regex.Matcher
 
+/** Classe Activity LogIn
+ *
+ *  Activity on es troba tota la lògica per poder fer Log In de l'app i accedir al registre.
+ *
+ *  @constructor Crea un perfil d'usuari amb tots els camps amb valor nul.
+ *  @author Adrià Espinola.
+ */
 class LogInActivity : AppCompatActivity() {
+
+    /** Funció inicialitzadora
+     *
+     *  Funció que fa que es mostri la pantalla de logIn a l'usuari.
+     *
+     *  @param savedInstanceState
+     *  @author Adrià Espinola.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_log_in)
     }
 
+    /** Funció signIn
+     *
+     *  Funció que comprova si els camps Email i Password són correctes per iniciar sessió.
+     *
+     *  @param view
+     *  @author Adrià Espinola.
+     */
     fun signIn(view: View) {
         var emailEmpty: Boolean = true
         var passwordEmpty = true
@@ -26,29 +52,46 @@ class LogInActivity : AppCompatActivity() {
         else showHome()
     }
 
+    /** Funció signUp
+     *
+     *  Funció que fa que es mostri la pantalla de CrearPerfilActivity (Crear Perfil) a l'usuari.
+     *
+     *  @param view
+     *  @author Adrià Espinola.
+     */
     fun signUp(view: View) {
         //Canviar MainActivity a CrearPerfilActivity quan es fagi el Merge
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }
 
+    /** Funció showHome
+     *
+     *  Funció que fa que es mostri la pantalla MainActivity (Pantalla principal Home) a l'usuari un cop hagi iniciat sessió.
+     *
+     *  @param savedInstanceState
+     *  @author Adrià Espinola.
+     */
     private fun showHome() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }
 
+    /** Funció showAlert
+     *
+     *  Funció que mostra un missatge d'error en format Toast segons els paràmetres d'entrada.
+     *
+     *  @param emailEmpty @param[passwordEmpty] @param[format]
+     *  @author Adrià Espinola.
+     */
     private fun showAlert(emailEmpty: Boolean, passwordEmpty: Boolean, format: Boolean) {
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle("Error")
         when {
-            emailEmpty and passwordEmpty -> builder.setMessage("Els camps Email i Password estan buits")
-            emailEmpty -> builder.setMessage("El camp Email és buit")
-            passwordEmpty -> builder.setMessage("El camp Password és buit")
-            format -> builder.setMessage("El format del Email és incorrecte")
+            emailEmpty and passwordEmpty -> Toast.makeText(this, "Els camps Email i Password estan buits", Toast.LENGTH_LONG).show()
+            emailEmpty -> Toast.makeText(this, "El camp Email és buit", Toast.LENGTH_LONG).show()
+            passwordEmpty -> Toast.makeText(this, "El camp Password és buit", Toast.LENGTH_LONG).show()
+            format -> Toast.makeText(this, "El format del Email és incorrecte", Toast.LENGTH_LONG).show()
         }
-        //builder.setMessage("S'ha produït un error d'autenticació")
-        builder.setPositiveButton("Acceptar", null)
-        val dialog: AlertDialog = builder.create()
-        dialog.show()
+
     }
+
 }

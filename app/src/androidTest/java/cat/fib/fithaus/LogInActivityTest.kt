@@ -1,0 +1,59 @@
+package cat.fib.fithaus
+
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions
+import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
+import junit.framework.Assert.assertEquals
+import junit.framework.TestCase
+import androidx.test.espresso.action.ViewActions.*
+import androidx.test.espresso.matcher.ViewMatchers.*
+import androidx.test.rule.ActivityTestRule
+import org.junit.Rule
+import org.junit.Test
+import org.junit.runner.RunWith
+
+@RunWith(AndroidJUnit4ClassRunner::class)
+class LogInActivityTest {
+    val EXPECTED_ERROR2 = "El format del Email és incorrecte"
+
+    @Rule
+    @JvmField
+    val rule: ActivityTestRule<LogInActivity> = ActivityTestRule(LogInActivity::class.java)
+
+    @Test
+    fun user_can_enter_email() {
+        onView(withId(R.id.editTextTextEmailAddress)).perform(typeText("adria@gmail.com"))
+    }
+
+    @Test
+    fun user_can_enter_password() {
+        onView(withId(R.id.editTextTextPassword)).perform(typeText("123456"))
+    }
+
+    @Test
+    fun user_can_enter_email_password() {
+        onView(withId(R.id.editTextTextEmailAddress)).perform(typeText("adria@mail.com"))
+        onView(withId(R.id.editTextTextPassword)).perform(typeText("123456"))
+    }
+
+    @Test
+    fun user_enter_email_password_check_format_correct() {
+        onView(withId(R.id.editTextTextEmailAddress)).perform(typeText("adria@mail.com"))
+        onView(withId(R.id.editTextTextPassword)).perform(typeText("123456"))
+        onView(withId(R.id.signInButton)).perform(click())
+    }
+
+    @Test
+    fun test_incorrect_format_email() {
+        val EXPECTED_ERROR = "El format del Email és incorrecte"
+        onView(withId(R.id.editTextTextEmailAddress)).perform(typeText("adria"))
+        onView(withId(R.id.editTextTextPassword)).perform(typeText("123456"), closeSoftKeyboard())
+        onView(withId(R.id.signInButton)).perform(ViewActions.click())
+        //onView(withText(EXPECTED_ERROR)).inRoot(ToastMatcher()).check(matches(isDisplayed()))
+        //onView(withText(buildToastMessage(EXPECTED_ERROR2))).inRoot(ToastMatcher()).check(matches(isDisplayed()))
+    }
+
+
+}
