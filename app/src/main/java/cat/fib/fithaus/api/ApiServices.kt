@@ -16,7 +16,7 @@ class ApiServices() {
                 errorListener: Response.ErrorListener
         ) {
 
-            val url = "https://192.168.1.137:8000/users/$id"
+            val url = "https://192.168.1.131:8000/users/$id"
             val headers: MutableMap<String, String> = HashMap()
             val g: Request<User> = ApiRequests(url, User::class.java, headers, listener, errorListener)
             Log.println(Log.INFO, "API", g.toString())
