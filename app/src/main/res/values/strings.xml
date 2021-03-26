@@ -40,4 +40,5 @@
     <string name="Fragment1">Fragment 1</string>
     <string name="PantallaInciarSessió">Iniciar Sessió</string>
     <string name="PantallaModificarPerfil">Modificar perfil</string>
+    <string name="Històric_bd">Històric IMC i IGC</string>
 </resources>

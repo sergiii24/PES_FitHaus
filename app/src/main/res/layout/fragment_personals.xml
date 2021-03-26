@@ -14,6 +14,8 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="24dp"
         android:text="@string/DadesPersonals"
+        android:textColor="#000000"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -86,6 +88,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        android:password="true"
         android:text="@string/Contrasenya"
         app:layout_constraintStart_toEndOf="@+id/Contrasenya"
         app:layout_constraintStart_toStartOf="@+id/Usuari_bd"

@@ -92,8 +92,9 @@ class ConsultarPerfilActivity : AppCompatActivity() {
 
             user = response
 
+            //dades personals
             val name: TextView = findViewById(R.id.Nom_bd)
-            name.text = response.firstname.plus("").plus(response.lastname)
+            name.text = response.firstname.plus(" ").plus(response.lastname)
 
             val user: TextView = findViewById(R.id.Usuari_bd)
             user.text = response.username
@@ -101,6 +102,48 @@ class ConsultarPerfilActivity : AppCompatActivity() {
             val pass: TextView = findViewById(R.id.Contrasenya_bd)
             pass.text = response.password
 
+            val sex: TextView = findViewById(R.id.Sexe_bd)
+            sex.text = response.gender
+
+            val bdate: TextView = findViewById(R.id.DataNaixement_bd)
+            bdate.text = response.birthdate
+
+            //dades esportives
+            val act: TextView = findViewById(R.id.NumActivitats_bd)
+            act.text = response.activitiesdone
+
+            val ass: TextView = findViewById(R.id.Assoliments_bd)
+            ass.text = response.achievements
+
+            val pts: TextView = findViewById(R.id.Punts_bd)
+            pts.text = response.points
+
+            val lvl: TextView = findViewById(R.id.Nivell_bd)
+            lvl.text = response.level
+
+            val obj: TextView = findViewById(R.id.Objectiu_bd)
+            obj.text = response.objective
+
+            val cat: TextView = findViewById(R.id.CategoriesInterès_bd)
+            cat.text = response.interestcategories
+
+            //dades físiques
+            val pes: TextView = findViewById(R.id.Pes_bd)
+            pes.text = response.weight
+
+            val alt: TextView = findViewById(R.id.Alçada_bd)
+            alt.text = response.height
+
+            val imc: TextView = findViewById(R.id.Imc_bd)
+            imc.text = response.imc
+
+            val igc: TextView = findViewById(R.id.Igc_bd)
+            igc.text = response.igc
+
+            /*TODO extreure la info de l'històric i afegir-la al seu camp
+            val hist: TextView = findViewById(R.id.Històric_bd)
+            hist.text = response.history
+            */
         }
 
     }

@@ -58,6 +58,8 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="24dp"
         android:text="@string/DadesFísiques"
+        android:textColor="@color/black"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -71,7 +73,7 @@
         app:layout_constraintTop_toTopOf="@+id/Pes" />
 
     <TextView
-        android:id="@+id/alçada_bd"
+        android:id="@+id/Alçada_bd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -80,20 +82,29 @@
         app:layout_constraintTop_toBottomOf="@+id/Pes_bd" />
 
     <TextView
-        android:id="@+id/igc_bd"
+        android:id="@+id/Igc_bd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="@string/IGC"
-        app:layout_constraintStart_toStartOf="@+id/imc_bd"
-        app:layout_constraintTop_toBottomOf="@+id/imc_bd" />
+        app:layout_constraintStart_toStartOf="@+id/Imc_bd"
+        app:layout_constraintTop_toBottomOf="@+id/Imc_bd" />
 
     <TextView
-        android:id="@+id/imc_bd"
+        android:id="@+id/Imc_bd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="@string/IMC"
-        app:layout_constraintStart_toStartOf="@+id/alçada_bd"
-        app:layout_constraintTop_toBottomOf="@+id/alçada_bd" />
+        app:layout_constraintStart_toStartOf="@+id/Alçada_bd"
+        app:layout_constraintTop_toBottomOf="@+id/Alçada_bd" />
+
+    <TextView
+        android:id="@+id/Històric_bd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/Històric_bd"
+        app:layout_constraintStart_toStartOf="@+id/Igc_bd"
+        app:layout_constraintTop_toBottomOf="@+id/Igc_bd" />
 </androidx.constraintlayout.widget.ConstraintLayout>
