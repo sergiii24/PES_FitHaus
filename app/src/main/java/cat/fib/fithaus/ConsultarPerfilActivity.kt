@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import cat.fib.fithaus.api.ApiServices
 import cat.fib.fithaus.models.User
@@ -13,11 +12,16 @@ import cat.fib.fithaus.ui.*
 import com.android.volley.Response
 import com.google.android.gms.security.ProviderInstaller
 
+/** Classe Consultar perfil
+ *
+ *  Classe que mostra les dades del perfil d'un usuari.
+ *
+ *  @constructor Inicialitza totes les variables de la pantalla i gestiona els listeners.
+ *  @author Oriol Prat.
+ */
 class ConsultarPerfilActivity : AppCompatActivity() {
 
     var userData : User = User()
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,26 +80,42 @@ class ConsultarPerfilActivity : AppCompatActivity() {
 
     }
 
-        fun getUserData() {
+    /** Funció getUserData
+     *
+     *  Funció que agafa totes les dades d'un usuari.
+     *
+     *  @author Oriol Prat.
+     */
+    fun getUserData() {
         //TODO: get id user
         ApiServices.getUserInfo(1, this, listener(), errorListener() )
     }
 
-
-
+    /** Funció listener
+     *
+     *  Funció que retorna la resposta d'un listener per usuaris.
+     *
+     *  @return Response.Listener<User>
+     *  @author Oriol Prat.
+     */
     fun listener() : Response.Listener<User> {
 
         return Response.Listener { response ->
             UserModelView.setUser(response)
         }
-
     }
 
+    /** Funció errorListener
+     *
+     *  Funció que retorna la resposta d'un listener d'errors.
+     *
+     *  @return Response.ErrorListener
+     *  @author Oriol Prat.
+     */
     fun errorListener(): Response.ErrorListener {
         return Response.ErrorListener { it ->
             Log.println(Log.ERROR, "API", it.toString())
         }
     }
-
 
 }

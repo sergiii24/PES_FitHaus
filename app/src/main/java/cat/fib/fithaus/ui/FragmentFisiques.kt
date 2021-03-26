@@ -10,10 +10,12 @@ import cat.fib.fithaus.R
 import cat.fib.fithaus.models.User
 import cat.fib.fithaus.models.UserModelView
 
-/**
- * A simple [Fragment] subclass.
- * Use the [FragmentFisiques.newInstance] factory method to
- * create an instance of this fragment.
+/** Classe Fragment físiques
+ *
+ *  Classe on hi ha el fragment de les dades físiques.
+ *
+ *  @constructor Inicialitza els camps d'informació i captura les dades de l'usuari.
+ *  @author Oriol Prat.
  */
 
 class FragmentFisiques : Fragment(R.layout.fragment_fisiques) {
@@ -36,6 +38,13 @@ class FragmentFisiques : Fragment(R.layout.fragment_fisiques) {
         return v
     }
 
+    /** Funció setUp
+     *
+     *  Funció que omple els camps del fragment amb les dades d'usuari corresponents.
+     *
+     *  @param userData
+     *  @author Oriol Prat.
+     */
     fun setUpData(userData: User) {
         weight.text = userData.weight.toString()
         height.text = userData.height.toString()

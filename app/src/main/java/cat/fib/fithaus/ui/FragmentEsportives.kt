@@ -10,10 +10,12 @@ import cat.fib.fithaus.R
 import cat.fib.fithaus.models.User
 import cat.fib.fithaus.models.UserModelView
 
-/**
- * A simple [Fragment] subclass.
- * Use the [FragmentEsportives.newInstance] factory method to
- * create an instance of this fragment.
+/** Classe Fragment esportives
+ *
+ *  Classe on hi ha el fragment de les dades esportives.
+ *
+ *  @constructor Inicialitza els camps d'informació i captura les dades de l'usuari.
+ *  @author Oriol Prat.
  */
 
 class FragmentEsportives : Fragment(R.layout.fragment_esportives) {
@@ -38,6 +40,13 @@ class FragmentEsportives : Fragment(R.layout.fragment_esportives) {
         return v
     }
 
+    /** Funció setUp
+     *
+     *  Funció que omple els camps del fragment amb les dades d'usuari corresponents.
+     *
+     *  @param userData
+     *  @author Oriol Prat.
+     */
     fun setUpData(userData: User) {
         activitiesdone.text = userData.activitiesdone.toString()
         achievements.text = userData.achievements

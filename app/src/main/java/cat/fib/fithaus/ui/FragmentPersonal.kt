@@ -10,11 +10,12 @@ import cat.fib.fithaus.R
 import cat.fib.fithaus.models.User
 import cat.fib.fithaus.models.UserModelView
 
-
-/**
- * A simple [Fragment] subclass.
- * Use the [FragmentPersonal.newInstance] factory method to
- * create an instance of this fragment.
+/** Classe Fragment personal
+ *
+ *  Classe on hi ha el fragment de les dades personals.
+ *
+ *  @constructor Inicialitza els camps d'informació i captura les dades de l'usuari.
+ *  @author Oriol Prat.
  */
 
 class FragmentPersonal : Fragment(R.layout.fragment_personals) {
@@ -37,6 +38,13 @@ class FragmentPersonal : Fragment(R.layout.fragment_personals) {
         return v
     }
 
+    /** Funció setUp
+     *
+     *  Funció que omple els camps del fragment amb les dades d'usuari corresponents.
+     *
+     *  @param userData
+     *  @author Oriol Prat.
+     */
     fun setUpPersonal(userData: User) {
         nom_bd.text = userData.firstname.plus(" ").plus(userData.lastname)
         usuari.text = userData.username
