@@ -2,15 +2,14 @@ package cat.fib.fithaus
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
 import android.util.Patterns
 import android.view.View
-import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import cat.fib.fithaus.api.ApiServices
 import com.android.volley.toolbox.*
 import kotlinx.android.synthetic.main.activity_log_in.*
-import java.util.regex.Matcher
 
 /** Classe Activity LogIn
  *
@@ -49,7 +48,18 @@ class LogInActivity : AppCompatActivity() {
         if (editTextTextPassword.text.isNotEmpty()) passwordEmpty = false
         if (Patterns.EMAIL_ADDRESS.matcher(editTextTextEmailAddress.text).matches()) incorrectFormat = false
         if (emailEmpty or passwordEmpty or incorrectFormat) showAlert(emailEmpty, passwordEmpty, incorrectFormat)
-        else showHome()
+        else login(editTextTextEmailAddress.text.toString(), editTextTextPassword.text.toString() )
+    }
+
+    fun login(
+        email: String,
+        pass: String
+    ) {
+
+        ApiServices.login(email, pass, this,
+            { showHome() },
+            { Toast.makeText(this, "Login no correcte!", Toast.LENGTH_LONG).show() })
+
     }
 
     /** Funció signUp

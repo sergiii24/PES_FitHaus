@@ -12,18 +12,19 @@
         android:theme="@style/Theme.FitHaus">
         <activity android:name=".CrearPerfilActivity"/>
         <activity android:name=".ModificarPerfilActivity" />
-        <activity android:name=".LogInActivity" />
+        <activity android:name=".LogInActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ConsultarPerfilActivity"/>
         <activity
             android:name=".TancarSessioActivity"/>
         <activity android:name=".AuthenticationProviders"
             android:theme="@style/Theme.FitHaus.SplashScreen">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"
