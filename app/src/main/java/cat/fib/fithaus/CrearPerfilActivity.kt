@@ -13,6 +13,8 @@ import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.RadioButton
 import android.widget.Toast
+import cat.fib.fithaus.api.ApiServices
+import cat.fib.fithaus.models.User
 import cat.fib.fithaus.ui.dialog.DatePickerFragment
 import java.util.*
 
@@ -92,10 +94,20 @@ class CrearPerfilActivity : AppCompatActivity() {
                                         else {
                                             if (!Patterns.EMAIL_ADDRESS.matcher(CorreuElectronic?.text).matches()) Toast.makeText(this, "El correu electrònic no té el format correcte (fit@fithaus.com)", Toast.LENGTH_LONG).show()
                                             else {
-                                                Toast.makeText(this, "Formulari complet!", Toast.LENGTH_LONG).show();
-                                                //Anar a la pantalla d'iniciar sessió amb el formulari complet
-                                                // val intent = Intent(this, LogInActivity::class.java).apply
-                                                //startActivity(intent)
+                                                Toast.makeText(this, "Formulari complet!", Toast.LENGTH_LONG).show()
+                                                var usuari = NomUsuari?.text.toString();
+                                                var lastname = PrimerCognom?.text.toString()+SegonCognom?.text.toString()
+                                                var name = Nom?.text.toString()
+                                                var email = CorreuElectronic?.text.toString()
+                                                var la = DataNaixement?.text.toString()
+                                                var g : String = "M"
+                                                if(Sexe_Dona?.isChecked == true) g = "W"
+                                                if(Sexe_Altre?.isChecked == true) g = "X"
+                                                val user = User(name, lastname, usuari, Contrasenya?.text.toString(),  email, g, Date(la) )
+                                                ApiServices.postUserInfo(user, this, {Toast.makeText(this, "Done!", Toast.LENGTH_LONG).show()},
+                                                    {Toast.makeText(this, "Fail!", Toast.LENGTH_LONG).show()}
+                                                    )
+
                                             }
                                         }
                                     }

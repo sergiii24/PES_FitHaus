@@ -4,9 +4,9 @@ import com.google.gson.annotations.SerializedName
 import java.time.Instant
 import java.util.*
 
-class User(
+data class User(
         @SerializedName("id")
-        var id: Int = -1,
+        var id: Int = 1000,
         @SerializedName("firstname")
         var firstname: String = "",
         @SerializedName("lastname")
@@ -44,5 +44,13 @@ class User(
         @SerializedName("birthdate")
         var birthdate: Date = Date.from(Instant.now())
 ){
+        constructor(firstname: String,
+                    lastname: String,
+                username: String,
+                password: String,
+                email: String,
+        gender: String,
+        birthdate: Date) : this(1000, firstname, lastname, username, "", password, 0, 0, 0, 0, "", 0, 0, 0, 0, 0, email, gender, birthdate
 
+        )
 }
