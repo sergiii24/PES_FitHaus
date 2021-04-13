@@ -11,7 +11,7 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import java.util.*
 
 
-class ApiService(client: OkHttpClient) {
+class ApiRequest(client: OkHttpClient) {
     private var client = OkHttpClient()
 
     init {

@@ -2,11 +2,8 @@ package cat.fib.fithaus.api
 
 import cat.fib.fithaus.models.User
 import cat.fib.fithaus.models.gson
-import cat.fib.fithaus.models.serializeToMap
-import cat.fib.fithaus.models.serializeToString
 import okhttp3.Callback
 import okhttp3.OkHttpClient
-import java.util.HashMap
 import okhttp3.logging.HttpLoggingInterceptor;
 
 
@@ -21,8 +18,8 @@ class ApiServices() {
 
             val client = OkHttpClient.Builder()
             client.addInterceptor(logging)
-            val request = ApiService(client.build())
-            val url = "http://192.168.1.248:8000/users/$id"
+            val request = ApiRequest(client.build())
+            val url = Configuration.urlServer+"/users/"+id
             request.GET(url, callback)
         }
 
@@ -36,8 +33,8 @@ class ApiServices() {
 
             val client = OkHttpClient.Builder()
             client.addInterceptor(logging)
-            val request = ApiService(client.build())
-            val url = "http://192.168.1.248:8000/users/login?email=$email&password=$pass"
+            val request = ApiRequest(client.build())
+            val url = Configuration.urlServer+"/users/login?email=$email&password=$pass"
             request.GET(url, callback)
         }
 
@@ -50,9 +47,9 @@ class ApiServices() {
 
             val client = OkHttpClient.Builder()
             client.addInterceptor(logging)
-            val request = ApiService(client.build())
+            val request = ApiRequest(client.build())
             val userJson: String = gson.toJson(user)
-            val url = "http://192.168.1.248:8000/users/"
+            val url = Configuration.urlServer+"/users/"
             request.post(url, userJson, callback)
         }
     }
