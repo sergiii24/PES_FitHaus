@@ -15,7 +15,13 @@ import android.widget.RadioButton
 import android.widget.Toast
 import cat.fib.fithaus.api.ApiServices
 import cat.fib.fithaus.models.User
+import cat.fib.fithaus.models.UserModelView
+import cat.fib.fithaus.models.gson
 import cat.fib.fithaus.ui.dialog.DatePickerFragment
+import okhttp3.Call
+import okhttp3.Callback
+import okhttp3.Response
+import java.io.IOException
 import java.util.*
 
 
@@ -104,9 +110,18 @@ class CrearPerfilActivity : AppCompatActivity() {
                                                 if(Sexe_Dona?.isChecked == true) g = "W"
                                                 if(Sexe_Altre?.isChecked == true) g = "X"
                                                 val user = User(name, lastname, usuari, Contrasenya?.text.toString(),  email, g, Date(la) )
-                                                ApiServices.postUserInfo(user, this, {Toast.makeText(this, "Done!", Toast.LENGTH_LONG).show()},
-                                                    {Toast.makeText(this, "Fail!", Toast.LENGTH_LONG).show()}
-                                                    )
+
+
+                                                ApiServices.postUserInfo(user, object : Callback {
+
+                                                    override fun onResponse(call: Call, response: Response) {
+                                                        println("User created.")
+                                                    }
+
+                                                    override fun onFailure(call: Call, e: IOException) {
+                                                        println("Request Failure.")
+                                                    }
+                                                })
 
                                             }
                                         }

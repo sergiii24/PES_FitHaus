@@ -2,21 +2,22 @@ package cat.fib.fithaus
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import cat.fib.fithaus.api.ApiServices
 import cat.fib.fithaus.models.User
 import cat.fib.fithaus.models.UserModelView
+import cat.fib.fithaus.models.gson
 import cat.fib.fithaus.ui.*
-import com.android.volley.Response
 import com.google.android.gms.security.ProviderInstaller
+import okhttp3.Call
+import okhttp3.Callback
+import okhttp3.Response
+import java.io.IOException
 
 class ConsultarPerfilActivity : AppCompatActivity() {
 
-    var userData : User = User()
-
+    var userData: User = User()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -76,25 +77,21 @@ class ConsultarPerfilActivity : AppCompatActivity() {
 
     }
 
-        fun getUserData() {
+    fun getUserData() {
         //TODO: get id user
-        ApiServices.getUserInfo(1, this, listener(), errorListener() )
-    }
+        ApiServices.getUserInfo(1, object : Callback {
 
+            override fun onResponse(call: Call, response: Response) {
+                val responseData = response.body?.string()
+                runOnUiThread {
+                    UserModelView.setUser(gson.fromJson(responseData, User::class.java))
+                }
+            }
 
-
-    fun listener() : Response.Listener<User> {
-
-        return Response.Listener { response ->
-            UserModelView.setUser(response)
-        }
-
-    }
-
-    fun errorListener(): Response.ErrorListener {
-        return Response.ErrorListener { it ->
-            Log.println(Log.ERROR, "API", it.toString())
-        }
+            override fun onFailure(call: Call, e: IOException) {
+                println("Request Failure.")
+            }
+        })
     }
 
 
