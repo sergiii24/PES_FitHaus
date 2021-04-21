@@ -75,4 +75,17 @@
 
     <string name="facebook_app_id">344349210333001</string>
     <string name="fb_login_protocol_scheme">fb344349210333001</string>
+    <string name="text_descripció">Descripció</string>
+    <string name="text_edat">Edat</string>
+    <string name="text_dificultat">Dificultat</string>
+    <string name="text_duració">Duració</string>
+    <string name="text_categoria">Categoria</string>
+    <string name="text_àreatreball">Àrea de treball</string>
+    <string name="title_activity_consultar_exercici">ConsultarExerciciActivity</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hello Square World!</string>
+    <string name="text_múscultreball">Múscul de treball</string>
 </resources>
