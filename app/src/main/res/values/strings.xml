@@ -75,4 +75,22 @@
 
     <string name="facebook_app_id">344349210333001</string>
     <string name="fb_login_protocol_scheme">fb344349210333001</string>
+    <string name="Qüestionari_Inicial">Qüestionari inicial</string>
+    <string name="Força">Força</string>
+    <string name="Càrdio">Càrdio</string>
+    <string name="Ioga">Ioga</string>
+    <string name="Estiraments">Estiraments</string>
+    <string name="Pilates">Pilates</string>
+    <string name="Salut">Salut</string>
+    <string name="Pèrdua_Pes">Pèrdua de pes</string>
+    <string name="Flexibilitat">Flexibilitat</string>
+    <string name="Resistència">Resistència</string>
+    <string name="Recuperació">Recuperació</string>
+    <string name="Agilitat">Agilitat</string>
+    <string name="Enviar_Qüestionari">Enviar qüestionari</string>
+    <string name="Experiència_Esportiva">Experiència esportiva</string>
+    <string name="Menys_6_Mesos">Menys de 6 mesos</string>
+    <string name="Entre_6_Mesos_2_Anys">Entre 6 mesos i 2 anys</string>
+    <string name="Més_2Anys">Més de 2 anys</string>
+    <string name="Rehabilitació">Rehabilitació</string>
 </resources>
