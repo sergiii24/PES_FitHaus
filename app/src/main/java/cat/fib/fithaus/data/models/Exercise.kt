@@ -1,10 +1,10 @@
-package cat.fib.fithaus.models
+package cat.fib.fithaus.data.models
 
 import com.google.gson.annotations.SerializedName
 
-class Exercise(
+data class Exercise(
     @SerializedName("id")
-    var id: Int = 1000,
+    var id: Int = 0,
     @SerializedName("name")
     var name: String = "",
     @SerializedName("image")
@@ -25,5 +25,4 @@ class Exercise(
     var duration: String,
     @SerializedName("imageMuscle")
     var imageMuscle: String
-) {
-}
+)

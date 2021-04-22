@@ -1,7 +1,7 @@
-package cat.fib.fithaus.api
+package cat.fib.fithaus.data.api
 
-import cat.fib.fithaus.models.User
-import cat.fib.fithaus.models.gson
+import cat.fib.fithaus.data.models.User
+import cat.fib.fithaus.data.models.gson
 import okhttp3.Callback
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor;

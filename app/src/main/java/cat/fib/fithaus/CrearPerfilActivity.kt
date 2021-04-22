@@ -1,22 +1,15 @@
 package cat.fib.fithaus
 
 import android.app.DatePickerDialog
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.MediaStore
-import android.text.method.HideReturnsTransformationMethod
-import android.text.method.PasswordTransformationMethod
 import android.util.Patterns
 import android.view.View
-import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.RadioButton
 import android.widget.Toast
-import cat.fib.fithaus.api.ApiServices
-import cat.fib.fithaus.models.User
-import cat.fib.fithaus.models.UserModelView
-import cat.fib.fithaus.models.gson
+import cat.fib.fithaus.data.api.ApiServices
+import cat.fib.fithaus.data.models.User
 import cat.fib.fithaus.ui.dialog.DatePickerFragment
 import okhttp3.Call
 import okhttp3.Callback

@@ -1,9 +1,8 @@
-package cat.fib.fithaus.api
+package cat.fib.fithaus.data.api
 
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
-import java.util.*
 
 
 class ApiRequest(client: OkHttpClient) {

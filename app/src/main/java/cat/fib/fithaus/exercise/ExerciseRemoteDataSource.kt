@@ -1,6 +1,6 @@
 package cat.fib.fithaus.exercise
 
-import cat.fib.fithaus.api.ExerciseService
+import cat.fib.fithaus.data.api.ExerciseService
 
 class ExerciseRemoteDataSource {
 

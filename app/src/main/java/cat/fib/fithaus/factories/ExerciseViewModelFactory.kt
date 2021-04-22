@@ -1,6 +1,6 @@
 package cat.fib.fithaus.factories
 
-import cat.fib.fithaus.exercise.ExerciseRepository
+import cat.fib.fithaus.data.repositories.ExerciseRepository
 import cat.fib.fithaus.exercise.ExerciseViewModel
 
 

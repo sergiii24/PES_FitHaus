@@ -1,6 +1,7 @@
-package cat.fib.fithaus.exercise
+package cat.fib.fithaus.data.repositories
 
-import cat.fib.fithaus.api.ExerciseService
+import cat.fib.fithaus.exercise.ExerciseLocalDataSource
+import cat.fib.fithaus.exercise.ExerciseRemoteDataSource
 
 class ExerciseRepository(
     private val localDataSource: ExerciseLocalDataSource,

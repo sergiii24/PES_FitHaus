@@ -1,4 +1,4 @@
-package cat.fib.fithaus.models
+package cat.fib.fithaus.data.models
 
 import com.google.gson.annotations.SerializedName
 import java.time.Instant

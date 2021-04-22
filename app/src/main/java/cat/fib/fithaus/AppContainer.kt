@@ -2,7 +2,7 @@ package cat.fib.fithaus
 
 import cat.fib.fithaus.exercise.ExerciseLocalDataSource
 import cat.fib.fithaus.exercise.ExerciseRemoteDataSource
-import cat.fib.fithaus.exercise.ExerciseRepository
+import cat.fib.fithaus.data.repositories.ExerciseRepository
 import cat.fib.fithaus.factories.ExerciseViewModelFactory
 
 class AppContainer {
