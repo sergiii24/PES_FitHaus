@@ -75,4 +75,11 @@
 
     <string name="facebook_app_id">344349210333001</string>
     <string name="fb_login_protocol_scheme">fb344349210333001</string>
+    <string name="text_descripció">Descripció</string>
+    <string name="text_entrenador">Entrenador</string>
+    <string name="text_àreatreball">Àrea de treball</string>
+    <string name="text_edat">Edat</string>
+    <string name="text_dificultat">Dificultat</string>
+    <string name="text_duració">Duració</string>
+    <string name="text_categoria">Categoria</string>
 </resources>
