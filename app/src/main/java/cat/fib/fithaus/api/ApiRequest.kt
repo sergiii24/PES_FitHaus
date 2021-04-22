@@ -1,10 +1,5 @@
 package cat.fib.fithaus.api
 
-/**
- * Created by Rohan Jahagirdar on 07-02-2018.
- */
-
-
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
