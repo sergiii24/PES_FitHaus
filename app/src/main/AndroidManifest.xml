@@ -15,11 +15,10 @@
         <activity android:name=".CercarExerciciActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CrearPerfilActivity"></activity>
+        <activity android:name=".CrearPerfilActivity" />
         <activity android:name=".ModificarPerfilActivity" />
         <activity android:name=".LogInActivity" />
         <activity android:name=".ConsultarPerfilActivity" />
