@@ -12,24 +12,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FitHaus">
-        <activity android:name=".CrearPerfilActivity">
+        <activity android:name=".CercarExerciciActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".CrearPerfilActivity"></activity>
         <activity android:name=".ModificarPerfilActivity" />
         <activity android:name=".LogInActivity" />
         <activity android:name=".ConsultarPerfilActivity" />
         <activity android:name=".TancarSessioActivity" />
         <activity
             android:name=".AuthenticationProviders"
-            android:theme="@style/Theme.FitHaus.SplashScreen"></activity>
+            android:theme="@style/Theme.FitHaus.SplashScreen" />
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/Theme.FitHaus.NoActionBar"></activity>
+            android:theme="@style/Theme.FitHaus.NoActionBar" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
