@@ -75,4 +75,5 @@
 
     <string name="facebook_app_id">344349210333001</string>
     <string name="fb_login_protocol_scheme">fb344349210333001</string>
+    <string name="boton_Guardar">GUARDAR</string>
 </resources>
