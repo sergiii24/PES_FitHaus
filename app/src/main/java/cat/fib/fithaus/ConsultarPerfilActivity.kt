@@ -1,5 +1,6 @@
 package cat.fib.fithaus
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -26,7 +27,7 @@ class ConsultarPerfilActivity : AppCompatActivity() {
         val btnFragmentEsportives: Button = findViewById(R.id.DadesEsportives)
         val btnFragmentFisiques: Button = findViewById(R.id.DadesFísiques)
         val btnModificarPerfil: Button = findViewById(R.id.ModificarPerfil)
-
+        val btnEliminarPerfil: Button = findViewById(R.id.EliminarPerfil)
 
         //Es pot afegir el fragment a una pila per poder tornar-hi quan es tiri endarrere -->  addToBackStack(null)  <-- després de replace
 
@@ -60,6 +61,11 @@ class ConsultarPerfilActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        //Quan cliquem al botó d'eliminar perfil anem a la pantalla d'inici de sessió
+        btnEliminarPerfil.setOnClickListener {
+            showAlert()
+        }
+
         //Posem el fragment de dades personals a la pantalla, necessitem el commit per fer efectiu el canvi
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.flFragment, fragmentPersonal)
@@ -68,5 +74,20 @@ class ConsultarPerfilActivity : AppCompatActivity() {
 
     }
 
+    private fun showAlert(){
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Confirmació")
+        builder.setMessage("Estàs segur que vols eliminar el perfil?")
+        builder.setPositiveButton("Acceptar"){ dialog, which ->
+            val intent = Intent(this@ConsultarPerfilActivity, LogInActivity::class.java)
+            startActivity(intent)
+        }
+        builder.setNegativeButton("Cancelar") { dialog, which ->
+            val intent = Intent(this@ConsultarPerfilActivity, this::class.java)
+            startActivity(intent)
+        }
+        val dialog: AlertDialog = builder.create()
+        dialog.create()
+    }
 
 }
