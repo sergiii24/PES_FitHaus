@@ -36,6 +36,22 @@ class ApiRequest(client: OkHttpClient) {
         return call
     }
 
+    fun patch(url: String, json: String, callback: Callback):
+            Call {
+        val builder = FormBody.Builder()
+        val body: RequestBody = json
+                .toRequestBody("application/json".toMediaTypeOrNull())
+
+        val request = Request.Builder()
+                .url(url)
+                .patch(body)
+                .build()
+
+        val call = client.newCall(request)
+        call.enqueue(callback)
+        return call
+    }
+
     fun GET(url: String, callback: Callback):
 
             Call {

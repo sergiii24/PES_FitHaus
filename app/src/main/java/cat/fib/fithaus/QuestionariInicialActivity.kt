@@ -11,11 +11,19 @@ import okhttp3.Callback
 import okhttp3.Response
 import org.json.JSONObject
 import java.io.IOException
+import cat.fib.fithaus.questionari.QuestionariViewModel
 
 class QuestionariInicialActivity : AppCompatActivity() {
+
+    private lateinit var questionariViewModel: QuestionariViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_questionari_inicial)
+
+        val appContainer = (application as Application).appContainer
+        questionariViewModel = appContainer.questionariViewModelFactory.create()
+
         setupSendButton()
     }
 
@@ -30,6 +38,7 @@ class QuestionariInicialActivity : AppCompatActivity() {
         val categories: MutableList<String> = chosencategories()
         val countC = categories.size
         val objectius: MutableList<String> = chosenobjectives()
+        val obj: String = objectius.toString()
         val countO = objectius.size
 
         if ((experiencia == null) || (countC == 0 || countC > 3) || (countO == 0 || countO > 3)) {
@@ -42,30 +51,20 @@ class QuestionariInicialActivity : AppCompatActivity() {
             Toast.makeText(this, countO.toString(), Toast.LENGTH_LONG).show()
             Toast.makeText(this, experiencia, Toast.LENGTH_LONG).show()
             println(categories)
-            println(objectius)
+            println(obj)
 
+            //questionariViewModel.patchQuestionari("1", experiencia, categories, objectius)
             // Create JSON using JSONObject
+            /*
             val jsonObject = JSONObject()
             jsonObject.put("id", "1")
             jsonObject.put("categories", categories)
-            jsonObject.put("age", objectius)
+            jsonObject.put("objectius", objectius)
 
             // Convert JSONObject to String
             val jsonObjectString = jsonObject.toString()
+            */
 
-            //Crida API
-            /*
-            //get id user
-            ApiServices.postUserInfo(user, object : Callback {
-
-                override fun onResponse(call: Call, response: Response) {
-                    println("Form sent.")
-                }
-
-                override fun onFailure(call: Call, e: IOException) {
-                    println("Request Failure.")
-                }
-            }) */
         }
     }
 
