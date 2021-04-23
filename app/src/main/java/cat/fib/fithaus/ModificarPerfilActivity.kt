@@ -24,6 +24,13 @@ import okhttp3.Callback
 import okhttp3.Response
 
 
+/** Classe ModificarPerfil
+ *
+ *  Classe on es mostra la pantalla de modificar perfil.
+ *
+ *  @constructor Indica a l'usuari que es troba a la pantalla de modificar perfil.
+ *  @author Daniel Cárdenas.
+ */
 class ModificarPerfilActivity : AppCompatActivity() {
 
     var userData: User = User()
@@ -46,6 +53,13 @@ class ModificarPerfilActivity : AppCompatActivity() {
         val btnGuardarModificacions: Button = findViewById(R.id.GuardarModificacions)
 
 
+        /** Funció experience
+         *
+         *  Funció que retorna un string depenent del radiobutton del sexe seleccionat.
+         *
+         *  @return String?
+         *  @author Daniel Cárdenas.
+         */
         fun experience(): String? {
             return when {
                 fragmentModificarPersonal.Sexe_Home?.isChecked == true -> "Home"
@@ -55,6 +69,13 @@ class ModificarPerfilActivity : AppCompatActivity() {
             }
         }
 
+        /** Funció campsbuitspersonals
+         *
+         *  Funció que retorna cert si hi ha algun camp a omplir que no s'ha omplert.
+         *
+         *  @return Boolean
+         *  @author Daniel Cárdenas.
+         */
         fun campsbuitspersonals(): Boolean {
             val sexe: String? = experience()
             if (fragmentModificarPersonal.name.text.isEmpty() || fragmentModificarPersonal.username.text.isEmpty() || sexe == null) {
@@ -63,6 +84,13 @@ class ModificarPerfilActivity : AppCompatActivity() {
             return false
         }
 
+        /** Funció campsbuitsesportives
+         *
+         *  Funció que retorna cert si hi ha algun camp a omplir que no s'ha omplert.
+         *
+         *  @return Boolean
+         *  @author Daniel Cárdenas.
+         */
         fun campsbuitsesportives(): Boolean {
             if (fragmentModificarEsportives.nivell.text.isEmpty() || fragmentModificarEsportives.objectiu.text.isEmpty() || fragmentModificarEsportives.categoriainteres.text.isEmpty()) {
                 return true
@@ -95,7 +123,7 @@ class ModificarPerfilActivity : AppCompatActivity() {
             }
         }*/
 
-        //Quan cliquem al botó de guardar anem a la pantalla de consultar les dades del perfil d'un usuari
+        //Quan cliquem al botó de guardar comprobem que els camps a omplir no siguin buits i anem a la pantalla de consultar les dades del perfil d'un usuari.
         btnGuardarModificacions.setOnClickListener {
             if (campsbuitspersonals()) Toast.makeText(this, "Els camps nom, usuari i/o sexe s'han d'omplir", Toast.LENGTH_LONG).show()
             else if (campsbuitsesportives()) Toast.makeText(this, "Els camps nivell, objectiu i/o categories d'interès s'han d'omplir", Toast.LENGTH_LONG).show()

@@ -12,6 +12,14 @@ import cat.fib.fithaus.R
 import cat.fib.fithaus.models.User
 import cat.fib.fithaus.models.UserModelView
 
+
+/** Classe FragmentModificarEsportives
+ *
+ *  Classe on hi ha el fragment de les dades esportives.
+ *
+ *  @constructor Inicialitza els camps d'informació i captura les dades de l'usuari.
+ *  @author Daniel Cárdenas.
+ */
 class FragmentModificarEsportives : Fragment(R.layout.fragment_modificar_esportives) {
 
     lateinit var activitats: TextView
@@ -34,6 +42,13 @@ class FragmentModificarEsportives : Fragment(R.layout.fragment_modificar_esporti
         return v
     }
 
+    /** Funció setUpData
+     *
+     *  Funció que omple els camps del fragment amb les dades d'usuari corresponents.
+     *
+     *  @param userData
+     *  @author Daniel Cárdenas.
+     */
     fun setUpData(userData: User) {
         activitats.text = userData.activitiesdone.toString()
         assoliments.text = userData.achievements.toString()
