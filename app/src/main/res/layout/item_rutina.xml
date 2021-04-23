@@ -11,7 +11,7 @@
     <!--TODO: canviar per imatge-->
 
     <TextView
-        android:id="@+id/ivExercici"
+        android:id="@+id/ivRutina"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:text="@string/Imatge" />
@@ -30,27 +30,20 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tvDificultat"
+            android:id="@+id/tvNivell"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8sp"
-            android:text="@string/Dificultat"
+            android:text="@string/Nivell"
             android:textSize="15sp" />
 
-        <TextView
-            android:id="@+id/tvDuracio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8sp"
-            android:text="@string/Duracio"
-            android:textSize="15sp" />
 
         <Button
-            android:id="@+id/btAfegeixARutina"
+            android:id="@+id/btAfegirACalendari"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="@string/AfegirARutina" />
+            android:text="@string/AfegirACalendari" />
 
     </LinearLayout>
 

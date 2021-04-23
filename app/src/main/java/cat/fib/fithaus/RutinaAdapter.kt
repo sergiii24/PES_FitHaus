@@ -5,17 +5,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.item_exercici.view.*
+import kotlinx.android.synthetic.main.item_rutina.view.*
 
-/** Classe ExerciciAdapter
+/** Classe RutinaAdapter
  *
  *  Classe que gestiona la vista del recycler view.
  *
- *  @param exercicis
+ *  @param rutines
  *  @author Oriol Prat.
  */
 
-class ExerciciAdapter (val exercicis:List<Exercici>):RecyclerView.Adapter<ExerciciAdapter.ExerciciHolder>() {
+class RutinaAdapter (val rutines:List<Rutina>):RecyclerView.Adapter<RutinaAdapter.RutinaHolder>() {
 
     /** Funció onCreateViewHolder
      *
@@ -25,9 +25,9 @@ class ExerciciAdapter (val exercicis:List<Exercici>):RecyclerView.Adapter<Exerci
      *  @param viewType
      *  @author Oriol Prat.
      */
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExerciciHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RutinaHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        return ExerciciHolder(layoutInflater.inflate(R.layout.item_exercici, parent, false))
+        return RutinaHolder(layoutInflater.inflate(R.layout.item_rutina, parent, false))
     }
 
     /** Funció getItemCount
@@ -37,7 +37,7 @@ class ExerciciAdapter (val exercicis:List<Exercici>):RecyclerView.Adapter<Exerci
      *  @author Oriol Prat.
      */
     override fun getItemCount(): Int {
-        return exercicis.size
+        return rutines.size
     }
 
     /** Funció onBindViewHolder
@@ -48,39 +48,38 @@ class ExerciciAdapter (val exercicis:List<Exercici>):RecyclerView.Adapter<Exerci
      *  @param position
      *  @author Oriol Prat.
      */
-    override fun onBindViewHolder(holder: ExerciciHolder, position: Int) {
-        holder.render(exercicis[position])
+    override fun onBindViewHolder(holder: RutinaHolder, position: Int) {
+        holder.render(rutines[position])
     }
 
-    /** Classe ExerciciHolder
+    /** Classe RutinaHolder
      *
      *  Classe que gestiona la renderització dels elements al recycler view.
      *
      *  @author Oriol Prat.
      */
-    class ExerciciHolder(val view: View):RecyclerView.ViewHolder(view){
+    class RutinaHolder(val view: View):RecyclerView.ViewHolder(view){
 
         /** Funció render
          *
          *  Funció on es gestionen els components d'un element del recycler view.
          *
-         *  @param exercici
+         *  @param rutina
          *  @author Oriol Prat.
          */
-        fun render(exercici: Exercici){
-            view.tvNom.text = exercici.nom
-            view.tvDuracio.text = exercici.duracio.toString()
-            view.tvDificultat.text = exercici.dificultat
+        fun render(rutina: Rutina){
+            view.tvNom.text = rutina.nom
+            view.tvNivell.text = rutina.nivell
 
             //TODO: canviar per setimage
-            view.ivExercici.text = exercici.imatge
+            view.ivRutina.text = rutina.imatge
 
-            //TODO: canviar per moure's a consultar exercici
+            //TODO: canviar per moure's a consultar rutina
             view.setOnClickListener {
-                Toast.makeText(view.context, "Has seleccionat l'exercici ${exercici.nom}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(view.context, "Has seleccionat la rutina ${rutina.nom}", Toast.LENGTH_SHORT).show()
             }
 
-            view.btAfegeixARutina.setOnClickListener {
+            view.btAfegirACalendari.setOnClickListener {
                 Toast.makeText(view.context, "Encara no s'ha implementat", Toast.LENGTH_LONG).show()
             }
 

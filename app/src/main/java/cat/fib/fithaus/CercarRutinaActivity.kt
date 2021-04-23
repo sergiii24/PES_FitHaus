@@ -8,25 +8,26 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlinx.android.synthetic.main.activity_cercar_exercici.*
+import kotlinx.android.synthetic.main.activity_cercar_rutina.*
 
-/** Classe Cercar exercici
+/** Classe Cercar rutina
  *
- *  Activity on es mostren tots els exercicis i el popup del filtre d'aquests.
+ *  Activity on es mostren totes les rutines i el popup del filtre d'aquestes.
  *
  *  @author Oriol Prat.
  */
-class CercarExerciciActivity : AppCompatActivity() {
+class CercarRutinaActivity : AppCompatActivity() {
 
     private lateinit var dialogBuilder: AlertDialog.Builder
     private lateinit var dialog: AlertDialog
 
-    //TODO: agafar tots els exercicis de l'app
-    val exercicis = listOf(
-            Exercici("cames", 5, "fàcil", "imatgecames"),
-            Exercici("braços", 10, "fàcil", "imatgebraços"),
-            Exercici("peus", 8, "fàcil", "imatgepeus"),
-            Exercici("ulls", 1, "fàcil", "imatgeulls")
+    //TODO: agafar totes les rutines de l'app
+    val rutines = listOf(
+            Rutina("rutina1","Principiant", "imatgerutina1"),
+            Rutina("rutina2","Intermedi", "imatgerutina2"),
+            Rutina("rutina3","Principiant", "imatgerutina3"),
+            Rutina("rutina4","Avançat", "imatgerutina4"),
+
     )
 
     /** Funció onCreate
@@ -38,7 +39,7 @@ class CercarExerciciActivity : AppCompatActivity() {
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_cercar_exercici)
+        setContentView(R.layout.activity_cercar_rutina)
 
         iniciBoto()
         initRecycler()
@@ -62,9 +63,9 @@ class CercarExerciciActivity : AppCompatActivity() {
      *  @author Oriol Prat.
      */
     private fun initRecycler(){
-        rvExerciciList.layoutManager = LinearLayoutManager(this)
-        val adapter = ExerciciAdapter(exercicis)
-        rvExerciciList.adapter = adapter
+        rvRutinaList.layoutManager = LinearLayoutManager(this)
+        val adapter = RutinaAdapter(rutines)
+        rvRutinaList.adapter = adapter
     }
 
     /** Funció createNewContactDialog
@@ -75,9 +76,9 @@ class CercarExerciciActivity : AppCompatActivity() {
      */
     private fun createNewContactDialog() {
         dialogBuilder = AlertDialog.Builder(this)
-        val contactPopupView = layoutInflater.inflate(R.layout.pop_up_window, null)
+        val contactPopupView = layoutInflater.inflate(R.layout.pop_up_window_rutina, null)
 
-        val nomExercici: TextView = contactPopupView.findViewById(R.id.etNomExercici)
+        val nomRutina: TextView = contactPopupView.findViewById(R.id.etNomRutina)
         val btFiltrar: Button = contactPopupView.findViewById(R.id.btOkay)
         val btCancelar: Button = contactPopupView.findViewById(R.id.btCancel)
 

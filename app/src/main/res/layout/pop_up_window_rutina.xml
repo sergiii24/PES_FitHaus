@@ -1,0 +1,512 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:showIn="@layout/pop_up_window_rutina">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvTitolFiltre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/Filtre"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/tvNomRutina"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/NomRutina"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/etNomRutina"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/BuscaRutina" />
+
+        <TextView
+            android:id="@+id/tvEdat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Edat"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:id="@+id/EdatLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ToggleButton
+                android:id="@+id/tbNen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/Nen"
+                android:textOff="@string/Nen"
+                android:textOn="@string/Nen" />
+
+            <ToggleButton
+                android:id="@+id/tbJove"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/Jove"
+                android:textOff="@string/Jove"
+                android:textOn="@string/Jove" />
+
+            <ToggleButton
+                android:id="@+id/tbAdult"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/Adult"
+                android:textOff="@string/Adult"
+                android:textOn="@string/Adult" />
+
+            <ToggleButton
+                android:id="@+id/tbGran"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/Gran"
+                android:textOff="@string/Gran"
+                android:textOn="@string/Gran" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvCategories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Categories"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:id="@+id/CategoriesLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/Categories1Layout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <ToggleButton
+                    android:id="@+id/tbForça"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/Força"
+                    android:textOff="@string/Força"
+                    android:textOn="@string/Força" />
+
+                <ToggleButton
+                    android:id="@+id/tbCardio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/Cardio"
+                    android:textOff="@string/Cardio"
+                    android:textOn="@string/Cardio" />
+
+                <ToggleButton
+                    android:id="@+id/tbIoga"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/Ioga"
+                    android:textOff="@string/Ioga"
+                    android:textOn="@string/Ioga" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/Categories2Layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ToggleButton
+                    android:id="@+id/tbEstiraments"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/Estiraments"
+                    android:textOff="@string/Estiraments"
+                    android:textOn="@string/Estiraments" />
+
+                <ToggleButton
+                    android:id="@+id/tbRehab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/Rehabilitació"
+                    android:textOff="@string/Rehabilitació"
+                    android:textOn="@string/Rehabilitació" />
+
+                <ToggleButton
+                    android:id="@+id/tbPilates"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/Pilates"
+                    android:textOff="@string/Pilates"
+                    android:textOn="@string/Pilates" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvTemps"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Temps"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:id="@+id/TempsLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ToggleButton
+                android:id="@+id/tbPersonalitzable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/Personalitzable"
+                android:textOff="@string/Personalitzable"
+                android:textOn="@string/Personalitzable" />
+
+            <ToggleButton
+                android:id="@+id/tbRondaCircuit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/RondaCircuits"
+                android:textOff="@string/RondaCircuits"
+                android:textOn="@string/RondaCircuits" />
+
+            <ToggleButton
+                android:id="@+id/tbFixat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/Fixat"
+                android:textOff="@string/Fixat"
+                android:textOn="@string/Fixat" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvNivell"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Nivell"
+            android:textSize="18sp" />
+
+
+
+            <LinearLayout
+                android:id="@+id/NivellLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ToggleButton
+                    android:id="@+id/tbPrincipiant"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/Principiant"
+                    android:textOff="@string/Principiant"
+                    android:textOn="@string/Principiant" />
+
+                <ToggleButton
+                    android:id="@+id/tbIntermedi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/Intermedi"
+                    android:textOff="@string/Intermedi"
+                    android:textOn="@string/Intermedi" />
+
+                <ToggleButton
+                    android:id="@+id/tbAvançat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/Avançat"
+                    android:textOff="@string/Avançat"
+                    android:textOn="@string/Avançat" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvEquipament"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/Equipament"
+                android:textSize="18sp" />
+
+        <LinearLayout
+            android:id="@+id/EquipamentLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/Equipament1Layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ToggleButton
+                    android:id="@+id/tbSense"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/Sense"
+                    android:textOff="@string/Sense"
+                    android:textOn="@string/Sense" />
+
+                <ToggleButton
+                    android:id="@+id/tbMaterialCasa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/MaterialCasa"
+                    android:textOff="@string/MaterialCasa"
+                    android:textOn="@string/MaterialCasa" />
+
+                <ToggleButton
+                    android:id="@+id/tbKettlebell"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/Kettlebell"
+                    android:textOff="@string/Kettlebell"
+                    android:textOn="@string/Kettlebell" />
+
+                <ToggleButton
+                    android:id="@+id/tbBodyweight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/Bodyweight"
+                    android:textOff="@string/Bodyweight"
+                    android:textOn="@string/Bodyweight" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/Equipament2Layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ToggleButton
+                    android:id="@+id/tbDumbbell"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/Dumbbell"
+                    android:textOff="@string/Dumbbell"
+                    android:textOn="@string/Dumbbell" />
+
+                <ToggleButton
+                    android:id="@+id/tbResistanceBand"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/ResistanceBand"
+                    android:textOff="@string/ResistanceBand"
+                    android:textOn="@string/ResistanceBand" />
+
+                <ToggleButton
+                    android:id="@+id/tbResistanceLoop"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/ResistanceLoop"
+                    android:textOff="@string/ResistanceLoop"
+                    android:textOn="@string/ResistanceLoop" />
+
+                <ToggleButton
+                    android:id="@+id/tbFoamRoller"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/FoamRoller"
+                    android:textOff="@string/FoamRoller"
+                    android:textOn="@string/FoamRoller" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/tvObjectiu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Objectiu"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:id="@+id/ObjectiusLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/Objectius1Layout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <ToggleButton
+                    android:id="@+id/tbSalut"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/Salut"
+                    android:textOff="@string/Salut"
+                    android:textOn="@string/Salut" />
+
+                <ToggleButton
+                    android:id="@+id/tbForça2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/Força"
+                    android:textOff="@string/Força"
+                    android:textOn="@string/Força" />
+
+                <ToggleButton
+                    android:id="@+id/tbPerdrePes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/PèrduaPes"
+                    android:textOff="@string/PèrduaPes"
+                    android:textOn="@string/PèrduaPes" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/Objectius2Layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ToggleButton
+                    android:id="@+id/tbFlexibilitat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/Flexibilitat"
+                    android:textOff="@string/Flexibilitat"
+                    android:textOn="@string/Flexibilitat" />
+
+                <ToggleButton
+                    android:id="@+id/tbResistencia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/Resistència"
+                    android:textOff="@string/Resistència"
+                    android:textOn="@string/Resistència" />
+
+                <ToggleButton
+                    android:id="@+id/tbRecuperació"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/Recuperació"
+                    android:textOff="@string/Recuperació"
+                    android:textOn="@string/Recuperació" />
+
+                <ToggleButton
+                    android:id="@+id/tbAgilitat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/Agilitat"
+                    android:textOff="@string/Agilitat"
+                    android:textOn="@string/Agilitat" />
+            </LinearLayout>
+        </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvImpacte"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/Impacte"
+                android:textSize="18sp" />
+
+            <LinearLayout
+                android:id="@+id/ImpacteLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ToggleButton
+                    android:id="@+id/tbBaix"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/Baix"
+                    android:textOff="@string/Baix"
+                    android:textOn="@string/Baix" />
+
+                <ToggleButton
+                    android:id="@+id/tbModerat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/Moderat"
+                    android:textOff="@string/Moderat"
+                    android:textOn="@string/Moderat" />
+
+                <ToggleButton
+                    android:id="@+id/tbAlt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/Alt"
+                    android:textOff="@string/Alt"
+                    android:textOn="@string/Alt" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btOkay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp"
+            android:text="@string/Okay"
+            app:layout_constraintBottom_toBottomOf="@id/ImpacteLayout" />
+
+        <Button
+            android:id="@+id/btCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:text="@string/Cancel"
+            app:layout_constraintBottom_toBottomOf="@id/btOkay"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </LinearLayout>
+</ScrollView>
