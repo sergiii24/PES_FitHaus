@@ -1,28 +1,42 @@
 package cat.fib.fithaus.data.models
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
+/**
+ * Immutable model class for a Exercise. In order to compile with Room, we can't use @JvmOverloads to
+ * generate multiple constructors.
+ *
+ * @param id id of the exercise
+ * @param name name of the exercise
+ * @param image image of the exercise
+ * @param video video of the exercise
+ */
+
+@Entity(tableName = "exercises")
 data class Exercise(
-    @SerializedName("id")
+    @PrimaryKey @ColumnInfo(name = "id") @SerializedName("id")
     var id: Int = 0,
-    @SerializedName("name")
+    @ColumnInfo(name = "name") @SerializedName("name")
     var name: String = "",
-    @SerializedName("image")
+    @ColumnInfo(name = "image") @SerializedName("image")
     var image: String,
-    @SerializedName("video")
+    @ColumnInfo(name = "video") @SerializedName("video")
     var video: String,
-    @SerializedName("description")
+    @ColumnInfo(name = "description") @SerializedName("description")
     var description: String,
-    @SerializedName("muscle")
+    @ColumnInfo(name = "muscle") @SerializedName("muscle")
     var muscle: String,
-    @SerializedName("age")
+    @ColumnInfo(name = "age") @SerializedName("age")
     var age: String,
-    @SerializedName("difficulty")
+    @ColumnInfo(name = "difficulty") @SerializedName("difficulty")
     var difficulty: String,
-    @SerializedName("category")
+    @ColumnInfo(name = "category") @SerializedName("category")
     var category: String,
-    @SerializedName("duration")
+    @ColumnInfo(name = "duration") @SerializedName("duration")
     var duration: String,
-    @SerializedName("imageMuscle")
+    @ColumnInfo(name = "imageMuscle") @SerializedName("imageMuscle")
     var imageMuscle: String
 )

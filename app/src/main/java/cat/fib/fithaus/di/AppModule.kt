@@ -4,14 +4,18 @@ import cat.fib.fithaus.data.api.ApiServices
 import cat.fib.fithaus.data.api.Configuration
 import cat.fib.fithaus.data.api.ExerciseService
 import cat.fib.fithaus.utils.LiveDataCallAdapterFactory
+import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 import javax.inject.Singleton
-
+@Module
+@InstallIn(SingletonComponent::class)
 class AppModule {
 
     @Singleton
