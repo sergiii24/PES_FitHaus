@@ -19,47 +19,55 @@ import cat.fib.fithaus.R
 import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.fragment_consultar_exercici.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+// Paràmetres d'inicialització del Fragment
+private const val ARG_PARAM1 = "nomExercici"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ConsultarExerciciFragment.newInstance] factory method to
- * create an instance of this fragment.
+/** Fragment ConsultarExercici
+ *
+ *  Fragment encarregat de consultar la informació completa d'un exercici
+ *
+ *  @constructor Crea el Fragment ConsultarExercici
+ *  @author Albert Miñana Montecino
  */
 class ConsultarExerciciFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    /*private var param1: String? = null
-    private var param2: String? = null
 
+    private var nomIdentificadorExercici: String? = null // Nom de l'exercici
+
+    lateinit var imatgeExercici: ImageView                  // ImageView amb la imatge de previsualització de l'exercici
+    lateinit var nomExercici: TextView                      // TextView amb el nom de l'exercici
+    lateinit var videotutorialExercici: VideoView           // VideoView amb el videotutorial de l'exercici
+    lateinit var contingutDescripcioExercici: TextView      // TextView amb la descripció de l'exercici
+    lateinit var contingutMusculTreballExercici: TextView   // TextView amb el múscul de treball de l'exercici
+    lateinit var imatgeMusculTreballExercici: ImageView     // ImageView amb la imatge del múscul de treball de l'exercici
+    lateinit var contingutEdatExercici: TextView            // TextView amb l'edat de l'exercici
+    lateinit var contingutDificultatExercici: TextView      // TextView amb la dificultat de l'exercici
+    lateinit var contingutDuracioExercici: TextView         // TextView amb la duració de l'exercici
+    lateinit var contingutCategoriaExercici: TextView       // TextView amb la categoria de l'exercici
+
+    /** Function onCreate
+     *
+     *  Funció encarregada de crear el fragment
+     *
+     *  @param savedInstanceState
+     *  @author Albert Miñana Montecino
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            nomIdentificadorExercici = it.getString(ARG_PARAM1)
         }
     }
-*/
 
-
-
-    lateinit var imatgeExercici: ImageView
-    lateinit var nomExercici: TextView
-    lateinit var videotutorialExercici: VideoView
-    lateinit var contingutDescripcioExercici: TextView
-    lateinit var contingutMusculTreballExercici: TextView
-    lateinit var imatgeMusculTreballExercici: ImageView
-    lateinit var contingutEdatExercici: TextView
-    lateinit var contingutDificultatExercici: TextView
-    lateinit var contingutDuracioExercici: TextView
-    lateinit var contingutCategoriaExercici: TextView
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    /** Function onCreateView
+     *
+     *  Funció encarregada de configurar i mostrar el contingut del fragment
+     *
+     *  @param inflater
+     *  @param container
+     *  @param savedInstanceState
+     *  @author Albert Miñana Montecino
+     */
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view: View = inflater.inflate(R.layout.fragment_consultar_exercici, container, false)
 
@@ -74,22 +82,30 @@ class ConsultarExerciciFragment : Fragment() {
         contingutDuracioExercici = view.findViewById(R.id.contingutDuracioExercici)
         contingutCategoriaExercici = view.findViewById(R.id.contingutCategoriaExercici)
 
-        setup()
+        setContent()
 
         return view
     }
 
-    private fun setup(){
+    /** Function setContent
+     *
+     *  Funció encarregada d'establir el contingut amb la informació completa d'un exercici
+     *
+     *  @author Albert Miñana Montecino
+     */
+    private fun setContent(){
+        // Demanar dades d'un exercici a Back
+
         imatgeExercici.setImageResource(R.drawable.exemple_exercici)
         nomExercici.text = "Genolls alts corrent en el seu lloc"
 
         val videoPath: String = "android.resource://" + BuildConfig.APPLICATION_ID + "/" + R.raw.high_knees_running_in_place
         val uri: Uri = Uri.parse(videoPath)
         videotutorialExercici.setVideoURI(uri)
+
         val mediaController = MediaController(activity)
         videotutorialExercici.setMediaController(mediaController)
         mediaController.setAnchorView(videotutorialExercici)
-
         videotutorialExercici.requestFocus()
         //videotutorialExercici.start()
         videotutorialExercici.seekTo(1)
@@ -102,24 +118,5 @@ class ConsultarExerciciFragment : Fragment() {
         contingutDuracioExercici.text = "30 segons"
         contingutCategoriaExercici.text = "Cardio"
     }
-/*
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ConsultarExerciciFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ConsultarExerciciFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }*/
+
 }

@@ -5,11 +5,24 @@ import android.os.Bundle
 import cat.fib.fithaus.exercise.ExerciseViewModel
 import cat.fib.fithaus.ui.ConsultarExerciciFragment
 
+/** Activity ConsultarExercici
+ *
+ *  Activitat encarregada de consultar la informació completa d'un exercici
+ *
+ *  @constructor Crea l'Activity ConsultarExercici
+ *  @author Albert Miñana Montecino
+ */
 class ConsultarExerciciActivity : AppCompatActivity() {
 
+    private lateinit var exerciseViewModel: ExerciseViewModel   // ViewModel de l'Activity ConsultarExercici
 
-    private lateinit var exerciseViewModel: ExerciseViewModel
-
+    /** Function onCreate
+     *
+     *  Funció encarregada de crear, configurar i mostrar el contingut de l'activitat mitjançant el Fragment ConsultarExercici
+     *
+     *  @param savedInstanceState
+     *  @author Albert Miñana Montecino
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_consultar_exercici)
