@@ -1,11 +1,14 @@
 package cat.fib.fithaus.data.source.remote
 
 import androidx.lifecycle.LiveData
+import cat.fib.fithaus.data.api.ExerciseService
 import cat.fib.fithaus.data.models.Exercise
 import cat.fib.fithaus.data.source.ExerciseDataSource
 import cat.fib.fithaus.utils.Resource
 
-object ExerciseRemoteDataSource : ExerciseDataSource {
+class ExerciseRemoteDataSource(
+    provideExerciseService : ExerciseService
+) : ExerciseDataSource {
     override fun observeExercises(): LiveData<Resource<List<Exercise>>> {
         TODO("Not yet implemented")
     }

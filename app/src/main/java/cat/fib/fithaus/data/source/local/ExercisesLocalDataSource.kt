@@ -5,7 +5,8 @@ import androidx.lifecycle.map
 import cat.fib.fithaus.data.models.Exercise
 import cat.fib.fithaus.data.source.ExerciseDataSource
 import cat.fib.fithaus.utils.Resource
-import cat.fib.fithaus.utils.Resource.Companion.success
+import cat.fib.fithaus.utils.Resource.Success
+import cat.fib.fithaus.utils.Resource.Error
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -21,15 +22,15 @@ class ExercisesLocalDataSource internal constructor(
 
     override fun observeExercises(): LiveData<Resource<List<Exercise>>> {
         return exerciseDao.observeAllExercises().map {
-            success(it)
+            Success(it)
         }
     }
 
     override suspend fun getExercises(): Resource<List<Exercise>> = withContext(ioDispatcher) {
         return@withContext try {
-            success(exerciseDao.getExercises())
+            Success(exerciseDao.getExercises())
         } catch (e: Exception) {
-            error(e)
+            Error(e)
         }
     }
 
@@ -46,12 +47,12 @@ class ExercisesLocalDataSource internal constructor(
             try {
                 val exercise = exerciseDao.getExerciseById(exerciseId)
                 if (exercise != null) {
-                    return@withContext success(exercise)
+                    return@withContext Success(exercise)
                 } else {
-                    return@withContext error(Exception("Exercise not found!"))
+                    return@withContext Error(Exception("Exercise not found!"))
                 }
             } catch (e: Exception) {
-                return@withContext error(e)
+                return@withContext Error(e)
             }
         }
 
