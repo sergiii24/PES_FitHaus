@@ -3,13 +3,19 @@ package cat.fib.fithaus
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.activity_cercar_exercici.*
 
-
+/** Classe Cercar exercici
+ *
+ *  Activity on es mostren tots els exercicis i el popup del filtre d'aquests.
+ *
+ *  @author Oriol Prat.
+ */
 class CercarExerciciActivity : AppCompatActivity() {
 
     private lateinit var dialogBuilder: AlertDialog.Builder
@@ -23,31 +29,51 @@ class CercarExerciciActivity : AppCompatActivity() {
             Exercici("ulls", 1, "fàcil", "imatgeulls")
     )
 
+    /** Funció onCreate
+     *
+     *  Funció on es mostra la pantalla i s'inicia la configuració dels elements.
+     *
+     *  @param savedInstanceState
+     *  @author Oriol Prat.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cercar_exercici)
-
-
 
         iniciBoto()
         initRecycler()
     }
 
-
+    /** Funció iniciBoto
+     *
+     *  Funció on s'inicialitza el botó del filtre i es defineix el seu listener.
+     *
+     *  @author Oriol Prat.
+     */
     private fun iniciBoto() {
         val button: FloatingActionButton = findViewById(R.id.btFiltre)
         button.setOnClickListener { createNewContactDialog() }
     }
 
-
-    fun initRecycler(){
+    /** Funció initRecycler
+     *
+     *  Funció on s'inicialitza el recycler view dels exercicis.
+     *
+     *  @author Oriol Prat.
+     */
+    private fun initRecycler(){
         rvExerciciList.layoutManager = LinearLayoutManager(this)
         val adapter = ExerciciAdapter(exercicis)
         rvExerciciList.adapter = adapter
     }
 
-
-    fun createNewContactDialog() {
+    /** Funció createNewContactDialog
+     *
+     *  Funció on es gestiona el popup del filtre.
+     *
+     *  @author Oriol Prat.
+     */
+    private fun createNewContactDialog() {
         dialogBuilder = AlertDialog.Builder(this)
         val contactPopupView = layoutInflater.inflate(R.layout.pop_up_window, null)
 
@@ -59,7 +85,7 @@ class CercarExerciciActivity : AppCompatActivity() {
         dialog = dialogBuilder.create()
         dialog.show()
         btFiltrar.setOnClickListener {
-
+            Toast.makeText(this, "Encara no s'ha implementat", Toast.LENGTH_LONG).show()
         }
         btCancelar.setOnClickListener { dialog.dismiss() }
     }
