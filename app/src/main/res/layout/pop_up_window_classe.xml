@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:showIn="@layout/pop_up_window">
+    tools:showIn="@layout/pop_up_window_classe">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,17 +20,17 @@
             android:textSize="25sp" />
 
         <TextView
-            android:id="@+id/tvNomExercici"
+            android:id="@+id/tvNomClasse"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/Nom_exercici"
+            android:text="@string/NomClasse"
             android:textSize="18sp" />
 
         <EditText
-            android:id="@+id/etNomExercici"
+            android:id="@+id/etNomClasse"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/BuscaExercici" />
+            android:hint="@string/BuscaClasse" />
 
         <TextView
             android:id="@+id/tvEdat"
@@ -209,137 +209,57 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/tvMusculs"
+            android:id="@+id/tvAreaTreball"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/Músculs"
+            android:text="@string/ÀreaTreball"
             android:textSize="18sp" />
 
+
         <LinearLayout
-            android:id="@+id/layoutMusculs"
+            android:id="@+id/layoutÀreaTreball"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+            <ToggleButton
+                android:id="@+id/tbTrenInferior"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/TrenInferior"
+                android:textOff="@string/TrenInferior"
+                android:textOn="@string/TrenInferior" />
 
-                <ToggleButton
-                    android:id="@+id/tbBiceps"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/Bíceps"
-                    android:textOff="@string/Bíceps"
-                    android:textOn="@string/Bíceps" />
+            <ToggleButton
+                android:id="@+id/tbTrenSuperior"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/TrenSuperior"
+                android:textOff="@string/TrenSuperior"
+                android:textOn="@string/TrenSuperior" />
 
-                <ToggleButton
-                    android:id="@+id/tbTriceps"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/Tríceps"
-                    android:textOff="@string/Tríceps"
-                    android:textOn="@string/Tríceps" />
+            <ToggleButton
+                android:id="@+id/tbCos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/Cos"
+                android:textOff="@string/Cos"
+                android:textOn="@string/Cos" />
 
-                <ToggleButton
-                    android:id="@+id/tbForearm"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/Forearm"
-                    android:textOff="@string/Forearm"
-                    android:textOn="@string/Forearm" />
-
-                <ToggleButton
-                    android:id="@+id/tbChest"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/Chest"
-                    android:textOff="@string/Chest"
-                    android:textOn="@string/Chest" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <ToggleButton
-                    android:id="@+id/tbShoulder"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/Shoulder"
-                    android:textOff="@string/Shoulder"
-                    android:textOn="@string/Shoulder" />
-
-                <ToggleButton
-                    android:id="@+id/tbDorsal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/Dorsal"
-                    android:textOff="@string/Dorsal"
-                    android:textOn="@string/Dorsal" />
-
-                <ToggleButton
-                    android:id="@+id/tbGluteus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/Gluteus"
-                    android:textOff="@string/Gluteus"
-                    android:textOn="@string/Gluteus" />
-
-                <ToggleButton
-                    android:id="@+id/tbFemoral"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/Femoral"
-                    android:textOff="@string/Femoral"
-                    android:textOn="@string/Femoral" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <ToggleButton
-                    android:id="@+id/tbQuadriceps"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/Quadriceps"
-                    android:textOff="@string/Quadriceps"
-                    android:textOn="@string/Quadriceps" />
-
-                <ToggleButton
-                    android:id="@+id/tbCalf"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/Calf"
-                    android:textOff="@string/Calf"
-                    android:textOn="@string/Calf" />
-
-                <ToggleButton
-                    android:id="@+id/tbCore"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/Core"
-                    android:textOff="@string/Core"
-                    android:textOn="@string/Core" />
-
-            </LinearLayout>
+            <ToggleButton
+                android:id="@+id/tbCore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/Core"
+                android:textOff="@string/Core"
+                android:textOn="@string/Core" />
 
         </LinearLayout>
+
 
         <Button
             android:id="@+id/btOkay"
@@ -348,7 +268,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="40dp"
             android:text="@string/Okay"
-            app:layout_constraintBottom_toBottomOf="@id/layoutMusculs" />
+            app:layout_constraintBottom_toBottomOf="@id/layoutÀreaTreball" />
 
         <Button
             android:id="@+id/btCancel"

@@ -11,7 +11,7 @@
     <!--TODO: canviar per imatge-->
 
     <TextView
-        android:id="@+id/ivExercici"
+        android:id="@+id/ivClasse"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:text="@string/Imatge" />
