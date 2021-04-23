@@ -11,45 +11,54 @@ import cat.fib.fithaus.R
 import kotlinx.android.synthetic.main.fragment_consultar_classe.*
 import org.w3c.dom.Text
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+// Paràmetres d'inicialització del Fragment
+private const val ARG_PARAM1 = "nomClasse"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ConsultarClasseFragment.newInstance] factory method to
- * create an instance of this fragment.
+/** Fragment ConsultarClasse
+ *
+ *  Fragment encarregat de consultar la informació completa d'una classe
+ *
+ *  @constructor Crea el Fragment ConsultarClasse
+ *  @author Albert Miñana Montecino
  */
 class ConsultarClasseFragment : Fragment() {
-    /*
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
+    private var nomIdentificadorClasse: String? = null  // Nom de la classe
+
+    lateinit var imatgeClasse: ImageView                // ImageView amb la imatge de previsualització de la classe
+    lateinit var nomClasse: TextView                    // TextView amb el nom de la classe
+    lateinit var contingutEntrenadorClasse: TextView    // TextView amb l'entrenador de la classe
+    lateinit var contingutDescripcioClasse: TextView    // TextView amb la descripció de la classe
+    lateinit var contingutAreaTreballClasse: TextView   // TextView amb l'àrea de treball de la classe
+    lateinit var contingutEdatClasse: TextView          // TextView amb l'edat de la classe
+    lateinit var contingutDificultatClasse: TextView    // TextView amb la dificultat de la classe
+    lateinit var contingutDuracioClasse: TextView       // TextView amb la duració de la classe
+    lateinit var contingutCategoriaClasse: TextView     // TextView amb la categoria de la classe
+
+    /** Function onCreate
+     *
+     *  Funció encarregada de crear el fragment
+     *
+     *  @param savedInstanceState
+     *  @author Albert Miñana Montecino
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            nomIdentificadorClasse = it.getString(ARG_PARAM1)
         }
     }
-    */
 
-    lateinit var imatgeClasse: ImageView
-    lateinit var nomClasse: TextView
-    lateinit var contingutEntrenadorClasse: TextView
-    lateinit var contingutDescripcioClasse: TextView
-    lateinit var contingutAreaTreballClasse: TextView
-    lateinit var contingutEdatClasse: TextView
-    lateinit var contingutDificultatClasse: TextView
-    lateinit var contingutDuracioClasse: TextView
-    lateinit var contingutCategoriaClasse: TextView
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    /** Function onCreateView
+     *
+     *  Funció encarregada de configurar i mostrar el contingut del fragment
+     *
+     *  @param inflater
+     *  @param container
+     *  @param savedInstanceState
+     *  @author Albert Miñana Montecino
+     */
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view: View = inflater.inflate(R.layout.fragment_consultar_classe, container, false)
 
@@ -63,12 +72,20 @@ class ConsultarClasseFragment : Fragment() {
         contingutDuracioClasse = view.findViewById(R.id.contingutDuracioClasse)
         contingutCategoriaClasse = view.findViewById(R.id.contingutCategoriaClasse)
 
-        setup()
+        setContent()
 
         return view
     }
 
-    fun setup(){
+    /** Function setContent
+     *
+     *  Funció encarregada d'establir el contingut amb la informació completa d'una classe
+     *
+     *  @author Albert Miñana Montecino
+     */
+    fun setContent(){
+        // Demanar dades d'una classe a Back
+
         imatgeClasse.setImageResource(R.drawable.fitness_home)
         nomClasse.text = "Classe d'estiraments"
         contingutEntrenadorClasse.text = "Albert"
@@ -78,29 +95,6 @@ class ConsultarClasseFragment : Fragment() {
         contingutDificultatClasse.text = "Fàcil"
         contingutDuracioClasse.text = "15 minuts"
         contingutCategoriaClasse.text = "Estiraments"
-
-
     }
 
-    /*
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ConsultarClasseFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ConsultarClasseFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
-    */
 }
