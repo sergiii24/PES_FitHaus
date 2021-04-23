@@ -11,17 +11,13 @@
     <!--TODO: canviar per imatge-->
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <TextView
         android:id="@+id/ivExercici"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:text="@string/Imatge" />
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
@@ -29,9 +25,9 @@
             android:id="@+id/tvNom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/Nom"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:text="@string/Nom" />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tvDificultat"
@@ -40,13 +36,21 @@
             android:layout_marginTop="8sp"
             android:text="@string/Dificultat"
             android:textSize="15sp" />
+
         <TextView
             android:id="@+id/tvDuracio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8sp"
             android:text="@string/Duracio"
-            android:textSize="15sp"
-            android:layout_marginTop="8sp" />
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/btAfegeixARutina"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="@string/AfegirARutina" />
 
     </LinearLayout>
 

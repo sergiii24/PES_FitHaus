@@ -167,7 +167,6 @@
     </string>
     <string name="Imatge">Imatge</string>
     <string name="Duracio">Duració</string>
-    <string name="Dificultat">Dificultat</string>
     <string name="Exercicis">Exercicis</string>
     <string name="Filtre">Filtre</string>
     <!-- Strings used for fragments for navigation -->
@@ -180,4 +179,37 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="Filter">Filter</string>
     <string name="button">Button</string>
+    <string name="Edat">Edat</string>
+    <string name="Nen">Nen</string>
+    <string name="Jove">Jove</string>
+    <string name="Adult">Adult</string>
+    <string name="Gran">Gran</string>
+    <string name="Dificultat">Dificultat</string>
+    <string name="Fàcil">Fàcil</string>
+    <string name="Mitja">Mitjà</string>
+    <string name="Difícil">Difícil</string>
+    <string name="Categories">Categories</string>
+    <string name="Força">Força</string>
+    <string name="Cardio">Cardio</string>
+    <string name="Ioga">Ioga</string>
+    <string name="Estiraments">Estiraments</string>
+    <string name="Rehabilitació">Rehabilitació</string>
+    <string name="Pilates">Pilates</string>
+    <string name="Músculs">Músculs treball</string>
+    <string name="Nom_exercici">Nom exercici</string>
+    <string name="Cancel">Cancelar</string>
+    <string name="Okay">Filtrar</string>
+    <string name="BuscaExercici">Escriu aquí el nom de l\'exercici</string>
+    <string name="Bíceps">Biceps</string>
+    <string name="Tríceps">Triceps</string>
+    <string name="Forearm">Forearm</string>
+    <string name="Chest">Chest</string>
+    <string name="Shoulder">Shoulder</string>
+    <string name="Dorsal">Dorsal</string>
+    <string name="Gluteus">Gluteus</string>
+    <string name="Femoral">Femoral</string>
+    <string name="Quadriceps">Quadriceps</string>
+    <string name="Calf">Calf</string>
+    <string name="Core">Core</string>
+    <string name="AfegirARutina">Afegir a rutina</string>
 </resources>

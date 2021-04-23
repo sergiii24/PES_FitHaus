@@ -18,14 +18,13 @@
         android:id="@+id/btFiltre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvTitolExercicis"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="-2dp"
-        android:layout_marginEnd="20dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="30dp"
         android:clickable="true"
         android:contentDescription="@string/Filtre"
-        android:foregroundGravity="right"
-        app:srcCompat="@drawable/outline_reorder_24" />
+        app:srcCompat="@drawable/filter_icon" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvExerciciList"

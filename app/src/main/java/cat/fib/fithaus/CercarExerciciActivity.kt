@@ -1,9 +1,8 @@
 package cat.fib.fithaus
 
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
-import android.widget.EditText
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,6 +15,7 @@ class CercarExerciciActivity : AppCompatActivity() {
     private lateinit var dialogBuilder: AlertDialog.Builder
     private lateinit var dialog: AlertDialog
 
+    //TODO: agafar tots els exercicis de l'app
     val exercicis = listOf(
             Exercici("cames", 5, "fàcil", "imatgecames"),
             Exercici("braços", 10, "fàcil", "imatgebraços"),
@@ -26,6 +26,8 @@ class CercarExerciciActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cercar_exercici)
+
+
 
         iniciBoto()
         initRecycler()
@@ -48,16 +50,18 @@ class CercarExerciciActivity : AppCompatActivity() {
     fun createNewContactDialog() {
         dialogBuilder = AlertDialog.Builder(this)
         val contactPopupView = layoutInflater.inflate(R.layout.pop_up_window, null)
-        val nom1 = contactPopupView.findViewById<View>(R.id.etnom1) as EditText
-        val nom2 = contactPopupView.findViewById<View>(R.id.etnom2) as EditText
-        val nom3 = contactPopupView.findViewById<View>(R.id.etnom3) as EditText
-        val boto1 = contactPopupView.findViewById<View>(R.id.bt1) as Button
-        val boto2 = contactPopupView.findViewById<View>(R.id.bt2) as Button
+
+        val nomExercici: TextView = contactPopupView.findViewById(R.id.etNomExercici)
+        val btFiltrar: Button = contactPopupView.findViewById(R.id.btOkay)
+        val btCancelar: Button = contactPopupView.findViewById(R.id.btCancel)
+
         dialogBuilder.setView(contactPopupView)
         dialog = dialogBuilder.create()
         dialog.show()
-        boto1.setOnClickListener { }
-        boto2.setOnClickListener { }
+        btFiltrar.setOnClickListener {
+
+        }
+        btCancelar.setOnClickListener { dialog.dismiss() }
     }
 
 }
