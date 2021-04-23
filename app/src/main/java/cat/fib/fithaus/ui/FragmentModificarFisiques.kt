@@ -11,6 +11,14 @@ import cat.fib.fithaus.R
 import cat.fib.fithaus.models.User
 import cat.fib.fithaus.models.UserModelView
 
+/** Classe FragmentModificarFisiques
+ *
+ *  Classe on hi ha el fragment de les dades físiques.
+ *
+ *  @constructor Inicialitza els camps d'informació i captura les dades de l'usuari.
+ *  @author Daniel Cárdenas.
+ */
+
 class FragmentModificarFisiques : Fragment(R.layout.fragment_modificar_fisiques) {
 
     lateinit var weight: EditText
@@ -31,6 +39,14 @@ class FragmentModificarFisiques : Fragment(R.layout.fragment_modificar_fisiques)
         return v
     }
 
+
+    /** Funció setUpData
+     *
+     *  Funció que omple els camps del fragment amb les dades d'usuari corresponents.
+     *
+     *  @param userData
+     *  @author Daniel Cárdenas.
+     */
     fun setUpData(userData: User) {
         weight.hint = userData.weight.toString()
         height.hint = userData.height.toString()
