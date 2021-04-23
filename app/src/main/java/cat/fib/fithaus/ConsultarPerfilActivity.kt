@@ -100,6 +100,12 @@ class ConsultarPerfilActivity : AppCompatActivity() {
         })
     }
 
+    /** Funció showAlert
+     *
+     *  Funció que treu una pantalla de confirmació per eliminar el perfil de l'usuari
+     *
+     *  @author Daniel Cárdenas.
+     */
     private fun showAlert(){
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Confirmació")
