@@ -3,7 +3,6 @@ package cat.fib.fithaus
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
-import cat.fib.fithaus.exercise.ExerciseViewModel
 import cat.fib.fithaus.ui.ConsultarExerciciFragment
 import cat.fib.fithaus.viewmodels.ExercisesViewModel
 import dagger.hilt.android.AndroidEntryPoint
