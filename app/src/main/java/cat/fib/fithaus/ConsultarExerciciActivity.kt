@@ -2,8 +2,11 @@ package cat.fib.fithaus
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
 import cat.fib.fithaus.exercise.ExerciseViewModel
 import cat.fib.fithaus.ui.ConsultarExerciciFragment
+import cat.fib.fithaus.viewmodels.ExercisesViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
 /** Activity ConsultarExercici
  *
@@ -12,9 +15,11 @@ import cat.fib.fithaus.ui.ConsultarExerciciFragment
  *  @constructor Crea l'Activity ConsultarExercici
  *  @author Albert Miñana Montecino
  */
+@AndroidEntryPoint
 class ConsultarExerciciActivity : AppCompatActivity() {
 
-    private lateinit var exerciseViewModel: ExerciseViewModel   // ViewModel de l'Activity ConsultarExercici
+    private val viewModel by viewModels<ExercisesViewModel>()
+
 
     /** Function onCreate
      *
@@ -27,9 +32,6 @@ class ConsultarExerciciActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_consultar_exercici)
 
-        val appContainer = (application as Application).appContainer
-        exerciseViewModel = appContainer.loginViewModelFactory.create()
-
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
 
@@ -37,5 +39,6 @@ class ConsultarExerciciActivity : AppCompatActivity() {
         fragmentTransaction.add(R.id.fragment_container, fragment)
         fragmentTransaction.commit()
     }
+
 
 }
