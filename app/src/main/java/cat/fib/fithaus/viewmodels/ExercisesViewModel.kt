@@ -19,7 +19,7 @@ class ExercisesViewModel @Inject constructor(
     private val _exercise = _exerciseId.switchMap { exerciseId ->
         exerciseRepository.observeExercise(exerciseId).map { computeResult(it) }
     }
-    val task: LiveData<Exercise?> = _exercise
+    val exercises: LiveData<Exercise?> = _exercise
 
 
     init {
@@ -33,6 +33,10 @@ class ExercisesViewModel @Inject constructor(
         } else {
             null
         }
+    }
+
+    fun getExercise(exerciseId: Int) {
+
     }
 
 }

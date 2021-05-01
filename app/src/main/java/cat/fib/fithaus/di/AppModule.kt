@@ -9,7 +9,6 @@ import cat.fib.fithaus.data.source.ExerciseDataSource
 import cat.fib.fithaus.data.source.local.ExercisesLocalDataSource
 import cat.fib.fithaus.data.source.local.FitHausDatabase
 import cat.fib.fithaus.data.source.remote.ExerciseRemoteDataSource
-import cat.fib.fithaus.exercise.ExerciseLocalDataSource
 import cat.fib.fithaus.utils.LiveDataCallAdapterFactory
 import dagger.Module
 import dagger.Provides

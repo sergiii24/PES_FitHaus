@@ -29,7 +29,7 @@ interface ExerciseDao {
      * @return the exercises with id.
      */
     @Query("SELECT * FROM exercises WHERE id = :id")
-    fun bserveById(id: String): LiveData<Exercise>
+    fun observeById(id: String): LiveData<Exercise>
 
     /**
      * Select all exercises from the exercises table.

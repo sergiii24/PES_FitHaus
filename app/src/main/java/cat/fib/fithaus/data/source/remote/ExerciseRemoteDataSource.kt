@@ -14,7 +14,7 @@ class ExerciseRemoteDataSource(
     }
 
     override suspend fun getExercises(): Resource<List<Exercise>> {
-        TODO("Not yet implemented")
+
     }
 
     override suspend fun refreshExercises() {

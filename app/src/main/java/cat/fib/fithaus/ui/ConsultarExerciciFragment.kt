@@ -93,6 +93,7 @@ class ConsultarExerciciFragment : Fragment() {
      *
      *  @author Albert Miñana Montecino
      */
+
     private fun setContent(){
         // Demanar dades d'un exercici a Back
 
