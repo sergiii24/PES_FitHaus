@@ -2,15 +2,11 @@ package cat.fib.fithaus
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
 import android.util.Patterns
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import cat.fib.fithaus.api.ApiServices
-import cat.fib.fithaus.models.User
-import cat.fib.fithaus.models.UserModelView
-import cat.fib.fithaus.models.gson
+import cat.fib.fithaus.data.api.ApiServices
 import com.android.volley.toolbox.*
 import kotlinx.android.synthetic.main.activity_log_in.*
 import okhttp3.Call

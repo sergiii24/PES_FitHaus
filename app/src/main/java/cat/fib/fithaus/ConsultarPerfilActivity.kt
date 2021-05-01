@@ -4,10 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import cat.fib.fithaus.api.ApiServices
-import cat.fib.fithaus.models.User
-import cat.fib.fithaus.models.UserModelView
-import cat.fib.fithaus.models.gson
+import cat.fib.fithaus.data.api.ApiServices
+import cat.fib.fithaus.data.models.User
+import cat.fib.fithaus.data.models.UserModelView
+import cat.fib.fithaus.data.models.gson
 import cat.fib.fithaus.ui.*
 import com.google.android.gms.security.ProviderInstaller
 import okhttp3.Call

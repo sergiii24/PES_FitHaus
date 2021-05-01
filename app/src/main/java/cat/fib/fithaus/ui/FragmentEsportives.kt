@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import cat.fib.fithaus.R
-import cat.fib.fithaus.models.User
-import cat.fib.fithaus.models.UserModelView
+import cat.fib.fithaus.data.models.User
+import cat.fib.fithaus.data.models.UserModelView
 
 /**
  * A simple [Fragment] subclass.
