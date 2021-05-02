@@ -1,14 +1,8 @@
-package cat.fib.fithaus.api
-
-/**
- * Created by Rohan Jahagirdar on 07-02-2018.
- */
-
+package cat.fib.fithaus.data.api
 
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
-import java.util.*
 
 
 class ApiRequest(client: OkHttpClient) {

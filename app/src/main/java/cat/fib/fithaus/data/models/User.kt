@@ -1,11 +1,10 @@
-package cat.fib.fithaus.models
-
-import com.google.gson.annotations.SerializedName
-import java.time.Instant
-import java.util.*
+package cat.fib.fithaus.data.models
 
 import com.google.gson.Gson
+import com.google.gson.annotations.SerializedName
 import com.google.gson.reflect.TypeToken
+import java.time.Instant
+import java.util.*
 
 val gson = Gson()
 

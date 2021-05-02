@@ -1,4 +1,4 @@
-package cat.fib.fithaus.api
+package cat.fib.fithaus.data.api
 
 class Configuration {
 
