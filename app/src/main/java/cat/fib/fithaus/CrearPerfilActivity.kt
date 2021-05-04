@@ -104,16 +104,7 @@ class CrearPerfilActivity : AppCompatActivity() {
                                                 val user = User(name, lastname, usuari, Contrasenya?.text.toString(),  email, g, Date(la) )
 
 
-                                                ApiServices.postUserInfo(user, object : Callback {
 
-                                                    override fun onResponse(call: Call, response: Response) {
-                                                        println("User created.")
-                                                    }
-
-                                                    override fun onFailure(call: Call, e: IOException) {
-                                                        println("Request Failure.")
-                                                    }
-                                                })
 
                                             }
                                         }

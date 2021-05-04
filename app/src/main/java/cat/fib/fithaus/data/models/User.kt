@@ -46,7 +46,7 @@ data class User(
         @ColumnInfo(name = "gender") @SerializedName("gender")
         var gender: String = "",
         @ColumnInfo(name = "birthdate") @SerializedName("birthdate")
-        var birthdate: Date = Date.from(Instant.now())
+        var birthdate: String = ""
 ){
         constructor(firstname: String,
                     lastname: String,
@@ -54,7 +54,7 @@ data class User(
                 password: String,
                 email: String,
         gender: String,
-        birthdate: Date) : this(1000, firstname, lastname, username, "", password, 0, 0, 0, 0, "", 0, 0, 0, 0, 0, email, gender, birthdate
+        birthdate: Date) : this(1000, firstname, lastname, username, "", password, 0, 0, 0, 0, "", 0, 0, 0, 0, 0, email, gender, birthdate.toString()
 
         )
 }

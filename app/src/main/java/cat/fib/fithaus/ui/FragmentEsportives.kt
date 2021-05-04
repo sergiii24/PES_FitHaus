@@ -5,16 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import cat.fib.fithaus.R
 import cat.fib.fithaus.data.models.User
-import cat.fib.fithaus.data.models.UserModelView
-import cat.fib.fithaus.utils.Resource
 import cat.fib.fithaus.utils.Status
 import cat.fib.fithaus.viewmodels.UserViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * A simple [Fragment] subclass.

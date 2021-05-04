@@ -59,7 +59,6 @@ class LogInActivity : AppCompatActivity() {
         pass: String
     ) {
 
-        viewModel.login(email,pass)
 
 
     }
