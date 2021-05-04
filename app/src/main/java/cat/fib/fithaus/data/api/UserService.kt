@@ -18,7 +18,7 @@ interface UserService {
     /**
      * @POST declares an HTTP POST request
      */
-    @POST("/users")
+    @POST("/users/")
     fun createUser(@Body user: User): LiveData<ApiResponse<User>>
 
     @GET("/users/login")

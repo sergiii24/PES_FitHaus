@@ -20,6 +20,7 @@ import dagger.hilt.android.AndroidEntryPoint
  * Use the [FragmentPersonal.newInstance] factory method to
  * create an instance of this fragment.
  */
+@AndroidEntryPoint
 class FragmentPersonal : Fragment(R.layout.fragment_personals) {
 
     private val viewModel by viewModels<UserViewModel>()

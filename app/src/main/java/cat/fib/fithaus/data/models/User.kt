@@ -5,6 +5,8 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import java.time.Instant
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 @Entity(tableName = "user")
@@ -17,7 +19,7 @@ data class User(
         var lastname: String = "",
         @ColumnInfo(name = "username") @SerializedName("username")
         var username: String = "",
-        @ColumnInfo(name = "achievements") @SerializedName("achievements")
+        @ColumnInfo(name = "achievements") @SerializedName("achivements")
         var achievements: String = "",
         @ColumnInfo(name = "password") @SerializedName("password")
         var password: String = "",
@@ -27,8 +29,8 @@ data class User(
         var points: Int = 0,
         @ColumnInfo(name = "level") @SerializedName("level")
         var level: Int = 0,
-        @ColumnInfo(name = "objectives") @SerializedName("objectives")
-        var objectives: Int = 0,
+        @ColumnInfo(name = "objectives") @SerializedName("objective")
+        var objectives: String = "",
         @ColumnInfo(name = "interestcategories") @SerializedName("interestcategories")
         var interestcategories: String = "",
         @ColumnInfo(name = "weight") @SerializedName("weight")
@@ -54,7 +56,7 @@ data class User(
                 password: String,
                 email: String,
         gender: String,
-        birthdate: Date) : this(1000, firstname, lastname, username, "", password, 0, 0, 0, 0, "", 0, 0, 0, 0, 0, email, gender, birthdate.toString()
+        birthdate: String) : this(1000, firstname, lastname, username, "asa", password, 0, 0, 0, "0", "as", 0, 0, 0, 0, 0, email, gender, birthdate)
 
-        )
+
 }

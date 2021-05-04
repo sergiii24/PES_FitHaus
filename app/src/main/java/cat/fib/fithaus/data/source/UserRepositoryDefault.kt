@@ -20,7 +20,7 @@ class UserRepositoryDefault(
 ) : UserRepository {
 
 
-    override suspend fun login(username: String, password: String): LiveData<Resource<Int>> {
+    override fun login(username: String, password: String): LiveData<Resource<Int>> {
 
         val result = MediatorLiveData<Resource<Int>>()
         val value = userService.login(username, password)
@@ -28,7 +28,7 @@ class UserRepositoryDefault(
         result.addSource(value) { response ->
             when (response) {
                 is ApiSuccessResponse -> {
-                    appExecutors.networkIO().execute {
+                    appExecutors.mainThread().execute {
 
                         result.setValue(Resource.success(response.body))
 
@@ -50,18 +50,33 @@ class UserRepositoryDefault(
 
     }
 
-    override suspend fun createUser(user: User): LiveData<Resource<User>> {
-        return object : NetworkBoundResource<User, User>(appExecutors) {
-            override fun saveCallResult(item: User) {
-                userDao.insertUser(item)
+    override fun createUser(user: User): LiveData<Resource<User>> {
+
+        val result = MediatorLiveData<Resource<User>>()
+        val value = userService.createUser(user)
+
+        result.addSource(value) { response ->
+            when (response) {
+                is ApiSuccessResponse -> {
+                    appExecutors.mainThread().execute {
+
+                        result.setValue(Resource.success(response.body))
+
+                    }
+                }
+
+                is ApiEmptyResponse -> {
+                    appExecutors.mainThread().execute {
+                        // reload from disk whatever we had
+                        result.setValue(Resource.loading(null))
+                    }
+                }
+
+
             }
+        }
 
-            override fun shouldFetch(data: User?) = data == null
-
-            override fun loadFromDb() = userDao.getUserById(user.username)
-
-            override fun createCall() = userService.createUser(user)
-        }.asLiveData()
+        return result as LiveData<Resource<User>>
     }
 
     override fun getUser(userId: String): LiveData<Resource<User>> {

@@ -19,6 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
  * Use the [FragmentFisiques.newInstance] factory method to
  * create an instance of this fragment.
  */
+@AndroidEntryPoint
 class FragmentFisiques : Fragment(R.layout.fragment_fisiques) {
 
     private val viewModel by viewModels<UserViewModel>()

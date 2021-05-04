@@ -19,7 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
  * Use the [FragmentEsportives.newInstance] factory method to
  * create an instance of this fragment.
  */
-
+@AndroidEntryPoint
 class FragmentEsportives : Fragment(R.layout.fragment_esportives) {
 
     private val viewModel by viewModels<UserViewModel>()

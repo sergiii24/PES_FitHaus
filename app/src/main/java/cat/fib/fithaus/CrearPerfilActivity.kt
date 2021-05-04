@@ -1,6 +1,7 @@
 package cat.fib.fithaus
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
@@ -8,13 +9,21 @@ import android.view.View
 import android.widget.EditText
 import android.widget.RadioButton
 import android.widget.Toast
+import androidx.activity.viewModels
+import androidx.fragment.app.viewModels
 import cat.fib.fithaus.data.models.User
 import cat.fib.fithaus.ui.dialog.DatePickerFragment
+import cat.fib.fithaus.utils.Status
+import cat.fib.fithaus.viewmodels.UserViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Response
 import java.io.IOException
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.*
+import javax.inject.Inject
 
 
 /** Classe CrearPerfil
@@ -24,6 +33,7 @@ import java.util.*
  *  @constructor Crea un perfil d'usuari amb tots els camps amb valor nul.
  *  @author Daniel Cárdenas.
 */
+@AndroidEntryPoint
 class CrearPerfilActivity : AppCompatActivity() {
     var Nom: EditText? = null
     var PrimerCognom: EditText? = null
@@ -35,6 +45,9 @@ class CrearPerfilActivity : AppCompatActivity() {
     var Sexe_Dona: RadioButton? = null
     var Sexe_Home: RadioButton? = null
     var Sexe_Altre: RadioButton? = null
+
+
+    private val viewModel by viewModels<UserViewModel>()
 
     /** Funció inicialitzadora
      *
@@ -93,17 +106,24 @@ class CrearPerfilActivity : AppCompatActivity() {
                                             if (!Patterns.EMAIL_ADDRESS.matcher(CorreuElectronic?.text).matches()) Toast.makeText(this, "El correu electrònic no té el format correcte (fit@fithaus.com)", Toast.LENGTH_LONG).show()
                                             else {
                                                 Toast.makeText(this, "Formulari complet!", Toast.LENGTH_LONG).show()
-                                                var usuari = NomUsuari?.text.toString();
-                                                var lastname = PrimerCognom?.text.toString()+SegonCognom?.text.toString()
-                                                var name = Nom?.text.toString()
-                                                var email = CorreuElectronic?.text.toString()
-                                                var la = DataNaixement?.text.toString()
+                                                val usuari = NomUsuari?.text.toString();
+                                                val lastname = PrimerCognom?.text.toString()+SegonCognom?.text.toString()
+                                                val name = Nom?.text.toString()
+                                                val email = CorreuElectronic?.text.toString()
+                                                val la = DataNaixement?.text.toString()
                                                 var g : String = "M"
                                                 if(Sexe_Dona?.isChecked == true) g = "W"
                                                 if(Sexe_Altre?.isChecked == true) g = "X"
-                                                val user = User(name, lastname, usuari, Contrasenya?.text.toString(),  email, g, Date(la) )
+                                                val user = User(name, lastname, usuari, Contrasenya?.text.toString(),  email, g,
+                                                    LocalDate.parse(la, DateTimeFormatter.ofPattern("dd/MM/yyyy")).format(DateTimeFormatter.ofPattern("yyyy-MM-dd")).toString())
 
+                                               viewModel.create(user).observe(this, androidx.lifecycle.Observer {
+                                                    if(it.status == Status.SUCCESS) {
+                                                        Toast.makeText(this, "Welcome ${it.data?.username}!", Toast.LENGTH_LONG).show()
+                                                        startActivity(Intent(this, ConsultarPerfilActivity::class.java))
+                                                    } else if (it.status == Status.ERROR) Toast.makeText(this, "ERROR!", Toast.LENGTH_LONG).show()
 
+                                                })
 
 
                                             }

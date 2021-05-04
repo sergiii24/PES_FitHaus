@@ -6,7 +6,9 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import cat.fib.fithaus.ui.*
 import com.google.android.gms.security.ProviderInstaller
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ConsultarPerfilActivity : AppCompatActivity() {
 
 
