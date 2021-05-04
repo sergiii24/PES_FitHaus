@@ -6,9 +6,9 @@ import cat.fib.fithaus.utils.Resource
 
 interface UserRepository {
 
-    suspend fun login(username: String, password: String): Resource<Int>
+    suspend fun login(username: String, password: String): LiveData<Resource<Int>>
 
-    suspend fun getUser(userId: String): LiveData<Resource<User>>
+    fun getUser(userId: String): LiveData<Resource<User>>
 
     suspend fun createUser(user: User): LiveData<Resource<User>>
 

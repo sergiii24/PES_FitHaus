@@ -13,16 +13,16 @@ interface UserService {
      * replacement for the {id} placeholder in the @GET path
      */
     @GET("/users/{id}")
-    suspend fun getUser(@Path("id") userId: String): LiveData<ApiResponse<User>>
+    fun getUser(@Path("id") userId: String): LiveData<ApiResponse<User>>
 
     /**
      * @POST declares an HTTP POST request
      */
     @POST("/users")
-    suspend fun createUser(@Body user: User): Call<User>
+    fun createUser(@Body user: User): LiveData<ApiResponse<User>>
 
-    @GET("/login")
-    suspend fun login(
+    @GET("/users/login")
+    fun login(
         @Query("username") username: String,
         @Query("password") password: String
     ): LiveData<ApiResponse<Int>>

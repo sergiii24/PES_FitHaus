@@ -8,7 +8,6 @@ import android.view.View
 import android.widget.EditText
 import android.widget.RadioButton
 import android.widget.Toast
-import cat.fib.fithaus.data.api.ApiServices
 import cat.fib.fithaus.data.models.User
 import cat.fib.fithaus.ui.dialog.DatePickerFragment
 import okhttp3.Call

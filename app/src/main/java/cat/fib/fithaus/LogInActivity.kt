@@ -5,14 +5,11 @@ import android.os.Bundle
 import android.util.Patterns
 import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import cat.fib.fithaus.data.api.ApiServices
-import com.android.volley.toolbox.*
+import cat.fib.fithaus.viewmodels.UserViewModel
 import kotlinx.android.synthetic.main.activity_log_in.*
-import okhttp3.Call
-import okhttp3.Callback
-import okhttp3.Response
-import java.io.IOException
+
 
 /** Classe Activity LogIn
  *
@@ -22,6 +19,9 @@ import java.io.IOException
  *  @author Adrià Espinola.
  */
 class LogInActivity : AppCompatActivity() {
+
+    private val viewModel by viewModels<UserViewModel>()
+
 
     /** Funció inicialitzadora
      *
@@ -58,17 +58,9 @@ class LogInActivity : AppCompatActivity() {
         email: String,
         pass: String
     ) {
-        ApiServices.login(email, pass, object : Callback {
 
-            override fun onResponse(call: Call, response: Response) {
-                showHome()
-            }
+        viewModel.login(email,pass)
 
-            override fun onFailure(call: Call, e: IOException) {
-                println("Request Failure.")
-                Toast.makeText(baseContext, "Login no correcte!", Toast.LENGTH_LONG).show()
-            }
-        })
 
     }
 
