@@ -4,16 +4,17 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import cat.fib.fithaus.api.ApiServices
-import cat.fib.fithaus.models.User
-import cat.fib.fithaus.models.UserModelView
-import cat.fib.fithaus.models.gson
+import cat.fib.fithaus.data.api.ApiServices
+import cat.fib.fithaus.data.models.User
+import cat.fib.fithaus.data.models.UserModelView
+import cat.fib.fithaus.data.models.gson
 import cat.fib.fithaus.ui.FragmentModificarEsportives
 import cat.fib.fithaus.ui.FragmentModificarPersonal
-import cat.fib.fithaus.ui.FragmentPersonal
 import java.io.IOException
 import com.google.android.gms.security.ProviderInstaller
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_crear_perfil.*
 import kotlinx.android.synthetic.main.fragment_modificar_personal.*
 import kotlinx.android.synthetic.main.fragment_modificar_personal.Sexe_Altre
@@ -31,7 +32,10 @@ import okhttp3.Response
  *  @constructor Indica a l'usuari que es troba a la pantalla de modificar perfil.
  *  @author Daniel Cárdenas.
  */
+@AndroidEntryPoint
 class ModificarPerfilActivity : AppCompatActivity() {
+
+    private val viewModel by viewModels<UserViewModel>()
 
     var userData: User = User()
 

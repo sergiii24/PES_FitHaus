@@ -5,14 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.TextView
-import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import cat.fib.fithaus.R
-import cat.fib.fithaus.models.User
-import cat.fib.fithaus.models.UserModelView
+import cat.fib.fithaus.data.models.User
+import cat.fib.fithaus.data.models.UserModelView
 
 
 /** Classe FragmentModificarPersonal
