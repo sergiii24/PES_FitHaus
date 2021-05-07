@@ -11,7 +11,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ExercisesViewModel @Inject constructor(
     private val exerciseRepository: ExerciseRepository,
-    @Assisted private val savedStateHandle: SavedStateHandle
+    private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
     /*
     private val _exerciseId = MutableLiveData<String>()
