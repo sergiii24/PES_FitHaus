@@ -5,14 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import cat.fib.fithaus.api.ApiServices
 import kotlinx.android.synthetic.main.activity_questionari_inicial.*
-import okhttp3.Call
-import okhttp3.Callback
-import okhttp3.Response
 import org.json.JSONObject
 import java.io.IOException
-import cat.fib.fithaus.questionari.QuestionariViewModel
 
 /** Classe Activty Qüestionari Inicial
  *
