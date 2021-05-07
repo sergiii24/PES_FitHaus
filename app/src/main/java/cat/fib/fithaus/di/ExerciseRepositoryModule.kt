@@ -1,5 +1,6 @@
 package cat.fib.fithaus.di
 
+import cat.fib.fithaus.data.api.ExerciseService
 import cat.fib.fithaus.data.api.UserService
 import cat.fib.fithaus.data.source.*
 import cat.fib.fithaus.data.source.local.FitHausDatabase

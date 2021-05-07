@@ -1,20 +1,19 @@
 package cat.fib.fithaus.data.source
 
 import androidx.lifecycle.LiveData
+import cat.fib.fithaus.data.api.ExerciseService
 import cat.fib.fithaus.data.models.Exercise
-import cat.fib.fithaus.data.source.local.ExercisesLocalDataSource
+import cat.fib.fithaus.data.source.local.ExerciseDao
+import cat.fib.fithaus.utils.AppExecutors
 import cat.fib.fithaus.utils.Resource
-import cat.fib.fithaus.utils.Status
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
 
 /**
  * Default implementation of [ExerciseRepository].
  */
 class ExerciseRepositoryDefault(
-    private val exercisesRemoteDataSource: ExerciseDataSource,
-    private val exercisesLocalDataSource: ExerciseDataSource,
-    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
+    private val exerciseDao: ExerciseDao,
+    private val exerciseService: ExerciseService,
+    private val appExecutors: AppExecutors,
 ) : ExerciseRepository {
     override fun observeExercises(): LiveData<Resource<List<Exercise>>> {
         TODO("Not yet implemented")
@@ -33,13 +32,7 @@ class ExerciseRepositoryDefault(
     }
 
     override suspend fun getExercise(exerciseId: String): Resource<Exercise> {
-
-        try {
-            updateTasksFromRemoteDataSource()
-        } catch (ex: Exception) {
-            return Resource.Error(ex)
-        }
-        return exercisesLocalDataSource.getExercise(exerciseId)
+        TODO("Not yet implemented")
     }
 
     override suspend fun refreshExercise(exerciseId: String) {
@@ -59,17 +52,7 @@ class ExerciseRepositoryDefault(
     }
 
     private suspend fun updateTasksFromRemoteDataSource() {
-        val remoteExercises = exercisesRemoteDataSource.getExercises()
-
-        if (remoteExercises is Resource.Success) {
-            // Real apps might want to do a proper sync, deleting, modifying or adding each task.
-            exercisesLocalDataSource.deleteAllExercises()
-            remoteExercises.data.forEach { exercise ->
-                exercisesLocalDataSource.saveExercise(exercise)
-            }
-        } else if (remoteExercises is Resource.Error) {
-            throw remoteExercises.exception
-        }
+        TODO("Not yet implemented")
     }
 
 }

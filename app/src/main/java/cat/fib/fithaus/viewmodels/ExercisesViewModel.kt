@@ -13,7 +13,7 @@ class ExercisesViewModel @Inject constructor(
     private val exerciseRepository: ExerciseRepository,
     @Assisted private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
-
+    /*
     private val _exerciseId = MutableLiveData<String>()
 
     private val _exercise = _exerciseId.switchMap { exerciseId ->
@@ -26,7 +26,8 @@ class ExercisesViewModel @Inject constructor(
         // Set initial state
 
     }
-
+    */
+    /*
     private fun computeResult(taskResult: Resource<Exercise>): Exercise? {
         return if (taskResult is Resource.Success) {
             taskResult.data
@@ -34,6 +35,7 @@ class ExercisesViewModel @Inject constructor(
             null
         }
     }
+    */
 
     fun getExercise(exerciseId: Int) {
 
