@@ -1,8 +1,9 @@
 package cat.fib.fithaus.di
 
-import cat.fib.fithaus.data.source.ExerciseDataSource
-import cat.fib.fithaus.data.source.ExerciseRepository
-import cat.fib.fithaus.data.source.ExerciseRepositoryDefault
+import cat.fib.fithaus.data.api.UserService
+import cat.fib.fithaus.data.source.*
+import cat.fib.fithaus.data.source.local.FitHausDatabase
+import cat.fib.fithaus.utils.AppExecutors
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,13 +19,29 @@ import javax.inject.Singleton
 object ExerciseRepositoryModule {
     @Singleton
     @Provides
-    fun provideTasksRepository(
-        @AppModule.RemoteTasksDataSource remoteExerciseDataSource: ExerciseDataSource,
-        @AppModule.LocalTasksDataSource localExerciseDataSource: ExerciseDataSource,
-        ioDispatcher: CoroutineDispatcher
+    fun provideExerciseRepository(
+        exerciseService: ExerciseService,
+        database: FitHausDatabase,
+        appExecutors: AppExecutors
     ): ExerciseRepository {
         return ExerciseRepositoryDefault(
-            remoteExerciseDataSource, localExerciseDataSource, ioDispatcher
+            database.exerciseDao(), exerciseService, appExecutors
+        )
+    }
+}
+
+@Module
+@InstallIn(SingletonComponent::class)
+object UserRepositoryModule {
+    @Singleton
+    @Provides
+    fun provideUserRepository(
+        userService: UserService,
+        database: FitHausDatabase,
+        appExecutors: AppExecutors
+    ): UserRepository {
+        return UserRepositoryDefault(
+            database.userDao(), userService, appExecutors
         )
     }
 }

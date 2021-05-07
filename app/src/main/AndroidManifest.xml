@@ -25,10 +25,11 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity android:name=".ModificarPerfilActivity" />
         <activity android:name=".LogInActivity" />
-        <activity android:name=".ConsultarPerfilActivity" />
+        <activity android:name=".ConsultarPerfilActivity" ></activity>
         <activity android:name=".TancarSessioActivity" />
         <activity
             android:name=".AuthenticationProviders"

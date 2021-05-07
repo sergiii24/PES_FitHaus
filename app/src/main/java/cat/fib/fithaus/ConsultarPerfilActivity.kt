@@ -4,20 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import cat.fib.fithaus.data.api.ApiServices
-import cat.fib.fithaus.data.models.User
-import cat.fib.fithaus.data.models.UserModelView
-import cat.fib.fithaus.data.models.gson
 import cat.fib.fithaus.ui.*
 import com.google.android.gms.security.ProviderInstaller
-import okhttp3.Call
-import okhttp3.Callback
-import okhttp3.Response
-import java.io.IOException
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ConsultarPerfilActivity : AppCompatActivity() {
-
-    var userData: User = User()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,7 +17,6 @@ class ConsultarPerfilActivity : AppCompatActivity() {
         setContentView(R.layout.activity_consultar)
 
         ProviderInstaller.installIfNeeded(this)
-        getUserData()
 
         val fragmentPersonal = FragmentPersonal()
         val fragmentEsportives = FragmentEsportives()
@@ -75,23 +66,6 @@ class ConsultarPerfilActivity : AppCompatActivity() {
             commit()
         }
 
-    }
-
-    fun getUserData() {
-        //TODO: get id user
-        ApiServices.getUserInfo(1, object : Callback {
-
-            override fun onResponse(call: Call, response: Response) {
-                val responseData = response.body?.string()
-                runOnUiThread {
-                    UserModelView.setUser(gson.fromJson(responseData, User::class.java))
-                }
-            }
-
-            override fun onFailure(call: Call, e: IOException) {
-                println("Request Failure.")
-            }
-        })
     }
 
 

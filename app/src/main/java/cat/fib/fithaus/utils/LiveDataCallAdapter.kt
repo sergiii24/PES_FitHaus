@@ -2,7 +2,6 @@ package cat.fib.fithaus.utils
 
 import androidx.lifecycle.LiveData
 import cat.fib.fithaus.data.api.ApiResponse
-import com.android.example.github.api.ApiResponse
 import retrofit2.Call
 import retrofit2.CallAdapter
 import retrofit2.Callback
