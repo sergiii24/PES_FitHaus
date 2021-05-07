@@ -6,17 +6,23 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import cat.fib.fithaus.R
-import cat.fib.fithaus.models.User
-import cat.fib.fithaus.models.UserModelView
+import cat.fib.fithaus.data.models.User
+import cat.fib.fithaus.utils.Status
+import cat.fib.fithaus.viewmodels.UserViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * A simple [Fragment] subclass.
  * Use the [FragmentEsportives.newInstance] factory method to
  * create an instance of this fragment.
  */
-
+@AndroidEntryPoint
 class FragmentEsportives : Fragment(R.layout.fragment_esportives) {
+
+    private val viewModel by viewModels<UserViewModel>()
 
     lateinit var activitiesdone: TextView
     lateinit var achievements: TextView
@@ -33,18 +39,21 @@ class FragmentEsportives : Fragment(R.layout.fragment_esportives) {
         level = v.findViewById(R.id.Nivell_bd)
         objectives = v.findViewById(R.id.Objectiu_bd)
         interestcategories = v.findViewById(R.id.CategoriesInterès_bd)
-        if(UserModelView.user != null)
-            setUpData(UserModelView.getUser())
+        viewModel.user.observe(viewLifecycleOwner, Observer {
+            if (it.status == Status.SUCCESS)
+                setUpData(it.data)
+        })
+
         return v
     }
 
-    fun setUpData(userData: User) {
-        activitiesdone.text = userData.activitiesdone.toString()
-        achievements.text = userData.achievements
-        points.text = userData.points.toString()
-        level.text = userData.level.toString()
-        objectives.text = userData.objectives.toString()
-        interestcategories.text = userData.interestcategories
+    fun setUpData(userData: User?) {
+        activitiesdone.text = userData?.activitiesdone.toString()
+        achievements.text = userData?.achievements
+        points.text = userData?.points.toString()
+        level.text = userData?.level.toString()
+        objectives.text = userData?.objectives.toString()
+        interestcategories.text = userData?.interestcategories
     }
 
 }
