@@ -27,5 +27,7 @@ interface UserService {
         @Query("password") password: String
     ): LiveData<ApiResponse<Int>>
 
+    @PUT("/users/{id}")
+    fun updateUser(@Path("id") userId: Int, @Body updatedUser: User): LiveData<ApiResponse<User>>
 }
 

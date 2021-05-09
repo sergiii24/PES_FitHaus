@@ -12,4 +12,8 @@ interface UserRepository {
 
     fun createUser(user: User): LiveData<Resource<User>>
 
+    fun updateUser(userId: Int, updtatedUser: User): LiveData<Resource<User>>
+
+    //fun 2updateUser(userId: Int, updtatedUser: User): LiveData<Resource<User>>
+
 }

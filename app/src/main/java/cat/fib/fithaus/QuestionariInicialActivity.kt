@@ -3,11 +3,17 @@ package cat.fib.fithaus
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
+import androidx.lifecycle.Observer
+import cat.fib.fithaus.utils.Status
+import cat.fib.fithaus.viewmodels.UserViewModel
 import kotlinx.android.synthetic.main.activity_questionari_inicial.*
+import cat.fib.fithaus.data.models.User
 import org.json.JSONObject
-import java.io.IOException
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import kotlin.math.exp
 
 /** Classe Activty Qüestionari Inicial
  *
@@ -18,7 +24,7 @@ import java.io.IOException
  */
 class QuestionariInicialActivity : AppCompatActivity() {
 
-    //private lateinit var questionariViewModel: QuestionariViewModel
+    private val viewModel by viewModels<UserViewModel>()
 
     /** Funció inicialitzadora
      *
@@ -30,9 +36,6 @@ class QuestionariInicialActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_questionari_inicial)
-
-        //val appContainer = (application as Application).appContainer
-        //questionariViewModel = appContainer.questionariViewModelFactory.create()
 
         setupSendButton()
     }
@@ -68,10 +71,16 @@ class QuestionariInicialActivity : AppCompatActivity() {
             if (countO == 0 || countO > 3) Toast.makeText(this, "Selecciona entre 1 i 3 objectius", Toast.LENGTH_LONG).show()
         }
         else {
-            Toast.makeText(this, "Enviat correctament", Toast.LENGTH_LONG).show()
 
-            val intent = Intent(this, LogInActivity::class.java)
-            startActivity(intent)
+            //Toast.makeText(this, "Enviat correctament", Toast.LENGTH_LONG).show()
+            viewModel.user.observe(this, Observer {
+                if (it.status == Status.SUCCESS) {
+                    updateU(it.data, objectius, categories, experiencia)
+                }
+            })
+
+            //val intent = Intent(this, LogInActivity::class.java)
+            //startActivity(intent)
 
             // Create JSON using JSONObject for back?
             /*
@@ -79,11 +88,34 @@ class QuestionariInicialActivity : AppCompatActivity() {
             jsonObject.put("id", "1")
             jsonObject.put("categories", categories)
             jsonObject.put("objectius", objectius)
-
+            println(jsonObject)
             // Convert JSONObject to String
             val jsonObjectString = jsonObject.toString()
             */
+        }
+    }
 
+    /** Funció updateU
+     *
+     *  Funció que actualitza el objecte Usuari amb els objectius, categories i experiència seleccionades.
+     *
+     *  @author Adrià Espinola.
+     */
+    private fun updateU(user: User?, objectius: MutableList<String>, categories: MutableList<String>, experiencia: String) {
+        val userId = user?.id
+        if (user != null) {
+            user.objectives = objectius.toString()
+            user.interestcategories = categories.toString()
+            user.level = experiencia
+        }
+        if (userId != null) {
+            viewModel.update(userId, user).observe(this, androidx.lifecycle.Observer {
+                if(it.status == Status.SUCCESS) {
+                    Toast.makeText(this, "Qüestionari enviat", Toast.LENGTH_LONG).show()
+                    val intent = Intent(this, LogInActivity::class.java)
+                    startActivity(intent)
+                } else if (it.status == Status.ERROR) Toast.makeText(this, "ERROR!", Toast.LENGTH_LONG).show()
+            })
         }
     }
 
