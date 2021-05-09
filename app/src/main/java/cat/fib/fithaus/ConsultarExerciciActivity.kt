@@ -2,9 +2,7 @@ package cat.fib.fithaus
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.activity.viewModels
 import cat.fib.fithaus.ui.ConsultarExerciciFragment
-import cat.fib.fithaus.viewmodels.ExercisesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 /** Activity ConsultarExercici
@@ -16,9 +14,6 @@ import dagger.hilt.android.AndroidEntryPoint
  */
 @AndroidEntryPoint
 class ConsultarExerciciActivity : AppCompatActivity() {
-
-    private val viewModel by viewModels<ExercisesViewModel>()
-
 
     /** Function onCreate
      *
@@ -38,6 +33,5 @@ class ConsultarExerciciActivity : AppCompatActivity() {
         fragmentTransaction.add(R.id.fragment_container, fragment)
         fragmentTransaction.commit()
     }
-
 
 }

@@ -50,6 +50,7 @@ class UserRepositoryDefault(
 
     }
 
+    /*
     override fun createUser(user: User): LiveData<Resource<User>> {
 
         val result = MediatorLiveData<Resource<User>>()
@@ -77,6 +78,22 @@ class UserRepositoryDefault(
         }
 
         return result as LiveData<Resource<User>>
+    }
+    */
+
+    override fun createUser(user: User): LiveData<Resource<User>> {
+        return object : NetworkDatabaseResource<User, User>(appExecutors) {
+
+            override fun createCall() = userService.createUser(user)
+
+            override fun saveCallResult(item: User) {
+                userDao.insertUser(item)
+                user.id = item.id
+            }
+
+            override fun loadFromDb() = userDao.getUserById(user.id.toString())
+
+        }.asLiveData()
     }
 
     override fun getUser(userId: String): LiveData<Resource<User>> {

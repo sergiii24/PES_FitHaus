@@ -1,26 +1,24 @@
 package cat.fib.fithaus.ui
 
-import android.media.MediaController2
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.MediaController
-import android.widget.TextView
-import android.widget.VideoView
-import androidx.annotation.RequiresApi
-import androidx.browser.customtabs.CustomTabsClient.getPackageName
+import android.widget.*
+import androidx.fragment.app.viewModels
 import cat.fib.fithaus.BuildConfig
 import cat.fib.fithaus.R
-import kotlinx.android.synthetic.*
-import kotlinx.android.synthetic.main.fragment_consultar_exercici.*
+import cat.fib.fithaus.utils.Status
+import cat.fib.fithaus.viewmodels.ExerciseViewModel
+import androidx.lifecycle.Observer
+import cat.fib.fithaus.data.models.Exercise
+import com.squareup.picasso.Picasso
+import dagger.hilt.android.AndroidEntryPoint
 
 // Paràmetres d'inicialització del Fragment
-private const val ARG_PARAM1 = "nomExercici"
+private const val ARG_PARAM1 = "identificadorExercici"
 
 /** Fragment ConsultarExercici
  *
@@ -29,9 +27,12 @@ private const val ARG_PARAM1 = "nomExercici"
  *  @constructor Crea el Fragment ConsultarExercici
  *  @author Albert Miñana Montecino
  */
+@AndroidEntryPoint
 class ConsultarExerciciFragment : Fragment() {
 
-    private var nomIdentificadorExercici: String? = null // Nom de l'exercici
+    private val viewModel by viewModels<ExerciseViewModel>()    // ViewModel de l'exercici
+
+    private var identificadorExercici: String? = null   // Identificador de l'exercici
 
     lateinit var imatgeExercici: ImageView                  // ImageView amb la imatge de previsualització de l'exercici
     lateinit var nomExercici: TextView                      // TextView amb el nom de l'exercici
@@ -54,7 +55,7 @@ class ConsultarExerciciFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            nomIdentificadorExercici = it.getString(ARG_PARAM1)
+            identificadorExercici = it.getString(ARG_PARAM1)
         }
     }
 
@@ -82,7 +83,18 @@ class ConsultarExerciciFragment : Fragment() {
         contingutDuracioExercici = view.findViewById(R.id.contingutDuracioExercici)
         contingutCategoriaExercici = view.findViewById(R.id.contingutCategoriaExercici)
 
-        setContent()
+        identificadorExercici = "3" // Eliminar aquesta línia de codi perquè s'està forçant el paràmetre que li ha d'arribar
+
+        identificadorExercici?.let {
+            viewModel.getExercise(it)
+        }
+
+        viewModel.exercise.observe(viewLifecycleOwner, Observer {
+            if (it.status == Status.SUCCESS)
+                setContent(it.data)
+            else
+                Toast.makeText(activity, "ERROR!", Toast.LENGTH_LONG).show()
+        })
 
         return view
     }
@@ -91,12 +103,44 @@ class ConsultarExerciciFragment : Fragment() {
      *
      *  Funció encarregada d'establir el contingut amb la informació completa d'un exercici
      *
+     *  @param exerciseData
      *  @author Albert Miñana Montecino
      */
+    private fun setContent(exerciseData: Exercise?){
 
-    private fun setContent(){
-        // Demanar dades d'un exercici a Back
+        Picasso.get().load(exerciseData?.image.toString()).into(imatgeExercici)
 
+        nomExercici.text = exerciseData?.name.toString()
+
+        val videoPath: String = exerciseData?.videoTutorial.toString()
+        val uri: Uri = Uri.parse(videoPath)
+        videotutorialExercici.setVideoURI(uri)
+
+        val mediaController = MediaController(activity)
+        videotutorialExercici.setMediaController(mediaController)
+        mediaController.setAnchorView(videotutorialExercici)
+        videotutorialExercici.requestFocus()
+        //videotutorialExercici.start()
+        videotutorialExercici.seekTo(1)
+
+        contingutDescripcioExercici.text = exerciseData?.description.toString()
+        contingutMusculTreballExercici.text = exerciseData?.muscle.toString()
+
+        Picasso.get().load(exerciseData?.imageMuscle.toString()).into(imatgeMusculTreballExercici)
+
+        contingutEdatExercici.text = exerciseData?.age.toString()
+        contingutDificultatExercici.text = exerciseData?.difficulty.toString()
+        contingutDuracioExercici.text = exerciseData?.duration.toString()
+        contingutCategoriaExercici.text = exerciseData?.category.toString()
+    }
+
+    /** Function setExampleContent
+     *
+     *  Funció encarregada d'establir un contingut d'exemple amb la informació completa d'un exercici
+     *
+     *  @author Albert Miñana Montecino
+     */
+    private fun setExampleContent(){
         imatgeExercici.setImageResource(R.drawable.exemple_exercici)
         nomExercici.text = "Genolls alts corrent en el seu lloc"
 

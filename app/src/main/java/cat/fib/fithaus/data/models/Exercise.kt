@@ -23,8 +23,10 @@ data class Exercise(
     var name: String = "",
     @ColumnInfo(name = "image") @SerializedName("image")
     var image: String,
-    @ColumnInfo(name = "video") @SerializedName("video")
-    var video: String,
+    @ColumnInfo(name = "videoTutorial") @SerializedName("videoTutorial")
+    var videoTutorial: String,
+    @ColumnInfo(name = "videoExercise") @SerializedName("videoExercise")
+    var videoExercise: String,
     @ColumnInfo(name = "description") @SerializedName("description")
     var description: String,
     @ColumnInfo(name = "muscle") @SerializedName("muscle")

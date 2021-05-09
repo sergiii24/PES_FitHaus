@@ -4,15 +4,25 @@ import androidx.lifecycle.*
 import cat.fib.fithaus.data.models.Exercise
 import cat.fib.fithaus.data.source.ExerciseRepository
 import cat.fib.fithaus.utils.Resource
-import dagger.assisted.Assisted
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class ExercisesViewModel @Inject constructor(
+class ExerciseViewModel @Inject constructor(
     private val exerciseRepository: ExerciseRepository,
     private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
+
+    lateinit var exercise : LiveData<Resource<Exercise>> // = exerciseRepository.getExercise("1000")
+
+    //var exercise : LiveData<Resource<Exercise>>? = false
+
+    fun getExercise(id: String) {
+        println("LLEGA")
+        exercise = exerciseRepository.getExercise(id)
+        println("SALE")
+    }
+
     /*
     private val _exerciseId = MutableLiveData<String>()
 
@@ -36,9 +46,5 @@ class ExercisesViewModel @Inject constructor(
         }
     }
     */
-
-    fun getExercise(exerciseId: Int) {
-
-    }
 
 }

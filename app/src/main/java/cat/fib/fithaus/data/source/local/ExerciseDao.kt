@@ -7,12 +7,30 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import cat.fib.fithaus.data.models.Exercise
+import cat.fib.fithaus.data.models.User
 
 /**
  * Data Access Object for the exercise table.
  */
 @Dao
 interface ExerciseDao {
+
+    /**
+     * Select a exercise by id.
+     *
+     * @param exerciseId the exercise id.
+     * @return the exercise with id.
+     */
+    @Query("SELECT * FROM exercises WHERE id = :exerciseId")
+    fun getExerciseById(exerciseId: String): LiveData<Exercise>
+
+    /**
+     * Insert a exercise in the database. If the exercise already exists, replace it.
+     *
+     * @param exercise the exercise to be inserted.
+     */
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertExercise(exercise: Exercise)
 
     /**
      * Observes list of tasks.
@@ -38,23 +56,6 @@ interface ExerciseDao {
      */
     @Query("SELECT * FROM exercises")
     suspend fun getExercises(): List<Exercise>
-
-    /**
-     * Select a exercise by id.
-     *
-     * @param exerciseId the exercise id.
-     * @return the exercise with id.
-     */
-    @Query("SELECT * FROM exercises WHERE id = :exerciseId")
-    suspend fun getExerciseById(exerciseId: String): Exercise?
-
-    /**
-     * Insert a exercise in the database. If the exercise already exists, replace it.
-     *
-     * @param exercise the exercise to be inserted.
-     */
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertExercise(exercise: Exercise)
 
     /**
      * Update a exercise.

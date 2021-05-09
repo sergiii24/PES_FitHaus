@@ -17,8 +17,8 @@ interface ExerciseService {
          * @Path("id") annotation on the userId parameter marks it as a
          * replacement for the {id} placeholder in the @GET path
          */
-        @GET("/exercise/{id}")
-        suspend fun getUser(@Path("id") exerciseId: String): LiveData<ApiResponse<Exercise>>
+        @GET("/exercises/{id}")
+        fun getExercise(@Path("id") exerciseId: String): LiveData<ApiResponse<Exercise>>
 
 }
 
