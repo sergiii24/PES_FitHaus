@@ -15,7 +15,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FitHaus">
-        <activity android:name=".CrearPerfilActivity">
+        <activity android:name=".CrearPerfilActivity"/>
+
+        <activity android:name=".ConsultarPerfilActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,9 +25,8 @@
             </intent-filter>
 
         </activity>
-        <activity android:name=".ModificarPerfilActivity" />
         <activity android:name=".LogInActivity" />
-        <activity android:name=".ConsultarPerfilActivity" ></activity>
+        <activity android:name=".ModificarPerfilActivity" ></activity>
         <activity android:name=".TancarSessioActivity" />
         <activity
             android:name=".AuthenticationProviders"

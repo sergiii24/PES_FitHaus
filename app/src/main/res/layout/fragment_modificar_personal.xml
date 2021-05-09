@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/dataNaixement_bd"
+        android:id="@+id/datanaixement_bd"
         android:layout_width="139dp"
         android:layout_height="26dp"
         android:layout_marginStart="36dp"
@@ -92,7 +92,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/nomedit"
         android:layout_width="178dp"
         android:layout_height="38dp"
         android:layout_marginStart="87dp"
@@ -110,7 +110,7 @@
         android:layout_marginStart="87dp"
         android:layout_marginTop="13dp"
         app:layout_constraintStart_toEndOf="@+id/sexe"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2">
+        app:layout_constraintTop_toBottomOf="@+id/usuariedit">
 
         <RadioButton
             android:id="@+id/Sexe_Dona"
@@ -136,7 +136,7 @@
     </RadioGroup>
 
     <EditText
-        android:id="@+id/editTextTextPersonName2"
+        android:id="@+id/usuariedit"
         android:layout_width="178dp"
         android:layout_height="38dp"
         android:layout_marginStart="75dp"
@@ -145,5 +145,15 @@
         android:hint="@string/Username"
         android:inputType="textPersonName"
         app:layout_constraintStart_toEndOf="@+id/usuari"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+        app:layout_constraintTop_toBottomOf="@+id/nomedit" />
+
+    <Button
+        android:id="@+id/GuardarModificacionsPersonals"
+        android:layout_width="134dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="76dp"
+        android:layout_marginEnd="22dp"
+        android:text="@string/boton_Guardar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/datanaixement_bd" />
 </androidx.constraintlayout.widget.ConstraintLayout>

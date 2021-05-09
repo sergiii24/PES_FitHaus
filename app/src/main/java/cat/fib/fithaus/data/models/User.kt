@@ -28,7 +28,7 @@ data class User(
         @ColumnInfo(name = "points") @SerializedName("points")
         var points: Int = 0,
         @ColumnInfo(name = "level") @SerializedName("level")
-        var level: Int = 0,
+        var level: String = "",
         @ColumnInfo(name = "objectives") @SerializedName("objective")
         var objectives: String = "",
         @ColumnInfo(name = "interestcategories") @SerializedName("interestcategories")
@@ -56,7 +56,7 @@ data class User(
                 password: String,
                 email: String,
         gender: String,
-        birthdate: String) : this(1000, firstname, lastname, username, "asa", password, 0, 0, 0, "0", "as", 0, 0, 0, 0, 0, email, gender, birthdate)
+        birthdate: String) : this(1000, firstname, lastname, username, "asa", password, 0, 0, "0", "0", "as", 0, 0, 0, 0, 0, email, gender, birthdate)
 
 
 }

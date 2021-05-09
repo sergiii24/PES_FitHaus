@@ -93,5 +93,20 @@ class UserRepositoryDefault(
         }.asLiveData()
     }
 
+    override fun updateUser(userId: Int, updtatedUser: User): LiveData<Resource<User>> {
+        return object : NetworkDatabaseResource<User, User>(appExecutors) {
+
+            override fun createCall() = userService.updateUser(userId, updtatedUser)
+
+            override fun saveCallResult(item: User) {
+                userDao.insertUser(item)
+                updtatedUser.id = item.id
+            }
+
+            override fun loadFromDb() = userDao.getUserById(updtatedUser.id.toString())
+
+        }.asLiveData()
+    }
+
 
 }
