@@ -12,4 +12,6 @@ interface UserRepository {
 
     fun createUser(user: User): LiveData<Resource<User>>
 
+    fun deleteUser(userId: Int): LiveData<Resource<User>>
+
 }

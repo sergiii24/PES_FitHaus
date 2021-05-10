@@ -27,5 +27,8 @@ interface UserService {
         @Query("password") password: String
     ): LiveData<ApiResponse<Int>>
 
+    @DELETE ("/users/{id}")
+    fun deleteUser(@Path ("id") userId: String): LiveData<ApiResponse<User>>
+
 }
 

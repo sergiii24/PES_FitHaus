@@ -93,5 +93,18 @@ class UserRepositoryDefault(
         }.asLiveData()
     }
 
+    override fun deleteUser(userId: Int): LiveData<Resource<User>> {
+        return object : NetworkDatabaseResource<User, User>(appExecutors) {
+            override fun saveCallResult(item: User) {
+                userDao.deleteUser(userId.toString())
+            }
+
+            override fun loadFromDb() = userDao.getUserById(userId.toString())
+
+            override fun createCall() = userService.deleteUser(userId.toString())
+
+        }.asLiveData()
+    }
+
 
 }

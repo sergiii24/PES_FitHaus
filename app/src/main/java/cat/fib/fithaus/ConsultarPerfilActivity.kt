@@ -4,13 +4,21 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import cat.fib.fithaus.ui.*
+import cat.fib.fithaus.utils.Status
+import cat.fib.fithaus.viewmodels.UserViewModel
 import com.google.android.gms.security.ProviderInstaller
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ConsultarPerfilActivity : AppCompatActivity() {
+
+    private val viewModel by viewModels<UserViewModel>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -74,20 +82,23 @@ class ConsultarPerfilActivity : AppCompatActivity() {
 
     }
 
-    private fun showAlert(){
-        val builder = AlertDialog.Builder(this)
+    private fun showAlert() {
+       /* val builder = AlertDialog.Builder(this)
         builder.setTitle("Confirmació")
         builder.setMessage("Estàs segur que vols eliminar el perfil?")
-        builder.setPositiveButton("Acceptar"){ dialog, which ->
-            val intent = Intent(this@ConsultarPerfilActivity, LogInActivity::class.java)
-            startActivity(intent)
-        }
-        builder.setNegativeButton("Cancelar") { dialog, which ->
+        builder.setPositiveButton("Acceptar") { dialog, which ->*/
+            viewModel.deleteUser(15).observe(this, Observer {
+                if (it.status == Status.SUCCESS) {
+                    val intent = Intent(this@ConsultarPerfilActivity, LogInActivity::class.java)
+                    startActivity(intent)
+                } else Toast.makeText(this, "ERROR!", Toast.LENGTH_LONG).show()
+            })
+        //}
+       /* builder.setNegativeButton("Cancelar") { dialog, which ->
             val intent = Intent(this@ConsultarPerfilActivity, this::class.java)
             startActivity(intent)
         }
         val dialog: AlertDialog = builder.create()
-        dialog.create()
+        dialog.create()*/
     }
-
 }

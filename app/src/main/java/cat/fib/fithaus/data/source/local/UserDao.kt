@@ -1,11 +1,7 @@
 package cat.fib.fithaus.data.source.local
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 import cat.fib.fithaus.data.models.User
 
 /**
@@ -35,4 +31,11 @@ interface UserDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertUser(user: User)
 
+    /**
+     * Delete a user in the database.
+     *
+     * @param userId the user id.
+     */
+    @Query("DELETE FROM user WHERE id = :userId")
+    fun deleteUser(userId: String)
 }
