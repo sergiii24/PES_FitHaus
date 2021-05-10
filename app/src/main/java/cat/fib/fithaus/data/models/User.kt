@@ -34,9 +34,9 @@ data class User(
         @ColumnInfo(name = "interestcategories") @SerializedName("interestcategories")
         var interestcategories: String = "",
         @ColumnInfo(name = "weight") @SerializedName("weight")
-        var weight: Int = 0,
+        var weight: Float = 0.0F,
         @ColumnInfo(name = "height") @SerializedName("height")
-        var height: Int = 0,
+        var height: Float = 0.0F,
         @ColumnInfo(name = "imc") @SerializedName("imc")
         var imc: Int = 0,
         @ColumnInfo(name = "igc") @SerializedName("igc")
@@ -56,7 +56,7 @@ data class User(
                 password: String,
                 email: String,
         gender: String,
-        birthdate: String) : this(1000, firstname, lastname, username, "asa", password, 0, 0, 0, "0", "as", 0, 0, 0, 0, 0, email, gender, birthdate)
+        birthdate: String) : this(1000, firstname, lastname, username, "asa", password, 0, 0, 0, "0", "as", 0.0F, 0.0F, 0, 0, 0, email, gender, birthdate)
 
 
 }

@@ -6,24 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".ModificarPerfilActivity">
 
-    <Button
-        android:id="@+id/GuardarModificacions"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:text="@string/Boton_Guardar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.927"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/flFragment" />
-
     <FrameLayout
         android:id="@+id/flFragment"
         android:layout_width="0dp"
-        android:layout_height="340dp"
-        android:layout_marginTop="28dp"
+        android:layout_height="550dp"
+        android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/DadesPersonalsModificar" />
 
