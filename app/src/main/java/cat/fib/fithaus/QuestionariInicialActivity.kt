@@ -10,6 +10,7 @@ import cat.fib.fithaus.utils.Status
 import cat.fib.fithaus.viewmodels.UserViewModel
 import kotlinx.android.synthetic.main.activity_questionari_inicial.*
 import cat.fib.fithaus.data.models.User
+import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONObject
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -22,6 +23,7 @@ import kotlin.math.exp
  *  @constructor Crea el qüestionari de l'usuari amb tots els camps sense seleccionar.
  *  @author Adrià Espinola.
  */
+@AndroidEntryPoint
 class QuestionariInicialActivity : AppCompatActivity() {
 
     private val viewModel by viewModels<UserViewModel>()
@@ -77,6 +79,7 @@ class QuestionariInicialActivity : AppCompatActivity() {
                 if (it.status == Status.SUCCESS) {
                     updateU(it.data, objectius, categories, experiencia)
                 }
+                else Toast.makeText(this, "ERROR!", Toast.LENGTH_LONG).show()
             })
 
             //val intent = Intent(this, LogInActivity::class.java)
@@ -114,7 +117,7 @@ class QuestionariInicialActivity : AppCompatActivity() {
                     Toast.makeText(this, "Qüestionari enviat", Toast.LENGTH_LONG).show()
                     val intent = Intent(this, LogInActivity::class.java)
                     startActivity(intent)
-                } else if (it.status == Status.ERROR) Toast.makeText(this, "ERROR!", Toast.LENGTH_LONG).show()
+                } else if (it.status == Status.ERROR) Toast.makeText(this, "ERROR2!", Toast.LENGTH_LONG).show()
             })
         }
     }
