@@ -7,12 +7,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import cat.fib.fithaus.data.models.Class
 import cat.fib.fithaus.R
-import kotlinx.android.synthetic.main.fragment_consultar_classe.*
-import org.w3c.dom.Text
+import cat.fib.fithaus.utils.Status
+import cat.fib.fithaus.viewmodels.ClassViewModel
+import com.squareup.picasso.Picasso
+import dagger.hilt.android.AndroidEntryPoint
 
 // Paràmetres d'inicialització del Fragment
-private const val ARG_PARAM1 = "nomClasse"
+private const val ARG_PARAM1 = "identificadorClasse"
 
 /** Fragment ConsultarClasse
  *
@@ -21,9 +27,12 @@ private const val ARG_PARAM1 = "nomClasse"
  *  @constructor Crea el Fragment ConsultarClasse
  *  @author Albert Miñana Montecino
  */
+@AndroidEntryPoint
 class ConsultarClasseFragment : Fragment() {
 
-    private var nomIdentificadorClasse: String? = null  // Nom de la classe
+    private val viewModel by viewModels<ClassViewModel>()    // ViewModel de la classe
+
+    private var identificadorClasse: String? = null // Identificador de la classe
 
     lateinit var imatgeClasse: ImageView                // ImageView amb la imatge de previsualització de la classe
     lateinit var nomClasse: TextView                    // TextView amb el nom de la classe
@@ -45,7 +54,7 @@ class ConsultarClasseFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            nomIdentificadorClasse = it.getString(ARG_PARAM1)
+            identificadorClasse = it.getString(ARG_PARAM1)
         }
     }
 
@@ -72,7 +81,18 @@ class ConsultarClasseFragment : Fragment() {
         contingutDuracioClasse = view.findViewById(R.id.contingutDuracioClasse)
         contingutCategoriaClasse = view.findViewById(R.id.contingutCategoriaClasse)
 
-        setContent()
+        identificadorClasse = "3" // Eliminar aquesta línia de codi perquè s'està forçant el paràmetre que li ha d'arribar
+
+        identificadorClasse?.let {
+            viewModel.getClass(it)
+        }
+
+        viewModel.classe.observe(viewLifecycleOwner, Observer {
+            if (it.status == Status.SUCCESS)
+                setContent(it.data)
+            else
+                Toast.makeText(activity, "ERROR!", Toast.LENGTH_LONG).show()
+        })
 
         return view
     }
@@ -81,11 +101,28 @@ class ConsultarClasseFragment : Fragment() {
      *
      *  Funció encarregada d'establir el contingut amb la informació completa d'una classe
      *
+     *  @param  classData
+     *  @author Albert Miñana Montecino
+     */
+    fun setContent(classData: Class?){
+        Picasso.get().load(classData?.image.toString()).into(imatgeClasse)
+        nomClasse.text = classData?.name.toString()
+        contingutEntrenadorClasse.text = classData?.trainer.toString()
+        contingutDescripcioClasse.text = classData?.description.toString()
+        contingutAreaTreballClasse.text = classData?.area.toString()
+        contingutEdatClasse.text = classData?.age.toString()
+        contingutDificultatClasse.text = classData?.difficulty.toString()
+        contingutDuracioClasse.text = classData?.duration.toString()
+        contingutCategoriaClasse.text = classData?.category.toString()
+    }
+
+    /** Function setContent
+     *
+     *  Funció encarregada d'establir un contingut d'exemple amb la informació completa d'una classe
+     *
      *  @author Albert Miñana Montecino
      */
     fun setContent(){
-        // Demanar dades d'una classe a Back
-
         imatgeClasse.setImageResource(R.drawable.fitness_home)
         nomClasse.text = "Classe d'estiraments"
         contingutEntrenadorClasse.text = "Albert"

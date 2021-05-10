@@ -3,6 +3,7 @@ package cat.fib.fithaus
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import cat.fib.fithaus.ui.ConsultarClasseFragment
+import dagger.hilt.android.AndroidEntryPoint
 
 /** Activity ConsultarClasse
  *
@@ -11,6 +12,7 @@ import cat.fib.fithaus.ui.ConsultarClasseFragment
  *  @constructor Crea l'Activity ConsultarClasse
  *  @author Albert Miñana Montecino
  */
+@AndroidEntryPoint
 class ConsultarClasseActivity : AppCompatActivity() {
 
     /** Function onCreate

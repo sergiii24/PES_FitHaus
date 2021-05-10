@@ -1,5 +1,6 @@
 package cat.fib.fithaus.di
 
+import cat.fib.fithaus.data.api.ClassService
 import cat.fib.fithaus.data.api.UserService
 import cat.fib.fithaus.data.source.*
 import cat.fib.fithaus.data.source.local.FitHausDatabase
@@ -8,7 +9,6 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Singleton
 
 /**
@@ -26,6 +26,25 @@ object UserRepositoryModule {
     ): UserRepository {
         return UserRepositoryDefault(
             database.userDao(), userService, appExecutors
+        )
+    }
+}
+
+/**
+ * The binding for ClassRepository has the default Repository.
+ */
+@Module
+@InstallIn(SingletonComponent::class)
+object ClassRepositoryModule {
+    @Singleton
+    @Provides
+    fun provideClassRepository(
+            classService: ClassService,
+            database: FitHausDatabase,
+            appExecutors: AppExecutors
+    ): ClassRepository {
+        return ClassRepositoryDefault(
+                database.classDao(), classService, appExecutors
         )
     }
 }
