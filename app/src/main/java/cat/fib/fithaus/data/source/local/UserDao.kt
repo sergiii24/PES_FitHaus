@@ -35,5 +35,11 @@ interface UserDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertUser(user: User)
 
-
+    /**
+     * Delete a user in the database.
+     *
+     * @param userId the user id.
+     */
+    @Query("DELETE FROM user WHERE id = :userId")
+    fun deleteUser(userId: String)
 }

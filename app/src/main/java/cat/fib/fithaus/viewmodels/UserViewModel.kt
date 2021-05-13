@@ -33,4 +33,8 @@ class UserViewModel @Inject constructor(
         return userRepository.updateUser(userId, updatedUser)
     }
 
+    fun deleteUser (userId: Int): LiveData<Resource<User>> {
+        return userRepository.deleteUser(userId)
+    }
+
 }

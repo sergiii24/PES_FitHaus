@@ -30,5 +30,8 @@ interface UserService {
    @PUT("/users/{id}")
    fun updateUser(@Path("id") userId: Int, @Body updatedUser: User): LiveData<ApiResponse<User>>
 
+    @DELETE ("/users/{id}")
+    fun deleteUser(@Path ("id") userId: String): LiveData<ApiResponse<User>>
+
 }
 
