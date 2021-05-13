@@ -6,13 +6,54 @@
     android:layout_height="match_parent"
     tools:context=".ModificarPerfilActivity">
 
-    <TextView
-        android:id="@+id/ModificarPerfilPantalla"
+    <FrameLayout
+        android:id="@+id/flFragment"
+        android:layout_width="0dp"
+        android:layout_height="340dp"
+        android:layout_marginTop="28dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/DadesPersonalsModificar" />
+
+    <Button
+        android:id="@+id/DadesFísiquesModificar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/PantallaModificarPerfil"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="18dp"
+        android:text="Dades\nFísiques"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/DadesEsportivesModificar"
+        app:layout_constraintTop_toBottomOf="@+id/logo4" />
+
+    <Button
+        android:id="@+id/DadesEsportivesModificar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:text="Dades\nEsportives"
+        app:layout_constraintEnd_toStartOf="@+id/DadesFísiquesModificar"
+        app:layout_constraintStart_toEndOf="@+id/DadesPersonalsModificar"
+        app:layout_constraintTop_toBottomOf="@+id/logo4" />
+
+    <Button
+        android:id="@+id/DadesPersonalsModificar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:text="Dades\nPersonals"
+        app:layout_constraintEnd_toStartOf="@+id/DadesEsportivesModificar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logo4" />
+
+    <ImageView
+        android:id="@+id/logo4"
+        android:layout_width="100dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@string/Logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo_fithaus" />
 </androidx.constraintlayout.widget.ConstraintLayout>

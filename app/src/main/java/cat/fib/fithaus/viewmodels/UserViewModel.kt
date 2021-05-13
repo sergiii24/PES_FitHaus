@@ -29,4 +29,8 @@ class UserViewModel @Inject constructor(
 
     }
 
+    fun update(userId: Int, updatedUser: User): LiveData<Resource<User>> {
+        return userRepository.updateUser(userId, updatedUser)
+    }
+
 }

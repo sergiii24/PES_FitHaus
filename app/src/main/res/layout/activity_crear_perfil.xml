@@ -12,7 +12,7 @@
         android:layout_height="54dp"
         android:layout_marginStart="-2dp"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/radioGroup2"
+        app:layout_constraintBottom_toTopOf="@+id/SexeSelection"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:passwordToggleEnabled="true">
@@ -140,7 +140,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup2"
+        app:layout_constraintTop_toBottomOf="@+id/SexeSelection"
         android:focusable="false"
         android:clickable="true"
         android:maxLines="1"
@@ -165,7 +165,7 @@
         app:layout_constraintTop_toBottomOf="@+id/DataNaixement" />
 
     <RadioGroup
-        android:id="@+id/radioGroup2"
+        android:id="@+id/SexeSelection"
         android:layout_width="351dp"
         android:layout_height="102dp"
         android:layout_marginStart="16dp"
