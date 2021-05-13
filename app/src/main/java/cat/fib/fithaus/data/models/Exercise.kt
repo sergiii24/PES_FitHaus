@@ -21,12 +21,12 @@ data class Exercise(
     var id: Int = 0,
     @ColumnInfo(name = "name") @SerializedName("name")
     var name: String = "",
-    @ColumnInfo(name = "image") @SerializedName("image")
-    var image: String,
-    @ColumnInfo(name = "videoTutorial") @SerializedName("videoTutorial")
-    var videoTutorial: String,
-    @ColumnInfo(name = "videoExercise") @SerializedName("videoExercise")
-    var videoExercise: String,
+    @ColumnInfo(name = "pre") @SerializedName("pre")
+    var pre: String,
+    @ColumnInfo(name = "videotutorial") @SerializedName("videotutorial")
+    var videotutorial: String,
+    @ColumnInfo(name = "videoexercise") @SerializedName("videoexercise")
+    var videoexercise: String,
     @ColumnInfo(name = "description") @SerializedName("description")
     var description: String,
     @ColumnInfo(name = "muscle") @SerializedName("muscle")
@@ -35,10 +35,10 @@ data class Exercise(
     var age: String,
     @ColumnInfo(name = "difficulty") @SerializedName("difficulty")
     var difficulty: String,
-    @ColumnInfo(name = "category") @SerializedName("category")
-    var category: String,
-    @ColumnInfo(name = "duration") @SerializedName("duration")
-    var duration: String,
-    @ColumnInfo(name = "imageMuscle") @SerializedName("imageMuscle")
-    var imageMuscle: String
+    @ColumnInfo(name = "categories") @SerializedName("categories")
+    var categories: String,
+    @ColumnInfo(name = "length") @SerializedName("length")
+    var length: String,
+    @ColumnInfo(name = "muscleimage") @SerializedName("muscleimage")
+    var muscleimage: String
 )

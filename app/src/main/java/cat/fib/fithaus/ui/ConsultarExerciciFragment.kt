@@ -108,11 +108,11 @@ class ConsultarExerciciFragment : Fragment() {
      */
     private fun setContent(exerciseData: Exercise?){
 
-        Picasso.get().load(exerciseData?.image.toString()).into(imatgeExercici)
+        Picasso.get().load(exerciseData?.pre.toString()).into(imatgeExercici)
 
         nomExercici.text = exerciseData?.name.toString()
 
-        val videoPath: String = exerciseData?.videoTutorial.toString()
+        val videoPath: String = exerciseData?.videotutorial.toString()
         val uri: Uri = Uri.parse(videoPath)
         videotutorialExercici.setVideoURI(uri)
 
@@ -126,12 +126,12 @@ class ConsultarExerciciFragment : Fragment() {
         contingutDescripcioExercici.text = exerciseData?.description.toString()
         contingutMusculTreballExercici.text = exerciseData?.muscle.toString()
 
-        Picasso.get().load(exerciseData?.imageMuscle.toString()).into(imatgeMusculTreballExercici)
+        Picasso.get().load(exerciseData?.muscleimage.toString()).into(imatgeMusculTreballExercici)
 
         contingutEdatExercici.text = exerciseData?.age.toString()
         contingutDificultatExercici.text = exerciseData?.difficulty.toString()
-        contingutDuracioExercici.text = exerciseData?.duration.toString()
-        contingutCategoriaExercici.text = exerciseData?.category.toString()
+        contingutDuracioExercici.text = exerciseData?.length.toString()
+        contingutCategoriaExercici.text = exerciseData?.categories.toString()
     }
 
     /** Function setExampleContent
