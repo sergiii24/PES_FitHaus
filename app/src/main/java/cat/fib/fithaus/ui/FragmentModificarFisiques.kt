@@ -109,7 +109,7 @@ class FragmentModificarFisiques : Fragment(R.layout.fragment_modificar_fisiques)
         height.hint = userData?.height.toString()
         imc.text = userData?.imc.toString()
         igc.text = userData?.igc.toString()
-        historic.text = userData?.historic.toString()
+        historic.text = userData?.updated.toString()
     }
 
 

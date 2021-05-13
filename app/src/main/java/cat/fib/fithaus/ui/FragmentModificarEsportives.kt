@@ -89,8 +89,12 @@ class FragmentModificarEsportives : Fragment(R.layout.fragment_modificar_esporti
                         this.context, "Els camps nivell, objectiu i/o categories d'interès s'han d'omplir", Toast.LENGTH_LONG).show()
             } else if (userId != null) {
                 user.level = nivell.toString()
-                user.objectives = objectiu.toString()
-                user.interestcategories = categoriainteres.toString()
+                var ArrayObjectius = ArrayList<String>()
+                ArrayObjectius.add(objectiu.toString())
+                var ArrayCategories = ArrayList<String>()
+                ArrayCategories.add(objectiu.toString())
+                user.objectives = ArrayObjectius
+                user.categories = ArrayCategories
             }
             if (userId != null) {
                 viewModel.update(userId, user).observe(viewLifecycleOwner, Observer {
@@ -117,7 +121,7 @@ class FragmentModificarEsportives : Fragment(R.layout.fragment_modificar_esporti
         punts.text = userData?.points.toString()
         nivell.hint = userData?.level.toString()
         objectiu.hint = userData?.objectives.toString()
-        categoriainteres.hint = userData?.interestcategories.toString()
+        categoriainteres.hint = userData?.categories.toString()
     }
 
     /** Funció campsbuitsesportives
