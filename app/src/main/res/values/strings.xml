@@ -75,6 +75,10 @@
 
     <string name="facebook_app_id">344349210333001</string>
     <string name="fb_login_protocol_scheme">fb344349210333001</string>
+    <string name="Boton_Guardar">Guardar</string>
+    <string name="Pes_Pista">62.5</string>
+    <string name="Alçada_Pista">175.8</string>
+    <string name="EliminarPerfil">Eliminar perfil</string>
 
     <string name="text_descripció">Descripció</string>
     <string name="text_edat">Edat</string>

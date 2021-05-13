@@ -4,35 +4,38 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import cat.fib.fithaus.data.models.User
-import cat.fib.fithaus.ui.FragmentModificarEsportives
-import cat.fib.fithaus.ui.FragmentModificarPersonal
+import cat.fib.fithaus.ui.FragmentEsportives
+import cat.fib.fithaus.ui.FragmentFisiques
+import cat.fib.fithaus.ui.FragmentModificarFisiques
+import cat.fib.fithaus.ui.FragmentPersonal
 import java.io.IOException
 import com.google.android.gms.security.ProviderInstaller
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_crear_perfil.*
-import kotlinx.android.synthetic.main.fragment_modificar_personal.*
-import kotlinx.android.synthetic.main.fragment_modificar_personal.Sexe_Altre
-import kotlinx.android.synthetic.main.fragment_modificar_personal.Sexe_Dona
-import kotlinx.android.synthetic.main.fragment_modificar_personal.Sexe_Home
+import kotlinx.android.synthetic.main.fragment_fisiques.*
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Response
 
-
-/** Classe ModificarPerfil
+/** Classe Modificar perfil
  *
  *  Classe on es mostra la pantalla de modificar perfil.
  *
  *  @constructor Indica a l'usuari que es troba a la pantalla de modificar perfil.
  *  @author Daniel Cárdenas.
  */
+
 @AndroidEntryPoint
 class ModificarPerfilActivity : AppCompatActivity() {
 
 
+    /** Funció inicialitzadora
+     *
+     *  Funció que fa que es mostri la pantalla a l'usuari i que inicialitza totes les variables.
+     *
+     *  @param savedInstanceState
+     *  @author Daniel Cárdenas.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_modificar_perfil)
@@ -41,12 +44,11 @@ class ModificarPerfilActivity : AppCompatActivity() {
 
         val fragmentModificarPersonal = FragmentModificarPersonal()
         val fragmentModificarEsportives = FragmentModificarEsportives()
-        //val fragmentModificarFisiques = FragmentModificarFisiques()
+        val fragmentModificarFisiques = FragmentModificarFisiques()
 
         val btnFragmentModificarPersonals: Button = findViewById(R.id.DadesPersonalsModificar)
         val btnFragmentModificarEsportives: Button = findViewById(R.id.DadesEsportivesModificar)
         val btnFragmentModificarFisiques: Button = findViewById(R.id.DadesFísiquesModificar)
-
 
 
         //Es pot afegir el fragment a una pila per poder tornar-hi quan es tiri endarrere -->  addToBackStack(null)  <-- després de replace
@@ -58,27 +60,27 @@ class ModificarPerfilActivity : AppCompatActivity() {
                 commit()
             }
         }
+
         //Quan cliquem al botó de dades esportives volem veure aquest fragment
-        btnFragmentModificarEsportives.setOnClickListener {
+        btnFragmentEsportives.setOnClickListener {
             supportFragmentManager.beginTransaction().apply {
-                replace(R.id.flFragment, fragmentModificarEsportives)
+                replace(R.id.flFragment, fragmentEsportives)
                 commit()
             }
         }
 
         //Quan cliquem al botó de dades físiques volem veure aquest fragment
-        /*btnFragmentModificarFisiques.setOnClickListener {
+        btnFragmentModificarFisiques.setOnClickListener {
             supportFragmentManager.beginTransaction().apply {
                 replace(R.id.flFragment, fragmentModificarFisiques)
                 commit()
             }
-        }*/
+        }
 
         //Posem el fragment de dades personals a la pantalla, necessitem el commit per fer efectiu el canvi
         supportFragmentManager.beginTransaction().apply {
-            replace(R.id.flFragment, fragmentModificarPersonal)
+            replace(R.id.flFragment, fragmentPersonal)
             commit()
         }
-
     }
 }
