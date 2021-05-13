@@ -105,15 +105,15 @@ class ConsultarClasseFragment : Fragment() {
      *  @author Albert Miñana Montecino
      */
     fun setContent(classData: Class?){
-        Picasso.get().load(classData?.image.toString()).into(imatgeClasse)
+        Picasso.get().load(classData?.pre.toString()).into(imatgeClasse)
         nomClasse.text = classData?.name.toString()
         contingutEntrenadorClasse.text = classData?.trainer.toString()
         contingutDescripcioClasse.text = classData?.description.toString()
-        contingutAreaTreballClasse.text = classData?.area.toString()
+        contingutAreaTreballClasse.text = classData?.workarea.toString()
         contingutEdatClasse.text = classData?.age.toString()
         contingutDificultatClasse.text = classData?.difficulty.toString()
-        contingutDuracioClasse.text = classData?.duration.toString()
-        contingutCategoriaClasse.text = classData?.category.toString()
+        contingutDuracioClasse.text = classData?.length.toString()
+        contingutCategoriaClasse.text = classData?.categories.toString()
     }
 
     /** Function setContent

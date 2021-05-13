@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+import com.google.gson.internal.bind.ArrayTypeAdapter
 
 @Entity(tableName = "classes")
 data class Class(
@@ -17,16 +18,16 @@ data class Class(
         var age: String,
         @ColumnInfo(name = "difficulty") @SerializedName("difficulty")
         var difficulty: String,
-        @ColumnInfo(name = "duration") @SerializedName("duration")
-        var duration: String,
-        @ColumnInfo(name = "category") @SerializedName("category")
-        var category: String,
-        @ColumnInfo(name = "image") @SerializedName("image")
-        var image: String,
-        @ColumnInfo(name = "area") @SerializedName("area")
-        var area: String,
+        @ColumnInfo(name = "length") @SerializedName("length")
+        var length: String,
+        @ColumnInfo(name = "categories") @SerializedName("categories")
+        var categories: ArrayList<String>,
+        @ColumnInfo(name = "pre") @SerializedName("pre")
+        var pre: String,
+        @ColumnInfo(name = "workarea") @SerializedName("workarea")
+        var workarea: String,
         @ColumnInfo(name = "trainer") @SerializedName("trainer")
         var trainer: String,
-        @ColumnInfo(name = "video") @SerializedName("video")
-        var video: String,
+        @ColumnInfo(name = "videoclass") @SerializedName("videoclass")
+        var videoclass: String,
 )
