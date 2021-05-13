@@ -5,10 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import cat.fib.fithaus.ui.FragmentEsportives
-import cat.fib.fithaus.ui.FragmentFisiques
-import cat.fib.fithaus.ui.FragmentModificarFisiques
-import cat.fib.fithaus.ui.FragmentPersonal
+import cat.fib.fithaus.ui.*
 import java.io.IOException
 import com.google.android.gms.security.ProviderInstaller
 import dagger.hilt.android.AndroidEntryPoint
@@ -62,9 +59,9 @@ class ModificarPerfilActivity : AppCompatActivity() {
         }
 
         //Quan cliquem al botó de dades esportives volem veure aquest fragment
-        btnFragmentEsportives.setOnClickListener {
+        btnFragmentModificarEsportives.setOnClickListener {
             supportFragmentManager.beginTransaction().apply {
-                replace(R.id.flFragment, fragmentEsportives)
+                replace(R.id.flFragment, fragmentModificarEsportives)
                 commit()
             }
         }
@@ -79,7 +76,7 @@ class ModificarPerfilActivity : AppCompatActivity() {
 
         //Posem el fragment de dades personals a la pantalla, necessitem el commit per fer efectiu el canvi
         supportFragmentManager.beginTransaction().apply {
-            replace(R.id.flFragment, fragmentPersonal)
+            replace(R.id.flFragment, fragmentModificarPersonal)
             commit()
         }
     }

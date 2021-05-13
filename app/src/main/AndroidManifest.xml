@@ -17,7 +17,7 @@
         android:theme="@style/Theme.FitHaus">
         <activity android:name=".CrearPerfilActivity">
             android:label="@string/title_activity_consultar_exercici"></activity>
-        <activity android:name=".ConsultarClasseActivity">
+        <activity android:name=".ConsultarClasseActivity"/>
 
         <activity android:name=".AuthenticationProviders"
             android:theme="@style/Theme.FitHaus.SplashScreen">
