@@ -2,6 +2,7 @@ package cat.fib.fithaus.di
 
 import android.content.Context
 import androidx.room.Room
+import cat.fib.fithaus.data.api.ClassService
 import cat.fib.fithaus.data.api.Configuration
 import cat.fib.fithaus.data.api.UserService
 import cat.fib.fithaus.data.api.ExerciseService
@@ -74,5 +75,23 @@ class AppModule {
     @Singleton
     @Provides
     fun provideIoDispatcher() = Dispatchers.IO
+
+    @Singleton
+    @Provides
+    fun provideClassService(): ClassService {
+        val logger = HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }
+
+        val client = OkHttpClient.Builder()
+                .addInterceptor(logger)
+                .build()
+
+        return Retrofit.Builder()
+                .baseUrl(Configuration.urlServer)
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(LiveDataCallAdapterFactory())
+                .build()
+                .create(ClassService::class.java)
+    }
 
 }
