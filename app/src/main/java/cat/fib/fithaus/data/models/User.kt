@@ -32,7 +32,7 @@ data class User(
         var points: Int = 0,
         @ColumnInfo(name = "level") @SerializedName("level")
         var level: String = "",
-        @ColumnInfo(name = "objectives") @SerializedName("objective")
+        @ColumnInfo(name = "objectives") @SerializedName("objectives")
         var objectives: ArrayList<String>,
         @ColumnInfo(name = "categories") @SerializedName("categories")
         var categories: ArrayList<String>,
