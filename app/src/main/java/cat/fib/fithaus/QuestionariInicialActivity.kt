@@ -107,8 +107,8 @@ class QuestionariInicialActivity : AppCompatActivity() {
     private fun updateU(user: User?, objectius: MutableList<String>, categories: MutableList<String>, experiencia: String) {
         val userId = user?.id
         if (user != null) {
-            user.objectives = objectius.toString()
-            user.interestcategories = categories.toString()
+            user.objectives = ArrayList(objectius)
+            user.categories = ArrayList(categories)
             user.level = experiencia
         }
         if (userId != null) {
@@ -130,9 +130,9 @@ class QuestionariInicialActivity : AppCompatActivity() {
      */
     private fun experience(): String? {
         return when {
-            radioButtonPrincipiant?.isChecked == true -> "Princpiant"
-            radioButtonIntermedi?.isChecked == true -> "Intermedi"
-            radioButtonAvançat?.isChecked == true -> "Avançat"
+            radioButtonPrincipiant?.isChecked == true -> "B"
+            radioButtonIntermedi?.isChecked == true -> "I"
+            radioButtonAvançat?.isChecked == true -> "A"
             else -> null
         }
     }

@@ -1,13 +1,16 @@
 package cat.fib.fithaus.data.models
 
+import androidx.collection.ArraySet
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+import com.google.gson.internal.bind.ArrayTypeAdapter
 import java.time.Instant
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.*
+import kotlin.collections.ArrayList
 
 @Entity(tableName = "user")
 data class User(
@@ -30,19 +33,19 @@ data class User(
         @ColumnInfo(name = "level") @SerializedName("level")
         var level: String = "",
         @ColumnInfo(name = "objectives") @SerializedName("objective")
-        var objectives: String = "",
-        @ColumnInfo(name = "interestcategories") @SerializedName("interestcategories")
-        var interestcategories: String = "",
+        var objectives: ArrayList<String>,
+        @ColumnInfo(name = "categories") @SerializedName("categories")
+        var categories: ArrayList<String>,
         @ColumnInfo(name = "weight") @SerializedName("weight")
-        var weight: Int = 0,
+        var weight: Float = 0.0f,
         @ColumnInfo(name = "height") @SerializedName("height")
-        var height: Int = 0,
+        var height: Float = 0.0f,
         @ColumnInfo(name = "imc") @SerializedName("imc")
-        var imc: Int = 0,
+        var imc: Float = 0.0f,
         @ColumnInfo(name = "igc") @SerializedName("igc")
-        var igc: Int = 0,
-        @ColumnInfo(name = "historic") @SerializedName("historic")
-        var historic: Int = 0,
+        var igc: Float = 0.0f,
+        @ColumnInfo(name = "updated") @SerializedName("updated")
+        var updated: String = "",
         @ColumnInfo(name = "email") @SerializedName("email")
         var email: String = "",
         @ColumnInfo(name = "gender") @SerializedName("gender")
@@ -56,7 +59,7 @@ data class User(
                 password: String,
                 email: String,
         gender: String,
-        birthdate: String) : this(1000, firstname, lastname, username, "asa", password, 0, 0, "0", "0", "as", 0, 0, 0, 0, 0, email, gender, birthdate)
+        birthdate: String) : this(1000, firstname, lastname, username, "asa", password, 0, 0, "B", ArrayList(), ArrayList(), 0.0f, 0.0f, 0.0f, 0.0f, "0", email, gender, birthdate)
 
 
 }
