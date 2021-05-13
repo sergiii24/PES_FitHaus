@@ -3,6 +3,7 @@ package cat.fib.fithaus.data.models
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
 import com.google.gson.annotations.SerializedName
 import com.google.gson.internal.bind.ArrayTypeAdapter
 import java.time.Instant
@@ -31,7 +32,7 @@ data class User(
         var points: Int = 0,
         @ColumnInfo(name = "level") @SerializedName("level")
         var level: String = "",
-        @ColumnInfo(name = "objectives") @SerializedName("objective")
+        @ColumnInfo(name = "objectives") @SerializedName("objectives")
         var objectives: ArrayList<String>,
         @ColumnInfo(name = "categories") @SerializedName("categories")
         var categories: ArrayList<String>,
