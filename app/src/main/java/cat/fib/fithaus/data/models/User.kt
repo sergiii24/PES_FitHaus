@@ -28,21 +28,21 @@ data class User(
         @ColumnInfo(name = "points") @SerializedName("points")
         var points: Int = 0,
         @ColumnInfo(name = "level") @SerializedName("level")
-        var level: Int = 0,
+        var level: String = "",
         @ColumnInfo(name = "objectives") @SerializedName("objective")
-        var objectives: String = "",
-        @ColumnInfo(name = "interestcategories") @SerializedName("interestcategories")
-        var interestcategories: String = "",
+        var objectives: ArrayList<String>,
+        @ColumnInfo(name = "categories") @SerializedName("categories")
+        var categories: ArrayList<String>,
         @ColumnInfo(name = "weight") @SerializedName("weight")
-        var weight: Int = 0,
+        var weight: Float = 0.0F,
         @ColumnInfo(name = "height") @SerializedName("height")
-        var height: Int = 0,
+        var height: Float = 0.0F,
         @ColumnInfo(name = "imc") @SerializedName("imc")
-        var imc: Int = 0,
+        var imc: Float = 0.0F,
         @ColumnInfo(name = "igc") @SerializedName("igc")
-        var igc: Int = 0,
-        @ColumnInfo(name = "historic") @SerializedName("historic")
-        var historic: Int = 0,
+        var igc: Float = 0.0F,
+        @ColumnInfo(name = "updated") @SerializedName("updated")
+        var updated: String = "",
         @ColumnInfo(name = "email") @SerializedName("email")
         var email: String = "",
         @ColumnInfo(name = "gender") @SerializedName("gender")
@@ -56,7 +56,7 @@ data class User(
                 password: String,
                 email: String,
         gender: String,
-        birthdate: String) : this(1000, firstname, lastname, username, "asa", password, 0, 0, 0, "0", "as", 0, 0, 0, 0, 0, email, gender, birthdate)
+        birthdate: String) : this(1000, firstname, lastname, username, "asa", password, 0, 0, "B", ArrayList(), ArrayList(), 0.0F, 0.0F, 0.0F, 0.0F, "0", email, gender, birthdate)
 
 
 }
