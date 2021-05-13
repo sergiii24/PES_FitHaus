@@ -1,5 +1,6 @@
 package cat.fib.fithaus.data.models
 
+import androidx.collection.ArraySet
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
