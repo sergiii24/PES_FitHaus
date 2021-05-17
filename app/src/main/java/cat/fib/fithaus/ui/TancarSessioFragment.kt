@@ -7,7 +7,7 @@ import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import cat.fib.fithaus.LogInActivity
+import cat.fib.fithaus.AuthenticationProviders
 import cat.fib.fithaus.R
 
 class TancarSessioFragment : Fragment(R.layout.fragment_tancar_sessio) {
@@ -20,7 +20,7 @@ class TancarSessioFragment : Fragment(R.layout.fragment_tancar_sessio) {
         tancar.setOnClickListener {
             progress.visibility = View.VISIBLE
             tancar.isEnabled = false
-            val intent = Intent(activity, LogInActivity::class.java)
+            val intent = Intent(activity, AuthenticationProviders::class.java)
             startActivity(intent)
             Toast.makeText(activity, "Fins aviat", Toast.LENGTH_SHORT).show()
         }

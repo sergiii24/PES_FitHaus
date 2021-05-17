@@ -1,4 +1,6 @@
 <resources>
+    <string name="prefs_file">cat.fib.fithaus.PREFERENCE_FILE_KEY</string>
+
     <string name="app_name">FitHaus</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -52,14 +54,14 @@
     <string name="Títol">Crea el teu perfil</string>
     <string name="Text_Botó">Crear perfil</string>
     <string name="Cognom1">Primer cognom</string>
-    <string name="Cognom2">Segon Cognom</string>
-    <string name="Email">Correu Electrònic</string>
+    <string name="Cognom2">Segon cognom</string>
+    <string name="Email">Correu electrònic</string>
     <string name="Password">Contrasenya</string>
     <string name="Sexe_home">Home</string>
     <string name="Sexe_Dona">Dona</string>
     <string name="Sexe_Altre">Altre</string>
-    <string name="Username">Nom Usuari</string>
-    <string name="Data_Naixement">Data Naixement</string>
+    <string name="Username">Nom usuari</string>
+    <string name="Data_Naixement">Data de naixement</string>
     <string name="Checkbox_Contrasenya">Mostrar</string>
     <string name="BotonTitulo">CrearPerfil</string>
     <string name="button_programes">Programes</string>
@@ -113,5 +115,6 @@
     <string name="text_múscultreball">Múscul de treball</string>
     <string name="text_entrenador">Entrenador</string>
     <string name="boton_Guardar">GUARDAR</string>
+    <string name="Cognoms">Cognoms</string>
 
 </resources>

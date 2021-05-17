@@ -85,14 +85,14 @@ class FragmentModificarFisiques : Fragment(R.layout.fragment_modificar_fisiques)
                 user.weight = weight.text.toString().toFloat()
                 user.height = height.text.toString().toFloat()
             }
-            if (userId != null) {
-                viewModel.update(userId, user).observe(viewLifecycleOwner, Observer {
+            if (userId != null) { /*
+                viewModel.updateUser(userId, user).observe(viewLifecycleOwner, Observer {
                     if (it.status == Status.SUCCESS) {
                         Toast.makeText(this.context, "Dades físiques modificades!", Toast.LENGTH_LONG).show()
                         val intent = Intent(activity, ConsultarPerfilActivity::class.java)
                         startActivity(intent)
                     } else if (it.status == Status.ERROR) Toast.makeText(this.context, "ERROR!", Toast.LENGTH_LONG).show()
-                })
+                }) */
             }
         }
     }

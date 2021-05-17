@@ -1,6 +1,7 @@
 package cat.fib.fithaus
 
 import android.app.DatePickerDialog
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,11 +12,13 @@ import android.widget.RadioButton
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import cat.fib.fithaus.data.models.User
 import cat.fib.fithaus.ui.dialog.DatePickerFragment
 import cat.fib.fithaus.utils.Status
 import cat.fib.fithaus.viewmodels.UserViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.activity_crear_perfil.*
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Response
@@ -23,6 +26,7 @@ import java.io.IOException
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.*
+
 import javax.inject.Inject
 
 
@@ -36,8 +40,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class CrearPerfilActivity : AppCompatActivity() {
     var Nom: EditText? = null
-    var PrimerCognom: EditText? = null
-    var SegonCognom: EditText? = null
+    var Cognoms: EditText? = null
     var NomUsuari: EditText? = null
     var CorreuElectronic: EditText? = null
     var Contrasenya: EditText? = null
@@ -61,8 +64,7 @@ class CrearPerfilActivity : AppCompatActivity() {
         setContentView(R.layout.activity_crear_perfil)
         //Asignem els valors de cada component de la interfície a les variables
         Nom = findViewById (R.id.Nom)
-        PrimerCognom = findViewById (R.id.PrimerCognom)
-        SegonCognom = findViewById (R.id.SegonCognom)
+        Cognoms = findViewById (R.id.Cognoms)
         NomUsuari = findViewById (R.id.NomUsuari)
         CorreuElectronic = findViewById (R.id.CorreuElectronic)
         Contrasenya = findViewById (R.id.Contrasenya)
@@ -73,68 +75,192 @@ class CrearPerfilActivity : AppCompatActivity() {
         Sexe_Dona = findViewById (R.id.Sexe_Dona)
         Sexe_Home = findViewById (R.id.Sexe_Home)
         Sexe_Altre = findViewById (R.id.Sexe_Altre)
+        setupSendButton()
     }
 
-    /** Funció Enviar
+    /** Function setupSendButton
      *
-     *  Funció que comprova tots els possibles errors dels camps a omplir.
+     *  Funció que comprova si els camps són correctes per crear un usuari.
      *
-     *  @param view
-     *  @author Daniel Cárdenas.
+     *  @author Adrià Espinola Garcia, Albert Miñana Montecino, Daniel Cárdenas Rafael
      */
-    //Definim un nou mètode per executar-lo al prémer el botó "Crear perfil"
-    fun Enviar(view: View) {
-
-        if (Nom?.text.toString().isEmpty()) Toast.makeText(this, "El camp Nom està buit", Toast.LENGTH_LONG).show();
-        else {
-            if (PrimerCognom?.text.toString().isEmpty()) Toast.makeText(this, "El camp Primer Cognom està buit", Toast.LENGTH_LONG).show()
-            else {
-                if (SegonCognom?.text.toString().isEmpty()) Toast.makeText(this, "El camp Segon Cognom està buit", Toast.LENGTH_LONG).show()
-                else {
-                    if (NomUsuari?.text.toString().isEmpty()) Toast.makeText(this, "El camp Nom Usuari està buit", Toast.LENGTH_LONG).show()
-                    else {
-                        if (CorreuElectronic?.text.toString().isEmpty()) Toast.makeText(this, "El camp Correu Electrònic està buit", Toast.LENGTH_LONG).show()
-                        else {
-                            if (!ContrasenyaValida(Contrasenya?.text.toString())) Toast.makeText(this, "La contrasenya ha de contenir com a mínim 8 caràcters amb una lletra mayúscula, una minúscula, un número i un símbol", Toast.LENGTH_LONG).show()
-                            else {
-                                if (Sexe_Dona?.isChecked == false && Sexe_Home?.isChecked == false && Sexe_Altre?.isChecked == false) Toast.makeText(this, "El Sexe no està seleccionat", Toast.LENGTH_LONG).show()
-                                else {
-                                    if (DataNaixement?.text.toString().isEmpty()) Toast.makeText(this, "El camp Data Naixement està buit", Toast.LENGTH_LONG).show()
-                                    else {
-                                        if (NomUsuari?.text.toString().isNotEmpty() && NomUsuari?.text.toString().length < 4) Toast.makeText(this, "El nom d'usuari ha de tenir 4 caràcters com a mínim", Toast.LENGTH_LONG).show()
-                                        else {
-                                            if (!Patterns.EMAIL_ADDRESS.matcher(CorreuElectronic?.text).matches()) Toast.makeText(this, "El correu electrònic no té el format correcte (fit@fithaus.com)", Toast.LENGTH_LONG).show()
-                                            else {
-                                                Toast.makeText(this, "Formulari complet!", Toast.LENGTH_LONG).show()
-                                                val usuari = NomUsuari?.text.toString();
-                                                val lastname = PrimerCognom?.text.toString()+SegonCognom?.text.toString()
-                                                val name = Nom?.text.toString()
-                                                val email = CorreuElectronic?.text.toString()
-                                                val la = DataNaixement?.text.toString()
-                                                var g : String = "M"
-                                                if(Sexe_Dona?.isChecked == true) g = "W"
-                                                if(Sexe_Altre?.isChecked == true) g = "X"
-                                                val user = User(name, lastname, usuari, Contrasenya?.text.toString(),  email, g,
-                                                    LocalDate.parse(la, DateTimeFormatter.ofPattern("dd/MM/yyyy")).format(DateTimeFormatter.ofPattern("yyyy-MM-dd")).toString())
-
-                                               viewModel.create(user).observe(this, androidx.lifecycle.Observer {
-                                                    if(it.status == Status.SUCCESS) {
-                                                        Toast.makeText(this, "Welcome ${it.data?.username}!", Toast.LENGTH_LONG).show()
-                                                        startActivity(Intent(this, ConsultarPerfilActivity::class.java))
-                                                    } else if (it.status == Status.ERROR) Toast.makeText(this, "ERROR!", Toast.LENGTH_LONG).show()
-
-                                                })
-
-
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
+    fun setupSendButton() {
+        CrearPerfilButton.setOnClickListener {
+            val validateName = validateName()
+            val validateLastName = validateLastName()
+            val validateUsername = validateUsername()
+            val validateEmail = validateEmail()
+            val validatePassword = validatePassword()
+            val validateBirthday = validateBirthday()
+            val validateGender = validateGender()
+            if (validateName && validateLastName && validateUsername && validateEmail && validatePassword && validateBirthday && validateGender) {
+                val name = Nom?.text.toString()
+                val lastname = Cognoms?.text.toString()
+                val username = NomUsuari?.text.toString()
+                val email = CorreuElectronic?.text.toString()
+                val password = Contrasenya?.text.toString()
+                val birthday = DataNaixement?.text.toString()
+                var gender: String
+                when {
+                    Sexe_Home?.isChecked == true -> gender = "M"
+                    Sexe_Dona?.isChecked == true -> gender = "W"
+                    else -> gender = "X"
                 }
+                val user = User(name, lastname, username, password, email, gender,
+                        LocalDate.parse(birthday, DateTimeFormatter.ofPattern("dd/MM/yyyy")).format(DateTimeFormatter.ofPattern("yyyy-MM-dd")).toString())
+                viewModel.createUser(user)
+                viewModel.user.observe(this, Observer {
+                    if (it.status == Status.SUCCESS) {
+                        //guarda id
+                        val prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit()
+                        prefs.putString("userId", it.data?.id.toString())
+                        prefs.putString("provider", "FitHaus")
+                        prefs.apply()
+                        showSurvey()
+                    } else {
+                        Toast.makeText(this, "ERROR!", Toast.LENGTH_LONG).show()
+                    }
+                })
             }
+        }
+    }
+
+    /** Function validateName
+     *
+     *  Funció que comprova si el camp Nom és correcte.
+     *
+     *  @return Retorna cert si és correcte, fals en cas contrari.
+     *  @author Adrià Espinola Garcia, Albert Miñana Montecino, Daniel Cárdenas Rafael
+     */
+    private fun validateName(): Boolean {
+        val name = Nom?.text.toString()
+        if (name.isEmpty()) {
+            textInputLayoutNom?.setError("El camp no pot ser buit")
+            return false
+        }
+        else {
+            textInputLayoutNom?.setError(null)
+            return true
+        }
+    }
+
+    /** Function validateLastName
+     *
+     *  Funció que comprova si el camp Cognoms és correcte.
+     *
+     *  @return Retorna cert si és correcte, fals en cas contrari.
+     *  @author Adrià Espinola Garcia, Albert Miñana Montecino, Daniel Cárdenas Rafael
+     */
+    private fun validateLastName(): Boolean {
+        val lastName = Cognoms?.text.toString()
+        if (lastName.isEmpty()) {
+            textInputLayoutCognoms?.setError("El camp no pot ser buit")
+            return false
+        }
+        else {
+            textInputLayoutCognoms?.setError(null)
+            return true
+        }
+    }
+
+    /** Function validateUserName
+     *
+     *  Funció que comprova si el camp Nom Usuari és correcte.
+     *
+     *  @return Retorna cert si és correcte, fals en cas contrari.
+     *  @author Adrià Espinola Garcia, Albert Miñana Montecino, Daniel Cárdenas Rafael
+     */
+    private fun validateUsername(): Boolean {
+        val username = NomUsuari?.text.toString()
+        if (username.isEmpty()) {
+            textInputLayoutNomUsuari?.setError("El camp no pot ser buit")
+            return false
+        }
+        else {
+            textInputLayoutNomUsuari?.setError(null)
+            return true
+        }
+    }
+
+    /** Function validateEmail
+     *
+     *  Funció que comprova si el camp Correu Electrònic és correcte.
+     *
+     *  @return Retorna cert si és correcte, fals en cas contrari.
+     *  @author Adrià Espinola Garcia, Albert Miñana Montecino, Daniel Cárdenas Rafael
+     */
+    private fun validateEmail(): Boolean {
+        val email = CorreuElectronic?.text.toString()
+        if (email.isEmpty()) {
+            textInputLayoutCorreuElectronic?.setError("El camp no pot ser buit")
+            return false
+        }
+        else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            textInputLayoutCorreuElectronic?.setError("Format incorrecte")
+            return false
+        }
+        else {
+            textInputLayoutCorreuElectronic?.setError(null)
+            return true
+        }
+    }
+
+    /** Function validatePassword
+     *
+     *  Funció que comprova si el camp Contrasenya és correcte.
+     *
+     *  @return Retorna cert si és correcte, fals en cas contrari.
+     *  @author Adrià Espinola Garcia, Albert Miñana Montecino, Daniel Cárdenas Rafael
+     */
+    private fun validatePassword(): Boolean {
+        val password = Contrasenya?.text.toString()
+        if (!ContrasenyaValida(password)) {
+            textInputLayout?.setError("Mínim 8 caràcters, 1 majúscula, 1 minúscula, 1 número, 1 símbol")
+            return false
+        }
+        else {
+            textInputLayout?.setError(null)
+            return true
+        }
+    }
+
+    /** Function validateBirthday
+     *
+     *  Funció que comprova si el camp Data Naixement és correcte.
+     *
+     *  @return Retorna cert si és correcte, fals en cas contrari.
+     *  @author Adrià Espinola Garcia, Albert Miñana Montecino, Daniel Cárdenas Rafael
+     */
+    private fun validateBirthday(): Boolean {
+        val birthday = DataNaixement?.text.toString()
+        if (birthday.isEmpty()) {
+            textInputLayoutDataNaixement?.setError("El camp no pot ser buit")
+            return false
+        }
+        else {
+            textInputLayoutDataNaixement?.setError(null)
+            return true
+        }
+    }
+
+    /** Function validateGender
+     *
+     *  Funció que comprova la selecció del camp Sexe.
+     *
+     *  @return Retorna cert si és correcte, fals en cas contrari.
+     *  @author Adrià Espinola Garcia, Albert Miñana Montecino, Daniel Cárdenas Rafael
+     */
+    private fun validateGender(): Boolean {
+        val genderNotChecked = (Sexe_Dona?.isChecked == false && Sexe_Home?.isChecked == false && Sexe_Altre?.isChecked == false)
+        if (genderNotChecked) {
+            textInputLayoutSexe?.setError("El camp no està seleccionat")
+            Sexe_Altre?.setError("El camp no està seleccionat")
+            return false
+        }
+        else {
+            textInputLayoutSexe?.setError(null)
+            Sexe_Altre?.setError(null)
+            return true
         }
     }
 
@@ -200,17 +326,16 @@ class CrearPerfilActivity : AppCompatActivity() {
      */
     fun Int.twoDigits() = if (this <= 9) "0$this" else this.toString()
 
-    /** Funció Enrere
+
+    /** Function showSurvey
      *
-     *  Funció que mostra la interfície d'inici de sessió.
+     *  Funció encarregada de canviar a l'activitat del qüestionari.
      *
-     *  @param view
-     *  @author Daniel Cárdenas.
+     *  @author Albert Miñana Montecino i Adrià Espinola Garcia
      */
-    /* fun Enrere(view: View) {
-         //Anar a la pantalla d'iniciar sessió sense omplir el formulari
-         val intent = Intent(this, LogInActivity::class.java).apply
-         startActivity(intent)
-     }*/
+    private fun showSurvey(){
+        val homeIntent = Intent(this, QuestionariInicialActivity::class.java)
+        startActivity(homeIntent)
+    }
 
 }

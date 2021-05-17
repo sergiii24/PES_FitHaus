@@ -6,7 +6,7 @@ import cat.fib.fithaus.utils.Resource
 
 interface UserRepository {
 
-    fun login(username: String, password: String): LiveData<Resource<Int>>
+    fun login(userEmail: String, userPassword: String): LiveData<Resource<User>>
 
     fun getUser(userId: String): LiveData<Resource<User>>
 
@@ -15,5 +15,7 @@ interface UserRepository {
     fun deleteUser(userId: Int): LiveData<Resource<User>>
 
     fun updateUser(userId: Int, updatedUser: User): LiveData<Resource<User>>
+
+    fun getUserByEmail(email: String): LiveData<Resource<User>>
 
 }

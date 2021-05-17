@@ -6,225 +6,204 @@
     android:layout_height="match_parent"
     tools:context=".CrearPerfilActivity">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout"
-        android:layout_width="388dp"
-        android:layout_height="54dp"
-        android:layout_marginStart="-2dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/SexeSelection"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:passwordToggleEnabled="true">
-
-        <EditText
-            android:id="@+id/Contrasenya"
-            android:layout_width="318dp"
-            android:layout_height="match_parent"
-            android:layout_marginStart="16dp"
-            android:background="#00FFFFFF"
-            android:ems="10"
-            android:hint="@string/Password"
-            android:inputType="textPassword"
-            android:textSize="18sp" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <EditText
-        android:id="@+id/SegonCognom"
-        android:layout_width="300dp"
-        android:layout_height="47dp"
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="240dp"
-        android:layout_marginEnd="78dp"
-        android:layout_marginBottom="8dp"
-        android:ems="10"
-        android:hint="@string/Cognom2"
-        android:inputType="textPersonName"
-        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
-        app:layout_constraintBottom_toTopOf="@+id/NomUsuari"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="370dp"
-        android:layout_height="46dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="68dp"
-        android:layout_marginEnd="16dp"
-        android:clickable="false"
-        android:fontFamily="sans-serif-black"
-        android:text="@string/Títol"
-        android:textAlignment="center"
-        android:textColor="#000000"
-        android:textSize="36sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/Nom"
-        android:layout_width="299dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="78dp"
-        android:layout_marginBottom="8dp"
-        android:ems="10"
-        android:hint="@string/Nom"
-        android:inputType="textPersonName"
-        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
-        app:layout_constraintBottom_toTopOf="@+id/PrimerCognom"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:layout_constraintVertical_bias="0.0"/>
-
-    <EditText
-        android:id="@+id/PrimerCognom"
-        android:layout_width="300dp"
-        android:layout_height="41dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="78dp"
-        android:layout_marginBottom="8dp"
-        android:ems="10"
-        android:hint="@string/Cognom1"
-        android:inputType="textPersonName"
-        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
-        app:layout_constraintBottom_toTopOf="@+id/SegonCognom"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Nom" />
-
-    <EditText
-        android:id="@+id/NomUsuari"
-        android:layout_width="300dp"
-        android:layout_height="39dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="296dp"
-        android:layout_marginEnd="78dp"
-        android:ems="10"
-        android:hint="@string/Username"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="100dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="147dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="147dp"
-        android:baselineAlignBottom="false"
-        android:clickable="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo" />
-
-    <EditText
-        android:id="@+id/DataNaixement"
-        android:layout_width="299dp"
-        android:layout_height="47dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="78dp"
-        android:ems="10"
-        android:hint="@string/Data_Naixement"
-        android:inputType="date"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SexeSelection"
-        android:focusable="false"
-        android:clickable="true"
-        android:maxLines="1"
-        android:datePickerMode="calendar"/>
-
-    <Button
-        android:id="@+id/CrearPerfilButton"
-        android:layout_width="334dp"
-        android:layout_height="67dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="30dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="35dp"
-        android:onClick="Enviar"
-        android:text="@string/Text_Botó"
-        android:textAlignment="center"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/DataNaixement" />
-
-    <RadioGroup
-        android:id="@+id/SexeSelection"
-        android:layout_width="351dp"
-        android:layout_height="102dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="459dp"
-        android:layout_marginEnd="41dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/DataNaixement"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <RadioButton
-            android:id="@+id/Sexe_Dona"
-            android:layout_width="92dp"
-            android:layout_height="34dp"
-            android:text="@string/Sexe_Dona"
-            android:textSize="18sp" />
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:baselineAlignBottom="false"
+            android:clickable="false"
+            app:srcCompat="@drawable/logo" />
 
-        <RadioButton
-            android:id="@+id/Sexe_Home"
-            android:layout_width="92dp"
-            android:layout_height="34dp"
-            android:text="@string/Sexe_home"
-            android:textSize="18sp" />
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:fontFamily="sans-serif-black"
+            android:text="@string/Títol"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="36sp"
+            android:textStyle="bold" />
 
-        <RadioButton
-            android:id="@+id/Sexe_Altre"
-            android:layout_width="92dp"
-            android:layout_height="34dp"
-            android:text="@string/Sexe_Altre"
-            android:textSize="18sp" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutNom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:errorEnabled="true">
+            <EditText
+                android:id="@+id/Nom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+                android:ems="10"
+                android:hint="@string/Nom"
+                android:inputType="textPersonName"
+                android:background="#00FFFFFF" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    </RadioGroup>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutCognoms"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:errorEnabled="true">
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="63dp"
-        android:layout_height="51dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="16dp"
-        android:clickable="true"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="?attr/actionModeCloseDrawable" />
+            <EditText
+                android:id="@+id/Cognoms"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#00FFFFFF"
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+                android:ems="10"
+                android:hint="@string/Cognoms"
+                android:inputType="textPersonName" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <EditText
-        android:id="@+id/CorreuElectronic"
-        android:layout_width="298dp"
-        android:layout_height="52dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="78dp"
-        android:layout_marginBottom="8dp"
-        android:ems="10"
-        android:hint="@string/Email"
-        android:inputType="textEmailAddress"
-        app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/NomUsuari" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutNomUsuari"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:errorEnabled="true">
+            <EditText
+                android:id="@+id/NomUsuari"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/Username"
+                android:inputType="textPersonName"
+                android:background="#00FFFFFF" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutCorreuElectronic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:errorEnabled="true">
+            <EditText
+                android:id="@+id/CorreuElectronic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/Email"
+                android:inputType="textEmailAddress"
+                android:background="#00FFFFFF" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:passwordToggleEnabled="true"
+            app:errorEnabled="true">
+
+            <EditText
+                android:id="@+id/Contrasenya"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#00FFFFFF"
+                android:ems="10"
+                android:hint="@string/Password"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutDataNaixement"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:errorEnabled="true">
+
+            <EditText
+                android:id="@+id/DataNaixement"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#00FFFFFF"
+                android:clickable="true"
+                android:datePickerMode="calendar"
+                android:ems="10"
+                android:focusable="false"
+                android:hint="@string/Data_Naixement"
+                android:inputType="date"
+                android:maxLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="17dp"
+            android:text="@string/Sexe"
+            android:textSize="16dp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutSexe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="17dp"
+            android:paddingRight="17dp"
+            app:hintAnimationEnabled="false"
+            app:hintEnabled="false">
+
+            <RadioGroup
+                android:id="@+id/SexeSelection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hapticFeedbackEnabled="false"
+                android:orientation="horizontal"
+                android:transitionGroup="false">
+
+                <RadioButton
+                    android:id="@+id/Sexe_Home"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.33"
+                    android:text="@string/Sexe_home"
+                    android:textColor="@color/radiobuttonstate"
+                    android:textSize="16sp" />
+
+                <RadioButton
+                    android:id="@+id/Sexe_Dona"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.33"
+                    android:text="@string/Sexe_Dona"
+                    android:textColor="@color/radiobuttonstate"
+                    android:textSize="16sp" />
+
+                <RadioButton
+                    android:id="@+id/Sexe_Altre"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.33"
+                    android:text="@string/Sexe_Altre"
+                    android:textColor="@color/radiobuttonstate"
+                    android:textSize="16sp"
+                    app:errorEnabled="true" />
+
+            </RadioGroup>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/CrearPerfilButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Text_Botó"
+            android:textAlignment="center"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

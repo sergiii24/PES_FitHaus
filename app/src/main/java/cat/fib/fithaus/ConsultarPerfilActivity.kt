@@ -89,7 +89,7 @@ class ConsultarPerfilActivity : AppCompatActivity() {
         builder.setPositiveButton("Acceptar") { dialog, which ->*/
             viewModel.deleteUser(15).observe(this, Observer {
                 if (it.status == Status.SUCCESS) {
-                    val intent = Intent(this@ConsultarPerfilActivity, LogInActivity::class.java)
+                    val intent = Intent(this@ConsultarPerfilActivity, AuthenticationProviders::class.java)
                     startActivity(intent)
                 } else Toast.makeText(this, "ERROR!", Toast.LENGTH_LONG).show()
             })

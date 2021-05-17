@@ -60,7 +60,10 @@ data class User(
                 password: String,
                 email: String,
         gender: String,
-        birthdate: String) : this(1000, firstname, lastname, username, "asa", password, 0, 0, "B", ArrayList(), ArrayList(), 0.0f, 0.0f, 0.0f, 0.0f, "0", email, gender, birthdate)
+        birthdate: String) : this(0, firstname, lastname, username, "", password, 0, 0, "", ArrayList(), ArrayList(), 0.0f, 0.0f, 0.0f, 0.0f, "0", email, gender, birthdate)
 
-
+        constructor(firstname: String,
+                    lastname: String,
+                    username: String,
+                    email: String) : this(0, firstname, lastname, username, "", "", 0, 0, "", ArrayList(), ArrayList(), 0.0f, 0.0f, 0.0f, 0.0f, "0", email, "", "")
 }

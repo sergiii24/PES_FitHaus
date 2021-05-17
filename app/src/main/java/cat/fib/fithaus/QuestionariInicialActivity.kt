@@ -1,5 +1,6 @@
 package cat.fib.fithaus
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -16,6 +17,7 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import kotlin.math.exp
 
+
 /** Classe Activty Qüestionari Inicial
  *
  *  Activity on es troba tota la lògica per poder fer el qüestionari inicial de l'usuari després de registrar-se.
@@ -28,6 +30,8 @@ class QuestionariInicialActivity : AppCompatActivity() {
 
     private val viewModel by viewModels<UserViewModel>()
 
+    private var identificadorUsuari: String? = null   // Identificador de l'usuari
+
     /** Funció inicialitzadora
      *
      *  Funció que fa que es mostri la pantalla del qüestionari inicial.
@@ -37,8 +41,9 @@ class QuestionariInicialActivity : AppCompatActivity() {
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
+        identificadorUsuari = prefs.getString("userId", null)
         setContentView(R.layout.activity_questionari_inicial)
-
         setupSendButton()
     }
 
@@ -74,10 +79,13 @@ class QuestionariInicialActivity : AppCompatActivity() {
         }
         else {
 
-            //Toast.makeText(this, "Enviat correctament", Toast.LENGTH_LONG).show()
+            identificadorUsuari?.let {
+                viewModel.getUser(it)
+            }
+
             viewModel.user.observe(this, Observer {
                 if (it.status == Status.SUCCESS) {
-                    updateU(it.data, objectius, categories, experiencia)
+                    updateUser(it.data, objectius, categories, experiencia)
                 }
                 else Toast.makeText(this, "ERROR!", Toast.LENGTH_LONG).show()
             })
@@ -104,7 +112,7 @@ class QuestionariInicialActivity : AppCompatActivity() {
      *
      *  @author Adrià Espinola.
      */
-    private fun updateU(user: User?, objectius: MutableList<String>, categories: MutableList<String>, experiencia: String) {
+    private fun updateUser(user: User?, objectius: MutableList<String>, categories: MutableList<String>, experiencia: String) {
         val userId = user?.id
         if (user != null) {
             user.objectives = ArrayList(objectius)
@@ -112,10 +120,10 @@ class QuestionariInicialActivity : AppCompatActivity() {
             user.level = experiencia
         }
         if (userId != null) {
-            viewModel.update(userId, user).observe(this, androidx.lifecycle.Observer {
+            viewModel.updateUser(userId, user)
+            viewModel.user.observe(this, Observer {
                 if(it.status == Status.SUCCESS) {
-                    Toast.makeText(this, "Qüestionari enviat", Toast.LENGTH_LONG).show()
-                    val intent = Intent(this, LogInActivity::class.java)
+                    val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                 } else if (it.status == Status.ERROR) Toast.makeText(this, "ERROR2!", Toast.LENGTH_LONG).show()
             })
@@ -130,9 +138,9 @@ class QuestionariInicialActivity : AppCompatActivity() {
      */
     private fun experience(): String? {
         return when {
-            radioButtonPrincipiant?.isChecked == true -> "B"
-            radioButtonIntermedi?.isChecked == true -> "I"
-            radioButtonAvançat?.isChecked == true -> "A"
+            radioButtonPrincipiant?.isChecked == true -> "Beginner"
+            radioButtonIntermedi?.isChecked == true -> "Intermediate"
+            radioButtonAvançat?.isChecked == true -> "Advanced"
             else -> null
         }
     }
@@ -145,13 +153,13 @@ class QuestionariInicialActivity : AppCompatActivity() {
      */
     private fun chosenObjectives(): MutableList<String> {
         val objectius: MutableList<String> = ArrayList()
-        if (checkBoxSalut.isChecked) objectius.add("Salut")
-        if (checkBoxForça2.isChecked) objectius.add("Força")
-        if (checkBoxPerduaPes.isChecked) objectius.add("Pèrdua de pes")
-        if (checkBoxFlexibilitat.isChecked) objectius.add("Flexibilitat")
-        if (checkBoxResistència.isChecked) objectius.add("Resistència")
-        if (checkBoxRecuperació.isChecked) objectius.add("Recuperació")
-        if (checkBoxAgilitat.isChecked) objectius.add("Agilitat")
+        if (checkBoxSalut.isChecked) objectius.add("S")
+        if (checkBoxForça2.isChecked) objectius.add("Fr")
+        if (checkBoxPerduaPes.isChecked) objectius.add("P")
+        if (checkBoxFlexibilitat.isChecked) objectius.add("Fl")
+        if (checkBoxResistència.isChecked) objectius.add("Rs")
+        if (checkBoxRecuperació.isChecked) objectius.add("Rc")
+        if (checkBoxAgilitat.isChecked) objectius.add("A")
         return objectius
     }
 
@@ -163,12 +171,12 @@ class QuestionariInicialActivity : AppCompatActivity() {
      */
     private fun chosenCategories(): MutableList<String> {
         val categories: MutableList<String> = ArrayList()
-        if (checkBoxForça.isChecked) categories.add("Força")
-        if (checkBoxCardio.isChecked) categories.add("Cardio")
-        if (checkBoxIoga.isChecked) categories.add("Ioga")
-        if (checkBoxEstiraments.isChecked) categories.add("Estiraments")
-        if (checkBoxRehabilitació.isChecked) categories.add("Rehabilitació")
-        if (checkBoxPilates.isChecked) categories.add("Pilates")
+        if (checkBoxForça.isChecked) categories.add("S")
+        if (checkBoxCardio.isChecked) categories.add("C")
+        if (checkBoxIoga.isChecked) categories.add("Y")
+        if (checkBoxEstiraments.isChecked) categories.add("E")
+        if (checkBoxRehabilitació.isChecked) categories.add("R")
+        if (checkBoxPilates.isChecked) categories.add("P")
         return categories
     }
 }

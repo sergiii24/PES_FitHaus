@@ -88,14 +88,14 @@ class FragmentModificarPersonal : Fragment(R.layout.fragment_modificar_personal)
                 user.gender = gender.toString()
             }
             if (userId != null) {
-                if (user != null) {
-                    viewModel.update(userId, user).observe(viewLifecycleOwner, Observer {
+                if (user != null) { /*
+                    viewModel.updateUser(userId, user).observe(viewLifecycleOwner, Observer {
                         if (it.status == Status.SUCCESS) {
                             Toast.makeText(this.context, "Dades personals modificades!", Toast.LENGTH_LONG).show()
                             val intent = Intent(activity, ConsultarPerfilActivity::class.java)
                             startActivity(intent)
                         } else if (it.status == Status.ERROR) Toast.makeText(this.context, "ERROR!", Toast.LENGTH_LONG).show()
-                    })
+                    }) */
                 }
             }
         }

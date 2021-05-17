@@ -20,21 +20,33 @@ class UserViewModel @Inject constructor(
     //private val userId: String =
     //  savedStateHandle["id"] ?: throw IllegalArgumentException("missing user id")
 
-    val user = userRepository.getUser("15")
+    //val user = userRepository.getUser("15")
+    lateinit var user : LiveData<Resource<User>> // = exerciseRepository.getExercise("1000")
 
-
-    fun create(user: User): LiveData<Resource<User>> {
-
-        return userRepository.createUser(user)
-
+    fun getUser(id: String) {
+        user = userRepository.getUser(id)
     }
 
-    fun update(userId: Int, updatedUser: User): LiveData<Resource<User>> {
-        return userRepository.updateUser(userId, updatedUser)
+
+    fun createUser(user: User) {
+        this.user = userRepository.createUser(user)
+    }
+
+    fun updateUser(userId: Int, updatedUser: User) {
+        user = userRepository.updateUser(userId, updatedUser)
     }
 
     fun deleteUser (userId: Int): LiveData<Resource<User>> {
         return userRepository.deleteUser(userId)
     }
+
+    fun login(userEmail: String, userPassword: String) {
+        user = userRepository.login(userEmail, userPassword)
+    }
+
+    fun getUserByEmail(email: String) {
+        user = userRepository.getUserByEmail(email)
+    }
+
 
 }
