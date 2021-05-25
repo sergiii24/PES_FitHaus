@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FitHaus</string>
+    <string name="app_name" translatable="false">FitHaus</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
@@ -113,5 +113,7 @@
     <string name="text_múscultreball">Múscul de treball</string>
     <string name="text_entrenador">Entrenador</string>
     <string name="boton_Guardar">GUARDAR</string>
+    <string name="Ranking">Rànquing Usuaris</string>
+    <string name="menu_ranking">Ranking</string>
 
 </resources>
