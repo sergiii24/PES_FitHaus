@@ -1,6 +1,6 @@
 package cat.fib.fithaus.di
 
-import cat.fib.fithaus.data.api.UserService
+import cat.fib.fithaus.data.api.RoutineService
 import cat.fib.fithaus.data.source.*
 import cat.fib.fithaus.data.source.local.FitHausDatabase
 import cat.fib.fithaus.utils.AppExecutors
@@ -12,20 +12,20 @@ import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Singleton
 
 /**
- * The binding for ExerciseRepository has the default Repository.
+ * The binding for RoutineRepository has the default Repository.
  */
 @Module
 @InstallIn(SingletonComponent::class)
-object UserRepositoryModule {
+object RoutineRepositoryModule {
     @Singleton
     @Provides
-    fun provideUserRepository(
-        userService: UserService,
+    fun provideRoutineRepository(
+        routineRepository: RoutineRepository,
         database: FitHausDatabase,
         appExecutors: AppExecutors
-    ): UserRepository {
-        return UserRepositoryDefault(
-            database.userDao(), userService, appExecutors
+    ): RoutineRepository {
+        return RoutineRepositoryDefault(
+            database.customRoutineDao(), database.predefinedRoutineDao(), RoutineService, appExecutors
         )
     }
 }

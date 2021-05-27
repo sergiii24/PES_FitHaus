@@ -3,7 +3,7 @@ package cat.fib.fithaus.di
 import android.content.Context
 import androidx.room.Room
 import cat.fib.fithaus.data.api.Configuration
-import cat.fib.fithaus.data.api.UserService
+import cat.fib.fithaus.data.api.RoutineService
 import cat.fib.fithaus.data.source.local.FitHausDatabase
 import cat.fib.fithaus.utils.AppExecutors
 import cat.fib.fithaus.utils.LiveDataCallAdapterFactory
@@ -25,7 +25,7 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideUserService(): UserService {
+    fun provideRoutineService(): RoutineService {
         val logger = HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }
 
         val client = OkHttpClient.Builder()
@@ -38,10 +38,8 @@ class AppModule {
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(LiveDataCallAdapterFactory())
             .build()
-            .create(UserService::class.java)
+            .create(RoutineService::class.java)
     }
-
-
 
 
     @Singleton

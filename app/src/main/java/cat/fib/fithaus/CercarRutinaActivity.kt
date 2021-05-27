@@ -62,8 +62,8 @@ class CercarRutinaActivity : AppCompatActivity() {
      *
      *  @author Oriol Prat.
      */
-    private fun initRecycler(){
-        rvRutinaList.layoutManager = LinearLayoutManager(this)
+    private fun initRecyclerLinear(){
+        rvRutinaList.layoutManager = LayoutManager(this)
         val adapter = RutinaAdapter(rutines)
         rvRutinaList.adapter = adapter
     }
