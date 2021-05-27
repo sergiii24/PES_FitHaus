@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.ConsultarClasseFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/nomClasse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/Nom"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/imatgeClasse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/ic_menu_gallery" />
+
+        <TextView
+            android:id="@+id/entrenadorClasse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/text_entrenador"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/contingutEntrenadorClasse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/text_entrenador" />
+
+        <TextView
+            android:id="@+id/descripcioClasse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/text_descripció"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/contingutDescripcioClasse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/text_descripció" />
+
+        <TextView
+            android:id="@+id/areaTreballClasse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/text_àreatreball"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/contingutAreaTreballClasse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/text_àreatreball" />
+
+        <TextView
+            android:id="@+id/edatClasse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/text_edat"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/contingutEdatClasse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/text_edat" />
+
+        <TextView
+            android:id="@+id/dificultatClasse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/text_dificultat"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/contingutDificultatClasse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/text_dificultat" />
+
+        <TextView
+            android:id="@+id/duracioClasse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/text_duració"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/contingutDuracioClasse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/text_duració" />
+
+        <TextView
+            android:id="@+id/categoriaClasse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/text_categoria"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/contingutCategoriaClasse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/text_categoria" />
+    </LinearLayout>
+</FrameLayout>

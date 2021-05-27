@@ -16,11 +16,10 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4ClassRunner::class)
 class LogInActivityTest {
-    val EXPECTED_ERROR2 = "El format del Email és incorrecte"
 
     @Rule
     @JvmField
-    val rule: ActivityTestRule<LogInActivity> = ActivityTestRule(LogInActivity::class.java)
+    val rule: ActivityTestRule<AuthenticationProviders> = ActivityTestRule(AuthenticationProviders::class.java)
 
     @Test
     fun user_can_enter_email() {
@@ -51,8 +50,6 @@ class LogInActivityTest {
         onView(withId(R.id.editTextTextEmailAddress)).perform(typeText("adria"))
         onView(withId(R.id.editTextTextPassword)).perform(typeText("123456"), closeSoftKeyboard())
         onView(withId(R.id.signInButton)).perform(ViewActions.click())
-        //onView(withText(EXPECTED_ERROR)).inRoot(ToastMatcher()).check(matches(isDisplayed()))
-        //onView(withText(buildToastMessage(EXPECTED_ERROR2))).inRoot(ToastMatcher()).check(matches(isDisplayed()))
     }
 
 

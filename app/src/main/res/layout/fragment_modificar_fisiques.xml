@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/GuardarModificacionsFisiques"
+        android:layout_width="124dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="22dp"
+        android:text="@string/Boton_Guardar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.882"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/historictotal" />
+
+    <TextView
+        android:id="@+id/historictotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/Històric_bd"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/igctotal"
+        app:layout_constraintTop_toBottomOf="@+id/igctotal" />
+
+    <TextView
+        android:id="@+id/imctotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/IMC"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/AlcadaIntroduida"
+        app:layout_constraintTop_toBottomOf="@+id/AlcadaIntroduida" />
+
+    <TextView
+        android:id="@+id/igctotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/IGC"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/imctotal"
+        app:layout_constraintTop_toBottomOf="@+id/imctotal" />
+
+    <TextView
+        android:id="@+id/històric2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/Històric"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/IGC2"
+        app:layout_constraintTop_toBottomOf="@+id/IGC2" />
+
+    <TextView
+        android:id="@+id/IMC2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/IMC"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/alçada"
+        app:layout_constraintTop_toBottomOf="@+id/alçada" />
+
+    <TextView
+        android:id="@+id/IGC2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/IGC"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/IMC2"
+        app:layout_constraintTop_toBottomOf="@+id/IMC2" />
+
+    <TextView
+        android:id="@+id/alçada"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/Alçada"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/pes"
+        app:layout_constraintTop_toBottomOf="@+id/pes" />
+
+    <TextView
+        android:id="@+id/pes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="119dp"
+        android:text="@string/Pes"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/PesIntroduit"
+        app:layout_constraintStart_toStartOf="@+id/dadesFísiques"
+        app:layout_constraintTop_toBottomOf="@+id/dadesFísiques" />
+
+    <TextView
+        android:id="@+id/dadesFísiques"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/DadesFísiques"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/PesIntroduit"
+        android:layout_width="82dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="71dp"
+        android:layout_marginEnd="128dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/AlcadaIntroduida"
+        android:layout_width="82dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="128dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/PesIntroduit"
+        app:layout_constraintTop_toBottomOf="@+id/PesIntroduit" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

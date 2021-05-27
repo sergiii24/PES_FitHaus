@@ -53,7 +53,7 @@ class FragmentEsportives : Fragment(R.layout.fragment_esportives) {
         points.text = userData?.points.toString()
         level.text = userData?.level.toString()
         objectives.text = userData?.objectives.toString()
-        interestcategories.text = userData?.interestcategories
+        interestcategories.text = userData?.categories.toString()
     }
 
 }

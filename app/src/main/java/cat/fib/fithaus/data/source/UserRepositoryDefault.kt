@@ -18,38 +18,35 @@ class UserRepositoryDefault(
     private val userService: UserService,
     private val appExecutors: AppExecutors,
 ) : UserRepository {
+    override fun login(userEmail: String, userPassword: String): LiveData<Resource<User>> {
+        return object : NetworkDatabaseResource<User, User>(appExecutors) {
 
+            override fun createCall() = userService.login(userEmail, userPassword)
 
-    override fun login(username: String, password: String): LiveData<Resource<Int>> {
-
-        val result = MediatorLiveData<Resource<Int>>()
-        val value = userService.login(username, password)
-
-        result.addSource(value) { response ->
-            when (response) {
-                is ApiSuccessResponse -> {
-                    appExecutors.mainThread().execute {
-
-                        result.setValue(Resource.success(response.body))
-
-                    }
-                }
-
-                is ApiEmptyResponse -> {
-                    appExecutors.mainThread().execute {
-                        // reload from disk whatever we had
-                        result.setValue(Resource.loading(0))
-                    }
-                }
-
-
+            override fun saveCallResult(item: User) {
+                userDao.insertUser(item)
             }
-        }
 
-        return result as LiveData<Resource<Int>>
+            override fun loadFromDb() = userDao.getUserByEmail(userEmail)
 
+        }.asLiveData()
     }
 
+    override fun getUserByEmail(email: String): LiveData<Resource<User>> {
+        return object : NetworkDatabaseResource<User, User>(appExecutors) {
+
+            override fun createCall() = userService.getUserByEmail(email)
+
+            override fun saveCallResult(item: User) {
+                userDao.insertUser(item)
+            }
+
+            override fun loadFromDb() = userDao.getUserByEmail(email)
+
+        }.asLiveData()
+    }
+
+    /*
     override fun createUser(user: User): LiveData<Resource<User>> {
 
         val result = MediatorLiveData<Resource<User>>()
@@ -78,6 +75,22 @@ class UserRepositoryDefault(
 
         return result as LiveData<Resource<User>>
     }
+    */
+
+    override fun createUser(user: User): LiveData<Resource<User>> {
+        return object : NetworkDatabaseResource<User, User>(appExecutors) {
+
+            override fun createCall() = userService.createUser(user)
+
+            override fun saveCallResult(item: User) {
+                userDao.insertUser(item)
+                user.id = item.id
+            }
+
+            override fun loadFromDb() = userDao.getUserById(user.id.toString())
+
+        }.asLiveData()
+    }
 
     override fun getUser(userId: String): LiveData<Resource<User>> {
         return object : NetworkBoundResource<User, User>(appExecutors) {
@@ -90,6 +103,33 @@ class UserRepositoryDefault(
             override fun loadFromDb() = userDao.getUserById(userId)
 
             override fun createCall() = userService.getUser(userId)
+        }.asLiveData()
+    }
+
+    override fun updateUser(userId: Int, updatedUser: User): LiveData<Resource<User>> {
+        return object : NetworkDatabaseResource<User, User>(appExecutors) {
+
+            override fun createCall() = userService.updateUser(userId, updatedUser)
+
+            override fun saveCallResult(item: User) {
+                userDao.insertUser(item)
+                //updatedUser.id = item.id
+            }
+
+            override fun loadFromDb() = userDao.getUserById(updatedUser.id.toString())
+
+        }.asLiveData()
+    }
+    override fun deleteUser(userId: Int): LiveData<Resource<User>> {
+        return object : NetworkDatabaseResource<User, User>(appExecutors) {
+            override fun saveCallResult(item: User) {
+                userDao.deleteUser(userId.toString())
+            }
+
+            override fun loadFromDb() = userDao.getUserById(userId.toString())
+
+            override fun createCall() = userService.deleteUser(userId.toString())
+
         }.asLiveData()
     }
 

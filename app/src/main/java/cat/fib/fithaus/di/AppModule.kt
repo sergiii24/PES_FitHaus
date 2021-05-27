@@ -2,8 +2,11 @@ package cat.fib.fithaus.di
 
 import android.content.Context
 import androidx.room.Room
+import cat.fib.fithaus.data.api.ClassService
 import cat.fib.fithaus.data.api.Configuration
 import cat.fib.fithaus.data.api.RoutineService
+import cat.fib.fithaus.data.api.UserService
+import cat.fib.fithaus.data.api.ExerciseService
 import cat.fib.fithaus.data.source.local.FitHausDatabase
 import cat.fib.fithaus.utils.AppExecutors
 import cat.fib.fithaus.utils.LiveDataCallAdapterFactory
@@ -12,6 +15,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -22,6 +26,24 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 class AppModule {
+
+    @Singleton
+    @Provides
+    fun provideExerciseService(): ExerciseService {
+        val logger = HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }
+
+        val client = OkHttpClient.Builder()
+            .addInterceptor(logger)
+            .build()
+
+        return Retrofit.Builder()
+            .baseUrl(Configuration.urlServer)
+            .client(client)
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(LiveDataCallAdapterFactory())
+            .build()
+            .create(ExerciseService::class.java)
+    }
 
     @Singleton
     @Provides
@@ -42,6 +64,7 @@ class AppModule {
     }
 
 
+
     @Singleton
     @Provides
     fun provideDataBase(@ApplicationContext context: Context): FitHausDatabase {
@@ -55,5 +78,23 @@ class AppModule {
     @Singleton
     @Provides
     fun provideIoDispatcher() = Dispatchers.IO
+
+    @Singleton
+    @Provides
+    fun provideClassService(): ClassService {
+        val logger = HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }
+
+        val client = OkHttpClient.Builder()
+                .addInterceptor(logger)
+                .build()
+
+        return Retrofit.Builder()
+                .baseUrl(Configuration.urlServer)
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(LiveDataCallAdapterFactory())
+                .build()
+                .create(ClassService::class.java)
+    }
 
 }

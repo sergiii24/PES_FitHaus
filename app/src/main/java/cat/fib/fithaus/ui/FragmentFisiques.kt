@@ -28,7 +28,7 @@ class FragmentFisiques : Fragment(R.layout.fragment_fisiques) {
     lateinit var height: TextView
     lateinit var imc: TextView
     lateinit var igc: TextView
-    lateinit var historic: TextView
+    lateinit var updated: TextView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v: View = inflater.inflate(R.layout.fragment_fisiques, container, false)
@@ -36,7 +36,7 @@ class FragmentFisiques : Fragment(R.layout.fragment_fisiques) {
         height = v.findViewById(R.id.Alçada_bd)
         imc = v.findViewById(R.id.Imc_bd)
         igc = v.findViewById(R.id.Igc_bd)
-        historic = v.findViewById(R.id.Històric_bd)
+        updated = v.findViewById(R.id.Updated_bd)
         viewModel.user.observe(viewLifecycleOwner, Observer {
             if (it.status == Status.SUCCESS)
                 setUpData(it.data)
@@ -49,7 +49,7 @@ class FragmentFisiques : Fragment(R.layout.fragment_fisiques) {
         height.text = userData?.height.toString()
         imc.text = userData?.imc.toString()
         igc.text = userData?.igc.toString()
-        historic.text = userData?.historic.toString()
+        updated.text = userData?.updated.toString()
     }
 
 }

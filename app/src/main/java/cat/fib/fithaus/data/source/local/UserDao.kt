@@ -23,6 +23,15 @@ interface UserDao {
     @Query("SELECT * FROM user WHERE id = :userId")
     fun getUserById(userId: String): LiveData<User>
 
+    /**
+     * Select a user by userEmail.
+     *
+     * @param userEmail the email of the user.
+     * @return the user with email.
+     */
+    @Query("SELECT * FROM user WHERE email = :userEmail")
+    fun getUserByEmail(userEmail: String): LiveData<User>
+
 
     @Query("SELECT * FROM user WHERE username = :username")
     fun getUserByUsername(username: String): LiveData<User>
@@ -35,4 +44,11 @@ interface UserDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertUser(user: User)
 
+    /**
+     * Delete a user in the database.
+     *
+     * @param userId the user id.
+     */
+    @Query("DELETE FROM user WHERE id = :userId")
+    fun deleteUser(userId: String)
 }
