@@ -19,15 +19,15 @@ interface UserService {
     /**
      * @POST declares an HTTP POST request
      */
-    @POST("/users")
+    @POST("/users/")
     fun createUser(@Body user: User): LiveData<ApiResponse<User>>
 
     @GET("/users/login")
-    fun login(@Query("email", encoded = true) email: String,
+    fun login(@Query("email") email: String,
               @Query("password") password: String
     ): LiveData<ApiResponse<User>>
 
-    @PUT("/users/{id}")
+    @PUT("/users/{id}/")
     fun updateUser(@Path("id") userId: Int, @Body updatedUser: User): LiveData<ApiResponse<User>>
 
     @DELETE ("/users/{id}")

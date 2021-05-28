@@ -71,6 +71,7 @@ class AuthenticationProviders : AppCompatActivity() {
             val validateEmail = validateEmail()
             val validatePassword = validatePassword()
             if (validateEmail && validatePassword) {
+                //showHome() //treure linia quan estigui integrat
                 viewModel.login(editTextTextEmailAddress.text.toString(), editTextTextPassword.text.toString() )
                 viewModel.user.observe(this, Observer {
                     if (it.status == Status.SUCCESS) {

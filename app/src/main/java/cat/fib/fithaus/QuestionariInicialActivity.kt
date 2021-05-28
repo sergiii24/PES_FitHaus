@@ -138,9 +138,9 @@ class QuestionariInicialActivity : AppCompatActivity() {
      */
     private fun experience(): String? {
         return when {
-            radioButtonPrincipiant?.isChecked == true -> "Beginner"
-            radioButtonIntermedi?.isChecked == true -> "Intermediate"
-            radioButtonAvançat?.isChecked == true -> "Advanced"
+            radioButtonPrincipiant?.isChecked == true -> "B"
+            radioButtonIntermedi?.isChecked == true -> "I"
+            radioButtonAvançat?.isChecked == true -> "A"
             else -> null
         }
     }
