@@ -16,9 +16,7 @@ import cat.fib.fithaus.data.models.Class
  * Note that exportSchema should be true in production databases.
  */
 
-@Database(entities = [User::class, Exercise::class, Class::class], version = 1, exportSchema = true)
-@TypeConverters(Converters::class)
-@Database(entities = [CustomRoutine::class, PredefinedRoutine::class], version = 1, exportSchema = true)
+@Database(entities = [User::class, Exercise::class, Class::class, CustomRoutine::class, PredefinedRoutine::class], version = 1, exportSchema = true)
 @TypeConverters(Converters::class)
 abstract class FitHausDatabase : RoomDatabase() {
 
@@ -29,5 +27,6 @@ abstract class FitHausDatabase : RoomDatabase() {
     abstract fun classDao(): ClassDao
 
     abstract fun customRoutineDao(): CustomRoutineDao
+
     abstract fun predefinedRoutineDao(): PredefinedRoutineDao
 }
