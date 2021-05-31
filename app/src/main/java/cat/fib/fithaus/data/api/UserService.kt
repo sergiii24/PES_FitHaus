@@ -14,7 +14,7 @@ interface UserService {
      * replacement for the {id} placeholder in the @GET path
      */
     @GET("/users/{id}")
-    fun getUser(@Path("id") userId: String): LiveData<ApiResponse<User>>
+    fun getUser(@Path("id") userId: Int): LiveData<ApiResponse<User>>
 
     /**
      * @POST declares an HTTP POST request
@@ -22,19 +22,17 @@ interface UserService {
     @POST("/users/")
     fun createUser(@Body user: User): LiveData<ApiResponse<User>>
 
-    @GET("/users/login")
-    fun login(@Query("email") email: String,
-              @Query("password") password: String
-    ): LiveData<ApiResponse<User>>
+    @POST("/users/login")
+    fun login(@Body loginInformation: LoginInformation): LiveData<ApiResponse<User>>
 
-    @PUT("/users/{id}/")
+    @PATCH("/users/{id}/")
     fun updateUser(@Path("id") userId: Int, @Body updatedUser: User): LiveData<ApiResponse<User>>
 
-    @DELETE ("/users/{id}")
-    fun deleteUser(@Path ("id") userId: String): LiveData<ApiResponse<User>>
+    @DELETE ("/users/{id}/")
+    fun deleteUser(@Path ("id") userId: Int): LiveData<ApiResponse<User>>
 
     @GET("/users")
-    fun getUserByEmail(@Query("email", encoded = true) email: String
+    fun getUserByEmail(@Query("email") email: String
     ): LiveData<ApiResponse<User>>
 
 }

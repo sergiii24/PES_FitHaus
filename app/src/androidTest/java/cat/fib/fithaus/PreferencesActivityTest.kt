@@ -14,11 +14,11 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4ClassRunner::class)
-class QuestionariInicialActivityTest {
+class PreferencesActivityTest {
 
     @Rule
     @JvmField
-    val rule: ActivityTestRule<QuestionariInicialActivity> = ActivityTestRule(QuestionariInicialActivity::class.java)
+    val rule: ActivityTestRule<PreferencesActivity> = ActivityTestRule(PreferencesActivity::class.java)
 
     @Test
     fun user_can_enter_principiant_experience() {

@@ -82,8 +82,8 @@ class AuthenticationProviders : AppCompatActivity() {
                         prefs.apply()
                         showHome()
                     }
-                    else
-                        Toast.makeText(this, "ERROR!", Toast.LENGTH_LONG).show()
+                    else if (it.status == Status.ERROR)
+                        showAlertFitHaus()
                 })
             }
         }
@@ -178,13 +178,15 @@ class AuthenticationProviders : AppCompatActivity() {
                                 viewModel.getUserByEmail(email.toString())
                                 viewModel.user.observe(this@AuthenticationProviders, Observer {
                                     if (it.status == Status.SUCCESS) {
+                                        println("Entra en el GET")
                                         //guarda id
                                         val prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit()
                                         prefs.putString("userId", it.data?.id.toString())
                                         prefs.putString("provider", "Facebook")
                                         prefs.apply()
                                         showHome()
-                                    } else {
+                                    } else if (it.status == Status.ERROR) {
+                                        println("Entra en el POST")
                                         val index = fullName?.indexOf(" ", 0, false)
                                         val firstName = index?.let { it1 -> fullName?.substring(0, it1) }
                                         val lastName = index?.plus(1)?.let { it1 -> fullName?.substring(it1) }
@@ -202,7 +204,7 @@ class AuthenticationProviders : AppCompatActivity() {
                                                 prefs.apply()
                                                 showSurvey()
                                             }
-                                            else {
+                                            else if (it.status == Status.ERROR) {
                                                 Toast.makeText(this@AuthenticationProviders, "ERROR!", Toast.LENGTH_LONG).show()
                                             }
                                         })
@@ -264,7 +266,7 @@ class AuthenticationProviders : AppCompatActivity() {
                                         prefs.putString("provider", "Google")
                                         prefs.apply()
                                         showHome()
-                                    } else {
+                                    } else if (it.status == Status.ERROR) {
                                         val index = fullName?.indexOf(" ", 0, false)
                                         val firstName = index?.let { it1 -> fullName?.substring(0, it1) }
                                         val lastName = index?.plus(1)?.let { it1 -> fullName?.substring(it1) }
@@ -282,7 +284,7 @@ class AuthenticationProviders : AppCompatActivity() {
                                                 prefs.apply()
                                                 showSurvey()
                                             }
-                                            else {
+                                            else if (it.status == Status.ERROR) {
                                                 Toast.makeText(this, "ERROR!", Toast.LENGTH_LONG).show()
                                             }
                                         })
@@ -333,7 +335,7 @@ class AuthenticationProviders : AppCompatActivity() {
      *  @author Albert Miñana Montecino i Adrià Espinola Garcia
      */
     private fun showSurvey(){
-        val homeIntent = Intent(this, QuestionariInicialActivity::class.java)
+        val homeIntent = Intent(this, PreferencesActivity::class.java)
         startActivity(homeIntent)
     }
 
@@ -350,27 +352,24 @@ class AuthenticationProviders : AppCompatActivity() {
         builder.setPositiveButton("Acceptar", null)
         val dialog: AlertDialog = builder.create()
         dialog.create()
+        dialog.show()
     }
 
-    /** Function showAlertSignIn
+    /** Function showAlertFitHaus
      *
-     *  Funció que mostra un missatge d'error en format Toast segons els paràmetres d'entrada.
+     *  Funció encarregada de mostrar un missatge d'error d'autenticació de l'usuari
      *
-     *  @param emailEmpty
-     *  @param passwordEmpty
-     *  @param format
-     *  @author Adrià Espinola Garcia
+     *  @author Albert Miñana Montecino
      */
-    private fun showAlertSignIn(emailEmpty: Boolean, passwordEmpty: Boolean, format: Boolean) {
-        when {
-            emailEmpty and passwordEmpty -> Toast.makeText(this, "Els camps Email i Password estan buits", Toast.LENGTH_LONG).show()
-            emailEmpty -> Toast.makeText(this, "El camp Email és buit", Toast.LENGTH_LONG).show()
-            passwordEmpty -> Toast.makeText(this, "El camp Password és buit", Toast.LENGTH_LONG).show()
-            format -> Toast.makeText(this, "El format del Email és incorrecte", Toast.LENGTH_LONG).show()
-        }
-
+    private fun showAlertFitHaus() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Advertència")
+        builder.setMessage("Les credencials introduïdes són incorrectes")
+        builder.setPositiveButton("Acceptar", null)
+        val dialog: AlertDialog = builder.create()
+        dialog.create()
+        dialog.show()
     }
-
 
     /** Function generateUsername
      *

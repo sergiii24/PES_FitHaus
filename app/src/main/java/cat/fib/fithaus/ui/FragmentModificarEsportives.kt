@@ -1,6 +1,5 @@
 package cat.fib.fithaus.ui
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +8,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import cat.fib.fithaus.R
@@ -18,8 +16,6 @@ import cat.fib.fithaus.utils.Status
 import cat.fib.fithaus.viewmodels.UserViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.lifecycle.Observer
-import cat.fib.fithaus.ConsultarPerfilActivity
-import cat.fib.fithaus.ModificarPerfilActivity
 
 
 /** Classe FragmentModificarEsportives
@@ -58,8 +54,8 @@ class FragmentModificarEsportives : Fragment(R.layout.fragment_modificar_esporti
         activitats = v.findViewById(R.id.NumActivitats_bd)
         assoliments = v.findViewById(R.id.Assoliments_bd)
         punts = v.findViewById(R.id.Punts_bd)
-        nivell = v.findViewById(R.id.Nivell_bd)
-        objectiu = v.findViewById(R.id.Objectiu_bd)
+        nivell = v.findViewById(R.id.nivell_bd)
+        objectiu = v.findViewById(R.id.objectiu_bd)
         categoriainteres = v.findViewById(R.id.categoriainteres_bd)
         viewModel.user.observe(viewLifecycleOwner, Observer {
             if (it.status == Status.SUCCESS) {

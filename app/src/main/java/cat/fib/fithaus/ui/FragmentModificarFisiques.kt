@@ -1,8 +1,6 @@
 package cat.fib.fithaus.ui
 
-import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +11,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import cat.fib.fithaus.ConsultarPerfilActivity
 import cat.fib.fithaus.R
 import cat.fib.fithaus.data.models.User
 import cat.fib.fithaus.utils.Status

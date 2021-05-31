@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ConsultarPerfilActivity">
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/DadesEsportives"
@@ -23,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="@string/NumActivitats"
+        android:text="@string/NumRutines"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/DadesEsportives"
         app:layout_constraintTop_toBottomOf="@+id/DadesEsportives" />
@@ -83,7 +82,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="180dp"
-        android:text="@string/NumActivitats"
+        android:text="@string/NumRutines"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/NumActivitats"
         app:layout_constraintTop_toTopOf="@+id/NumActivitats" />

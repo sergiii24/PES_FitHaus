@@ -9,7 +9,6 @@ import cat.fib.fithaus.ui.*
 import java.io.IOException
 import com.google.android.gms.security.ProviderInstaller
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_fisiques.*
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Response

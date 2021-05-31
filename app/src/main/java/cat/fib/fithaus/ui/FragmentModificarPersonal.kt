@@ -1,6 +1,5 @@
 package cat.fib.fithaus.ui
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +13,6 @@ import cat.fib.fithaus.utils.Status
 import cat.fib.fithaus.viewmodels.UserViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.lifecycle.Observer
-import cat.fib.fithaus.ConsultarPerfilActivity
 import kotlinx.android.synthetic.main.fragment_modificar_personal.*
 
 
