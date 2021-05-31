@@ -35,8 +35,19 @@ class ExerciseRepositoryDefault(
         TODO("Not yet implemented")
     }
 
-    override suspend fun getExercises(): Resource<List<Exercise>> {
-        TODO("Not yet implemented")
+    override fun getExercises(): LiveData<Resource<List<Exercise>>> {
+        return object : NetworkBoundResource<List<Exercise>, List<Exercise>>(appExecutors) {
+            override fun saveCallResult(items: List<Exercise>) {
+                for (item in items)
+                    exerciseDao.insertExercise(item)
+            }
+
+            override fun shouldFetch(data: List<Exercise>?) = data == null || data.isEmpty()
+
+            override fun loadFromDb() = exerciseDao.getExercises()
+
+            override fun createCall() = exerciseService.getExercises()
+        }.asLiveData()
     }
 
     override suspend fun refreshExercises() {

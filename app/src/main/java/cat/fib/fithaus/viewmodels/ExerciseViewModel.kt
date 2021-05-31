@@ -4,7 +4,10 @@ import androidx.lifecycle.*
 import cat.fib.fithaus.data.models.Exercise
 import cat.fib.fithaus.data.source.ExerciseRepository
 import cat.fib.fithaus.utils.Resource
+import cat.fib.fithaus.utils.Status
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -13,9 +16,17 @@ class ExerciseViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    lateinit var exercise : LiveData<Resource<Exercise>> // = exerciseRepository.getExercise("1000")
+    companion object {
+        private const val NO_GROW_ZONE = -1
+        private const val GROW_ZONE_SAVED_STATE_KEY = "GROW_ZONE_SAVED_STATE_KEY"
+    }
 
-    //var exercise : LiveData<Resource<Exercise>>? = false
+    lateinit var exercise : LiveData<Resource<Exercise>> // = exerciseRepository.getExercise("1000")
+    var exercises:  LiveData<Resource<List<Exercise>>> = exerciseRepository.getExercises()
+
+    private val filtered: MutableStateFlow<Int> = MutableStateFlow(
+        savedStateHandle.get(GROW_ZONE_SAVED_STATE_KEY) ?: NO_GROW_ZONE
+    )
 
     fun getExercise(id: String) {
         println("LLEGA")
@@ -23,28 +34,16 @@ class ExerciseViewModel @Inject constructor(
         println("SALE")
     }
 
-    /*
-    private val _exerciseId = MutableLiveData<String>()
-
-    private val _exercise = _exerciseId.switchMap { exerciseId ->
-        exerciseRepository.observeExercise(exerciseId).map { computeResult(it) }
-    }
-    val exercises: LiveData<Exercise?> = _exercise
 
 
-    init {
-        // Set initial state
 
-    }
-    */
-    /*
-    private fun computeResult(taskResult: Resource<Exercise>): Exercise? {
-        return if (taskResult is Resource.Success) {
+    private fun computeResult(taskResult: Resource<List<Exercise>>): List<Exercise>? {
+        return if (taskResult.status == Status.SUCCESS) {
             taskResult.data
         } else {
             null
         }
     }
-    */
+
 
 }

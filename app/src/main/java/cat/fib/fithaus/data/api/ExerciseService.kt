@@ -20,5 +20,7 @@ interface ExerciseService {
         @GET("/exercises/{id}")
         fun getExercise(@Path("id") exerciseId: String): LiveData<ApiResponse<Exercise>>
 
+        @GET("/exercises")
+        fun getExercises() : LiveData<ApiResponse<List<Exercise>>>
 }
 

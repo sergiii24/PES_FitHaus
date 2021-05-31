@@ -55,7 +55,7 @@ interface ExerciseDao {
      * @return all exercises.
      */
     @Query("SELECT * FROM exercises")
-    suspend fun getExercises(): List<Exercise>
+    fun getExercises(): LiveData<List<Exercise>>
 
     /**
      * Update a exercise.
