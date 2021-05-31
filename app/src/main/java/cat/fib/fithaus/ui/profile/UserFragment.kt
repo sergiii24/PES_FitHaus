@@ -11,6 +11,7 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import cat.fib.fithaus.MainActivity
 import cat.fib.fithaus.R
 import cat.fib.fithaus.data.models.User
 import cat.fib.fithaus.ui.dialog.DatePickerFragment
@@ -95,9 +96,9 @@ class UserFragment : Fragment(R.layout.fragment_user) {
         data.setOnClickListener {
             showDatePickerDialog()
         }
-        sexeDona = v.findViewById (R.id.Sexe_Dona)
-        sexeHome = v.findViewById (R.id.Sexe_Home)
-        sexeAltre = v.findViewById (R.id.Sexe_Altre)
+        sexeDona = v.findViewById(R.id.Sexe_Dona)
+        sexeHome = v.findViewById(R.id.Sexe_Home)
+        sexeAltre = v.findViewById(R.id.Sexe_Altre)
 
         botoActualitzarPerfil = v.findViewById(R.id.ActualitzarUsuariButton)
 
@@ -109,8 +110,7 @@ class UserFragment : Fragment(R.layout.fragment_user) {
             if (it.status == Status.SUCCESS) {
                 user = it.data
                 setUpUser(it.data)
-            }
-            else if (it.status == Status.ERROR) Toast.makeText(activity, "ERROR!", Toast.LENGTH_LONG).show()
+            } else if (it.status == Status.ERROR) Toast.makeText(activity, "ERROR!", Toast.LENGTH_LONG).show()
         })
 
         setupUpdateProfileButton()
@@ -131,7 +131,7 @@ class UserFragment : Fragment(R.layout.fragment_user) {
         usuari.text = userData?.username.toString()
         correu.text = userData?.email.toString()
         contrasenya.text = userData?.password.toString()
-        data.text = LocalDate.parse(userData?.birthdate.toString(), DateTimeFormatter.ofPattern("yyyy-MM-dd" )).format(DateTimeFormatter.ofPattern("dd/MM/yyyy")).toString()
+        data.text = LocalDate.parse(userData?.birthdate.toString(), DateTimeFormatter.ofPattern("yyyy-MM-dd")).format(DateTimeFormatter.ofPattern("dd/MM/yyyy")).toString()
         when (userData?.gender) {
             "M" -> sexeHome.isChecked = true
             "W" -> sexeDona.isChecked = true
@@ -198,6 +198,11 @@ class UserFragment : Fragment(R.layout.fragment_user) {
                 viewModel.user.observe(viewLifecycleOwner, Observer {
                     if (it.status == Status.SUCCESS) {
                         setUpUser(it.data)
+                        val prefs = requireActivity().getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit()
+                        prefs.putString("name", it.data?.firstname.toString() + " " + it.data?.lastname.toString())
+                        prefs.putString("email", it.data?.email.toString())
+                        prefs.apply()
+                        (activity as MainActivity).setNameAndEmail()
                     } else if (it.status == Status.ERROR) {
                         Toast.makeText(activity, "ERROR!", Toast.LENGTH_LONG).show()
                     }
@@ -353,7 +358,7 @@ class UserFragment : Fragment(R.layout.fragment_user) {
      *  @return Retorna el booleà valida si es compleixen les condicions
      *  @author Daniel Cárdenas.
      */
-    fun validPassword (password: String): Boolean {
+    fun validPassword(password: String): Boolean {
         var valida: Boolean = true
         var minuscula: Int = 0
         var mayuscula: Int = 0

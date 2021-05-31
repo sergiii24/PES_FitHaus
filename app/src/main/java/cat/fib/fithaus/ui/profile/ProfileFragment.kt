@@ -14,7 +14,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import cat.fib.fithaus.AuthenticationProviders
-import cat.fib.fithaus.ModificarPerfilActivity
 import cat.fib.fithaus.R
 import cat.fib.fithaus.utils.Status
 import cat.fib.fithaus.viewmodels.UserViewModel
