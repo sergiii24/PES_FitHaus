@@ -25,7 +25,11 @@
         <activity android:name=".ConsultarClasseActivity"/>
 
         <activity android:name=".AuthenticationProviders"
-            android:theme="@style/Theme.FitHaus.SplashScreen">
+            android:theme="@style/Theme.FitHaus.SplashScreen"/>
+        <activity android:name=".ModificarPerfilActivity" />
+        <activity android:name=".ConsultarPerfilActivity" ></activity>
+        <activity android:name=".TancarSessioActivity" />
+        <activity  android:name=".ConsultarExerciciActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -33,10 +37,6 @@
             </intent-filter>
 
         </activity>
-        <activity android:name=".ModificarPerfilActivity" />
-        <activity android:name=".ConsultarPerfilActivity" ></activity>
-        <activity android:name=".TancarSessioActivity" />
-        <activity  android:name=".ConsultarExerciciActivity"/>
         <activity android:name=".QuestionariInicialActivity"/>
         <activity
             android:name=".MainActivity"

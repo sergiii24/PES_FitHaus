@@ -116,5 +116,6 @@
     <string name="text_entrenador">Entrenador</string>
     <string name="boton_Guardar">GUARDAR</string>
     <string name="Cognoms">Cognoms</string>
+    <string name="ConsultarPrograma">Consulta un Programa</string>
 
 </resources>
