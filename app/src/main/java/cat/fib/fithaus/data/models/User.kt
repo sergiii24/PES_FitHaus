@@ -60,7 +60,7 @@ data class User(
                     password: String,
                     email: String,
                     gender: String,
-                    birthdate: String) : this(0, firstname, lastname, username, null, password, null, null, null, null, null, 1.0f, 1.0f, null, null, null, email, gender, birthdate)
+                    birthdate: String) : this(0, firstname, lastname, username, null, password, null, null, null, null, null, null, null, null, null, null, email, gender, birthdate)
 
         constructor(firstname: String,
                     lastname: String,

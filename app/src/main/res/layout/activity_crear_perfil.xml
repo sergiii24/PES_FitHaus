@@ -119,7 +119,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:errorEnabled="true"
-                    app:passwordToggleEnabled="true">
+                    app:passwordToggleEnabled="true"
+                    app:errorIconDrawable="@null">
 
                     <EditText
                         android:id="@+id/Contrasenya"
