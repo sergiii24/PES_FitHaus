@@ -19,13 +19,15 @@ package cat.fib.fithaus.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import cat.fib.fithaus.data.models.Exercise
 import cat.fib.fithaus.databinding.ListItemExerciseBinding
-import cat.fib.fithaus.databinding.MainFragmentBinding
+import cat.fib.fithaus.ui.main.ExerciseListFragmentDirections
 
 
 /**
@@ -33,8 +35,9 @@ import cat.fib.fithaus.databinding.MainFragmentBinding
  */
 class ExerciseAdapter : ListAdapter<Exercise, RecyclerView.ViewHolder>(PlantDiffCallback()) {
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return PlantViewHolder(
+        return ExerciseViewHolder(
             ListItemExerciseBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
@@ -44,31 +47,30 @@ class ExerciseAdapter : ListAdapter<Exercise, RecyclerView.ViewHolder>(PlantDiff
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val plant = getItem(position)
-        (holder as PlantViewHolder).bind(plant)
+        val exercise = getItem(position)
+        (holder as ExerciseViewHolder).bind(exercise)
     }
 
-    class PlantViewHolder(
+    class ExerciseViewHolder(
         private val binding: ListItemExerciseBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         init {
             binding.setClickListener {
                 binding.exercise?.let { exercise ->
-                    navigateToPlant(exercise, it)
+                    navigateToExercise(exercise, it)
                 }
             }
         }
 
-        private fun navigateToPlant(
+        private fun navigateToExercise(
             exercise: Exercise,
             view: View
         ) {
-//            val direction =
-//                HomeViewPagerFragmentDirections.actionViewPagerFragmentToPlantDetailFragment(
-//                    exercise.id
-//                )
-//            view.findNavController().navigate(direction)
-        }
+            val direction =
+                ExerciseListFragmentDirections.actionViewPagerFragmentToPlantDetailFragment(
+                )
+            view.findNavController().navigate(direction)
+       }
 
         fun bind(item: Exercise) {
             binding.apply {
@@ -77,15 +79,16 @@ class ExerciseAdapter : ListAdapter<Exercise, RecyclerView.ViewHolder>(PlantDiff
             }
         }
     }
-}
 
-private class PlantDiffCallback : DiffUtil.ItemCallback<Exercise>() {
 
-    override fun areItemsTheSame(oldItem: Exercise, newItem: Exercise): Boolean {
-        return oldItem.id == newItem.id
-    }
+    private class PlantDiffCallback : DiffUtil.ItemCallback<Exercise>() {
 
-    override fun areContentsTheSame(oldItem: Exercise, newItem: Exercise): Boolean {
-        return oldItem == newItem
+        override fun areItemsTheSame(oldItem: Exercise, newItem: Exercise): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: Exercise, newItem: Exercise): Boolean {
+            return oldItem == newItem
+        }
     }
 }

@@ -10,6 +10,21 @@
         android:name="cat.fib.fithaus.ui.main.ExerciseListFragment"
         tools:layout="@layout/main_fragment">
 
+        <action
+            android:id="@+id/action_view_pager_fragment_to_plant_detail_fragment"
+            app:destination="@id/exercise_detail_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/exercise_detail_fragment"
+        android:name="cat.fib.fithaus.ui.ConsultarExerciciFragment"
+        android:label=""
+        tools:layout="@layout/fragment_consultar_exercici">
+
     </fragment>
 
 

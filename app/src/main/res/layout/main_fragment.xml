@@ -20,8 +20,8 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:navigationIcon="@drawable/ic_detail_back_no_circle"
-                app:title="" />
+                app:navigationIcon="@drawable/baseline_filter_list_24"
+                />
 
         </com.google.android.material.appbar.AppBarLayout>
 
