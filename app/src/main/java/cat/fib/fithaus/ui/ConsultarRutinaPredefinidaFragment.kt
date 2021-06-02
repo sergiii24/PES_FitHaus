@@ -1,5 +1,6 @@
 package cat.fib.fithaus.ui
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,17 +10,20 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import cat.fib.fithaus.CardViewItem
-import cat.fib.fithaus.R
-import cat.fib.fithaus.RecyclerViewAdapter
+import cat.fib.fithaus.*
+import cat.fib.fithaus.data.models.PredefinedRoutine
+import cat.fib.fithaus.utils.Status
+import cat.fib.fithaus.viewmodels.ClassViewModel
+import cat.fib.fithaus.viewmodels.ExerciseViewModel
+import cat.fib.fithaus.viewmodels.PredefinedRoutineViewModel
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_consultar_rutina_predefinida.*
 
 // Paràmetres d'inicialització del Fragment
-private const val ARG_PARAM1 = "identificadorRutinaPredefinida"
+private const val EXTRA_MESSAGE = "cat.fib.fithaus.MESSAGE"
 
 /** Fragment ConsultarRutinaPredefinida
  *
@@ -31,9 +35,10 @@ private const val ARG_PARAM1 = "identificadorRutinaPredefinida"
 @AndroidEntryPoint
 class ConsultarRutinaPredefinidaFragment : Fragment(), RecyclerViewAdapter.OnItemClickListener {
 
-    //private val viewModel by viewModels<DefaultRoutineViewModel>()    // ViewModel de la rutina predefinida
+    private val viewModelRutinaPredefinida by viewModels<PredefinedRoutineViewModel>()      // ViewModel de la rutina predefinida
 
-    private var identificadorRutinaPredefinida: String? = null   // Identificador de la rutina predefinida
+    private var identificadorRutinaPredefinida: String? = null      // Identificador de la rutina predefinida
+    private var rutinaPredefinida: PredefinedRoutine? = null        // Model de la rutina predefinida
 
     lateinit var imatgeRutinaPredefinida: ImageView                 // ImageView amb la imatge de previsualització de la rutina predefinida
     lateinit var nomRutinaPredefinida: TextView                     // TextView amb el nom de la rutina predefinida
@@ -46,8 +51,8 @@ class ConsultarRutinaPredefinidaFragment : Fragment(), RecyclerViewAdapter.OnIte
     lateinit var contingutObjectiuRutinaPredefinida: TextView       // TextView amb l'objectiu de la rutina predefinida
     lateinit var contingutImpacteRutinaPredefinida: TextView        // TextView amb l'impacte de la rutina predefinida
 
-    lateinit var recyclerView: RecyclerView
-    lateinit var llistat: ArrayList<CardViewItem>
+    lateinit var recyclerView: RecyclerView                         // RecyclerView de CardViewItems que contenen la imatge i el nom de les activitats (exercicis i classes) que formen la rutina predefinida
+    lateinit var list: ArrayList<CardViewItem>                      // Llistat de CardViewItems que contenen la imatge i el nom de les activitats (exercicis i classes) que formen la rutina predefinida
 
     /** Function onCreate
      *
@@ -58,9 +63,7 @@ class ConsultarRutinaPredefinidaFragment : Fragment(), RecyclerViewAdapter.OnIte
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            identificadorRutinaPredefinida = it.getString(ARG_PARAM1)
-        }
+        identificadorRutinaPredefinida = activity?.intent?.getStringExtra(EXTRA_MESSAGE)
     }
 
     /** Function onCreateView
@@ -87,33 +90,150 @@ class ConsultarRutinaPredefinidaFragment : Fragment(), RecyclerViewAdapter.OnIte
         contingutObjectiuRutinaPredefinida = view.findViewById(R.id.contingutObjectiuRutinaPredefinida)
         contingutImpacteRutinaPredefinida = view.findViewById(R.id.contingutImpacteRutinaPredefinida)
 
-
         recyclerView = view.findViewById(R.id.recycler_view)
 
-        /*
-        identificadorExercici?.let {
-            viewModel.getExercise(it)
+
+        identificadorRutinaPredefinida = "3" // Eliminar aquesta línia de codi perquè s'està forçant el paràmetre que li ha d'arribar
+
+        identificadorRutinaPredefinida?.let {
+            viewModelRutinaPredefinida.getPredefinedRoutine(it.toInt())
         }
 
-        viewModel.exercise.observe(viewLifecycleOwner, Observer {
-            if (it.status == Status.SUCCESS)
-                setContent(it.data)
-            else
+        viewModelRutinaPredefinida.predefinedRoutine.observe(viewLifecycleOwner, Observer {
+            if (it.status == Status.SUCCESS) {
+                rutinaPredefinida = it.data
+                setPredefinedRoutineContent()
+            }
+            else if (it.status == Status.ERROR)
                 Toast.makeText(activity, "ERROR!", Toast.LENGTH_LONG).show()
-        })*/
+        })
 
-        setExampleContent()
+        //setExampleContent()
 
         return view
     }
 
+    /** Function onItemClick
+     *
+     *  Funció encarregada de configurar el comportament del clic en un CardViewItem del RecyclerView
+     *
+     *  @param position
+     *  @author Albert Miñana Montecino
+     */
     override fun onItemClick(position: Int) {
-        Toast.makeText(context, "Item $position clicked", Toast.LENGTH_SHORT).show()
-        val clickedItem = llistat[position]
-        clickedItem.text = "Item $position modified"
-        recyclerView.adapter?.notifyItemChanged(position)
+        if (position < rutinaPredefinida!!.exercises.size){
+            // El CardViewItem clicat és un exercici
+            val identificadorExercici = rutinaPredefinida!!.exercises[position]
+            val intent = Intent(activity, ConsultarExerciciActivity::class.java).apply {
+                putExtra(EXTRA_MESSAGE, identificadorExercici)
+            }
+            startActivity(intent)
+        }
+        else if (rutinaPredefinida!!.exercises.size <= position && position < (rutinaPredefinida!!.exercises.size + rutinaPredefinida!!.classes.size)){
+            // El CardViewItem clicat és una classe
+            val absolutePosition = position - rutinaPredefinida!!.exercises.size
+            val identificadorClasse = rutinaPredefinida!!.classes[absolutePosition]
+            val intent = Intent(activity, ConsultarClasseActivity::class.java).apply {
+                putExtra(EXTRA_MESSAGE, identificadorClasse)
+            }
+            startActivity(intent)
+        }
+
+        //Toast.makeText(context, "Item $position clicked", Toast.LENGTH_SHORT).show()
+        //val clickedItem = list[position]
+        //clickedItem.text = "Item $position modified"
+        //recyclerView.adapter?.notifyItemChanged(position)
     }
 
+    /** Function setPredefinedRoutineContent
+     *
+     *  Funció encarregada d'establir el contingut amb la informació completa d'una rutina predefinida
+     *
+     *  @author Albert Miñana Montecino
+     */
+    private fun setPredefinedRoutineContent(){
+        Picasso.get().load(rutinaPredefinida!!.image).into(imatgeRutinaPredefinida)
+        nomRutinaPredefinida.text = rutinaPredefinida!!.name
+        contingutDescripcioRutinaPredefinida.text = rutinaPredefinida!!.description
+        contingutCategoriaRutinaPredefinida.text = rutinaPredefinida!!.categories.toString()
+        contingutTempsRutinaPredefinida.text = rutinaPredefinida!!.time
+        contingutEdatRutinaPredefinida.text = rutinaPredefinida!!.age
+        contingutNivellRutinaPredefinida.text = rutinaPredefinida!!.level
+        contingutEquipamentRutinaPredefinida.text = rutinaPredefinida!!.equipment.toString()
+        contingutObjectiuRutinaPredefinida.text = rutinaPredefinida!!.objective
+        contingutImpacteRutinaPredefinida.text = rutinaPredefinida!!.impact
+
+        setExercisesContent(0)
+    }
+
+    /** Function setExercisesContent
+     *
+     *  Funció encarregada de generar la llista de CardViewItems amb la imatge i el nom dels exercicis que formen la rutina predefinida
+     *
+     *  @param  position
+     *  @author Albert Miñana Montecino
+     */
+    private fun setExercisesContent(position: Int) {
+        if (position < rutinaPredefinida!!.exercises.size){
+            val viewModelExercicis by viewModels<ExerciseViewModel>()   // ViewModel dels exercicis de la rutina predefinida
+            val identificadorExercici = rutinaPredefinida!!.exercises[position]
+            viewModelExercicis.getExercise(identificadorExercici.toString())
+            viewModelExercicis.exercise.observe(viewLifecycleOwner, Observer {
+                if (it.status == Status.SUCCESS){
+                    val item = CardViewItem(it.data!!.pre, it.data!!.name + " (Exercici)")
+                    list.plusAssign(item)
+                    setExercisesContent(position+1)
+                }
+                else if (it.status == Status.ERROR)
+                    Toast.makeText(activity, "ERROR!", Toast.LENGTH_LONG).show()
+            })
+        }
+        else setClassesContent(0)
+    }
+
+    /** Function setClassesContent
+     *
+     *  Funció encarregada de generar la llista de CardViewItems amb la imatge i el nom de les classes que formen la rutina predefinida
+     *
+     *  @param  position
+     *  @author Albert Miñana Montecino
+     */
+    private fun setClassesContent(position: Int) {
+        if (position < rutinaPredefinida!!.classes.size){
+            val viewModelClasses by viewModels<ClassViewModel>()    // ViewModel de les classes de la rutina predefinida
+            val identificadorClasse = rutinaPredefinida!!.classes[position]
+            viewModelClasses.getClass(identificadorClasse.toString())
+            viewModelClasses.classe.observe(viewLifecycleOwner, Observer {
+                if (it.status == Status.SUCCESS){
+                    val item = CardViewItem(it.data!!.pre, it.data!!.name + " (Classe)")
+                    list.plusAssign(item)
+                    setClassesContent(position+1)
+                }
+                else if (it.status == Status.ERROR)
+                    Toast.makeText(activity, "ERROR!", Toast.LENGTH_LONG).show()
+            })
+        }
+        else setActivitiesContent()
+    }
+
+    /** Function setActivitiesContent
+     *
+     *  Funció encarregada d'omplir el RecyclerView amb la llista de CardViewItems que contenen la imatge i el nom de les activitats (exercicis i classes) que formen la rutina predefinida
+     *
+     *  @author Albert Miñana Montecino
+     */
+    private fun setActivitiesContent(){
+        recyclerView.adapter = RecyclerViewAdapter(list, this)
+        recyclerView.layoutManager = LinearLayoutManager(activity)
+        recyclerView.setHasFixedSize(true)
+    }
+
+    /** Function setExampleContent
+     *
+     *  Funció encarregada d'establir un contingut d'exemple amb la informació completa d'una rutina predefinida
+     *
+     *  @author Albert Miñana Montecino
+     */
     private fun setExampleContent(){
         Picasso.get().load("https://mens.laradiomovil.com/wp-content/uploads/2019/02/img_msanoja_20160504-144748_imagenes_lv_getty_gettyimages-546127037_2-k7r-U401526493710pEB-992x558@LaVanguardia-Web.jpg").into(imatgeRutinaPredefinida)
         nomRutinaPredefinida.text = "Rutina predefinida d'exemple"
@@ -126,7 +246,7 @@ class ConsultarRutinaPredefinidaFragment : Fragment(), RecyclerViewAdapter.OnIte
         contingutObjectiuRutinaPredefinida.text = "Salut"
         contingutImpacteRutinaPredefinida.text = "Moderat"
 
-        llistat = ArrayList<CardViewItem>()
+        list = ArrayList<CardViewItem>()
         for (i in 0 until 500) {
             val imatge = when (i % 3) {
                 0 -> "http://simpleicon.com/wp-content/uploads/android.png"
@@ -134,9 +254,9 @@ class ConsultarRutinaPredefinidaFragment : Fragment(), RecyclerViewAdapter.OnIte
                 else -> "https://icons-for-free.com/iconfiles/png/512/microsoft+windows+icon-1320186681671871370.png"
             }
             val item = CardViewItem(imatge, "Item $i")
-            llistat.plusAssign(item)
+            list.plusAssign(item)
         }
-        recyclerView.adapter = RecyclerViewAdapter(llistat, this)
+        recyclerView.adapter = RecyclerViewAdapter(list, this)
         recyclerView.layoutManager = LinearLayoutManager(activity)
         recyclerView.setHasFixedSize(true)
     }

@@ -17,10 +17,8 @@ class ExerciseViewModel @Inject constructor(
 
     //var exercise : LiveData<Resource<Exercise>>? = false
 
-    fun getExercise(id: String) {
-        println("LLEGA")
-        exercise = exerciseRepository.getExercise(id)
-        println("SALE")
+    fun getExercise(name: String) {
+        exercise = exerciseRepository.getExercise(name)
     }
 
     /*

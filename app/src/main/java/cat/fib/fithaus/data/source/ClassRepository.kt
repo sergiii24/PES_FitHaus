@@ -5,5 +5,5 @@ import cat.fib.fithaus.data.models.Class
 import cat.fib.fithaus.utils.Resource
 
 interface ClassRepository {
-    fun getClass(classId: String): LiveData<Resource<Class>>
+    fun getClass(className: String): LiveData<Resource<Class>>
 }

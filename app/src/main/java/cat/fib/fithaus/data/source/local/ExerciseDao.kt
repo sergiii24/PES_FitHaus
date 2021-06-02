@@ -16,13 +16,13 @@ import cat.fib.fithaus.data.models.User
 interface ExerciseDao {
 
     /**
-     * Select a exercise by id.
+     * Select a exercise by name.
      *
-     * @param exerciseId the exercise id.
-     * @return the exercise with id.
+     * @param exerciseName the exercise name.
+     * @return the exercise with name.
      */
-    @Query("SELECT * FROM exercises WHERE id = :exerciseId")
-    fun getExerciseById(exerciseId: String): LiveData<Exercise>
+    @Query("SELECT * FROM exercises WHERE name = :exerciseName")
+    fun getExerciseByName(exerciseName: String): LiveData<Exercise>
 
     /**
      * Insert a exercise in the database. If the exercise already exists, replace it.
@@ -43,11 +43,11 @@ interface ExerciseDao {
     /**
      * Observes a single exercise.
      *
-     * @param id the task id.
-     * @return the exercises with id.
+     * @param name the exercise name.
+     * @return the exercise with name.
      */
-    @Query("SELECT * FROM exercises WHERE id = :id")
-    fun observeById(id: String): LiveData<Exercise>
+    @Query("SELECT * FROM exercises WHERE name = :name")
+    fun observeByName(name: String): LiveData<Exercise>
 
     /**
      * Select all exercises from the exercises table.
@@ -68,12 +68,12 @@ interface ExerciseDao {
 
 
     /**
-     * Delete a exercise by id.
+     * Delete a exercise by name.
      *
-     * @return the number of tasks deleted. This should always be 1.
+     * @return the number of exercises deleted. This should always be 1.
      */
-    @Query("DELETE FROM exercises WHERE id = :exerciseId")
-    suspend fun deleteExerciseById(exerciseId: String): Int
+    @Query("DELETE FROM exercises WHERE name = :exerciseName")
+    suspend fun deleteExerciseByName(exerciseName: String): Int
 
     /**
      * Delete all exercises.

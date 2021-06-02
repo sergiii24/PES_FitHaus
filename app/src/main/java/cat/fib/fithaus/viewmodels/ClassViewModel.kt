@@ -17,8 +17,8 @@ class ClassViewModel @Inject constructor(
 
     lateinit var classe : LiveData<Resource<Class>>
 
-    fun getClass(id: String) {
-        classe = classRepository.getClass(id)
+    fun getClass(name: String) {
+        classe = classRepository.getClass(name)
     }
 
 }

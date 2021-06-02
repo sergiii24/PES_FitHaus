@@ -8,9 +8,7 @@ import com.google.gson.internal.bind.ArrayTypeAdapter
 
 @Entity(tableName = "classes")
 data class Class(
-        @PrimaryKey @ColumnInfo(name = "id") @SerializedName("id")
-        var id: Int = 0,
-        @ColumnInfo(name = "name") @SerializedName("name")
+        @PrimaryKey @ColumnInfo(name = "name") @SerializedName("name")
         var name: String,
         @ColumnInfo(name = "description") @SerializedName("description")
         var description: String,

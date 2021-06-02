@@ -18,7 +18,7 @@ import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 
 // Paràmetres d'inicialització del Fragment
-private const val ARG_PARAM1 = "identificadorExercici"
+private const val EXTRA_MESSAGE = "cat.fib.fithaus.MESSAGE"
 
 /** Fragment ConsultarExercici
  *
@@ -32,7 +32,7 @@ class ConsultarExerciciFragment : Fragment() {
 
     private val viewModel by viewModels<ExerciseViewModel>()    // ViewModel de l'exercici
 
-    private var identificadorExercici: String? = null   // Identificador de l'exercici
+    private var nomIdentificadorExercici: String? = null    // Nom identificador de l'exercici
 
     lateinit var imatgeExercici: ImageView                  // ImageView amb la imatge de previsualització de l'exercici
     lateinit var nomExercici: TextView                      // TextView amb el nom de l'exercici
@@ -54,9 +54,7 @@ class ConsultarExerciciFragment : Fragment() {
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            identificadorExercici = it.getString(ARG_PARAM1)
-        }
+        nomIdentificadorExercici = activity?.intent?.getStringExtra(EXTRA_MESSAGE)
     }
 
     /** Function onCreateView
@@ -83,16 +81,16 @@ class ConsultarExerciciFragment : Fragment() {
         contingutDuracioExercici = view.findViewById(R.id.contingutDuracioExercici)
         contingutCategoriaExercici = view.findViewById(R.id.contingutCategoriaExercici)
 
-        identificadorExercici = "3" // Eliminar aquesta línia de codi perquè s'està forçant el paràmetre que li ha d'arribar
+        nomIdentificadorExercici = "3" // Eliminar aquesta línia de codi perquè s'està forçant el paràmetre que li ha d'arribar
 
-        identificadorExercici?.let {
+        nomIdentificadorExercici?.let {
             viewModel.getExercise(it)
         }
 
         viewModel.exercise.observe(viewLifecycleOwner, Observer {
             if (it.status == Status.SUCCESS)
                 setContent(it.data)
-            else
+            else if (it.status == Status.ERROR)
                 Toast.makeText(activity, "ERROR!", Toast.LENGTH_LONG).show()
         })
 

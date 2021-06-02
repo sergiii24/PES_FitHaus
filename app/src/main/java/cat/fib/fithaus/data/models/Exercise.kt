@@ -17,9 +17,7 @@ import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "exercises")
 data class Exercise(
-    @PrimaryKey @ColumnInfo(name = "id") @SerializedName("id")
-    var id: Int = 0,
-    @ColumnInfo(name = "name") @SerializedName("name")
+    @PrimaryKey @ColumnInfo(name = "name") @SerializedName("name")
     var name: String = "",
     @ColumnInfo(name = "pre") @SerializedName("pre")
     var pre: String,

@@ -18,7 +18,7 @@ import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 
 // Paràmetres d'inicialització del Fragment
-private const val ARG_PARAM1 = "identificadorClasse"
+private const val EXTRA_MESSAGE = "cat.fib.fithaus.MESSAGE"
 
 /** Fragment ConsultarClasse
  *
@@ -32,7 +32,7 @@ class ConsultarClasseFragment : Fragment() {
 
     private val viewModel by viewModels<ClassViewModel>()    // ViewModel de la classe
 
-    private var identificadorClasse: String? = null // Identificador de la classe
+    private var nomIdentificadorClasse: String? = null  // Nom identificador de la classe
 
     lateinit var imatgeClasse: ImageView                // ImageView amb la imatge de previsualització de la classe
     lateinit var nomClasse: TextView                    // TextView amb el nom de la classe
@@ -53,9 +53,7 @@ class ConsultarClasseFragment : Fragment() {
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            identificadorClasse = it.getString(ARG_PARAM1)
-        }
+        nomIdentificadorClasse = activity?.intent?.getStringExtra(EXTRA_MESSAGE)
     }
 
     /** Function onCreateView
@@ -81,9 +79,9 @@ class ConsultarClasseFragment : Fragment() {
         contingutDuracioClasse = view.findViewById(R.id.contingutDuracioClasse)
         contingutCategoriaClasse = view.findViewById(R.id.contingutCategoriaClasse)
 
-        identificadorClasse = "3" // Eliminar aquesta línia de codi perquè s'està forçant el paràmetre que li ha d'arribar
+        nomIdentificadorClasse = "3" // Eliminar aquesta línia de codi perquè s'està forçant el paràmetre que li ha d'arribar
 
-        identificadorClasse?.let {
+        nomIdentificadorClasse?.let {
             viewModel.getClass(it)
         }
 
