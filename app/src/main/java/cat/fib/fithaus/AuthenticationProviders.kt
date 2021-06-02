@@ -219,10 +219,10 @@ class AuthenticationProviders : AppCompatActivity() {
                                     } else if (it.status == Status.ERROR) {
                                         println("Entra en el POST")
                                         val index = fullName?.indexOf(" ", 0, false)
-                                        val firstName = index?.let { it1 -> fullName?.substring(0, it1) }
-                                        val lastName = index?.plus(1)?.let { it1 -> fullName?.substring(it1) }
+                                        val firstName = index?.let { it -> fullName?.substring(0, it) }
+                                        val lastName = index?.plus(1)?.let { it -> fullName?.substring(it) }
                                         val indexEmail = email?.indexOf("@", 0, false)
-                                        val emailName = indexEmail?.let { it1 -> email?.substring(0, it1) }
+                                        val emailName = indexEmail?.let { it -> email?.substring(0, it) }
                                         val username = generateUsername(emailName)
                                         val user = User(firstName.toString(), lastName.toString(), username, email.toString())
                                         viewModel.createUser(user)
@@ -301,10 +301,10 @@ class AuthenticationProviders : AppCompatActivity() {
                                         showHome()
                                     } else if (it.status == Status.ERROR) {
                                         val index = fullName?.indexOf(" ", 0, false)
-                                        val firstName = index?.let { it1 -> fullName?.substring(0, it1) }
-                                        val lastName = index?.plus(1)?.let { it1 -> fullName?.substring(it1) }
+                                        val firstName = index?.let { it -> fullName?.substring(0, it) }
+                                        val lastName = index?.plus(1)?.let { it -> fullName?.substring(it) }
                                         val indexEmail = email?.indexOf("@", 0, false)
-                                        val emailName = indexEmail?.let { it1 -> email?.substring(0, it1) }
+                                        val emailName = indexEmail?.let { it -> email?.substring(0, it) }
                                         val username = generateUsername(emailName)
                                         val user = User(firstName.toString(), lastName.toString(), username, email.toString())
                                         viewModel.createUser(user)
