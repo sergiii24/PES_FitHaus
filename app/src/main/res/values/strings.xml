@@ -117,5 +117,8 @@
     <string name="boton_Guardar">GUARDAR</string>
     <string name="Cognoms">Cognoms</string>
     <string name="ConsultarPrograma">Consulta un Programa</string>
+    <string name="text_temps">Temps</string>
+    <string name="text_equipament">Equipament</string>
+    <string name="text_impacte">Impacte</string>
 
 </resources>

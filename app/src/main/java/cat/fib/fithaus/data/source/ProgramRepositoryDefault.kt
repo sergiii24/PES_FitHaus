@@ -15,7 +15,7 @@ class ProgramRepositoryDefault (
         private val programService: ProgramService,
         private val appExecutors: AppExecutors,
 ) : ProgramRepository {
-    override fun getProgram(programId: String): LiveData<Resource<Program>> {
+    override fun getProgram(programId: Int): LiveData<Resource<Program>> {
         return object : NetworkBoundResource<Program, Program>(appExecutors) {
             override fun saveCallResult(item: Program) {
                 programDao.insertProgram(item)

@@ -1,5 +1,6 @@
 package cat.fib.fithaus.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,15 +12,20 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import cat.fib.fithaus.ProgramRecyclerView
-import cat.fib.fithaus.ProgramaAdapter
+import cat.fib.fithaus.CardViewItem
+import cat.fib.fithaus.ConsultarRutinaPredefinidaActivity
+import cat.fib.fithaus.RecyclerViewAdapter
 import cat.fib.fithaus.R
 import cat.fib.fithaus.data.models.Program
 import cat.fib.fithaus.utils.Status
+import cat.fib.fithaus.viewmodels.PredefinedRoutineViewModel
 import cat.fib.fithaus.viewmodels.ProgramViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_consultar_programa.*
-import kotlinx.android.synthetic.main.programa_recyclerview.view.*
+
+
+// Paràmetres d'inicialització del Fragment
+private const val EXTRA_MESSAGE = "cat.fib.fithaus.MESSAGE"
 
 /** Classe FragmentConsultarPrograma
  *
@@ -30,8 +36,11 @@ import kotlinx.android.synthetic.main.programa_recyclerview.view.*
  */
 
 @AndroidEntryPoint
-class FragmentConsultarPrograma : Fragment(R.layout.fragment_consultar_programa) {
-    private val viewModel by viewModels<ProgramViewModel>()
+class FragmentConsultarPrograma : Fragment(), RecyclerViewAdapter.OnItemClickListener {
+    private val viewModelPrograma by viewModels<ProgramViewModel>()
+
+    private var identificadorPrograma: String? = null      // Identificador del programa
+    private var programa: Program? = null                  // Model del programa
 
     lateinit var nom_programa: TextView
     lateinit var descripcio: TextView
@@ -40,16 +49,29 @@ class FragmentConsultarPrograma : Fragment(R.layout.fragment_consultar_programa)
     lateinit var setmanes_text: TextView
     lateinit var setmanes_asignades: TextView
     lateinit var llistat_rutines_text: TextView
-    lateinit var llistat_rutines: RecyclerView
-    var num_predef_routines: Int = 0
 
+    lateinit var recyclerView: RecyclerView
+    lateinit var llistat_rutines: ArrayList<CardViewItem>
 
-
-    /** Funció inicialitzadora
+    /** Function onCreate
      *
-     *  Funció que inicialitza les variables amb el valor corresponent segons el programa consultat.
+     *  Funció encarregada de crear el fragment
      *
-     *  @param inflater, container, savedInstanceState
+     *  @param savedInstanceState
+     *  @author Daniel Cárdenas
+     */
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        identificadorPrograma = activity?.intent?.getStringExtra(EXTRA_MESSAGE)
+    }
+
+    /** Funció onCreateView
+     *
+     *  Funció encarregada de configurar i mostrar el contingut del fragment
+     *
+     *  @param inflater
+     *  @param container
+     *  @param savedInstanceState
      *  @return View?
      *  @author Daniel Cárdenas.
      */
@@ -63,46 +85,117 @@ class FragmentConsultarPrograma : Fragment(R.layout.fragment_consultar_programa)
         setmanes_text = v.findViewById(R.id.SetmanesProgramaText)
         setmanes_asignades = v.findViewById(R.id.setmanesProgramaConsultat)
         llistat_rutines_text = v.findViewById(R.id.RutinesText)
-        llistat_rutines = v.findViewById(R.id.LlistatRutines)
-        viewModel.program.observe(viewLifecycleOwner, Observer {
+
+        recyclerView = v.findViewById(R.id.recycler_view)
+
+        identificadorPrograma = "3" // Eliminar aquesta línia de codi perquè s'està forçant el paràmetre que li ha d'arribar
+
+        identificadorPrograma?.let {
+            viewModelPrograma.getProgram(it.toInt())
+        }
+
+
+        viewModelPrograma.program.observe(viewLifecycleOwner, Observer {
             if (it.status == Status.SUCCESS) {
-                setUpData(it.data)
-                val routinesList = generateList(num_predef_routines)
-                LlistatRutines.adapter = ProgramaAdapter(routinesList)
-                LlistatRutines.layoutManager = LinearLayoutManager(this.context)
+                programa = it.data
+                setUpData()
             }
-            else Toast.makeText(this.context, "ERROR!", Toast.LENGTH_LONG).show()
+            else if (it.status == Status.ERROR)
+                Toast.makeText(activity, "ERROR!", Toast.LENGTH_LONG).show()
         })
+
         return v
     }
 
-    private fun generateList(size: Int): List<ProgramRecyclerView> {
-        val list = ArrayList<ProgramRecyclerView>()
 
-        for (i in 0 until size) {
-            val imagen = list[i].imageResource
-            val nombre = list[i].nametext
-
-            val item = ProgramRecyclerView(imagen, nombre)
-            list += item
+    /** Function onItemClick
+     *
+     *  Funció encarregada de configurar el comportament del clic en un CardViewItem del RecyclerView
+     *
+     *  @param position
+     *  @author Daniel Cárdenas
+     */
+    override fun onItemClick(position: Int) {
+        if (position < programa!!.predef_routines.size){
+            // El CardViewItem clicat és una rutina
+            val identificadorRutina = programa!!.predef_routines[position]
+            val intent = Intent(activity, ConsultarRutinaPredefinidaActivity::class.java).apply {
+                putExtra(EXTRA_MESSAGE, identificadorRutina)
+            }
+            startActivity(intent)
         }
-        return list
+    }
+
+    /** Funció setUpData
+    *
+    *  Funció que omple els camps del fragment amb les dades del programa corresponent.
+    *
+    *  @author Daniel Cárdenas.
+    */
+    private fun setUpData() {
+        nom_programa.text = programa!!.name.toString()
+        descripcio.text = programa!!.description.toString()
+        nivell_asignat.text = programa!!.difficulty.toString()
+        setmanes_asignades.text = programa!!.weeks.toString()
+        setPredefinedRoutinesContent(0)
+    }
+
+    /** Function setPredefinedRoutinesContent
+     *
+     *  Funció encarregada de generar la llista de CardViewItems amb la imatge i el nom de les rutines predefinides que formen el programa
+     *
+     *  @param  position
+     *  @author Daniel Cárdenas
+     */
+    private fun setPredefinedRoutinesContent(position: Int) {
+        if (position < programa!!.predef_routines.size){
+            val viewModelRutines by viewModels<PredefinedRoutineViewModel>()   // ViewModel de les rutines predefinides del programa
+            val identificadorRutina = programa!!.predef_routines[position]
+            viewModelRutines.getPredefinedRoutine(identificadorRutina)
+            viewModelRutines.predefinedRoutine.observe(viewLifecycleOwner, Observer {
+                if (it.status == Status.SUCCESS){
+                    val item = CardViewItem(it.data!!.image, it.data!!.name + " (Rutina)")
+                    llistat_rutines.plusAssign(item)
+                    setPredefinedRoutinesContent(position+1)
+                }
+                else if (it.status == Status.ERROR)
+                    Toast.makeText(activity, "ERROR!", Toast.LENGTH_LONG).show()
+            })
+        }
+        else setActivitiesContent()
+}
+
+    /** Function setActivitiesContent
+     *
+     *  Funció encarregada d'omplir el RecyclerView amb la llista de CardViewItems que contenen la imatge i el nom de les rutines predefinides que formen el programa
+     *
+     *  @author Daniel Cárdenas
+     */
+    private fun setActivitiesContent(){
+        recyclerView.adapter = RecyclerViewAdapter(llistat_rutines, this)
+        recyclerView.layoutManager = LinearLayoutManager(activity)
+        recyclerView.setHasFixedSize(true)
     }
 
 
-    /** Funció setUpData
-     *
-     *  Funció que omple els camps del fragment amb les dades del programa corresponent.
-     *
-     *  @param userData
-     *  @author Daniel Cárdenas.
-     */
-    fun setUpData(programData: Program?) {
-        nom_programa.text = programData?.name.toString()
-        descripcio.text = programData?.description.toString()
-        nivell_asignat.text = programData?.difficulty.toString()
-        setmanes_asignades.text = programData?.weeks.toString()
-        //llistat_rutines = programData?.predef_routines.get()
-        //num_predef_routines = programData?.predef_routines?.size!!
+    private fun setExampleContent(){
+        nom_programa.text = "Programa d'exemple"
+        descripcio.text = "Descripció del programa d'exemple"
+        nivell_asignat.text = "B"
+        setmanes_asignades.text = "6"
+
+        llistat_rutines = ArrayList<CardViewItem>()
+        for (i in 0 until 500) {
+            val imatge = when (i % 3) {
+                0 -> "http://simpleicon.com/wp-content/uploads/android.png"
+                1 -> "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/647px-Apple_logo_black.svg.png"
+                else -> "https://icons-for-free.com/iconfiles/png/512/microsoft+windows+icon-1320186681671871370.png"
+            }
+            val item = CardViewItem(imatge, "Item $i")
+            llistat_rutines.plusAssign(item)
+        }
+        recyclerView.adapter = RecyclerViewAdapter(llistat_rutines, this)
+        recyclerView.layoutManager = LinearLayoutManager(activity)
+        recyclerView.setHasFixedSize(true)
     }
 }

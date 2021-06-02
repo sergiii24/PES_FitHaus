@@ -17,7 +17,7 @@ interface ProgramDao {
      * @return the program with id = programId
      */
     @Query("SELECT * FROM program WHERE id = :programId")
-    fun getProgramById(programId: String): LiveData<Program>
+    fun getProgramById(programId: Int): LiveData<Program>
 
     /**
      * Insert a program in the database. If the program already exists, replace it.

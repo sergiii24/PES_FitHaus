@@ -17,7 +17,7 @@ class ProgramViewModel @Inject constructor (
 
     lateinit var program : LiveData<Resource<Program>>
 
-    fun getProgram(id: String) {
+    fun getProgram(id: Int) {
         program = programRepository.getProgram(id)
     }
 }

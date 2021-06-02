@@ -7,11 +7,13 @@
 
     <LinearLayout
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -24,8 +26,8 @@
             android:padding="16dp"
             android:text="Nom del Programa"
             android:textAlignment="center"
-            android:textSize="36sp"
             android:textColor="#000000"
+            android:textSize="36sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.041"
             app:layout_constraintStart_toStartOf="parent"
@@ -38,7 +40,7 @@
         <TextView
             android:id="@+id/descripcióProgramaConsultat"
             android:layout_width="match_parent"
-            android:layout_height="79dp"
+            android:layout_height="wrap_content"
             android:padding="16dp"
             android:text="Descripció"
             android:textSize="16sp"
@@ -52,28 +54,24 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_weight="0"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/NivellProgramaText"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Nivell "
-                android:textSize="16sp"
-                app:layout_constraintStart_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/SetmanesProgramaText" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/nivellProgramaConsultat"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Nivell "
-                android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/SetmanesProgramaText" />
+                android:textSize="16sp" />
 
         </LinearLayout>
 
@@ -84,12 +82,12 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_weight="0"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/SetmanesProgramaText"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Setmanes "
@@ -97,12 +95,11 @@
 
             <TextView
                 android:id="@+id/setmanesProgramaConsultat"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Setmanes "
-                android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="parent" />
+                android:textSize="16sp" />
         </LinearLayout>
 
         <Space
@@ -116,29 +113,15 @@
             android:padding="18dp"
             android:text="Llistat de Rutines:"
             android:textAlignment="center"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/NivellProgramaText" />
+            android:textSize="16sp" />
 
-        <ScrollView
-            android:layout_width="346dp"
-            android:layout_height="274dp"
-            android:padding="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.478"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/RutinesText">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/LlistatRutines"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="8dp"
-                android:clipToPadding="false"
-                android:orientation="vertical"
-                tools:listitem="@layout/programa_recyclerview"/>
-
-        </ScrollView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:padding="4dp"
+            tools:listitem="@layout/cardview_item" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

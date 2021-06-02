@@ -7,6 +7,6 @@ import retrofit2.http.Path
 
 interface ProgramService {
     @GET("/programs/{id}")
-    fun getProgram(@Path("id") programId: String): LiveData<ApiResponse<Program>>
+    fun getProgram(@Path("id") programId: Int): LiveData<ApiResponse<Program>>
 
 }

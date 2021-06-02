@@ -19,7 +19,7 @@ data class Program(
         @ColumnInfo(name = "weeks") @SerializedName("weeks")
         var weeks: Int = 0,
         @ColumnInfo(name = "predef_routines") @SerializedName("predef_routines")
-        var predef_routines: ArrayList<String>
+        var predef_routines: ArrayList<Int>
 ){
     constructor(name: String,
                 description: String,

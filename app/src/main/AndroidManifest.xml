@@ -29,7 +29,8 @@
         <activity android:name=".ModificarPerfilActivity" />
         <activity android:name=".ConsultarPerfilActivity" ></activity>
         <activity android:name=".TancarSessioActivity" />
-        <activity  android:name=".ConsultarExerciciActivity">
+        <activity  android:name=".ConsultarExerciciActivity"/>
+        <activity  android:name=".ConsultarProgramaActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
