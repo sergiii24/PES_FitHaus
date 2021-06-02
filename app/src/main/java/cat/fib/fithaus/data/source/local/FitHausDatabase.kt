@@ -14,7 +14,7 @@ import cat.fib.fithaus.data.models.Converters
  * Note that exportSchema should be true in production databases.
  */
 
-@Database(entities = [User::class, Exercise::class, Class::class], version = 1, exportSchema = true)
+@Database(entities = [User::class, Exercise::class, Class::class, Collection::class], version = 1, exportSchema = true)
 @TypeConverters(Converters::class)
 abstract class FitHausDatabase : RoomDatabase() {
 
@@ -23,5 +23,7 @@ abstract class FitHausDatabase : RoomDatabase() {
     abstract fun exerciseDao(): ExerciseDao
 
     abstract fun classDao(): ClassDao
+
+    abstract fun collectionDao(): CollectionDao
 
 }
