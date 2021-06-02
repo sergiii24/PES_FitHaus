@@ -1,8 +1,6 @@
 package cat.fib.fithaus.di
 
-import cat.fib.fithaus.data.api.ExerciseService
-import cat.fib.fithaus.data.api.ClassService
-import cat.fib.fithaus.data.api.UserService
+import cat.fib.fithaus.data.api.*
 import cat.fib.fithaus.data.source.*
 import cat.fib.fithaus.data.source.local.FitHausDatabase
 import cat.fib.fithaus.utils.AppExecutors
@@ -65,3 +63,42 @@ object ClassRepositoryModule {
         )
     }
 }
+/*
+/**
+ * The binding for AchievementRepository has the default Repository.
+ */
+@Module
+@InstallIn(SingletonComponent::class)
+object AchievementRepositoryModule {
+    @Singleton
+    @Provides
+    fun provideAchievementRepository(
+        achievementService: AchievementService,
+        database: FitHausDatabase,
+        appExecutors: AppExecutors
+    ): AchievementRepository {
+        return AchievementRepositoryDefault(
+            database.achievementDao(), achievementService, appExecutors
+        )
+    }
+}
+
+/**
+ * The binding for ShareAchievementRepository has the default Repository.
+ */
+@Module
+@InstallIn(SingletonComponent::class)
+object ShareAchievementRepositoryModule {
+    @Singleton
+    @Provides
+    fun provideShareAchievementRepository(
+        shareAchievementService: ShareAchievementService,
+        database: FitHausDatabase,
+        appExecutors: AppExecutors
+    ): ShareAchievementRepository {
+        return ShareAchievementRepositoryDefault(
+            database.shareAchievementDao(), shareAchievementService, appExecutors
+        )
+    }
+
+} */

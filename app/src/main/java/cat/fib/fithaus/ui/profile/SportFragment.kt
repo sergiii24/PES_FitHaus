@@ -12,12 +12,13 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import cat.fib.fithaus.AuthenticationProviders
-import cat.fib.fithaus.PreferencesActivity
-import cat.fib.fithaus.R
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import cat.fib.fithaus.*
 import cat.fib.fithaus.data.models.User
 import cat.fib.fithaus.utils.Status
 import cat.fib.fithaus.viewmodels.UserViewModel
+import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_preferences.*
 import kotlinx.android.synthetic.main.fragment_sport.*
@@ -30,7 +31,7 @@ import kotlinx.android.synthetic.main.fragment_sport.*
  *  @author Albert Miñana Montecino, Adrià Espinola Garcia, Daniel Cárdenas Rafael, Oriol Prat Marín
  */
 @AndroidEntryPoint
-class SportFragment : Fragment(R.layout.fragment_sport) {
+class SportFragment : Fragment(R.layout.fragment_sport), RecyclerViewAdapter.OnItemClickListener {
 
     private val viewModel by viewModels<UserViewModel>()
 
@@ -41,8 +42,11 @@ class SportFragment : Fragment(R.layout.fragment_sport) {
     lateinit var interestObjectives: TextView
     lateinit var routinesDone: TextView
     lateinit var points: TextView
-    lateinit var achievements: TextView
+    //lateinit var achievements: TextView
     lateinit var preferencesButton: Button
+
+    lateinit var recyclerView: RecyclerView
+    lateinit var llistat: ArrayList<CardViewItem>
 
     /** Function onCreate
      *
@@ -73,7 +77,9 @@ class SportFragment : Fragment(R.layout.fragment_sport) {
         interestObjectives = v.findViewById(R.id.Objectiu)
         routinesDone = v.findViewById(R.id.NumRutines)
         points = v.findViewById(R.id.Punts)
-        achievements = v.findViewById(R.id.Assoliments)
+        //achievements = v.findViewById(R.id.Assoliments)
+
+        recyclerView = v.findViewById(R.id.recycler_view)
 
         preferencesButton = v.findViewById(R.id.ActualitzarPreferencesPerfilButton)
 
@@ -89,7 +95,32 @@ class SportFragment : Fragment(R.layout.fragment_sport) {
 
         setUpButtonPreferences()
 
+        setExampleContent()
+
         return v
+    }
+
+    override fun onItemClick(position: Int) {
+        Toast.makeText(context, "Item $position clicked", Toast.LENGTH_SHORT).show()
+        val clickedItem = llistat[position]
+        clickedItem.text = "Item $position modified"
+        recyclerView.adapter?.notifyItemChanged(position)
+    }
+
+    private fun setExampleContent(){
+        llistat = ArrayList<CardViewItem>()
+        for (i in 0 until 500) {
+            val imatge = when (i % 3) {
+                0 -> "https://www.pngarea.com/pngm/572/4026438_certificate-icon-png-edexcel-outstanding-achievement-certificate-transparent.png"
+                1 -> "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/647px-Apple_logo_black.svg.png"
+                else -> "https://icons-for-free.com/iconfiles/png/512/microsoft+windows+icon-1320186681671871370.png"
+            }
+            val item = CardViewItem(imatge, "Item $i")
+            llistat.plusAssign(item)
+        }
+        recyclerView.adapter = RecyclerViewAdapter(llistat, this)
+        recyclerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+        recyclerView.setHasFixedSize(true)
     }
 
     /** Function setUpSport
@@ -108,7 +139,7 @@ class SportFragment : Fragment(R.layout.fragment_sport) {
         interestObjectives.text = objectives.joinToString()
         routinesDone.text = userData?.activitiesdone.toString()
         points.text = userData?.points.toString()
-        achievements.text = userData?.achievements.toString()
+        //achievements.text = userData?.achievements.toString()
     }
 
     /** Function getLevel
