@@ -9,10 +9,8 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
-    <string name="DadesPersonals">Dades personals</string>
+    <string name="menu_home">Inici</string>
+    <string name="DadesPersonals">Usuari</string>
     <string name="Nom">Nom</string>
     <string name="Usuari">Usuari</string>
     <string name="Contrasenya">Contrasenya</string>
@@ -20,16 +18,16 @@
     <string name="DataNaixement">Data naixement</string>
     <string name="Logo">Logo</string>
     <string name="SegüentPantalla">Següent pantalla</string>
-    <string name="DadesEsportives">Dades esportives</string>
-    <string name="NumActivitats">Nº activitats fetes</string>
+    <string name="DadesEsportives">Esport</string>
+    <string name="NumRutines">Rutines d\'entrenament realitzades</string>
     <string name="Assoliments">Assoliments</string>
     <string name="Punts">Punts</string>
     <string name="Nivell">Nivell</string>
-    <string name="Objectiu">Objectiu</string>
+    <string name="Objectiu">Objectius d\'interès</string>
     <string name="CategoriesInterès">Categories d\'interès</string>
     <string name="Anterior_Pantalla">Anterior pantalla</string>
     <string name="TancarSessio">Tancar sessió</string>
-    <string name="DadesFísiques">Dades físiques</string>
+    <string name="DadesFísiques">Físic</string>
     <string name="Pes">Pes</string>
     <string name="Alçada">Alçada</string>
     <string name="IMC">IMC</string>
@@ -60,7 +58,7 @@
     <string name="Sexe_home">Home</string>
     <string name="Sexe_Dona">Dona</string>
     <string name="Sexe_Altre">Altre</string>
-    <string name="Username">Nom usuari</string>
+    <string name="Username">Nom d\'usuari</string>
     <string name="Data_Naixement">Data de naixement</string>
     <string name="Checkbox_Contrasenya">Mostrar</string>
     <string name="BotonTitulo">CrearPerfil</string>
@@ -77,7 +75,7 @@
 
     <string name="facebook_app_id">344349210333001</string>
     <string name="fb_login_protocol_scheme">fb344349210333001</string>
-    <string name="Qüestionari_Inicial">Qüestionari inicial</string>
+    <string name="Preferencies">Preferències</string>
     <string name="Força">Força</string>
     <string name="Càrdio">Càrdio</string>
     <string name="Ioga">Ioga</string>
@@ -89,7 +87,7 @@
     <string name="Resistència">Resistència</string>
     <string name="Recuperació">Recuperació</string>
     <string name="Agilitat">Agilitat</string>
-    <string name="Enviar_Qüestionari">Enviar qüestionari</string>
+    <string name="Enviar_Preferencies">Enviar preferències</string>
     <string name="Experiència_Esportiva">Experiència esportiva</string>
     <string name="Menys_6_Mesos">Menys de 6 mesos</string>
     <string name="Entre_6_Mesos_2_Anys">Entre 6 mesos i 2 anys</string>
@@ -116,6 +114,9 @@
     <string name="text_entrenador">Entrenador</string>
     <string name="boton_Guardar">GUARDAR</string>
     <string name="Cognoms">Cognoms</string>
+    <string name="menu_profile">Perfil</string>
+    <string name="Actualitzar_Perfil">Actualitzar perfil</string>
+    <string name="Restablir_Preferencies">Restablir preferències</string>
     <string name="text_temps">Temps</string>
     <string name="text_equipament">Equipament</string>
     <string name="text_impacte">Impacte</string>

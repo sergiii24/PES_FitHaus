@@ -3,6 +3,7 @@
     package="cat.fib.fithaus">
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -31,16 +32,14 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
-        <activity android:name=".ModificarPerfilActivity" />
-        <activity android:name=".ConsultarPerfilActivity" />
-        <activity android:name=".TancarSessioActivity" />
-        <activity android:name=".ConsultarExerciciActivity" />
-        <activity android:name=".QuestionariInicialActivity" />
+        <activity  android:name=".ConsultarExerciciActivity"/>
+        <activity android:name=".PreferencesActivity"/>
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/Theme.FitHaus.NoActionBar" />
+            android:theme="@style/Theme.FitHaus.NoActionBar"></activity>
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

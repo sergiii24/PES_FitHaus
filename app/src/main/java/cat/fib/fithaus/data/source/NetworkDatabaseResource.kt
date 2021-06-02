@@ -30,12 +30,15 @@ abstract class NetworkDatabaseResource<ResultType, RequestType>
 
     private fun transmitToNetwork() {
         val apiResponse = createCall()
-
+        println("ApiResponse: " + apiResponse.toString())
         result.addSource(apiResponse) { response ->
+            println("Response: " + response.toString())
             result.removeSource(apiResponse)
             when (response) {
                 is ApiSuccessResponse -> {
                     appExecutors.diskIO().execute {
+                        println(response.toString())
+                        println(processResponse(response).toString())
                         saveCallResult(processResponse(response))
                         appExecutors.mainThread().execute {
                             // we specially request a new live data,
