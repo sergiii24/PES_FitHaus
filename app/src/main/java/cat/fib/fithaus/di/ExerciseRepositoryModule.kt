@@ -63,7 +63,7 @@ object ClassRepositoryModule {
         )
     }
 }
-/*
+
 /**
  * The binding for AchievementRepository has the default Repository.
  */
@@ -101,4 +101,4 @@ object ShareAchievementRepositoryModule {
         )
     }
 
-} */
+}

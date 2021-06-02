@@ -15,8 +15,12 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cat.fib.fithaus.*
+import cat.fib.fithaus.data.models.Achievement
+import cat.fib.fithaus.data.models.ShareAchievement
 import cat.fib.fithaus.data.models.User
 import cat.fib.fithaus.utils.Status
+import cat.fib.fithaus.viewmodels.AchievementViewModel
+import cat.fib.fithaus.viewmodels.ShareAchievementViewModel
 import cat.fib.fithaus.viewmodels.UserViewModel
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
@@ -34,6 +38,10 @@ import kotlinx.android.synthetic.main.fragment_sport.*
 class SportFragment : Fragment(R.layout.fragment_sport), RecyclerViewAdapter.OnItemClickListener {
 
     private val viewModel by viewModels<UserViewModel>()
+    private val viewModelAchievement by viewModels<AchievementViewModel>()
+    private val viewModelShareAchievement by viewModels<ShareAchievementViewModel>()
+
+     lateinit var listAchievements: ArrayList<Achievement>
 
     private var identificadorUsuari: String? = null     // Identificador de l'usuari
 
@@ -93,11 +101,23 @@ class SportFragment : Fragment(R.layout.fragment_sport), RecyclerViewAdapter.OnI
             else if (it.status == Status.ERROR) Toast.makeText(activity, "ERROR!", Toast.LENGTH_LONG).show()
         })
 
+        identificadorUsuari?.let {
+            viewModelShareAchievement.getShareAchievementById(it.toInt())
+        }
+
+        viewModelShareAchievement.shareAchievement.observe(viewLifecycleOwner, Observer {
+            if (it.status == Status.SUCCESS) setUpAchievements(it.data)
+            else if (it.status == Status.ERROR) Toast.makeText(activity, "ERROR!", Toast.LENGTH_LONG).show()
+        })
+
         setUpButtonPreferences()
 
         setExampleContent()
 
         return v
+    }
+
+    private fun setUpAchievements(data: List<ShareAchievement>?, ) {
     }
 
     override fun onItemClick(position: Int) {
