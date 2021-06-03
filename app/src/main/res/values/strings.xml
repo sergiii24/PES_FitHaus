@@ -120,7 +120,9 @@
     <string name="text_temps">Temps</string>
     <string name="text_equipament">Equipament</string>
     <string name="text_impacte">Impacte</string>
+    <string name="text_compartir">Compartir</string>
     <string name="text_filtrar">Filtrar</string>
+    <string name="text_exercicis">Exercicis</string>
     <string name="text_classes">Classes</string>
 
 </resources>

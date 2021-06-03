@@ -31,11 +31,21 @@ class ExerciseRepositoryDefault(
         }.asLiveData()
     }
 
-    override fun observeExercises(): LiveData<Resource<List<Exercise>>> {
-        TODO("Not yet implemented")
+    override fun getExercises(): LiveData<Resource<List<Exercise>>> {
+        return object : NetworkDatabaseResource<List<Exercise>, List<Exercise>>(appExecutors) {
+            override fun saveCallResult(items: List<Exercise>) {
+                for (i in items) {
+                    exerciseDao.insertExercise(i)
+                }
+            }
+
+            override fun loadFromDb() = exerciseDao.getExercises()
+
+            override fun createCall() = exerciseService.getExercises()
+        }.asLiveData()
     }
 
-    override suspend fun getExercises(): Resource<List<Exercise>> {
+    override fun observeExercises(): LiveData<Resource<List<Exercise>>> {
         TODO("Not yet implemented")
     }
 

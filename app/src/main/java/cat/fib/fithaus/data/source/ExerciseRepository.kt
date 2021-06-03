@@ -8,9 +8,9 @@ interface ExerciseRepository {
 
     fun getExercise(exerciseName: String): LiveData<Resource<Exercise>>
 
-    fun observeExercises(): LiveData<Resource<List<Exercise>>>
+    fun getExercises(): LiveData<Resource<List<Exercise>>>
 
-    suspend fun getExercises(): Resource<List<Exercise>>
+    fun observeExercises(): LiveData<Resource<List<Exercise>>>
 
     suspend fun refreshExercises()
 
