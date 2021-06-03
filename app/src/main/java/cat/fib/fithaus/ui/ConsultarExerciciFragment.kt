@@ -123,14 +123,61 @@ class ConsultarExerciciFragment : Fragment() {
         videotutorialExercici.seekTo(1)
 
         contingutDescripcioExercici.text = exerciseData?.description.toString()
-        contingutMusculTreballExercici.text = exerciseData?.muscle.toString()
+        contingutMusculTreballExercici.text = muscleName(exerciseData?.muscle.toString())
 
         Picasso.get().load(Configuration.Companion.urlServer + exerciseData?.muscleimage.toString()).into(imatgeMusculTreballExercici)
 
-        contingutEdatExercici.text = exerciseData?.age.toString()
-        contingutDificultatExercici.text = exerciseData?.difficulty.toString()
+        contingutEdatExercici.text = ageName(exerciseData?.age.toString())
+        contingutDificultatExercici.text = difficultyName(exerciseData?.difficulty.toString())
         contingutDuracioExercici.text = exerciseData?.length.toString()
-        contingutCategoriaExercici.text = exerciseData?.categories.toString()
+        contingutCategoriaExercici.text = categoriesName(exerciseData?.categories!!)
+    }
+
+    private fun categoriesName(categories: ArrayList<String>): String? {
+        var categoriesString: ArrayList<String> = ArrayList()
+        if (categories.contains("S")) categoriesString.add("Força")
+        if (categories.contains("C")) categoriesString.add("Càrdio")
+        if (categories.contains("Y")) categoriesString.add("Ioga")
+        if (categories.contains("E")) categoriesString.add("Estiraments")
+        if (categories.contains("R")) categoriesString.add("Rehabilitació")
+        if (categories.contains("P")) categoriesString.add("Pilates")
+        return categoriesString.joinToString()
+    }
+
+    private fun difficultyName(difficulty: String): String? {
+        when (difficulty) {
+            "E" -> return "Fàcil"
+            "M" -> return "Mitjana"
+            "H" -> return "Difícil"
+            else -> return null
+        }
+    }
+
+    private fun ageName(age: String): String? {
+        when (age) {
+            "K" -> return "Nen"
+            "T" -> return "Gent jove"
+            "A" -> return "Adult"
+            "E" -> return "Gent gran"
+            else -> return null
+        }
+    }
+
+    private fun muscleName(muscle: String): String? {
+        when (muscle) {
+            "Bi" -> return "Bíceps"
+            "Tr" -> return "Tríceps"
+            "Fa" -> return "Forearm"
+            "Ch" -> return "Chest"
+            "Sh" -> return "Shoulder"
+            "Do" -> return "Dorsal"
+            "Gl" -> return "Glutis"
+            "Fe" -> return "Femoral"
+            "Qu" -> return "Quàdriceps"
+            "Ca" -> return "Calves"
+            "Co" -> return "Core"
+            else -> return null
+        }
     }
 
     /** Function setExampleContent
