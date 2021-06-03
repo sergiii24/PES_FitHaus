@@ -11,7 +11,7 @@ import cat.fib.fithaus.data.models.*
  * Note that exportSchema should be true in production databases.
  */
 
-@Database(entities = [User::class, Exercise::class, Class::class, PredefinedRoutine::class, HealthData::class, Program::class], version = 1, exportSchema = true)
+@Database(entities = [User::class, Exercise::class, Class::class, PredefinedRoutine::class, HealthData::class, Program::class], version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class FitHausDatabase : RoomDatabase() {
 

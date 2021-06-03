@@ -6,7 +6,7 @@ import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
-@Entity(tableName = "program", indices = [Index(value = ["name", "difficulty"], unique = true)])
+@Entity(tableName = "program", indices = [Index(value = ["name", "level"], unique = true)])
 data class Program(
     @PrimaryKey @ColumnInfo(name = "id") @SerializedName("id")
     var id: Int = 0,
@@ -14,7 +14,7 @@ data class Program(
     var name: String = "",
     @ColumnInfo(name = "description") @SerializedName("description")
     var description: String = "",
-    @ColumnInfo(name = "difficulty") @SerializedName("difficulty")
+    @ColumnInfo(name = "level") @SerializedName("level")
     var difficulty: String = "",
     @ColumnInfo(name = "weeks") @SerializedName("weeks")
     var weeks: Int = 0,
@@ -23,7 +23,7 @@ data class Program(
 ){
     constructor(name: String,
                 description: String,
-                difficulty: String,
+                level: String,
                 weeks: Int,
                 predef_routines: ArrayList<Int>) : this(0, name, description, "B", 0, ArrayList())
 }

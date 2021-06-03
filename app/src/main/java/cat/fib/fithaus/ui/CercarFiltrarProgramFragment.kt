@@ -61,6 +61,8 @@ class CercarFiltrarProgramFragment : Fragment(), RecyclerViewNomAdapter.OnItemCl
         // Inflate the layout for this fragment
         val view: View = inflater.inflate(R.layout.fragment_cercar_filtrar_programa, container, false)
 
+        recyclerView = view.findViewById(R.id.recycler_view)
+        list = ArrayList<CardViewNom>()
 
         viewModel.getPrograms()
         viewModel.programs?.observe(viewLifecycleOwner, Observer {
@@ -100,9 +102,9 @@ class CercarFiltrarProgramFragment : Fragment(), RecyclerViewNomAdapter.OnItemCl
      *  @author Daniel Cárdenas
      */
     override fun onItemClick(position: Int) {
-        val nomIdentificadorExercici = llistatProgrames!![position].name
+        val nomIdentificadorPrograma = llistatProgrames!![position].name
         val intent = Intent(activity, ConsultarProgramaActivity::class.java).apply {
-            putExtra(EXTRA_MESSAGE, nomIdentificadorExercici)
+            putExtra(EXTRA_MESSAGE, nomIdentificadorPrograma)
         }
         startActivity(intent)
     }
