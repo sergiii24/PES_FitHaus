@@ -8,6 +8,12 @@
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_menu_home"
             android:title="@string/menu_home" />
+
+        <item
+            android:id="@+id/nav_classes"
+            android:icon="@drawable/ic_classes"
+            android:title="@string/text_classes" />
+
         <item
             android:id="@+id/nav_profile"
             android:icon="@drawable/ic_menu_profile"

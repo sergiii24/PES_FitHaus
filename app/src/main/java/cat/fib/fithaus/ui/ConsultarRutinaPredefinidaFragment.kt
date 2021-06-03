@@ -208,7 +208,7 @@ class ConsultarRutinaPredefinidaFragment : Fragment(), RecyclerViewAdapter.OnIte
             val viewModelClasses by viewModels<ClassViewModel>()    // ViewModel de les classes de la rutina predefinida
             val identificadorClasse = rutinaPredefinida!!.classes[position]
             viewModelClasses.getClass(identificadorClasse.toString())
-            viewModelClasses.classe.observe(viewLifecycleOwner, Observer {
+            viewModelClasses.classe?.observe(viewLifecycleOwner, Observer {
                 if (it.status == Status.SUCCESS){
                     val item = CardViewItem(Configuration.Companion.urlServer + it.data!!.pre, it.data!!.name + " (Classe)")
                     list.plusAssign(item)

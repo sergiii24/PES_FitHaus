@@ -27,4 +27,18 @@ class ClassRepositoryDefault(
         }.asLiveData()
     }
 
+    override fun getClasses(): LiveData<Resource<List<Class>>> {
+        return object : NetworkDatabaseResource<List<Class>, List<Class>>(appExecutors) {
+            override fun saveCallResult(items: List<Class>) {
+                for (i in items) {
+                    classDao.insertClass(i)
+                }
+            }
+
+            override fun loadFromDb() = classDao.getClasses()
+
+            override fun createCall() = classService.getClasses()
+        }.asLiveData()
+    }
+
 }

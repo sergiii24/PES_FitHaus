@@ -6,4 +6,6 @@ import cat.fib.fithaus.utils.Resource
 
 interface ClassRepository {
     fun getClass(className: String): LiveData<Resource<Class>>
+
+    fun getClasses(): LiveData<Resource<List<Class>>>
 }
