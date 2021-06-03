@@ -14,6 +14,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cat.fib.fithaus.*
+import cat.fib.fithaus.data.api.Configuration
 import cat.fib.fithaus.data.models.PredefinedRoutine
 import cat.fib.fithaus.utils.Status
 import cat.fib.fithaus.viewmodels.ClassViewModel
@@ -52,7 +53,7 @@ class ConsultarRutinaPredefinidaFragment : Fragment(), RecyclerViewAdapter.OnIte
     lateinit var contingutImpacteRutinaPredefinida: TextView        // TextView amb l'impacte de la rutina predefinida
 
     lateinit var recyclerView: RecyclerView                         // RecyclerView de CardViewItems que contenen la imatge i el nom de les activitats (exercicis i classes) que formen la rutina predefinida
-    lateinit var list: ArrayList<CardViewItem>                      // Llistat de CardViewItems que contenen la imatge i el nom de les activitats (exercicis i classes) que formen la rutina predefinida
+    lateinit var list: ArrayList<CardViewItem>                     // Llistat de CardViewItems que contenen la imatge i el nom de les activitats (exercicis i classes) que formen la rutina predefinida
 
     /** Function onCreate
      *
@@ -92,8 +93,9 @@ class ConsultarRutinaPredefinidaFragment : Fragment(), RecyclerViewAdapter.OnIte
 
         recyclerView = view.findViewById(R.id.recycler_view)
 
+        list = ArrayList<CardViewItem>()
 
-        identificadorRutinaPredefinida = "3" // Eliminar aquesta línia de codi perquè s'està forçant el paràmetre que li ha d'arribar
+        identificadorRutinaPredefinida = "1" // Eliminar aquesta línia de codi perquè s'està forçant el paràmetre que li ha d'arribar
 
         identificadorRutinaPredefinida?.let {
             viewModelRutinaPredefinida.getPredefinedRoutine(it.toInt())
@@ -101,10 +103,12 @@ class ConsultarRutinaPredefinidaFragment : Fragment(), RecyclerViewAdapter.OnIte
 
         viewModelRutinaPredefinida.predefinedRoutine.observe(viewLifecycleOwner, Observer {
             if (it.status == Status.SUCCESS) {
+                println("Entra Success")
                 rutinaPredefinida = it.data
                 setPredefinedRoutineContent()
             }
             else if (it.status == Status.ERROR)
+                println("Entra Error")
                 Toast.makeText(activity, "ERROR!", Toast.LENGTH_LONG).show()
         })
 
@@ -152,6 +156,7 @@ class ConsultarRutinaPredefinidaFragment : Fragment(), RecyclerViewAdapter.OnIte
      *  @author Albert Miñana Montecino
      */
     private fun setPredefinedRoutineContent(){
+        println("Entra en set")
         Picasso.get().load(rutinaPredefinida!!.image).into(imatgeRutinaPredefinida)
         nomRutinaPredefinida.text = rutinaPredefinida!!.name
         contingutDescripcioRutinaPredefinida.text = rutinaPredefinida!!.description
@@ -180,7 +185,7 @@ class ConsultarRutinaPredefinidaFragment : Fragment(), RecyclerViewAdapter.OnIte
             viewModelExercicis.getExercise(identificadorExercici.toString())
             viewModelExercicis.exercise.observe(viewLifecycleOwner, Observer {
                 if (it.status == Status.SUCCESS){
-                    val item = CardViewItem(it.data!!.pre, it.data!!.name + " (Exercici)")
+                    val item = CardViewItem(Configuration.Companion.urlServer + it.data!!.pre, it.data!!.name + " (Exercici)")
                     list.plusAssign(item)
                     setExercisesContent(position+1)
                 }
@@ -205,7 +210,7 @@ class ConsultarRutinaPredefinidaFragment : Fragment(), RecyclerViewAdapter.OnIte
             viewModelClasses.getClass(identificadorClasse.toString())
             viewModelClasses.classe.observe(viewLifecycleOwner, Observer {
                 if (it.status == Status.SUCCESS){
-                    val item = CardViewItem(it.data!!.pre, it.data!!.name + " (Classe)")
+                    val item = CardViewItem(Configuration.Companion.urlServer + it.data!!.pre, it.data!!.name + " (Classe)")
                     list.plusAssign(item)
                     setClassesContent(position+1)
                 }

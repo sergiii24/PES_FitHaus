@@ -44,6 +44,10 @@ class UserViewModel @Inject constructor(
         user = userRepository.login(userEmail, userPassword)
     }
 
+    fun login(userUid: String) {
+        user = userRepository.login(userUid)
+    }
+
     fun getUserByEmail(email: String) {
         user = userRepository.getUserByEmail(email)
     }
