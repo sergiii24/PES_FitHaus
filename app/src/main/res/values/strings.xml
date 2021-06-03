@@ -125,5 +125,8 @@
     <string name="text_exercicis">Exercicis</string>
     <string name="text_classes">Classes</string>
     <string name="text_predefinedroutines">Rutines predefinides</string>
+    <string name="text_previous">Anterior</string>
+    <string name="text_next">Següent</string>
+    <string name="text_cancel">Cancel·lar</string>
 
 </resources>

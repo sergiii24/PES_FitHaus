@@ -344,7 +344,8 @@ class AuthenticationProviders : AppCompatActivity() {
     fun setupSignUpButton() {
         signUpButton.setOnClickListener {
             //val intent = Intent(this, CrearPerfilActivity::class.java)
-            val intent = Intent(this, ConsultarRutinaPredefinidaActivity::class.java)
+            //val intent = Intent(this, ConsultarRutinaPredefinidaActivity::class.java)
+            val intent = Intent(this, RealitzarRutinaPredefinidaActivity::class.java)
             startActivity(intent)
         }
     }
