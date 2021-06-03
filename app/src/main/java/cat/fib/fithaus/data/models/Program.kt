@@ -25,5 +25,5 @@ data class Program(
                 description: String,
                 difficulty: String,
                 weeks: Int,
-                predef_routines: ArrayList<String>) : this(0, name, description, "B", 0, ArrayList())
+                predef_routines: ArrayList<Int>) : this(0, name, description, "B", 0, ArrayList())
 }
