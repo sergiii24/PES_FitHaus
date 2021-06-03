@@ -22,15 +22,15 @@ data class PredefinedRoutine(
     @ColumnInfo(name = "level") @SerializedName("level")
     var level: String,
     @ColumnInfo(name = "equipment") @SerializedName("equipment")
-    var equipment: ArrayList<String>,
+    var equipment: String,
     @ColumnInfo(name = "objective") @SerializedName("objective")
     var objective: String,
     @ColumnInfo(name = "impact") @SerializedName("impact")
     var impact: String,
     @ColumnInfo(name = "image") @SerializedName("image")
-    var image: String,
+    var image: String?,
     @ColumnInfo(name = "exercises") @SerializedName("exercises")
-    var exercises: ArrayList<Int>,
+    var exercises: ArrayList<String>,
     @ColumnInfo(name = "classes") @SerializedName("classes")
-    var classes: ArrayList<Int>
+    var classes: ArrayList<String>
 )

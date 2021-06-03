@@ -52,7 +52,11 @@ data class User(
         @ColumnInfo(name = "gender") @SerializedName("gender")
         var gender: String? = "",
         @ColumnInfo(name = "birthdate") @SerializedName("birthdate")
-        var birthdate: String? = ""
+        var birthdate: String? = "",
+        @ColumnInfo(name = "uid") @SerializedName("uid")
+        var uid: String?,
+        @ColumnInfo(name = "provider") @SerializedName("provider")
+        var provider: String?
 ){
         constructor(firstname: String,
                     lastname: String,
@@ -60,10 +64,12 @@ data class User(
                     password: String,
                     email: String,
                     gender: String,
-                    birthdate: String) : this(0, firstname, lastname, username, null, password, null, null, null, null, null, null, null, null, null, null, email, gender, birthdate)
+                    birthdate: String) : this(0, firstname, lastname, username, null, password, null, null, null, null, null, null, null, null, null, null, email, gender, birthdate, null, null)
 
         constructor(firstname: String,
                     lastname: String,
                     username: String,
-                    email: String) : this(0, firstname, lastname, username, "None", "None123#", 0, 0, "B", arrayListOf<String>("S"), arrayListOf<String>("S"), 1.0f, 1.0f, 0.0f, 0.0f, "0", email, "X", "2000-01-01")
+                    email: String,
+                    uid: String,
+                    provider: String) : this(0, firstname, lastname, username, null, null, null, null, null, null, null, null, null, null, null, null, email, null, null, uid, provider)
 }

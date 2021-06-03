@@ -204,10 +204,9 @@ class AuthenticationProviders : AppCompatActivity() {
                                 val fullName = it.result?.user?.displayName
                                 val email = it.result?.user?.email
                                 val uid = it.result?.user?.uid
-                                viewModel.getUserByEmail(email.toString())
+                                viewModel.login(uid.toString())
                                 viewModel.user.observe(this@AuthenticationProviders, Observer {
                                     if (it.status == Status.SUCCESS) {
-                                        println("Entra en el GET")
                                         //guarda id
                                         val prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit()
                                         prefs.putString("userId", it.data?.id.toString())
@@ -217,14 +216,13 @@ class AuthenticationProviders : AppCompatActivity() {
                                         prefs.apply()
                                         showHome()
                                     } else if (it.status == Status.ERROR) {
-                                        println("Entra en el POST")
                                         val index = fullName?.indexOf(" ", 0, false)
                                         val firstName = index?.let { it -> fullName?.substring(0, it) }
                                         val lastName = index?.plus(1)?.let { it -> fullName?.substring(it) }
                                         val indexEmail = email?.indexOf("@", 0, false)
                                         val emailName = indexEmail?.let { it -> email?.substring(0, it) }
                                         val username = generateUsername(emailName)
-                                        val user = User(firstName.toString(), lastName.toString(), username, email.toString())
+                                        val user = User(firstName.toString(), lastName.toString(), username, email.toString(), uid.toString(), "Facebook")
                                         viewModel.createUser(user)
                                         viewModel.user.observe(this@AuthenticationProviders, Observer {
                                             if (it.status == Status.SUCCESS) {
@@ -288,7 +286,7 @@ class AuthenticationProviders : AppCompatActivity() {
                                 val fullName = it.result?.user?.displayName
                                 val email = it.result?.user?.email
                                 val uid = it.result?.user?.uid
-                                viewModel.getUserByEmail(email.toString())
+                                viewModel.login(uid.toString())
                                 viewModel.user.observe(this, Observer {
                                     if (it.status == Status.SUCCESS) {
                                         //guarda id
@@ -306,7 +304,7 @@ class AuthenticationProviders : AppCompatActivity() {
                                         val indexEmail = email?.indexOf("@", 0, false)
                                         val emailName = indexEmail?.let { it -> email?.substring(0, it) }
                                         val username = generateUsername(emailName)
-                                        val user = User(firstName.toString(), lastName.toString(), username, email.toString())
+                                        val user = User(firstName.toString(), lastName.toString(), username, email.toString(), uid.toString(), "Google")
                                         viewModel.createUser(user)
                                         viewModel.user.observe(this, Observer {
                                             if (it.status == Status.SUCCESS) {

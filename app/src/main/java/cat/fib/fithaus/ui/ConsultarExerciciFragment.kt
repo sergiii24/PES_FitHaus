@@ -87,7 +87,7 @@ class ConsultarExerciciFragment : Fragment() {
             viewModel.getExercise(it)
         }
 
-        viewModel.exercise.observe(viewLifecycleOwner, Observer {
+        viewModel.exercise?.observe(viewLifecycleOwner, Observer {
             if (it.status == Status.SUCCESS)
                 setContent(it.data)
             else if (it.status == Status.ERROR)

@@ -178,7 +178,7 @@ class ConsultarRutinaPredefinidaFragment : Fragment(), RecyclerViewAdapter.OnIte
             val viewModelExercicis by viewModels<ExerciseViewModel>()   // ViewModel dels exercicis de la rutina predefinida
             val identificadorExercici = rutinaPredefinida!!.exercises[position]
             viewModelExercicis.getExercise(identificadorExercici.toString())
-            viewModelExercicis.exercise.observe(viewLifecycleOwner, Observer {
+            viewModelExercicis.exercise?.observe(viewLifecycleOwner, Observer {
                 if (it.status == Status.SUCCESS){
                     val item = CardViewItem(it.data!!.pre, it.data!!.name + " (Exercici)")
                     list.plusAssign(item)
