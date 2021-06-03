@@ -9,10 +9,16 @@ interface ClassService {
 
     /**
      * @GET declares an HTTP GET request
-     * @Path("id") annotation on the classId parameter marks it as a
-     * replacement for the {id} placeholder in the @GET path
+     * @Path("name") annotation on the className parameter marks it as a
+     * replacement for the {name} placeholder in the @GET path
      */
-    @GET("/classes/{id}")
-    fun getClass(@Path("id") classId: String): LiveData<ApiResponse<Class>>
+    @GET("/classes/{name}")
+    fun getClass(@Path("name") className: String): LiveData<ApiResponse<Class>>
+
+    /**
+     * @GET declares an HTTP GET request
+     */
+    @GET("/classes/")
+    fun getClasses(): LiveData<ApiResponse<List<Class>>>
 
 }

@@ -137,6 +137,7 @@ class PreferencesActivity : AppCompatActivity() {
             viewModel.user.observe(this, Observer {
                 if (it.status == Status.SUCCESS) {
                     val intent = Intent(this, MainActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
                     startActivity(intent)
                 } else if (it.status == Status.ERROR) Toast.makeText(this, "ERROR!", Toast.LENGTH_LONG).show()
             })

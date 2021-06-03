@@ -7,4 +7,6 @@ import cat.fib.fithaus.utils.Resource
 interface CollectionRepository {
 
     fun getCollection(collectionName: String): LiveData<Resource<Collection>>
+
+    fun getCollections(): LiveData<Resource<List<Collection>>>
 }

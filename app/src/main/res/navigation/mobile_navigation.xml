@@ -15,4 +15,27 @@
         android:id="@+id/nav_profile"
         android:name="cat.fib.fithaus.ui.profile.ProfileFragment"
         android:label="@string/menu_profile" />
+
+    <fragment
+        android:id="@+id/nav_programs"
+        android:name="cat.fib.fithaus.ui.CercarFiltrarProgramFragment"
+        android:label="CercarFiltrarProgramFragment" />
+    <fragment
+        android:id="@+id/nav_predefinedroutine"
+        android:name="cat.fib.fithaus.ui.CercarFiltrarRutinaPredefinidaFragment"
+        android:label="CercarFiltrarRutinaPredefinidaFragment" />
+    <fragment
+        android:id="@+id/nav_exercises"
+        android:name="cat.fib.fithaus.ui.CercarFiltrarExerciciFragment"
+        android:label="CercarFiltrarExerciciFragment" />
+    <fragment
+        android:id="@+id/nav_classes"
+        android:name="cat.fib.fithaus.viewmodels.CercarFiltrarClasseFragment"
+        android:label="CercarFiltrarClasseFragment" />
+
+    <fragment
+        android:id="@+id/nav_collections"
+        android:name="cat.fib.fithaus.ui.CercarFiltrarCollectionFragment"
+        android:label="CercarFiltrarCollectionFragment" />
+
 </navigation>

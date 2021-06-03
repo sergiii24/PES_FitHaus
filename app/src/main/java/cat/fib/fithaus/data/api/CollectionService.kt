@@ -7,6 +7,12 @@ import retrofit2.http.Path
 
 interface CollectionService {
 
-    @GET("/collections/{name}")
+    @GET("/colections/{name}")
     fun getCollection(@Path("name") collectionName: String): LiveData<ApiResponse<Collection>>
+
+    /**
+     * @GET declares an HTTP GET request
+     */
+    @GET ("/colections/")
+    fun getCollections(): LiveData<ApiResponse<List<Collection>>>
 }

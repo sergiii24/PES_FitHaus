@@ -14,11 +14,17 @@ import java.io.IOException
 interface ExerciseService {
      /**
          * @GET declares an HTTP GET request
-         * @Path("id") annotation on the userId parameter marks it as a
-         * replacement for the {id} placeholder in the @GET path
+         * @Path("name") annotation on the exerciseName parameter marks it as a
+         * replacement for the {name} placeholder in the @GET path
          */
-        @GET("/exercises/{id}")
-        fun getExercise(@Path("id") exerciseId: String): LiveData<ApiResponse<Exercise>>
+        @GET("/exercises/{name}")
+        fun getExercise(@Path("name") exerciseName: String): LiveData<ApiResponse<Exercise>>
+
+        /**
+         * @GET declares an HTTP GET request
+         */
+        @GET("/exercises/")
+        fun getExercises(): LiveData<ApiResponse<List<Exercise>>>
 
 }
 

@@ -1,6 +1,8 @@
 package cat.fib.fithaus.di
 
-import cat.fib.fithaus.data.api.*
+import cat.fib.fithaus.data.api.ExerciseService
+import cat.fib.fithaus.data.api.ClassService
+import cat.fib.fithaus.data.api.UserService
 import cat.fib.fithaus.data.source.*
 import cat.fib.fithaus.data.source.local.FitHausDatabase
 import cat.fib.fithaus.utils.AppExecutors
@@ -64,6 +66,7 @@ object ClassRepositoryModule {
     }
 }
 
+
 /**
  * The binding for PredefinedRoutineRepository has the default Repository.
  */
@@ -83,6 +86,43 @@ object PredefinedRoutineRepositoryModule {
     }
 }
 
+/**
+ * The binding for HealthDataRepository has the default Repository.
+ */
+@Module
+@InstallIn(SingletonComponent::class)
+object HealthDataRepositoryModule {
+    @Singleton
+    @Provides
+    fun provideHealthDataRepository(
+        healthDataService: HealthDataService,
+        database: FitHausDatabase,
+        appExecutors: AppExecutors
+    ): HealthDataRepository {
+        return HealthDataRepositoryDefault(
+            database.healthDataDao(), healthDataService, appExecutors
+        )
+    }
+}
+
+/**
+ * The binding for ProgramRepository has the default Repository.
+ */
+@Module
+@InstallIn(SingletonComponent::class)
+object ProgramRepositoryModule {
+    @Singleton
+    @Provides
+    fun provideProgramRepository(
+        programService: ProgramService,
+        database: FitHausDatabase,
+        appExecutors: AppExecutors
+    ): ProgramRepository {
+        return ProgramRepositoryDefault(
+            database.programDao(), programService, appExecutors
+        )
+    }
+}
 
 /**
  * The binding for Collection has the default Repository.

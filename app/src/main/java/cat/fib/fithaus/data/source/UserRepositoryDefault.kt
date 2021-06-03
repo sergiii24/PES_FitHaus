@@ -32,6 +32,20 @@ class UserRepositoryDefault(
         }.asLiveData()
     }
 
+    override fun login(userUid: String): LiveData<Resource<User>> {
+        return object : NetworkDatabaseResource<User, User>(appExecutors) {
+
+            override fun createCall() = userService.login(GoogleFacebookInformation(userUid))
+
+            override fun saveCallResult(item: User) {
+                userDao.insertUser(item)
+            }
+
+            override fun loadFromDb() = userDao.getUserByUid(userUid)
+
+        }.asLiveData()
+    }
+
     override fun getUserByEmail(email: String): LiveData<Resource<User>> {
         return object : NetworkDatabaseResource<User, User>(appExecutors) {
 

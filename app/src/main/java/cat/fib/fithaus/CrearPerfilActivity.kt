@@ -106,6 +106,8 @@ class CrearPerfilActivity : AppCompatActivity() {
                         val prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit()
                         prefs.putString("userId", it.data?.id.toString())
                         prefs.putString("provider", "FitHaus")
+                        prefs.putString("name", it.data?.firstname.toString() + " " + it.data?.lastname.toString())
+                        prefs.putString("email", it.data?.email.toString())
                         prefs.apply()
                         showSurvey()
                     } else if (it.status == Status.ERROR) {

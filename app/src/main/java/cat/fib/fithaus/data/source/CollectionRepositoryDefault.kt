@@ -28,4 +28,17 @@ class CollectionRepositoryDefault (
         }.asLiveData()
     }
 
+    override fun getCollections(): LiveData<Resource<List<Collection>>> {
+        return object : NetworkDatabaseResource<List<Collection>, List<Collection>>(appExecutors) {
+            override fun saveCallResult(items: List<Collection>) {
+                for (i in items) {
+                    collectionDao.insertCollection(i)
+                }
+            }
+
+            override fun loadFromDb() = collectionDao.getCollections()
+
+            override fun createCall() = collectionService.getCollections()
+        }.asLiveData()
+    }
 }

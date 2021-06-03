@@ -16,9 +16,14 @@ class CollectionViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle
 ): ViewModel() {
 
-    lateinit var collection: LiveData<Resource<Collection>>
+    var collection : LiveData<Resource<Collection>>?= null
+    var collections: LiveData<Resource<List<Collection>>>? = null
 
     fun getCollection(collectionName: String) {
         collection = collectionRepository.getCollection(collectionName)
+    }
+
+    fun getCollections() {
+        collections = collectionRepository.getCollections()
     }
 }

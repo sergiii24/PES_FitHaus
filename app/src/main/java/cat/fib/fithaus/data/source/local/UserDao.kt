@@ -32,6 +32,15 @@ interface UserDao {
     @Query("SELECT * FROM user WHERE email = :userEmail")
     fun getUserByEmail(userEmail: String): LiveData<User>
 
+    /**
+     * Select a user by userUid.
+     *
+     * @param userUid the uid of the user.
+     * @return the user with uid.
+     */
+    @Query("SELECT * FROM user WHERE uid = :userUid")
+    fun getUserByUid(userUid: String): LiveData<User>
+
 
     @Query("SELECT * FROM user WHERE username = :username")
     fun getUserByUsername(username: String): LiveData<User>

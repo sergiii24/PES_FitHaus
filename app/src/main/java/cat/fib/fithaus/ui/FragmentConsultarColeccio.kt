@@ -20,7 +20,6 @@ import cat.fib.fithaus.data.models.Collection
 import cat.fib.fithaus.utils.Status
 import cat.fib.fithaus.viewmodels.CollectionViewModel
 import cat.fib.fithaus.viewmodels.PredefinedRoutineViewModel
-import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_consultar_coleccio.*
 
@@ -84,7 +83,7 @@ class FragmentConsultarColeccio : Fragment(), RecyclerViewAdapter.OnItemClickLis
             viewModelCollection.getCollection(it)
         }
 
-        viewModelCollection.collection.observe(viewLifecycleOwner, Observer {
+        viewModelCollection.collection?.observe(viewLifecycleOwner, Observer {
             if (it.status == Status.SUCCESS) {
                 coleccio = it.data
                 setUpData()
@@ -128,7 +127,7 @@ class FragmentConsultarColeccio : Fragment(), RecyclerViewAdapter.OnItemClickLis
         setPredefinedRoutinesContent(0)
     }
 
-    
+
     /** Function setPredefinedRoutinesContent
      *
      *  Funció encarregada de generar la llista de CardViewItems amb la imatge i el nom de les rutines predefinides que formen la col·lecció
@@ -141,9 +140,9 @@ class FragmentConsultarColeccio : Fragment(), RecyclerViewAdapter.OnItemClickLis
             val viewModelRutines by viewModels<PredefinedRoutineViewModel>()   // ViewModel de les rutines predefinides de la col·lecció
             val identificadorRutina = coleccio!!.predef_routines[position]
             viewModelRutines.getPredefinedRoutine(identificadorRutina)
-            viewModelRutines.predefinedRoutine.observe(viewLifecycleOwner, Observer {
+            viewModelRutines.predefinedRoutine?.observe(viewLifecycleOwner, Observer {
                 if (it.status == Status.SUCCESS){
-                    val item = CardViewItem(it.data!!.image, it.data!!.name + " (Rutina)")
+                    val item = CardViewItem(it.data!!.image.toString(), it.data!!.name + " (Rutina)")
                     llistat_rutines.plusAssign(item)
                     setPredefinedRoutinesContent(position+1)
                 }

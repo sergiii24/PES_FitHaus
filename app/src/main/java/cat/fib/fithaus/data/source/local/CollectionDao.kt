@@ -30,4 +30,14 @@ interface CollectionDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertCollection(collection: Collection)
 
+
+    /**
+     * Select all collections from the collections table.
+     *
+     * @return all collections.
+     */
+    @Query("SELECT * FROM collections")
+    fun getCollections(): LiveData<List<Collection>>
+
+
 }

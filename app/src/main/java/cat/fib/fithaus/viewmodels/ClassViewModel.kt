@@ -15,10 +15,16 @@ class ClassViewModel @Inject constructor(
         private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    lateinit var classe : LiveData<Resource<Class>>
+    var classe : LiveData<Resource<Class>>?= null
+    var classes: LiveData<Resource<List<Class>>>? = null
 
-    fun getClass(id: String) {
-        classe = classRepository.getClass(id)
+    fun getClass(name: String) {
+        classe = classRepository.getClass(name)
     }
+
+    fun getClasses(){
+        classes = classRepository.getClasses()
+    }
+
 
 }
