@@ -89,7 +89,7 @@ class ConsultarClasseFragment : Fragment() {
         viewModel.classe.observe(viewLifecycleOwner, Observer {
             if (it.status == Status.SUCCESS)
                 setContent(it.data)
-            else
+            else if (it.status == Status.ERROR)
                 Toast.makeText(activity, "ERROR!", Toast.LENGTH_LONG).show()
         })
 

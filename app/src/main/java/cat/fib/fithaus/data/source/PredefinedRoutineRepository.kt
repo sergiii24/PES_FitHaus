@@ -7,4 +7,6 @@ import cat.fib.fithaus.utils.Resource
 interface PredefinedRoutineRepository {
 
     fun getPredefinedRoutine(predefinedRoutineId: Int): LiveData<Resource<PredefinedRoutine>>
+
+    fun getPredefinedRoutines(): LiveData<Resource<List<PredefinedRoutine>>>
 }

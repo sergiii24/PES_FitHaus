@@ -8,6 +8,12 @@
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_menu_home"
             android:title="@string/menu_home" />
+
+        <item
+            android:id="@+id/nav_predefinedroutine"
+            android:icon="@drawable/ic_predefinedroutines"
+            android:title="@string/text_predefinedroutines" />
+
         <item
             android:id="@+id/nav_profile"
             android:icon="@drawable/ic_menu_profile"

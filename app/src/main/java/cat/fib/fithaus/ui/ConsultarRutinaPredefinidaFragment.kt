@@ -101,7 +101,7 @@ class ConsultarRutinaPredefinidaFragment : Fragment(), RecyclerViewAdapter.OnIte
             viewModelRutinaPredefinida.getPredefinedRoutine(it.toInt())
         }
 
-        viewModelRutinaPredefinida.predefinedRoutine.observe(viewLifecycleOwner, Observer {
+        viewModelRutinaPredefinida.predefinedRoutine?.observe(viewLifecycleOwner, Observer {
             if (it.status == Status.SUCCESS) {
                 println("Entra Success")
                 rutinaPredefinida = it.data

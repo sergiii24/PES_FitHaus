@@ -15,4 +15,8 @@
         android:id="@+id/nav_profile"
         android:name="cat.fib.fithaus.ui.profile.ProfileFragment"
         android:label="@string/menu_profile" />
+    <fragment
+        android:id="@+id/nav_predefinedroutine"
+        android:name="cat.fib.fithaus.ui.CercarFiltrarRutinaPredefinidaFragment"
+        android:label="CercarFiltrarRutinaPredefinidaFragment" />
 </navigation>
