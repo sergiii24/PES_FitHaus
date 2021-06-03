@@ -3,7 +3,6 @@
     package="cat.fib.fithaus">
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -15,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FitHaus">
-        <activity android:name=".ConsultarRutinaPredefinidaActivity"></activity>
+        <activity android:name=".RealitzarRutinaPredefinidaActivity"></activity>
+        <activity android:name=".ConsultarRutinaPredefinidaActivity" />
         <activity android:name=".CrearPerfilActivity">
             android:parentActivityName=".AuthenticationProviders">
             <!-- The meta-data tag is required if you support API level 15 and lower -->
@@ -32,14 +32,13 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-        <activity  android:name=".ConsultarExerciciActivity"/>
-        <activity android:name=".PreferencesActivity"/>
+        <activity android:name=".ConsultarExerciciActivity" />
+        <activity android:name=".PreferencesActivity" />
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/Theme.FitHaus.NoActionBar"></activity>
+            android:theme="@style/Theme.FitHaus.NoActionBar" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

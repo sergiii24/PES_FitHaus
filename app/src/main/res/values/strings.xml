@@ -126,5 +126,9 @@
     <string name="text_classes">Classes</string>
     <string name="text_predefinedroutines">Rutines predefinides</string>
     <string name="Collections">Col·leccions</string>
+    <string name="text_previous">Anterior</string>
+    <string name="text_next">Següent</string>
+    <string name="text_cancel">Cancel·lar</string>
+    <string name="Realitzar">Realitzar</string>
 
 </resources>
