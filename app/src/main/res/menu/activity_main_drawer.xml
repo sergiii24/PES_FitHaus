@@ -14,6 +14,18 @@
             android:icon="@drawable/ic_predefinedroutines"
             android:title="@string/text_predefinedroutines" />
 
+
+        <item
+            android:id="@+id/nav_exercises"
+            android:icon="@drawable/ic_exercises"
+            android:title="@string/text_exercicis" />
+
+
+        <item
+            android:id="@+id/nav_classes"
+            android:icon="@drawable/ic_classes"
+            android:title="@string/text_classes" />
+
         <item
             android:id="@+id/nav_profile"
             android:icon="@drawable/ic_menu_profile"

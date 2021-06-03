@@ -86,7 +86,7 @@ class ConsultarClasseFragment : Fragment() {
             viewModel.getClass(it)
         }
 
-        viewModel.classe.observe(viewLifecycleOwner, Observer {
+        viewModel.classe?.observe(viewLifecycleOwner, Observer {
             if (it.status == Status.SUCCESS)
                 setContent(it.data)
             else if (it.status == Status.ERROR)

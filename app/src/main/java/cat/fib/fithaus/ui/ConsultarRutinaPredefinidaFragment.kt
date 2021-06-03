@@ -1,11 +1,13 @@
 package cat.fib.fithaus.ui
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -22,6 +24,7 @@ import cat.fib.fithaus.viewmodels.ExerciseViewModel
 import cat.fib.fithaus.viewmodels.PredefinedRoutineViewModel
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_consultar_rutina_predefinida.*
 
 // Paràmetres d'inicialització del Fragment
 private const val EXTRA_MESSAGE = "cat.fib.fithaus.MESSAGE"
@@ -54,6 +57,8 @@ class ConsultarRutinaPredefinidaFragment : Fragment(), RecyclerViewAdapter.OnIte
 
     lateinit var recyclerView: RecyclerView                         // RecyclerView de CardViewItems que contenen la imatge i el nom de les activitats (exercicis i classes) que formen la rutina predefinida
     lateinit var list: ArrayList<CardViewItem>                     // Llistat de CardViewItems que contenen la imatge i el nom de les activitats (exercicis i classes) que formen la rutina predefinida
+
+    lateinit var botoCompartir: Button                              // Button per compartir la rutina predefinida
 
     /** Function onCreate
      *
@@ -93,6 +98,8 @@ class ConsultarRutinaPredefinidaFragment : Fragment(), RecyclerViewAdapter.OnIte
 
         recyclerView = view.findViewById(R.id.recycler_view)
 
+        botoCompartir = view.findViewById(R.id.botoCompartir)
+
         list = ArrayList<CardViewItem>()
 
         identificadorRutinaPredefinida = "1" // Eliminar aquesta línia de codi perquè s'està forçant el paràmetre que li ha d'arribar
@@ -103,16 +110,16 @@ class ConsultarRutinaPredefinidaFragment : Fragment(), RecyclerViewAdapter.OnIte
 
         viewModelRutinaPredefinida.predefinedRoutine?.observe(viewLifecycleOwner, Observer {
             if (it.status == Status.SUCCESS) {
-                println("Entra Success")
                 rutinaPredefinida = it.data
                 setPredefinedRoutineContent()
             }
             else if (it.status == Status.ERROR)
-                println("Entra Error")
                 Toast.makeText(activity, "ERROR!", Toast.LENGTH_LONG).show()
         })
 
         //setExampleContent()
+
+        setUpShareButton()
 
         return view
     }
@@ -156,7 +163,6 @@ class ConsultarRutinaPredefinidaFragment : Fragment(), RecyclerViewAdapter.OnIte
      *  @author Albert Miñana Montecino
      */
     private fun setPredefinedRoutineContent(){
-        println("Entra en set")
         Picasso.get().load(rutinaPredefinida!!.image).into(imatgeRutinaPredefinida)
         nomRutinaPredefinida.text = rutinaPredefinida!!.name
         contingutDescripcioRutinaPredefinida.text = rutinaPredefinida!!.description
@@ -183,7 +189,7 @@ class ConsultarRutinaPredefinidaFragment : Fragment(), RecyclerViewAdapter.OnIte
             val viewModelExercicis by viewModels<ExerciseViewModel>()   // ViewModel dels exercicis de la rutina predefinida
             val identificadorExercici = rutinaPredefinida!!.exercises[position]
             viewModelExercicis.getExercise(identificadorExercici.toString())
-            viewModelExercicis.exercise.observe(viewLifecycleOwner, Observer {
+            viewModelExercicis.exercise?.observe(viewLifecycleOwner, Observer {
                 if (it.status == Status.SUCCESS){
                     val item = CardViewItem(Configuration.Companion.urlServer + it.data!!.pre, it.data!!.name + " (Exercici)")
                     list.plusAssign(item)
@@ -208,7 +214,7 @@ class ConsultarRutinaPredefinidaFragment : Fragment(), RecyclerViewAdapter.OnIte
             val viewModelClasses by viewModels<ClassViewModel>()    // ViewModel de les classes de la rutina predefinida
             val identificadorClasse = rutinaPredefinida!!.classes[position]
             viewModelClasses.getClass(identificadorClasse.toString())
-            viewModelClasses.classe.observe(viewLifecycleOwner, Observer {
+            viewModelClasses.classe?.observe(viewLifecycleOwner, Observer {
                 if (it.status == Status.SUCCESS){
                     val item = CardViewItem(Configuration.Companion.urlServer + it.data!!.pre, it.data!!.name + " (Classe)")
                     list.plusAssign(item)
@@ -264,5 +270,17 @@ class ConsultarRutinaPredefinidaFragment : Fragment(), RecyclerViewAdapter.OnIte
         recyclerView.adapter = RecyclerViewAdapter(list, this)
         recyclerView.layoutManager = LinearLayoutManager(activity)
         recyclerView.setHasFixedSize(true)
+    }
+
+    private fun setUpShareButton(){
+        botoCompartir.setOnClickListener {
+            val missatge = "L'aplicació FitHaus m'ajuda a estar en forma! Vols practicar l'activitat física tu també? Uneix-te i mira't la rutina d'entrenament predefinida "+rutinaPredefinida!!.name+", potser t'interessa!"
+            val intent = Intent()
+            intent.type = "text/plain"
+            intent.putExtra(Intent.EXTRA_TEXT, missatge)
+            intent.action = Intent.ACTION_SEND
+            val chooseIntent = Intent.createChooser(intent, "Compartir en xarxes socials")
+            startActivity(chooseIntent)
+        }
     }
 }
