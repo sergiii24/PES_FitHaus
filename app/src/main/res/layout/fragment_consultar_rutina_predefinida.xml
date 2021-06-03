@@ -9,22 +9,24 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <Button
-            android:id="@+id/botoCompartir"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/text_compartir"
-            app:icon="@drawable/ic_share" />
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/botoCompartir"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_compartir"
+                app:icon="@drawable/ic_share" />
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/imatgeRutinaPredefinida"
@@ -42,10 +44,6 @@
             android:textColor="@color/black"
             android:textSize="36sp" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="16dp" />
-
         <TextView
             android:id="@+id/descripcioRutinaPredefinida"
             android:layout_width="match_parent"
@@ -61,6 +59,10 @@
             android:textColor="@color/black"
             android:textSize="16sp" />
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="15dp" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -68,7 +70,7 @@
 
             <TextView
                 android:id="@+id/categoriaRutinaPredefinida"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/text_categoria"
@@ -76,13 +78,17 @@
 
             <TextView
                 android:id="@+id/contingutCategoriaRutinaPredefinida"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/text_categoria"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
         </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="15dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -91,7 +97,7 @@
 
             <TextView
                 android:id="@+id/tempsRutinaPredefinida"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/text_temps"
@@ -99,13 +105,17 @@
 
             <TextView
                 android:id="@+id/contingutTempsRutinaPredefinida"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/text_temps"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
         </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="15dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -114,7 +124,7 @@
 
             <TextView
                 android:id="@+id/edatRutinaPredefinida"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/text_edat"
@@ -122,13 +132,17 @@
 
             <TextView
                 android:id="@+id/contingutEdatRutinaPredefinida"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/text_edat"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
         </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="15dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -137,7 +151,7 @@
 
             <TextView
                 android:id="@+id/nivellRutinaPredefinida"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/Nivell"
@@ -145,13 +159,17 @@
 
             <TextView
                 android:id="@+id/contingutNivellRutinaPredefinida"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/Nivell"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
         </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="15dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -160,7 +178,7 @@
 
             <TextView
                 android:id="@+id/equipamentRutinaPredefinida"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/text_equipament"
@@ -168,13 +186,17 @@
 
             <TextView
                 android:id="@+id/contingutEquipamentRutinaPredefinida"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/text_equipament"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
         </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="15dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -183,7 +205,7 @@
 
             <TextView
                 android:id="@+id/objectiuRutinaPredefinida"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/Objectiu"
@@ -191,13 +213,17 @@
 
             <TextView
                 android:id="@+id/contingutObjectiuRutinaPredefinida"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/Objectiu"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
         </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="15dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -206,7 +232,7 @@
 
             <TextView
                 android:id="@+id/impacteRutinaPredefinida"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/text_impacte"
@@ -214,7 +240,7 @@
 
             <TextView
                 android:id="@+id/contingutImpacteRutinaPredefinida"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/text_impacte"
