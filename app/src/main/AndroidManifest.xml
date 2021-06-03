@@ -27,12 +27,11 @@
         <activity
             android:name=".AuthenticationProviders"
             android:theme="@style/Theme.FitHaus.SplashScreen">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
         </activity>
         <activity  android:name=".ConsultarExerciciActivity"/>
         <activity android:name=".PreferencesActivity"/>

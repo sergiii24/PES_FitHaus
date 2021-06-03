@@ -101,3 +101,22 @@ object HealthDataRepositoryModule {
         )
     }
 }
+
+/**
+ * The binding for ProgramRepository has the default Repository.
+ */
+@Module
+@InstallIn(SingletonComponent::class)
+object ProgramRepositoryModule {
+    @Singleton
+    @Provides
+    fun provideProgramRepository(
+        programService: ProgramService,
+        database: FitHausDatabase,
+        appExecutors: AppExecutors
+    ): ProgramRepository {
+        return ProgramRepositoryDefault(
+            database.programDao(), programService, appExecutors
+        )
+    }
+}
