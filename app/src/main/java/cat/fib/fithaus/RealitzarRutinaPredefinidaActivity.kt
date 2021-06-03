@@ -59,7 +59,7 @@ class RealitzarRutinaPredefinidaActivity : AppCompatActivity() {
 
         identificadorRutinaPredefinida = intent.getStringExtra(EXTRA_MESSAGE)
 
-        identificadorRutinaPredefinida = "3"
+        //identificadorRutinaPredefinida = "3"
 
         identificadorRutinaPredefinida?.let {
             viewModel.getPredefinedRoutine(it.toInt())

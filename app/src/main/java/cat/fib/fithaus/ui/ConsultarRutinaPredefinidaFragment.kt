@@ -57,6 +57,8 @@ class ConsultarRutinaPredefinidaFragment : Fragment(), RecyclerViewAdapter.OnIte
     lateinit var list: ArrayList<CardViewItem>                     // Llistat de CardViewItems que contenen la imatge i el nom de les activitats (exercicis i classes) que formen la rutina predefinida
 
     lateinit var botoCompartir: Button                              // Button per compartir la rutina predefinida
+    lateinit var botoRealitzar: Button                              // Button per realitzar la rutina predefinida
+
 
     /** Function onCreate
      *
@@ -98,9 +100,11 @@ class ConsultarRutinaPredefinidaFragment : Fragment(), RecyclerViewAdapter.OnIte
 
         botoCompartir = view.findViewById(R.id.botoCompartir)
 
+        botoRealitzar = view.findViewById(R.id.botoRealitzar)
+
         list = ArrayList<CardViewItem>()
 
-        identificadorRutinaPredefinida = "1" // Eliminar aquesta línia de codi perquè s'està forçant el paràmetre que li ha d'arribar
+        //identificadorRutinaPredefinida = "1" // Eliminar aquesta línia de codi perquè s'està forçant el paràmetre que li ha d'arribar
 
         identificadorRutinaPredefinida?.let {
             viewModelRutinaPredefinida.getPredefinedRoutine(it.toInt())
@@ -118,6 +122,8 @@ class ConsultarRutinaPredefinidaFragment : Fragment(), RecyclerViewAdapter.OnIte
         //setExampleContent()
 
         setUpShareButton()
+
+        setUpPlayButton()
 
         return view
     }
@@ -356,4 +362,15 @@ class ConsultarRutinaPredefinidaFragment : Fragment(), RecyclerViewAdapter.OnIte
             startActivity(chooseIntent)
         }
     }
+
+    private fun setUpPlayButton() {
+        botoRealitzar.setOnClickListener {
+            val intent = Intent(activity, RealitzarRutinaPredefinidaActivity::class.java).apply {
+                putExtra(EXTRA_MESSAGE, identificadorRutinaPredefinida)
+            }
+            startActivity(intent)
+        }
+    }
+
+
 }
