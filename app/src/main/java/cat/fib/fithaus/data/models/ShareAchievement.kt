@@ -10,11 +10,11 @@ data class ShareAchievement(
     @PrimaryKey @ColumnInfo(name = "id") @SerializedName("id")
     var id: Int = 0,
     @ColumnInfo(name = "share") @SerializedName("share")
-    var firstname: Boolean,
+    var share: Boolean,
     @ColumnInfo(name = "user") @SerializedName("user")
-    var lastname: Int,
+    var user: Int,
     @ColumnInfo(name = "achievement") @SerializedName("achievement")
-    var username: Int
+    var achievement: Int
 ){
     constructor(share: Boolean,
                 user: Int,

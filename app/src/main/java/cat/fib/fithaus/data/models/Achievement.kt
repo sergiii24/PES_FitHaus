@@ -10,11 +10,11 @@ data class Achievement(
         @PrimaryKey @ColumnInfo(name = "id") @SerializedName("id")
         var id: Int = 0,
         @ColumnInfo(name = "achievement") @SerializedName("achievement")
-        var firstname: String,
+        var achievement: String,
         @ColumnInfo(name = "quantity") @SerializedName("quantity")
-        var lastname: Int,
+        var quantity: Int,
         @ColumnInfo(name = "points") @SerializedName("points")
-        var username: Int
+        var points: Int
 ){
     constructor(achievement: String,
                 quantity: Int,

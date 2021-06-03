@@ -15,7 +15,7 @@ class ShareAchievementViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    lateinit var shareAchievement : LiveData<Resource<List<ShareAchievement>>>
+    var shareAchievement : LiveData<Resource<List<ShareAchievement>>>? = null
 
     fun getShareAchievementById(id: Int){
         shareAchievement = shareAchievementRepository.getShareAchievementById(id)

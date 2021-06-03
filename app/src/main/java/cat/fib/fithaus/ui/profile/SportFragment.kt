@@ -41,7 +41,7 @@ class SportFragment : Fragment(R.layout.fragment_sport), RecyclerViewAdapter.OnI
     private val viewModelAchievement by viewModels<AchievementViewModel>()
     private val viewModelShareAchievement by viewModels<ShareAchievementViewModel>()
 
-     lateinit var listAchievements: ArrayList<Achievement>
+     private var listAchievements: List<ShareAchievement>? = null
 
     private var identificadorUsuari: String? = null     // Identificador de l'usuari
 
@@ -52,6 +52,7 @@ class SportFragment : Fragment(R.layout.fragment_sport), RecyclerViewAdapter.OnI
     lateinit var points: TextView
     //lateinit var achievements: TextView
     lateinit var preferencesButton: Button
+
 
     lateinit var recyclerView: RecyclerView
     lateinit var llistat: ArrayList<CardViewItem>
@@ -88,7 +89,7 @@ class SportFragment : Fragment(R.layout.fragment_sport), RecyclerViewAdapter.OnI
         //achievements = v.findViewById(R.id.Assoliments)
 
         recyclerView = v.findViewById(R.id.recycler_view)
-
+        llistat = ArrayList<CardViewItem>()
         preferencesButton = v.findViewById(R.id.ActualitzarPreferencesPerfilButton)
 
 
@@ -97,27 +98,78 @@ class SportFragment : Fragment(R.layout.fragment_sport), RecyclerViewAdapter.OnI
         }
 
         viewModel.user.observe(viewLifecycleOwner, Observer {
-            if (it.status == Status.SUCCESS) setUpSport(it.data)
+            if (it.status == Status.SUCCESS) {
+                setUpSport(it.data)
+                println("Primer success")
+                getAchievements()
+            }
             else if (it.status == Status.ERROR) Toast.makeText(activity, "ERROR!", Toast.LENGTH_LONG).show()
         })
 
-        identificadorUsuari?.let {
-            viewModelShareAchievement.getShareAchievementById(it.toInt())
-        }
-
-        viewModelShareAchievement.shareAchievement.observe(viewLifecycleOwner, Observer {
-            if (it.status == Status.SUCCESS) setUpAchievements(it.data)
-            else if (it.status == Status.ERROR) Toast.makeText(activity, "ERROR!", Toast.LENGTH_LONG).show()
-        })
 
         setUpButtonPreferences()
 
-        setExampleContent()
+        //setExampleContent()
 
         return v
     }
 
-    private fun setUpAchievements(data: List<ShareAchievement>?, ) {
+    private fun getAchievements() {
+        println("Entra getAchievements")
+        viewModelShareAchievement.getShareAchievementById(identificadorUsuari!!.toInt())
+        println("Before observe")
+        viewModelShareAchievement.shareAchievement?.observe(viewLifecycleOwner, Observer {
+            if (it.status == Status.SUCCESS) {
+                println("Segona Success: " + it.data)
+                listAchievements = it.data
+                println(listAchievements)
+                setUpAchievements(it.data)
+            } else if (it.status == Status.ERROR) Toast.makeText(
+                activity,
+                "ERROR!",
+                Toast.LENGTH_LONG
+            ).show()
+        })
+    }
+
+
+    private fun setUpAchievements(data: List<ShareAchievement>? ) {
+        println("Entra Achievements")
+        for (i in listAchievements!!) {
+            val achievement_id = i.achievement
+            viewModelAchievement.getAchievementById(achievement_id)
+            viewModelAchievement.achievement.observe(viewLifecycleOwner, Observer {
+                if (it.status == Status.SUCCESS) {
+                    val imatge = "https://www.pngarea.com/pngm/572/4026438_certificate-icon-png-edexcel-outstanding-achievement-certificate-transparent.png"
+                    val name_achievement = getNom(it.data?.achievement)
+                    val quant = it.data?.quantity
+                    val nom = "$name_achievement ($quant)"
+                    val item = CardViewItem(imatge, nom)
+                    llistat?.plusAssign(item)
+                } else if (it.status == Status.ERROR) Toast.makeText(
+                    activity,
+                    "ERROR!",
+                    Toast.LENGTH_LONG
+                ).show()
+            })
+
+        }
+        recyclerView.adapter = RecyclerViewAdapter(llistat, this)
+        recyclerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+        recyclerView.setHasFixedSize(true)
+    }
+
+    private fun getNom(achievement: String?): String {
+        return when (achievement) {
+            "TT" -> return "Total Trainings"
+            "ST" -> return "Strength Trainings"
+            "CT" -> return "Cardio Trainings"
+            "YT" -> return "Yoga Trainings"
+            "StchT" -> return "Stretching Trainings"
+            "RT" -> return "Rehabilitation Trainings"
+            "PT" -> return "Pilates Trainings"
+            else -> ""
+        }
     }
 
     override fun onItemClick(position: Int) {

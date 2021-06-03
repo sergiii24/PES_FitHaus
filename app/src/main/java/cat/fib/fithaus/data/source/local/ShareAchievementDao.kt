@@ -20,7 +20,7 @@ interface ShareAchievementDao {
      * @param shareAchievementId the shareAchievement id.
      * @return the shareAchievement with id.
      */
-    @Query("SELECT * FROM shareachievement WHERE id = :shareAchievementId")
+    @Query("SELECT * FROM shareachievement WHERE user = :shareAchievementId")
     fun getShareAchievementById(shareAchievementId: Int): LiveData<List<ShareAchievement>>
 
     /**
