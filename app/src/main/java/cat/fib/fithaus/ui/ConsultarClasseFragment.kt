@@ -12,6 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import cat.fib.fithaus.data.models.Class
 import cat.fib.fithaus.R
+import cat.fib.fithaus.data.api.Configuration
 import cat.fib.fithaus.utils.Status
 import cat.fib.fithaus.viewmodels.ClassViewModel
 import com.squareup.picasso.Picasso
@@ -79,7 +80,7 @@ class ConsultarClasseFragment : Fragment() {
         contingutDuracioClasse = view.findViewById(R.id.contingutDuracioClasse)
         contingutCategoriaClasse = view.findViewById(R.id.contingutCategoriaClasse)
 
-        nomIdentificadorClasse = "3" // Eliminar aquesta línia de codi perquè s'està forçant el paràmetre que li ha d'arribar
+        //nomIdentificadorClasse = "3" // Eliminar aquesta línia de codi perquè s'està forçant el paràmetre que li ha d'arribar
 
         nomIdentificadorClasse?.let {
             viewModel.getClass(it)
@@ -103,7 +104,7 @@ class ConsultarClasseFragment : Fragment() {
      *  @author Albert Miñana Montecino
      */
     fun setContent(classData: Class?){
-        Picasso.get().load(classData?.pre.toString()).into(imatgeClasse)
+        Picasso.get().load(Configuration.Companion.urlServer + classData?.pre.toString()).into(imatgeClasse)
         nomClasse.text = classData?.name.toString()
         contingutEntrenadorClasse.text = classData?.trainer.toString()
         contingutDescripcioClasse.text = classData?.description.toString()

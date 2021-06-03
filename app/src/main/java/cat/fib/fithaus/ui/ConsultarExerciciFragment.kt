@@ -13,6 +13,7 @@ import cat.fib.fithaus.R
 import cat.fib.fithaus.utils.Status
 import cat.fib.fithaus.viewmodels.ExerciseViewModel
 import androidx.lifecycle.Observer
+import cat.fib.fithaus.data.api.Configuration
 import cat.fib.fithaus.data.models.Exercise
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
@@ -81,7 +82,7 @@ class ConsultarExerciciFragment : Fragment() {
         contingutDuracioExercici = view.findViewById(R.id.contingutDuracioExercici)
         contingutCategoriaExercici = view.findViewById(R.id.contingutCategoriaExercici)
 
-        nomIdentificadorExercici = "3" // Eliminar aquesta línia de codi perquè s'està forçant el paràmetre que li ha d'arribar
+        // nomIdentificadorExercici = "3" // Eliminar aquesta línia de codi perquè s'està forçant el paràmetre que li ha d'arribar
 
         nomIdentificadorExercici?.let {
             viewModel.getExercise(it)
@@ -106,11 +107,11 @@ class ConsultarExerciciFragment : Fragment() {
      */
     private fun setContent(exerciseData: Exercise?){
 
-        Picasso.get().load(exerciseData?.pre.toString()).into(imatgeExercici)
+        Picasso.get().load(Configuration.Companion.urlServer + exerciseData?.pre.toString()).into(imatgeExercici)
 
         nomExercici.text = exerciseData?.name.toString()
 
-        val videoPath: String = exerciseData?.videotutorial.toString()
+        val videoPath: String = Configuration.Companion.urlServer + exerciseData?.videotutorial.toString()
         val uri: Uri = Uri.parse(videoPath)
         videotutorialExercici.setVideoURI(uri)
 
@@ -124,7 +125,7 @@ class ConsultarExerciciFragment : Fragment() {
         contingutDescripcioExercici.text = exerciseData?.description.toString()
         contingutMusculTreballExercici.text = exerciseData?.muscle.toString()
 
-        Picasso.get().load(exerciseData?.muscleimage.toString()).into(imatgeMusculTreballExercici)
+        Picasso.get().load(Configuration.Companion.urlServer + exerciseData?.muscleimage.toString()).into(imatgeMusculTreballExercici)
 
         contingutEdatExercici.text = exerciseData?.age.toString()
         contingutDificultatExercici.text = exerciseData?.difficulty.toString()

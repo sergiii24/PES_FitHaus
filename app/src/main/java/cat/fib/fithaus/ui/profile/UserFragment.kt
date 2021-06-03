@@ -131,7 +131,7 @@ class UserFragment : Fragment(R.layout.fragment_user) {
         usuari.text = userData?.username.toString()
         correu.text = userData?.email.toString()
         contrasenya.text = userData?.password.toString()
-        data.text = LocalDate.parse(userData?.birthdate.toString(), DateTimeFormatter.ofPattern("yyyy-MM-dd")).format(DateTimeFormatter.ofPattern("dd/MM/yyyy")).toString()
+        if (userData?.birthdate != null) data.text = LocalDate.parse(userData?.birthdate.toString(), DateTimeFormatter.ofPattern("yyyy-MM-dd")).format(DateTimeFormatter.ofPattern("dd/MM/yyyy")).toString()
         when (userData?.gender) {
             "M" -> sexeHome.isChecked = true
             "W" -> sexeDona.isChecked = true
