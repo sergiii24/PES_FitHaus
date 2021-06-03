@@ -15,4 +15,10 @@ interface ClassService {
     @GET("/classes/{name}")
     fun getClass(@Path("name") className: String): LiveData<ApiResponse<Class>>
 
+    /**
+     * @GET declares an HTTP GET request
+     */
+    @GET("/classes/")
+    fun getClasses(): LiveData<ApiResponse<List<Class>>>
+
 }

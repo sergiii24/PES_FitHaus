@@ -86,10 +86,10 @@ class ConsultarClasseFragment : Fragment() {
             viewModel.getClass(it)
         }
 
-        viewModel.classe.observe(viewLifecycleOwner, Observer {
+        viewModel.classe?.observe(viewLifecycleOwner, Observer {
             if (it.status == Status.SUCCESS)
                 setContent(it.data)
-            else
+            else if (it.status == Status.ERROR)
                 Toast.makeText(activity, "ERROR!", Toast.LENGTH_LONG).show()
         })
 
@@ -108,11 +108,51 @@ class ConsultarClasseFragment : Fragment() {
         nomClasse.text = classData?.name.toString()
         contingutEntrenadorClasse.text = classData?.trainer.toString()
         contingutDescripcioClasse.text = classData?.description.toString()
-        contingutAreaTreballClasse.text = classData?.workarea.toString()
-        contingutEdatClasse.text = classData?.age.toString()
-        contingutDificultatClasse.text = classData?.difficulty.toString()
+        contingutAreaTreballClasse.text = workareaName(classData?.workarea.toString())
+        contingutEdatClasse.text = ageName(classData?.age.toString())
+        contingutDificultatClasse.text = difficultyName(classData?.difficulty.toString())
         contingutDuracioClasse.text = classData?.length.toString()
-        contingutCategoriaClasse.text = classData?.categories.toString()
+        contingutCategoriaClasse.text = categoriesName(classData?.categories!!)
+    }
+
+    private fun workareaName(workarea: String): String? {
+        when (workarea) {
+            "UB" -> return "Tren superior"
+            "LB" -> return "Tren inferior"
+            "FB" -> return "Cos sencer"
+            "C" -> return "Core"
+            else -> return null
+        }
+    }
+
+    private fun categoriesName(categories: ArrayList<String>): String? {
+        var categoriesString: ArrayList<String> = ArrayList()
+        if (categories.contains("S")) categoriesString.add("Força")
+        if (categories.contains("C")) categoriesString.add("Càrdio")
+        if (categories.contains("Y")) categoriesString.add("Ioga")
+        if (categories.contains("E")) categoriesString.add("Estiraments")
+        if (categories.contains("R")) categoriesString.add("Rehabilitació")
+        if (categories.contains("P")) categoriesString.add("Pilates")
+        return categoriesString.joinToString()
+    }
+
+    private fun difficultyName(difficulty: String): String? {
+        when (difficulty) {
+            "E" -> return "Fàcil"
+            "M" -> return "Mitjana"
+            "H" -> return "Difícil"
+            else -> return null
+        }
+    }
+
+    private fun ageName(age: String): String? {
+        when (age) {
+            "K" -> return "Nen"
+            "T" -> return "Gent jove"
+            "A" -> return "Adult"
+            "E" -> return "Gent gran"
+            else -> return null
+        }
     }
 
     /** Function setContent

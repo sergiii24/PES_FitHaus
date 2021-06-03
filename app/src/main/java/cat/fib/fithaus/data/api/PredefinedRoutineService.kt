@@ -15,4 +15,10 @@ interface PredefinedRoutineService {
     @GET("/predefinedroutines/{id}")
     fun getPredefinedRoutine(@Path("id") predefinedRoutineId: Int): LiveData<ApiResponse<PredefinedRoutine>>
 
+    /**
+     * @GET declares an HTTP GET request
+     */
+    @GET("/predefinedroutines/")
+    fun getPredefinedRoutines(): LiveData<ApiResponse<List<PredefinedRoutine>>>
+
 }

@@ -20,5 +20,11 @@ interface ExerciseService {
         @GET("/exercises/{name}")
         fun getExercise(@Path("name") exerciseName: String): LiveData<ApiResponse<Exercise>>
 
+        /**
+         * @GET declares an HTTP GET request
+         */
+        @GET("/exercises/")
+        fun getExercises(): LiveData<ApiResponse<List<Exercise>>>
+
 }
 

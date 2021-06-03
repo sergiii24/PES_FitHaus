@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -55,6 +56,10 @@ class ConsultarRutinaPredefinidaFragment : Fragment(), RecyclerViewAdapter.OnIte
     lateinit var recyclerView: RecyclerView                         // RecyclerView de CardViewItems que contenen la imatge i el nom de les activitats (exercicis i classes) que formen la rutina predefinida
     lateinit var list: ArrayList<CardViewItem>                     // Llistat de CardViewItems que contenen la imatge i el nom de les activitats (exercicis i classes) que formen la rutina predefinida
 
+    lateinit var botoCompartir: Button                              // Button per compartir la rutina predefinida
+    lateinit var botoRealitzar: Button                              // Button per realitzar la rutina predefinida
+
+
     /** Function onCreate
      *
      *  Funció encarregada de crear el fragment
@@ -93,26 +98,32 @@ class ConsultarRutinaPredefinidaFragment : Fragment(), RecyclerViewAdapter.OnIte
 
         recyclerView = view.findViewById(R.id.recycler_view)
 
+        botoCompartir = view.findViewById(R.id.botoCompartir)
+
+        botoRealitzar = view.findViewById(R.id.botoRealitzar)
+
         list = ArrayList<CardViewItem>()
 
-        identificadorRutinaPredefinida = "1" // Eliminar aquesta línia de codi perquè s'està forçant el paràmetre que li ha d'arribar
+        //identificadorRutinaPredefinida = "1" // Eliminar aquesta línia de codi perquè s'està forçant el paràmetre que li ha d'arribar
 
         identificadorRutinaPredefinida?.let {
             viewModelRutinaPredefinida.getPredefinedRoutine(it.toInt())
         }
 
-        viewModelRutinaPredefinida.predefinedRoutine.observe(viewLifecycleOwner, Observer {
+        viewModelRutinaPredefinida.predefinedRoutine?.observe(viewLifecycleOwner, Observer {
             if (it.status == Status.SUCCESS) {
-                println("Entra Success")
                 rutinaPredefinida = it.data
                 setPredefinedRoutineContent()
             }
             else if (it.status == Status.ERROR)
-                println("Entra Error")
                 Toast.makeText(activity, "ERROR!", Toast.LENGTH_LONG).show()
         })
 
         //setExampleContent()
+
+        setUpShareButton()
+
+        setUpPlayButton()
 
         return view
     }
@@ -156,19 +167,93 @@ class ConsultarRutinaPredefinidaFragment : Fragment(), RecyclerViewAdapter.OnIte
      *  @author Albert Miñana Montecino
      */
     private fun setPredefinedRoutineContent(){
-        println("Entra en set")
         Picasso.get().load(rutinaPredefinida!!.image).into(imatgeRutinaPredefinida)
         nomRutinaPredefinida.text = rutinaPredefinida!!.name
         contingutDescripcioRutinaPredefinida.text = rutinaPredefinida!!.description
-        contingutCategoriaRutinaPredefinida.text = rutinaPredefinida!!.categories.toString()
-        contingutTempsRutinaPredefinida.text = rutinaPredefinida!!.time
-        contingutEdatRutinaPredefinida.text = rutinaPredefinida!!.age
-        contingutNivellRutinaPredefinida.text = rutinaPredefinida!!.level
-        contingutEquipamentRutinaPredefinida.text = rutinaPredefinida!!.equipment.toString()
-        contingutObjectiuRutinaPredefinida.text = rutinaPredefinida!!.objective
-        contingutImpacteRutinaPredefinida.text = rutinaPredefinida!!.impact
+        contingutCategoriaRutinaPredefinida.text = categoriesName(rutinaPredefinida!!.categories)
+        contingutTempsRutinaPredefinida.text = timeName(rutinaPredefinida!!.time)
+        contingutEdatRutinaPredefinida.text = ageName(rutinaPredefinida!!.age)
+        contingutNivellRutinaPredefinida.text = levelName(rutinaPredefinida!!.level)
+        contingutEquipamentRutinaPredefinida.text = equipmentName(rutinaPredefinida!!.equipment)
+        contingutObjectiuRutinaPredefinida.text = objectiveName(rutinaPredefinida!!.objective)
+        contingutImpacteRutinaPredefinida.text = impactName(rutinaPredefinida!!.impact)
 
         setExercisesContent(0)
+    }
+
+    private fun categoriesName(categories: ArrayList<String>): String? {
+        var categoriesString: ArrayList<String> = ArrayList()
+        if (categories.contains("S")) categoriesString.add("Força")
+        if (categories.contains("C")) categoriesString.add("Càrdio")
+        if (categories.contains("Y")) categoriesString.add("Ioga")
+        if (categories.contains("E")) categoriesString.add("Estiraments")
+        if (categories.contains("R")) categoriesString.add("Rehabilitació")
+        if (categories.contains("P")) categoriesString.add("Pilates")
+        return categoriesString.joinToString()
+    }
+
+    private fun timeName(time: String): String? {
+        when (time) {
+            "P" -> return "Personalitzable"
+            "R" -> return "Ronda circuits"
+            "F" -> return "Fixat"
+            else -> return null
+        }
+    }
+
+    private fun ageName(age: String): String? {
+        when (age) {
+            "K" -> return "Nen"
+            "T" -> return "Gent jove"
+            "A" -> return "Adult"
+            "E" -> return "Gent gran"
+            else -> return null
+        }
+    }
+
+    private fun levelName(level: String): String? {
+        when (level) {
+            "P" -> return "Principiant"
+            "I" -> return "Intermedi"
+            "A" -> return "Avançat"
+            else -> return null
+        }
+    }
+
+    private fun equipmentName(equipment: String): String? {
+        when (equipment) {
+            "W" -> return "Sense"
+            "HM" -> return "Material de casa"
+            "K" -> return "Kettlebell"
+            "B" -> return "Bodyweight"
+            "D" -> return "Dumbbell"
+            "RB" -> return "Resistance band"
+            "RL" -> return "Resistance loop"
+            "FR" -> return "Foam roller"
+            else -> return null
+        }
+    }
+
+    private fun objectiveName(objective: String): String? {
+        when (objective) {
+            "S" -> return "Salut"
+            "Fr" -> return "Força"
+            "P" -> return "Pèrdua de pes"
+            "Fl" -> return "Flexibilitat"
+            "Rs" -> return "Resistència"
+            "Rc" -> return "Recuperació"
+            "A" -> return "Agilitat"
+            else -> return null
+        }
+    }
+
+    private fun impactName(impact: String): String? {
+        when (impact) {
+            "L" -> return "Baix"
+            "M" -> return "Moderat"
+            "H" -> return "Alt"
+            else -> return null
+        }
     }
 
     /** Function setExercisesContent
@@ -183,7 +268,7 @@ class ConsultarRutinaPredefinidaFragment : Fragment(), RecyclerViewAdapter.OnIte
             val viewModelExercicis by viewModels<ExerciseViewModel>()   // ViewModel dels exercicis de la rutina predefinida
             val identificadorExercici = rutinaPredefinida!!.exercises[position]
             viewModelExercicis.getExercise(identificadorExercici.toString())
-            viewModelExercicis.exercise.observe(viewLifecycleOwner, Observer {
+            viewModelExercicis.exercise?.observe(viewLifecycleOwner, Observer {
                 if (it.status == Status.SUCCESS){
                     val item = CardViewItem(Configuration.Companion.urlServer + it.data!!.pre, it.data!!.name + " (Exercici)")
                     list.plusAssign(item)
@@ -208,7 +293,7 @@ class ConsultarRutinaPredefinidaFragment : Fragment(), RecyclerViewAdapter.OnIte
             val viewModelClasses by viewModels<ClassViewModel>()    // ViewModel de les classes de la rutina predefinida
             val identificadorClasse = rutinaPredefinida!!.classes[position]
             viewModelClasses.getClass(identificadorClasse.toString())
-            viewModelClasses.classe.observe(viewLifecycleOwner, Observer {
+            viewModelClasses.classe?.observe(viewLifecycleOwner, Observer {
                 if (it.status == Status.SUCCESS){
                     val item = CardViewItem(Configuration.Companion.urlServer + it.data!!.pre, it.data!!.name + " (Classe)")
                     list.plusAssign(item)
@@ -265,4 +350,27 @@ class ConsultarRutinaPredefinidaFragment : Fragment(), RecyclerViewAdapter.OnIte
         recyclerView.layoutManager = LinearLayoutManager(activity)
         recyclerView.setHasFixedSize(true)
     }
+
+    private fun setUpShareButton(){
+        botoCompartir.setOnClickListener {
+            val missatge = "L'aplicació FitHaus m'ajuda a estar en forma! Vols practicar l'activitat física tu també? Uneix-te i mira't la rutina d'entrenament predefinida "+rutinaPredefinida!!.name+", potser t'interessa!"
+            val intent = Intent()
+            intent.type = "text/plain"
+            intent.putExtra(Intent.EXTRA_TEXT, missatge)
+            intent.action = Intent.ACTION_SEND
+            val chooseIntent = Intent.createChooser(intent, "Compartir en xarxes socials")
+            startActivity(chooseIntent)
+        }
+    }
+
+    private fun setUpPlayButton() {
+        botoRealitzar.setOnClickListener {
+            val intent = Intent(activity, RealitzarRutinaPredefinidaActivity::class.java).apply {
+                putExtra(EXTRA_MESSAGE, identificadorRutinaPredefinida)
+            }
+            startActivity(intent)
+        }
+    }
+
+
 }

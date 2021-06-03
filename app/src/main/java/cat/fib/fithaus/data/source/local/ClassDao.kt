@@ -30,4 +30,12 @@ interface ClassDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertClass(classe: Class)
 
+    /**
+     * Select all classes from the classes table.
+     *
+     * @return all classes.
+     */
+    @Query("SELECT * FROM classes")
+    fun getClasses(): LiveData<List<Class>>
+
 }

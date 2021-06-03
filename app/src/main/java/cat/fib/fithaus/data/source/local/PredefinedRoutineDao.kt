@@ -29,4 +29,13 @@ interface PredefinedRoutineDao {
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertPredefinedRoutine(predefinedRoutine: PredefinedRoutine)
+
+
+    /**
+     * Select all predefined routines from the predefined routines table.
+     *
+     * @return all predefined routines.
+     */
+    @Query("SELECT * FROM predefinedRoutines")
+    fun getPredefinedRoutines(): LiveData<List<PredefinedRoutine>>
 }
