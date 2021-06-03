@@ -14,13 +14,13 @@ import cat.fib.fithaus.data.models.Class
 interface ClassDao {
 
     /**
-     * Select a class by id.
+     * Select a class by name.
      *
-     * @param classId the class id.
-     * @return the class with id.
+     * @param className the class name.
+     * @return the class with name.
      */
-    @Query("SELECT * FROM classes WHERE id = :classId")
-    fun getClassById(classId: String): LiveData<Class>
+    @Query("SELECT * FROM classes WHERE name = :className")
+    fun getClassByName(className: String): LiveData<Class>
 
     /**
      * Insert a class in the database. If the class already exists, replace it.
@@ -29,5 +29,13 @@ interface ClassDao {
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertClass(classe: Class)
+
+    /**
+     * Select all classes from the classes table.
+     *
+     * @return all classes.
+     */
+    @Query("SELECT * FROM classes")
+    fun getClasses(): LiveData<List<Class>>
 
 }

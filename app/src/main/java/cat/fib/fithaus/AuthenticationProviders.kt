@@ -2,12 +2,14 @@ package cat.fib.fithaus
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
+import android.view.View
+import android.widget.RelativeLayout.TRUE
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import cat.fib.fithaus.data.models.User
 import cat.fib.fithaus.utils.Status
@@ -25,8 +27,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_authentication_providers.*
-import kotlinx.android.synthetic.main.activity_authentication_providers.editTextTextEmailAddress
-import kotlinx.android.synthetic.main.activity_authentication_providers.editTextTextPassword
+import java.lang.Boolean.TRUE
 import kotlin.random.Random
 
 /** Activity AuthenticationProviders
@@ -55,9 +56,36 @@ class AuthenticationProviders : AppCompatActivity() {
         setTheme(R.style.Theme_FitHaus)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_authentication_providers)
+        session()
         setupSignInButton()
         setupGoogleFacebookButtons()
         setupSignUpButton()
+    }
+
+    /** Function onStart
+     *
+     *  Funció que estableix la visibilitat del contingut.
+     *
+     *  @author Adrià Espinola Garcia, Albert Miñana Montecino
+     */
+    override fun onStart() {
+        super.onStart()
+        LinearLayoutAuthentication.visibility = View.VISIBLE
+    }
+
+    /** Function session
+     *
+     *  Funció que prova de recuperar la sessió.
+     *
+     *  @author Adrià Espinola Garcia, Albert Miñana Montecino
+     */
+    private fun session() {
+        val prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
+        val userId = prefs.getString("userId", null)
+        if (userId != null) {
+            LinearLayoutAuthentication.visibility = View.INVISIBLE
+            showHome()
+        }
     }
 
     /** Function setupSignInButton
@@ -71,18 +99,20 @@ class AuthenticationProviders : AppCompatActivity() {
             val validateEmail = validateEmail()
             val validatePassword = validatePassword()
             if (validateEmail && validatePassword) {
-                viewModel.login(editTextTextEmailAddress.text.toString(), editTextTextPassword.text.toString() )
+                //showHome() //treure linia quan estigui integrat
+                viewModel.login(editTextTextEmailAddress.text.toString(), editTextTextPassword.text.toString())
                 viewModel.user.observe(this, Observer {
                     if (it.status == Status.SUCCESS) {
                         //guarda id
                         val prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit()
                         prefs.putString("userId", it.data?.id.toString())
                         prefs.putString("provider", "FitHaus")
+                        prefs.putString("name", it.data?.firstname.toString() + " " + it.data?.lastname.toString())
+                        prefs.putString("email", it.data?.email.toString())
                         prefs.apply()
                         showHome()
-                    }
-                    else
-                        Toast.makeText(this, "ERROR!", Toast.LENGTH_LONG).show()
+                    } else if (it.status == Status.ERROR)
+                        showAlertFitHaus()
                 })
             }
         }
@@ -162,35 +192,37 @@ class AuthenticationProviders : AppCompatActivity() {
             LoginManager.getInstance().logInWithReadPermissions(this, listOf("email"))
 
             // Operacions de resposta un cop finalizat l'accés amb Facebook
-            LoginManager.getInstance().registerCallback(callbackManager, object: FacebookCallback<LoginResult>{
+            LoginManager.getInstance().registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
                 override fun onSuccess(result: LoginResult?) {
                     result?.let {
                         // Mostra l'accés amb Google a la consola de Firebase
                         val token = it.accessToken
                         val credential = FacebookAuthProvider.getCredential(token.token)
-                        FirebaseAuth.getInstance().signInWithCredential(credential).addOnCompleteListener(){
-                            if (it.isSuccessful){
+                        FirebaseAuth.getInstance().signInWithCredential(credential).addOnCompleteListener() {
+                            if (it.isSuccessful) {
                                 //Pendent de la funcionalitat del Back
                                 val fullName = it.result?.user?.displayName
                                 val email = it.result?.user?.email
                                 val uid = it.result?.user?.uid
-                                viewModel.getUserByEmail(email.toString())
+                                viewModel.login(uid.toString())
                                 viewModel.user.observe(this@AuthenticationProviders, Observer {
                                     if (it.status == Status.SUCCESS) {
                                         //guarda id
                                         val prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit()
                                         prefs.putString("userId", it.data?.id.toString())
                                         prefs.putString("provider", "Facebook")
+                                        prefs.putString("name", it.data?.firstname.toString() + " " + it.data?.lastname.toString())
+                                        prefs.putString("email", it.data?.email.toString())
                                         prefs.apply()
                                         showHome()
-                                    } else {
+                                    } else if (it.status == Status.ERROR) {
                                         val index = fullName?.indexOf(" ", 0, false)
-                                        val firstName = index?.let { it1 -> fullName?.substring(0, it1) }
-                                        val lastName = index?.plus(1)?.let { it1 -> fullName?.substring(it1) }
+                                        val firstName = index?.let { it -> fullName?.substring(0, it) }
+                                        val lastName = index?.plus(1)?.let { it -> fullName?.substring(it) }
                                         val indexEmail = email?.indexOf("@", 0, false)
-                                        val emailName = indexEmail?.let { it1 -> email?.substring(0, it1) }
+                                        val emailName = indexEmail?.let { it -> email?.substring(0, it) }
                                         val username = generateUsername(emailName)
-                                        val user = User(firstName.toString(), lastName.toString(), username, email.toString())
+                                        val user = User(firstName.toString(), lastName.toString(), username, email.toString(), uid.toString(), "Facebook")
                                         viewModel.createUser(user)
                                         viewModel.user.observe(this@AuthenticationProviders, Observer {
                                             if (it.status == Status.SUCCESS) {
@@ -198,17 +230,17 @@ class AuthenticationProviders : AppCompatActivity() {
                                                 val prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit()
                                                 prefs.putString("userId", it.data?.id.toString())
                                                 prefs.putString("provider", "Facebook")
+                                                prefs.putString("name", it.data?.firstname.toString() + " " + it.data?.lastname.toString())
+                                                prefs.putString("email", it.data?.email.toString())
                                                 prefs.apply()
                                                 showSurvey()
-                                            }
-                                            else {
+                                            } else if (it.status == Status.ERROR) {
                                                 Toast.makeText(this@AuthenticationProviders, "ERROR!", Toast.LENGTH_LONG).show()
                                             }
                                         })
                                     }
                                 })
-                            }
-                            else{
+                            } else {
                                 showAlertGoogleFacebook()
                             }
                         }
@@ -254,23 +286,25 @@ class AuthenticationProviders : AppCompatActivity() {
                                 val fullName = it.result?.user?.displayName
                                 val email = it.result?.user?.email
                                 val uid = it.result?.user?.uid
-                                viewModel.getUserByEmail(email.toString())
+                                viewModel.login(uid.toString())
                                 viewModel.user.observe(this, Observer {
                                     if (it.status == Status.SUCCESS) {
                                         //guarda id
                                         val prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit()
                                         prefs.putString("userId", it.data?.id.toString())
                                         prefs.putString("provider", "Google")
+                                        prefs.putString("name", it.data?.firstname.toString() + " " + it.data?.lastname.toString())
+                                        prefs.putString("email", it.data?.email.toString())
                                         prefs.apply()
                                         showHome()
-                                    } else {
+                                    } else if (it.status == Status.ERROR) {
                                         val index = fullName?.indexOf(" ", 0, false)
-                                        val firstName = index?.let { it1 -> fullName?.substring(0, it1) }
-                                        val lastName = index?.plus(1)?.let { it1 -> fullName?.substring(it1) }
+                                        val firstName = index?.let { it -> fullName?.substring(0, it) }
+                                        val lastName = index?.plus(1)?.let { it -> fullName?.substring(it) }
                                         val indexEmail = email?.indexOf("@", 0, false)
-                                        val emailName = indexEmail?.let { it1 -> email?.substring(0, it1) }
+                                        val emailName = indexEmail?.let { it -> email?.substring(0, it) }
                                         val username = generateUsername(emailName)
-                                        val user = User(firstName.toString(), lastName.toString(), username, email.toString())
+                                        val user = User(firstName.toString(), lastName.toString(), username, email.toString(), uid.toString(), "Google")
                                         viewModel.createUser(user)
                                         viewModel.user.observe(this, Observer {
                                             if (it.status == Status.SUCCESS) {
@@ -278,10 +312,11 @@ class AuthenticationProviders : AppCompatActivity() {
                                                 val prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit()
                                                 prefs.putString("userId", it.data?.id.toString())
                                                 prefs.putString("provider", "Google")
+                                                prefs.putString("name", it.data?.firstname.toString() + " " + it.data?.lastname.toString())
+                                                prefs.putString("email", it.data?.email.toString())
                                                 prefs.apply()
                                                 showSurvey()
-                                            }
-                                            else {
+                                            } else if (it.status == Status.ERROR) {
                                                 Toast.makeText(this, "ERROR!", Toast.LENGTH_LONG).show()
                                             }
                                         })
@@ -294,7 +329,7 @@ class AuthenticationProviders : AppCompatActivity() {
 
                 }
             }
-            catch(e: ApiException){
+            catch (e: ApiException){
                 showAlertGoogleFacebook()
             }
         }
@@ -309,6 +344,8 @@ class AuthenticationProviders : AppCompatActivity() {
     fun setupSignUpButton() {
         signUpButton.setOnClickListener {
             val intent = Intent(this, CrearPerfilActivity::class.java)
+            //val intent = Intent(this, ConsultarRutinaPredefinidaActivity::class.java)
+            //val intent = Intent(this, RealitzarRutinaPredefinidaActivity::class.java)
             startActivity(intent)
         }
     }
@@ -322,6 +359,7 @@ class AuthenticationProviders : AppCompatActivity() {
      */
     private fun showHome(){
         val homeIntent = Intent(this, MainActivity::class.java)
+        homeIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(homeIntent)
     }
 
@@ -332,7 +370,7 @@ class AuthenticationProviders : AppCompatActivity() {
      *  @author Albert Miñana Montecino i Adrià Espinola Garcia
      */
     private fun showSurvey(){
-        val homeIntent = Intent(this, QuestionariInicialActivity::class.java)
+        val homeIntent = Intent(this, PreferencesActivity::class.java)
         startActivity(homeIntent)
     }
 
@@ -349,27 +387,24 @@ class AuthenticationProviders : AppCompatActivity() {
         builder.setPositiveButton("Acceptar", null)
         val dialog: AlertDialog = builder.create()
         dialog.create()
+        dialog.show()
     }
 
-    /** Function showAlertSignIn
+    /** Function showAlertFitHaus
      *
-     *  Funció que mostra un missatge d'error en format Toast segons els paràmetres d'entrada.
+     *  Funció encarregada de mostrar un missatge d'error d'autenticació de l'usuari
      *
-     *  @param emailEmpty
-     *  @param passwordEmpty
-     *  @param format
-     *  @author Adrià Espinola Garcia
+     *  @author Albert Miñana Montecino
      */
-    private fun showAlertSignIn(emailEmpty: Boolean, passwordEmpty: Boolean, format: Boolean) {
-        when {
-            emailEmpty and passwordEmpty -> Toast.makeText(this, "Els camps Email i Password estan buits", Toast.LENGTH_LONG).show()
-            emailEmpty -> Toast.makeText(this, "El camp Email és buit", Toast.LENGTH_LONG).show()
-            passwordEmpty -> Toast.makeText(this, "El camp Password és buit", Toast.LENGTH_LONG).show()
-            format -> Toast.makeText(this, "El format del Email és incorrecte", Toast.LENGTH_LONG).show()
-        }
-
+    private fun showAlertFitHaus() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Advertència")
+        builder.setMessage("Les credencials introduïdes són incorrectes")
+        builder.setPositiveButton("Acceptar", null)
+        val dialog: AlertDialog = builder.create()
+        dialog.create()
+        dialog.show()
     }
-
 
     /** Function generateUsername
      *

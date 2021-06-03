@@ -15,9 +15,14 @@ class PredefinedRoutineViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    lateinit var predefinedRoutine : LiveData<Resource<PredefinedRoutine>>
+    var predefinedRoutine : LiveData<Resource<PredefinedRoutine>>? = null
+    var predefinedRoutines: LiveData<Resource<List<PredefinedRoutine>>>? = null
 
     fun getPredefinedRoutine(id: Int){
         predefinedRoutine = predefinedRoutineRepository.getPredefinedRoutine(id)
+    }
+
+    fun getPredefinedRoutines(){
+        predefinedRoutines = predefinedRoutineRepository.getPredefinedRoutines()
     }
 }

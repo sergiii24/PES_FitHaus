@@ -15,9 +15,14 @@ class ProgramViewModel @Inject constructor (
     private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    lateinit var program : LiveData<Resource<Program>>
+    var program : LiveData<Resource<Program>>?= null
+    var programs: LiveData<Resource<List<Program>>>? = null
 
     fun getProgram(id: Int) {
         program = programRepository.getProgram(id)
+    }
+
+    fun getPrograms() {
+        programs = programRepository.getPrograms()
     }
 }

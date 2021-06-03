@@ -13,7 +13,7 @@ class ClassRepositoryDefault(
         private val appExecutors: AppExecutors,
 ) : ClassRepository {
 
-    override fun getClass(classId: String): LiveData<Resource<Class>> {
+    override fun getClass(className: String): LiveData<Resource<Class>> {
         return object : NetworkBoundResource<Class, Class>(appExecutors) {
             override fun saveCallResult(item: Class) {
                 classDao.insertClass(item)
@@ -21,9 +21,23 @@ class ClassRepositoryDefault(
 
             override fun shouldFetch(data: Class?) = data == null
 
-            override fun loadFromDb() = classDao.getClassById(classId)
+            override fun loadFromDb() = classDao.getClassByName(className)
 
-            override fun createCall() = classService.getClass(classId)
+            override fun createCall() = classService.getClass(className)
+        }.asLiveData()
+    }
+
+    override fun getClasses(): LiveData<Resource<List<Class>>> {
+        return object : NetworkDatabaseResource<List<Class>, List<Class>>(appExecutors) {
+            override fun saveCallResult(items: List<Class>) {
+                for (i in items) {
+                    classDao.insertClass(i)
+                }
+            }
+
+            override fun loadFromDb() = classDao.getClasses()
+
+            override fun createCall() = classService.getClasses()
         }.asLiveData()
     }
 

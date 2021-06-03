@@ -95,7 +95,7 @@ class FragmentConsultarPrograma : Fragment(), RecyclerViewAdapter.OnItemClickLis
         }
 
 
-        viewModelPrograma.program.observe(viewLifecycleOwner, Observer {
+        viewModelPrograma.program?.observe(viewLifecycleOwner, Observer {
             if (it.status == Status.SUCCESS) {
                 programa = it.data
                 setUpData()
@@ -127,11 +127,11 @@ class FragmentConsultarPrograma : Fragment(), RecyclerViewAdapter.OnItemClickLis
     }
 
     /** Funció setUpData
-    *
-    *  Funció que omple els camps del fragment amb les dades del programa corresponent.
-    *
-    *  @author Daniel Cárdenas.
-    */
+     *
+     *  Funció que omple els camps del fragment amb les dades del programa corresponent.
+     *
+     *  @author Daniel Cárdenas.
+     */
     private fun setUpData() {
         nom_programa.text = programa!!.name.toString()
         descripcio.text = programa!!.description.toString()
@@ -154,7 +154,7 @@ class FragmentConsultarPrograma : Fragment(), RecyclerViewAdapter.OnItemClickLis
             viewModelRutines.getPredefinedRoutine(identificadorRutina)
             viewModelRutines.predefinedRoutine.observe(viewLifecycleOwner, Observer {
                 if (it.status == Status.SUCCESS){
-                    val item = CardViewItem(it.data!!.image, it.data!!.name + " (Rutina)")
+                    val item = CardViewItem(it.data!!.image.toString(), it.data!!.name + " (Rutina)")
                     llistat_rutines.plusAssign(item)
                     setPredefinedRoutinesContent(position+1)
                 }
@@ -163,7 +163,7 @@ class FragmentConsultarPrograma : Fragment(), RecyclerViewAdapter.OnItemClickLis
             })
         }
         else setActivitiesContent()
-}
+    }
 
     /** Function setActivitiesContent
      *

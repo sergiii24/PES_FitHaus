@@ -27,4 +27,12 @@ interface ProgramDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertProgram(program: Program)
 
+
+    /**
+     * Select all programs from the program table.
+     *
+     * @return all programs.
+     */
+    @Query("SELECT * FROM program")
+    fun getPrograms(): LiveData<List<Program>>
 }

@@ -1,6 +1,8 @@
 package cat.fib.fithaus.di
 
-import cat.fib.fithaus.data.api.*
+import cat.fib.fithaus.data.api.ExerciseService
+import cat.fib.fithaus.data.api.ClassService
+import cat.fib.fithaus.data.api.UserService
 import cat.fib.fithaus.data.source.*
 import cat.fib.fithaus.data.source.local.FitHausDatabase
 import cat.fib.fithaus.utils.AppExecutors
@@ -64,6 +66,45 @@ object ClassRepositoryModule {
     }
 }
 
+
+/**
+ * The binding for PredefinedRoutineRepository has the default Repository.
+ */
+@Module
+@InstallIn(SingletonComponent::class)
+object PredefinedRoutineRepositoryModule {
+    @Singleton
+    @Provides
+    fun providePredefinedRoutineRepository(
+        predefinedRoutineService: PredefinedRoutineService,
+        database: FitHausDatabase,
+        appExecutors: AppExecutors
+    ): PredefinedRoutineRepository {
+        return PredefinedRoutineRepositoryDefault(
+            database.predefinedRoutineDao(), predefinedRoutineService, appExecutors
+        )
+    }
+}
+
+/**
+ * The binding for HealthDataRepository has the default Repository.
+ */
+@Module
+@InstallIn(SingletonComponent::class)
+object HealthDataRepositoryModule {
+    @Singleton
+    @Provides
+    fun provideHealthDataRepository(
+        healthDataService: HealthDataService,
+        database: FitHausDatabase,
+        appExecutors: AppExecutors
+    ): HealthDataRepository {
+        return HealthDataRepositoryDefault(
+            database.healthDataDao(), healthDataService, appExecutors
+        )
+    }
+}
+
 /**
  * The binding for ProgramRepository has the default Repository.
  */
@@ -84,20 +125,20 @@ object ProgramRepositoryModule {
 }
 
 /**
- * The binding for PredefinedRoutineRepository has the default Repository.
+ * The binding for Collection has the default Repository.
  */
 @Module
 @InstallIn(SingletonComponent::class)
-object PredefinedRoutineRepositoryModule {
+object CollectionRepositoryModule {
     @Singleton
     @Provides
-    fun providePredefinedRoutineRepository(
-        predefinedRoutineService: PredefinedRoutineService,
+    fun provideCollectionRepository(
+        collectionService: CollectionService,
         database: FitHausDatabase,
         appExecutors: AppExecutors
-    ): PredefinedRoutineRepository {
-        return PredefinedRoutineRepositoryDefault(
-            database.predefinedRoutineDao(), predefinedRoutineService, appExecutors
+    ): CollectionRepository {
+        return CollectionRepositoryDefault(
+            database.collectionDao(), collectionService, appExecutors
         )
     }
 }

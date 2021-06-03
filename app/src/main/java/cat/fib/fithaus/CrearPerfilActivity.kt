@@ -6,12 +6,10 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
-import android.view.View
 import android.widget.EditText
 import android.widget.RadioButton
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import cat.fib.fithaus.data.models.User
 import cat.fib.fithaus.ui.dialog.DatePickerFragment
@@ -19,15 +17,8 @@ import cat.fib.fithaus.utils.Status
 import cat.fib.fithaus.viewmodels.UserViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_crear_perfil.*
-import okhttp3.Call
-import okhttp3.Callback
-import okhttp3.Response
-import java.io.IOException
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
-import java.util.*
-
-import javax.inject.Inject
 
 
 /** Classe CrearPerfil
@@ -78,14 +69,14 @@ class CrearPerfilActivity : AppCompatActivity() {
         setupSendButton()
     }
 
-    /** Function setupSendButton
+        /** Function setupSendButton
      *
      *  Funció que comprova si els camps són correctes per crear un usuari.
      *
      *  @author Adrià Espinola Garcia, Albert Miñana Montecino, Daniel Cárdenas Rafael
      */
     fun setupSendButton() {
-        CrearPerfilButton.setOnClickListener {
+        ActualitzarUsuariButton.setOnClickListener {
             val validateName = validateName()
             val validateLastName = validateLastName()
             val validateUsername = validateUsername()
@@ -115,9 +106,11 @@ class CrearPerfilActivity : AppCompatActivity() {
                         val prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit()
                         prefs.putString("userId", it.data?.id.toString())
                         prefs.putString("provider", "FitHaus")
+                        prefs.putString("name", it.data?.firstname.toString() + " " + it.data?.lastname.toString())
+                        prefs.putString("email", it.data?.email.toString())
                         prefs.apply()
                         showSurvey()
-                    } else {
+                    } else if (it.status == Status.ERROR) {
                         Toast.makeText(this, "ERROR!", Toast.LENGTH_LONG).show()
                     }
                 })
@@ -334,7 +327,7 @@ class CrearPerfilActivity : AppCompatActivity() {
      *  @author Albert Miñana Montecino i Adrià Espinola Garcia
      */
     private fun showSurvey(){
-        val homeIntent = Intent(this, QuestionariInicialActivity::class.java)
+        val homeIntent = Intent(this, PreferencesActivity::class.java)
         startActivity(homeIntent)
     }
 

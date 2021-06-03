@@ -13,15 +13,20 @@ class ExerciseViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    lateinit var exercise : LiveData<Resource<Exercise>> // = exerciseRepository.getExercise("1000")
+    var exercise : LiveData<Resource<Exercise>>? = null // = exerciseRepository.getExercise("1000")
+    var exercises: LiveData<Resource<List<Exercise>>>? = null
 
     //var exercise : LiveData<Resource<Exercise>>? = false
 
-    fun getExercise(id: String) {
-        println("LLEGA")
-        exercise = exerciseRepository.getExercise(id)
-        println("SALE")
+    fun getExercise(name: String) {
+        exercise = exerciseRepository.getExercise(name)
     }
+
+    fun getExercises(){
+        exercises = exerciseRepository.getExercises()
+    }
+
+
 
     /*
     private val _exerciseId = MutableLiveData<String>()

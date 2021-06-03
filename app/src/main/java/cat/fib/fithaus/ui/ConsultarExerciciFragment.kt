@@ -13,12 +13,13 @@ import cat.fib.fithaus.R
 import cat.fib.fithaus.utils.Status
 import cat.fib.fithaus.viewmodels.ExerciseViewModel
 import androidx.lifecycle.Observer
+import cat.fib.fithaus.data.api.Configuration
 import cat.fib.fithaus.data.models.Exercise
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 
 // Paràmetres d'inicialització del Fragment
-private const val ARG_PARAM1 = "identificadorExercici"
+private const val EXTRA_MESSAGE = "cat.fib.fithaus.MESSAGE"
 
 /** Fragment ConsultarExercici
  *
@@ -32,7 +33,7 @@ class ConsultarExerciciFragment : Fragment() {
 
     private val viewModel by viewModels<ExerciseViewModel>()    // ViewModel de l'exercici
 
-    private var identificadorExercici: String? = null   // Identificador de l'exercici
+    private var nomIdentificadorExercici: String? = null    // Nom identificador de l'exercici
 
     lateinit var imatgeExercici: ImageView                  // ImageView amb la imatge de previsualització de l'exercici
     lateinit var nomExercici: TextView                      // TextView amb el nom de l'exercici
@@ -54,9 +55,7 @@ class ConsultarExerciciFragment : Fragment() {
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            identificadorExercici = it.getString(ARG_PARAM1)
-        }
+        nomIdentificadorExercici = activity?.intent?.getStringExtra(EXTRA_MESSAGE)
     }
 
     /** Function onCreateView
@@ -83,16 +82,16 @@ class ConsultarExerciciFragment : Fragment() {
         contingutDuracioExercici = view.findViewById(R.id.contingutDuracioExercici)
         contingutCategoriaExercici = view.findViewById(R.id.contingutCategoriaExercici)
 
-        identificadorExercici = "3" // Eliminar aquesta línia de codi perquè s'està forçant el paràmetre que li ha d'arribar
+        // nomIdentificadorExercici = "3" // Eliminar aquesta línia de codi perquè s'està forçant el paràmetre que li ha d'arribar
 
-        identificadorExercici?.let {
+        nomIdentificadorExercici?.let {
             viewModel.getExercise(it)
         }
 
-        viewModel.exercise.observe(viewLifecycleOwner, Observer {
+        viewModel.exercise?.observe(viewLifecycleOwner, Observer {
             if (it.status == Status.SUCCESS)
                 setContent(it.data)
-            else
+            else if (it.status == Status.ERROR)
                 Toast.makeText(activity, "ERROR!", Toast.LENGTH_LONG).show()
         })
 
@@ -108,11 +107,11 @@ class ConsultarExerciciFragment : Fragment() {
      */
     private fun setContent(exerciseData: Exercise?){
 
-        Picasso.get().load(exerciseData?.pre.toString()).into(imatgeExercici)
+        Picasso.get().load(Configuration.Companion.urlServer + exerciseData?.pre.toString()).into(imatgeExercici)
 
         nomExercici.text = exerciseData?.name.toString()
 
-        val videoPath: String = exerciseData?.videotutorial.toString()
+        val videoPath: String = Configuration.Companion.urlServer + exerciseData?.videotutorial.toString()
         val uri: Uri = Uri.parse(videoPath)
         videotutorialExercici.setVideoURI(uri)
 
@@ -124,14 +123,61 @@ class ConsultarExerciciFragment : Fragment() {
         videotutorialExercici.seekTo(1)
 
         contingutDescripcioExercici.text = exerciseData?.description.toString()
-        contingutMusculTreballExercici.text = exerciseData?.muscle.toString()
+        contingutMusculTreballExercici.text = muscleName(exerciseData?.muscle.toString())
 
-        Picasso.get().load(exerciseData?.muscleimage.toString()).into(imatgeMusculTreballExercici)
+        Picasso.get().load(Configuration.Companion.urlServer + exerciseData?.muscleimage.toString()).into(imatgeMusculTreballExercici)
 
-        contingutEdatExercici.text = exerciseData?.age.toString()
-        contingutDificultatExercici.text = exerciseData?.difficulty.toString()
+        contingutEdatExercici.text = ageName(exerciseData?.age.toString())
+        contingutDificultatExercici.text = difficultyName(exerciseData?.difficulty.toString())
         contingutDuracioExercici.text = exerciseData?.length.toString()
-        contingutCategoriaExercici.text = exerciseData?.categories.toString()
+        contingutCategoriaExercici.text = categoriesName(exerciseData?.categories!!)
+    }
+
+    private fun categoriesName(categories: ArrayList<String>): String? {
+        var categoriesString: ArrayList<String> = ArrayList()
+        if (categories.contains("S")) categoriesString.add("Força")
+        if (categories.contains("C")) categoriesString.add("Càrdio")
+        if (categories.contains("Y")) categoriesString.add("Ioga")
+        if (categories.contains("E")) categoriesString.add("Estiraments")
+        if (categories.contains("R")) categoriesString.add("Rehabilitació")
+        if (categories.contains("P")) categoriesString.add("Pilates")
+        return categoriesString.joinToString()
+    }
+
+    private fun difficultyName(difficulty: String): String? {
+        when (difficulty) {
+            "E" -> return "Fàcil"
+            "M" -> return "Mitjana"
+            "H" -> return "Difícil"
+            else -> return null
+        }
+    }
+
+    private fun ageName(age: String): String? {
+        when (age) {
+            "K" -> return "Nen"
+            "T" -> return "Gent jove"
+            "A" -> return "Adult"
+            "E" -> return "Gent gran"
+            else -> return null
+        }
+    }
+
+    private fun muscleName(muscle: String): String? {
+        when (muscle) {
+            "Bi" -> return "Bíceps"
+            "Tr" -> return "Tríceps"
+            "Fa" -> return "Forearm"
+            "Ch" -> return "Chest"
+            "Sh" -> return "Shoulder"
+            "Do" -> return "Dorsal"
+            "Gl" -> return "Glutis"
+            "Fe" -> return "Femoral"
+            "Qu" -> return "Quàdriceps"
+            "Ca" -> return "Calves"
+            "Co" -> return "Core"
+            else -> return null
+        }
     }
 
     /** Function setExampleContent

@@ -12,13 +12,14 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import cat.fib.fithaus.data.models.Class
 import cat.fib.fithaus.R
+import cat.fib.fithaus.data.api.Configuration
 import cat.fib.fithaus.utils.Status
 import cat.fib.fithaus.viewmodels.ClassViewModel
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 
 // Paràmetres d'inicialització del Fragment
-private const val ARG_PARAM1 = "identificadorClasse"
+private const val EXTRA_MESSAGE = "cat.fib.fithaus.MESSAGE"
 
 /** Fragment ConsultarClasse
  *
@@ -32,7 +33,7 @@ class ConsultarClasseFragment : Fragment() {
 
     private val viewModel by viewModels<ClassViewModel>()    // ViewModel de la classe
 
-    private var identificadorClasse: String? = null // Identificador de la classe
+    private var nomIdentificadorClasse: String? = null  // Nom identificador de la classe
 
     lateinit var imatgeClasse: ImageView                // ImageView amb la imatge de previsualització de la classe
     lateinit var nomClasse: TextView                    // TextView amb el nom de la classe
@@ -53,9 +54,7 @@ class ConsultarClasseFragment : Fragment() {
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            identificadorClasse = it.getString(ARG_PARAM1)
-        }
+        nomIdentificadorClasse = activity?.intent?.getStringExtra(EXTRA_MESSAGE)
     }
 
     /** Function onCreateView
@@ -81,16 +80,16 @@ class ConsultarClasseFragment : Fragment() {
         contingutDuracioClasse = view.findViewById(R.id.contingutDuracioClasse)
         contingutCategoriaClasse = view.findViewById(R.id.contingutCategoriaClasse)
 
-        identificadorClasse = "3" // Eliminar aquesta línia de codi perquè s'està forçant el paràmetre que li ha d'arribar
+        //nomIdentificadorClasse = "3" // Eliminar aquesta línia de codi perquè s'està forçant el paràmetre que li ha d'arribar
 
-        identificadorClasse?.let {
+        nomIdentificadorClasse?.let {
             viewModel.getClass(it)
         }
 
-        viewModel.classe.observe(viewLifecycleOwner, Observer {
+        viewModel.classe?.observe(viewLifecycleOwner, Observer {
             if (it.status == Status.SUCCESS)
                 setContent(it.data)
-            else
+            else if (it.status == Status.ERROR)
                 Toast.makeText(activity, "ERROR!", Toast.LENGTH_LONG).show()
         })
 
@@ -105,15 +104,55 @@ class ConsultarClasseFragment : Fragment() {
      *  @author Albert Miñana Montecino
      */
     fun setContent(classData: Class?){
-        Picasso.get().load(classData?.pre.toString()).into(imatgeClasse)
+        Picasso.get().load(Configuration.Companion.urlServer + classData?.pre.toString()).into(imatgeClasse)
         nomClasse.text = classData?.name.toString()
         contingutEntrenadorClasse.text = classData?.trainer.toString()
         contingutDescripcioClasse.text = classData?.description.toString()
-        contingutAreaTreballClasse.text = classData?.workarea.toString()
-        contingutEdatClasse.text = classData?.age.toString()
-        contingutDificultatClasse.text = classData?.difficulty.toString()
+        contingutAreaTreballClasse.text = workareaName(classData?.workarea.toString())
+        contingutEdatClasse.text = ageName(classData?.age.toString())
+        contingutDificultatClasse.text = difficultyName(classData?.difficulty.toString())
         contingutDuracioClasse.text = classData?.length.toString()
-        contingutCategoriaClasse.text = classData?.categories.toString()
+        contingutCategoriaClasse.text = categoriesName(classData?.categories!!)
+    }
+
+    private fun workareaName(workarea: String): String? {
+        when (workarea) {
+            "UB" -> return "Tren superior"
+            "LB" -> return "Tren inferior"
+            "FB" -> return "Cos sencer"
+            "C" -> return "Core"
+            else -> return null
+        }
+    }
+
+    private fun categoriesName(categories: ArrayList<String>): String? {
+        var categoriesString: ArrayList<String> = ArrayList()
+        if (categories.contains("S")) categoriesString.add("Força")
+        if (categories.contains("C")) categoriesString.add("Càrdio")
+        if (categories.contains("Y")) categoriesString.add("Ioga")
+        if (categories.contains("E")) categoriesString.add("Estiraments")
+        if (categories.contains("R")) categoriesString.add("Rehabilitació")
+        if (categories.contains("P")) categoriesString.add("Pilates")
+        return categoriesString.joinToString()
+    }
+
+    private fun difficultyName(difficulty: String): String? {
+        when (difficulty) {
+            "E" -> return "Fàcil"
+            "M" -> return "Mitjana"
+            "H" -> return "Difícil"
+            else -> return null
+        }
+    }
+
+    private fun ageName(age: String): String? {
+        when (age) {
+            "K" -> return "Nen"
+            "T" -> return "Gent jove"
+            "A" -> return "Adult"
+            "E" -> return "Gent gran"
+            else -> return null
+        }
     }
 
     /** Function setContent

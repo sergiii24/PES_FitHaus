@@ -27,4 +27,18 @@ class PredefinedRoutineRepositoryDefault(
         }.asLiveData()
     }
 
+    override fun getPredefinedRoutines(): LiveData<Resource<List<PredefinedRoutine>>> {
+        return object : NetworkDatabaseResource<List<PredefinedRoutine>, List<PredefinedRoutine>>(appExecutors) {
+            override fun saveCallResult(items: List<PredefinedRoutine>) {
+                for (i in items) {
+                    predefinedRoutineDao.insertPredefinedRoutine(i)
+                }
+            }
+
+            override fun loadFromDb() = predefinedRoutineDao.getPredefinedRoutines()
+
+            override fun createCall() = predefinedRoutineService.getPredefinedRoutines()
+        }.asLiveData()
+    }
+
 }

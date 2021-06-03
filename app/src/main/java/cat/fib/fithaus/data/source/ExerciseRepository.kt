@@ -6,11 +6,11 @@ import cat.fib.fithaus.utils.Resource
 
 interface ExerciseRepository {
 
-    fun getExercise(exerciseId: String): LiveData<Resource<Exercise>>
+    fun getExercise(exerciseName: String): LiveData<Resource<Exercise>>
+
+    fun getExercises(): LiveData<Resource<List<Exercise>>>
 
     fun observeExercises(): LiveData<Resource<List<Exercise>>>
-
-    suspend fun getExercises(): Resource<List<Exercise>>
 
     suspend fun refreshExercises()
 

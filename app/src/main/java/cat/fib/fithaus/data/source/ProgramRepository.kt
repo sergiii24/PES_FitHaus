@@ -6,4 +6,6 @@ import cat.fib.fithaus.utils.Resource
 
 interface ProgramRepository {
     fun getProgram(programId: Int): LiveData<Resource<Program>>
+
+    fun getPrograms(): LiveData<Resource<List<Program>>>
 }
