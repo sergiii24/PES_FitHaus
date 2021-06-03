@@ -109,4 +109,22 @@ class AppModule {
             .create(PredefinedRoutineService::class.java)
     }
 
+    @Singleton
+    @Provides
+    fun provideHealthDataService(): HealthDataService {
+        val logger = HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }
+
+        val client = OkHttpClient.Builder()
+            .addInterceptor(logger)
+            .build()
+
+        return Retrofit.Builder()
+            .baseUrl(Configuration.urlServer)
+            .client(client)
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(LiveDataCallAdapterFactory())
+            .build()
+            .create(HealthDataService::class.java)
+    }
+
 }

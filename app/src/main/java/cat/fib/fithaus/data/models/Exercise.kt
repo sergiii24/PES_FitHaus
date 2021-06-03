@@ -34,7 +34,7 @@ data class Exercise(
     @ColumnInfo(name = "difficulty") @SerializedName("difficulty")
     var difficulty: String,
     @ColumnInfo(name = "categories") @SerializedName("categories")
-    var categories: String,
+    var categories: ArrayList<String>,
     @ColumnInfo(name = "length") @SerializedName("length")
     var length: String,
     @ColumnInfo(name = "muscleimage") @SerializedName("muscleimage")

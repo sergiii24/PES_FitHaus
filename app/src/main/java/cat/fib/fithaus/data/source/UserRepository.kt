@@ -8,6 +8,8 @@ interface UserRepository {
 
     fun login(userEmail: String, userPassword: String): LiveData<Resource<User>>
 
+    fun login(userUid: String): LiveData<Resource<User>>
+
     fun getUser(userId: Int): LiveData<Resource<User>>
 
     fun createUser(user: User): LiveData<Resource<User>>
