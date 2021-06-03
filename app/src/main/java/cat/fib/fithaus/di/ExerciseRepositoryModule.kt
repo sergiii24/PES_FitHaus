@@ -101,3 +101,22 @@ object HealthDataRepositoryModule {
         )
     }
 }
+
+/**
+ * The binding for Collection has the default Repository.
+ */
+@Module
+@InstallIn(SingletonComponent::class)
+object CollectionRepositoryModule {
+    @Singleton
+    @Provides
+    fun provideCollectionRepository(
+        collectionService: CollectionService,
+        database: FitHausDatabase,
+        appExecutors: AppExecutors
+    ): CollectionRepository {
+        return CollectionRepositoryDefault(
+            database.collectionDao(), collectionService, appExecutors
+        )
+    }
+}

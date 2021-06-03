@@ -127,4 +127,22 @@ class AppModule {
             .create(HealthDataService::class.java)
     }
 
+    @Singleton
+    @Provides
+    fun provideCollectionService(): CollectionService {
+        val logger = HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }
+
+        val client = OkHttpClient.Builder()
+            .addInterceptor(logger)
+            .build()
+
+        return Retrofit.Builder()
+            .baseUrl(Configuration.urlServer)
+            .client(client)
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(LiveDataCallAdapterFactory())
+            .build()
+            .create(CollectionService::class.java)
+    }
+
 }

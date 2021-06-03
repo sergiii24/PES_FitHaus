@@ -4,6 +4,7 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import cat.fib.fithaus.data.models.*
+import cat.fib.fithaus.data.models.Collection
 
 /**
  * The Room Database that contains the Exercise table.
@@ -11,7 +12,7 @@ import cat.fib.fithaus.data.models.*
  * Note that exportSchema should be true in production databases.
  */
 
-@Database(entities = [User::class, Exercise::class, Class::class, PredefinedRoutine::class, HealthData::class], version = 1, exportSchema = true)
+@Database(entities = [User::class, Exercise::class, Class::class, PredefinedRoutine::class, HealthData::class, Collection::class], version = 1, exportSchema = true)
 @TypeConverters(Converters::class)
 abstract class FitHausDatabase : RoomDatabase() {
 
@@ -24,5 +25,7 @@ abstract class FitHausDatabase : RoomDatabase() {
     abstract fun predefinedRoutineDao(): PredefinedRoutineDao
 
     abstract fun healthDataDao(): HealthDataDao
+
+    abstract fun collectionDao(): CollectionDao
 
 }

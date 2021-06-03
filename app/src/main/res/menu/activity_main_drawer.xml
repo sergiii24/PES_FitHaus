@@ -35,6 +35,11 @@
             android:id="@+id/nav_logout"
             android:icon="@drawable/ic_logout"
             android:title="@string/TancarSessio" />
+
+        <item
+            android:id="@+id/nav_collections"
+            android:icon="@drawable/ic_collections"
+            android:title="@string/Collections" />
     </group>
 
 </menu>
