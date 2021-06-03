@@ -1,5 +1,6 @@
 package cat.fib.fithaus.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,13 +14,19 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cat.fib.fithaus.RecyclerViewAdapter
 import cat.fib.fithaus.CardViewItem
+import cat.fib.fithaus.ConsultarRutinaPredefinidaActivity
 import cat.fib.fithaus.R
 import cat.fib.fithaus.data.models.Collection
 import cat.fib.fithaus.utils.Status
 import cat.fib.fithaus.viewmodels.CollectionViewModel
+import cat.fib.fithaus.viewmodels.PredefinedRoutineViewModel
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_consultar_coleccio.*
+
+
+// Paràmetres d'inicialització del Fragment
+private const val EXTRA_MESSAGE = "cat.fib.fithaus.MESSAGE"
 
 /** Classe FragmentConsultarColeccio
  *
@@ -30,8 +37,11 @@ import kotlinx.android.synthetic.main.fragment_consultar_coleccio.*
  */
 
 @AndroidEntryPoint
-class FragmentConsultarColeccio : Fragment(R.layout.fragment_consultar_coleccio), RecyclerViewAdapter.OnItemClickListener {
-    private val viewModel by viewModels<CollectionViewModel>()
+class FragmentConsultarColeccio : Fragment(), RecyclerViewAdapter.OnItemClickListener {
+    private val viewModelCollection by viewModels<CollectionViewModel>()
+
+    private var identificadorCollection: String? = null      // Identificador de la col·lecció
+    private var coleccio: Collection? = null                 // Model de la col·lecció
 
     lateinit var nom_coleccio: TextView
     lateinit var descripcio_coleccio: TextView
@@ -39,6 +49,18 @@ class FragmentConsultarColeccio : Fragment(R.layout.fragment_consultar_coleccio)
     lateinit var llistat_rutines: ArrayList<CardViewItem>
     lateinit var recyclerView: RecyclerView
 
+
+    /** Function onCreate
+     *
+     *  Funció encarregada de crear el fragment
+     *
+     *  @param savedInstanceState
+     *  @author Daniel Cárdenas
+     */
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        identificadorCollection = activity?.intent?.getStringExtra(EXTRA_MESSAGE)
+    }
 
     /** Funció inicialitzadora
      *
@@ -56,38 +78,41 @@ class FragmentConsultarColeccio : Fragment(R.layout.fragment_consultar_coleccio)
         llistat_rutines_text = v.findViewById(R.id.RutinesText)
         recyclerView = v.findViewById(R.id.recycler_view)
 
-        /*viewModel.collection.observe(viewLifecycleOwner, Observer {
+        identificadorCollection = "3" // Eliminar aquesta línia de codi perquè s'està forçant el paràmetre que li ha d'arribar
+
+        identificadorCollection?.let {
+            viewModelCollection.getCollection(it)
+        }
+
+        viewModelCollection.collection.observe(viewLifecycleOwner, Observer {
             if (it.status == Status.SUCCESS) {
-                setUpData(it.data)
-                /*val routinesList = generateList(num_predef_routines)
-                LlistatRutines.adapter = RecyclerViewAdapter(routinesList)
-                LlistatRutines.layoutManager = LinearLayoutManager(this.context)*/
+                coleccio = it.data
+                setUpData()
             }
-            else Toast.makeText(this.context, "ERROR!", Toast.LENGTH_LONG).show()
-        })*/
-        setExampleContent()
+            else if (it.status == Status.ERROR)
+                Toast.makeText(activity, "ERROR!", Toast.LENGTH_LONG).show()
+        })
+
         return v
     }
 
+    /** Function onItemClick
+     *
+     *  Funció encarregada de configurar el comportament del clic en un CardViewItem del RecyclerView
+     *
+     *  @param position
+     *  @author Daniel Cárdenas
+     */
     override fun onItemClick(position: Int) {
-        Toast.makeText(context, "Item $position clicked", Toast.LENGTH_SHORT).show()
-        val clickedItem = llistat_rutines[position]
-        clickedItem.text = "Item $position modified"
-        recyclerView.adapter?.notifyItemChanged(position)
-    }
-
-    /*private fun generateList(size: Int): List<CardViewItem> {
-        val list = ArrayList<CardViewItem>()
-
-        for (i in 0 until size) {
-            val imagen = list[i].imageResource
-            val nombre = list[i].nametext
-
-            val item = CardViewItem(imagen, nombre)
-            list += item
+        if (position < coleccio!!.predef_routines.size){
+            // El CardViewItem clicat és una rutina
+            val identificadorRutina = coleccio!!.predef_routines[position]
+            val intent = Intent(activity, ConsultarRutinaPredefinidaActivity::class.java).apply {
+                putExtra(EXTRA_MESSAGE, identificadorRutina)
+            }
+            startActivity(intent)
         }
-        return list
-    }*/
+    }
 
 
     /** Funció setUpData
@@ -97,12 +122,50 @@ class FragmentConsultarColeccio : Fragment(R.layout.fragment_consultar_coleccio)
      *  @param collectionData
      *  @author Daniel Cárdenas.
      */
-    /*fun setUpData(collectionData: Collection?) {
-        nom_coleccio.text = collectionData?.name.toString()
-        descripcio_coleccio.text = collectionData?.description.toString()
-        //llistat_rutines = collectionData?.predef_routines.get()
+    fun setUpData() {
+        nom_coleccio.text = coleccio!!.name.toString()
+        descripcio_coleccio.text = coleccio!!.description.toString()
+        setPredefinedRoutinesContent(0)
+    }
 
-    }*/
+    
+    /** Function setPredefinedRoutinesContent
+     *
+     *  Funció encarregada de generar la llista de CardViewItems amb la imatge i el nom de les rutines predefinides que formen la col·lecció
+     *
+     *  @param  position
+     *  @author Daniel Cárdenas
+     */
+    private fun setPredefinedRoutinesContent(position: Int) {
+        if (position < coleccio!!.predef_routines.size){
+            val viewModelRutines by viewModels<PredefinedRoutineViewModel>()   // ViewModel de les rutines predefinides de la col·lecció
+            val identificadorRutina = coleccio!!.predef_routines[position]
+            viewModelRutines.getPredefinedRoutine(identificadorRutina)
+            viewModelRutines.predefinedRoutine.observe(viewLifecycleOwner, Observer {
+                if (it.status == Status.SUCCESS){
+                    val item = CardViewItem(it.data!!.image, it.data!!.name + " (Rutina)")
+                    llistat_rutines.plusAssign(item)
+                    setPredefinedRoutinesContent(position+1)
+                }
+                else if (it.status == Status.ERROR)
+                    Toast.makeText(activity, "ERROR!", Toast.LENGTH_LONG).show()
+            })
+        }
+        else setActivitiesContent()
+    }
+
+    /** Function setActivitiesContent
+     *
+     *  Funció encarregada d'omplir el RecyclerView amb la llista de CardViewItems que contenen la imatge i el nom de les rutines predefinides que formen la col·lecció
+     *
+     *  @author Daniel Cárdenas
+     */
+    private fun setActivitiesContent(){
+        recyclerView.adapter = RecyclerViewAdapter(llistat_rutines, this)
+        recyclerView.layoutManager = LinearLayoutManager(activity)
+        recyclerView.setHasFixedSize(true)
+    }
+
 
 
     private fun setExampleContent(){

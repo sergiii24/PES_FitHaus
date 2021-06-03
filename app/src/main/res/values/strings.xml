@@ -117,5 +117,8 @@
     <string name="menu_profile">Perfil</string>
     <string name="Actualitzar_Perfil">Actualitzar perfil</string>
     <string name="Restablir_Preferencies">Restablir preferències</string>
+    <string name="text_impacte">Impacte</string>
+    <string name="text_equipament">Equipament</string>
+    <string name="text_temps">Temps</string>
 
 </resources>

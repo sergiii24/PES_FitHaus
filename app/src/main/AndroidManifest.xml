@@ -25,15 +25,17 @@
         <activity android:name=".ConsultarClasseActivity"/>
 
         <activity android:name=".AuthenticationProviders"
-            android:theme="@style/Theme.FitHaus.SplashScreen">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:theme="@style/Theme.FitHaus.SplashScreen"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        <activity android:name=".ModificarPerfilActivity" />
+        <activity android:name=".ConsultarColeccioActivity">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
 
         </activity>
-        <activity android:name=".ModificarPerfilActivity" />
         <activity android:name=".TancarSessioActivity" />
         <activity  android:name=".ConsultarExerciciActivity"/>
         <activity android:name=".PreferencesActivity"/>

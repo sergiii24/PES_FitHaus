@@ -6,7 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import cat.fib.fithaus.data.models.Collection
-import cat.fib.fithaus.data.models.User
+
 
 /**
  * Data Access Object for the collection table.
@@ -19,7 +19,7 @@ interface CollectionDao {
      * @param collectionName the name of the collection.
      * @return the name of collection.
      */
-    @Query("SELECT * FROM collection WHERE name = :collectionName")
+    @Query("SELECT * FROM collections WHERE name = :collectionName")
     fun getCollectionByName(collectionName: String): LiveData<Collection>
 
     /**
