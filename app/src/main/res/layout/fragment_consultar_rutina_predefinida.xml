@@ -60,7 +60,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/text_descripció"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/contingutDescripcioRutinaPredefinida"
@@ -85,7 +86,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/text_categoria"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/contingutCategoriaRutinaPredefinida"
@@ -112,7 +114,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/text_temps"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/contingutTempsRutinaPredefinida"
@@ -139,7 +142,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/text_edat"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/contingutEdatRutinaPredefinida"
@@ -166,7 +170,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/Nivell"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/contingutNivellRutinaPredefinida"
@@ -193,7 +198,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/text_equipament"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/contingutEquipamentRutinaPredefinida"
@@ -220,7 +226,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/Objectiu"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/contingutObjectiuRutinaPredefinida"
@@ -247,7 +254,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/text_impacte"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/contingutImpacteRutinaPredefinida"

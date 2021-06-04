@@ -133,9 +133,19 @@ class FragmentConsultarPrograma : Fragment(), RecyclerViewNomAdapter.OnItemClick
     private fun setUpData() {
         nom_programa.text = programa!!.name.toString()
         descripcio.text = programa!!.description.toString()
-        nivell_asignat.text = programa!!.difficulty.toString()
+        nivell_asignat.text = levelName(programa!!.difficulty)
+        println("difficulty: " + programa!!.difficulty)
         setmanes_asignades.text = programa!!.weeks.toString()
         setPredefinedRoutinesContent(0)
+    }
+
+    private fun levelName(level: String): String? {
+        when (level) {
+            "B" -> return "Principiant"
+            "I" -> return "Intermedi"
+            "A" -> return "Avançat"
+            else -> return null
+        }
     }
 
     /** Function setPredefinedRoutinesContent

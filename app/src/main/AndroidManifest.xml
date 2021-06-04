@@ -16,9 +16,27 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FitHaus">
         <activity android:name=".RealitzarRutinaPredefinidaActivity"></activity>
-        <activity android:name=".ConsultarRutinaPredefinidaActivity" />
-        <activity android:name=".ConsultarProgramaActivity" />
-        <activity android:name=".ConsultarColeccioActivity" />
+        <activity android:name=".ConsultarRutinaPredefinidaActivity">
+            android:parentActivityName=".MainActivity">
+            <!-- The meta-data tag is required if you support API level 15 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity android:name=".ConsultarProgramaActivity">
+            android:parentActivityName=".MainActivity">
+            <!-- The meta-data tag is required if you support API level 15 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity android:name=".ConsultarColeccioActivity">
+            android:parentActivityName=".MainActivity">
+            <!-- The meta-data tag is required if you support API level 15 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
         <activity android:name=".CrearPerfilActivity">
             android:parentActivityName=".AuthenticationProviders">
             <!-- The meta-data tag is required if you support API level 15 and lower -->
@@ -26,7 +44,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".ConsultarClasseActivity"/>
+        <activity android:name=".ConsultarClasseActivity">
+            android:parentActivityName=".MainActivity">
+            <!-- The meta-data tag is required if you support API level 15 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
 
         <activity android:name=".AuthenticationProviders"
             android:theme="@style/Theme.FitHaus.SplashScreen">
@@ -37,8 +61,13 @@
         </intent-filter>
 
         </activity>
-        <activity android:name=".ConsultarColeccioActivity"/>
-        <activity android:name=".ConsultarExerciciActivity" />
+        <activity android:name=".ConsultarExerciciActivity">
+            android:parentActivityName=".MainActivity">
+            <!-- The meta-data tag is required if you support API level 15 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
         <activity android:name=".PreferencesActivity" />
         <activity
             android:name=".MainActivity"

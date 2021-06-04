@@ -19,23 +19,23 @@
     <fragment
         android:id="@+id/nav_programs"
         android:name="cat.fib.fithaus.ui.CercarFiltrarProgramFragment"
-        android:label="CercarFiltrarProgramFragment" />
+        android:label="@string/text_programs" />
     <fragment
         android:id="@+id/nav_predefinedroutine"
         android:name="cat.fib.fithaus.ui.CercarFiltrarRutinaPredefinidaFragment"
-        android:label="CercarFiltrarRutinaPredefinidaFragment" />
+        android:label="@string/text_predefinedroutines" />
     <fragment
         android:id="@+id/nav_exercises"
         android:name="cat.fib.fithaus.ui.CercarFiltrarExerciciFragment"
-        android:label="CercarFiltrarExerciciFragment" />
+        android:label="@string/text_exercicis" />
     <fragment
         android:id="@+id/nav_classes"
         android:name="cat.fib.fithaus.viewmodels.CercarFiltrarClasseFragment"
-        android:label="CercarFiltrarClasseFragment" />
+        android:label="@string/text_classes" />
 
     <fragment
         android:id="@+id/nav_collections"
         android:name="cat.fib.fithaus.ui.CercarFiltrarCollectionFragment"
-        android:label="CercarFiltrarCollectionFragment" />
+        android:label="@string/Collections" />
 
 </navigation>
