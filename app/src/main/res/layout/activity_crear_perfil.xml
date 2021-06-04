@@ -59,7 +59,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="#00FFFFFF"
-                        android:digits="ABCDEFGHIJKLMNÑOPQRSTUVWXYZabcdefghijklmnñopqrstuvwxyz"
+                        android:digits="ABCDEFGHIJKLMNÑOPQRSTUVWXYZÀÁÈÉÌÍÒÓÙÏÜ abcdefghijklmnñopqrstuvwxyzàáèéìíòóùúïü"
                         android:ems="10"
                         android:hint="@string/Nom"
                         android:inputType="textPersonName" />
@@ -76,7 +76,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="#00FFFFFF"
-                        android:digits="ABCDEFGHIJKLMNÑOPQRSTUVWXYZabcdefghijklmnñopqrstuvwxyz"
+                        android:digits="ABCDEFGHIJKLMNÑOPQRSTUVWXYZÀÁÈÉÌÍÒÓÙÏÜ abcdefghijklmnñopqrstuvwxyzàáèéìíòóùúïü"
                         android:ems="10"
                         android:hint="@string/Cognoms"
                         android:inputType="textPersonName" />

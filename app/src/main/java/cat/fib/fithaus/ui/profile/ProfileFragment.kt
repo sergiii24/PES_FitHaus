@@ -138,7 +138,7 @@ class ProfileFragment : Fragment() {
      *
      *  @author Albert Miñana Montecino, Adrià Espinola Garcia, Daniel Cárdenas Rafael
      */
-    private fun confirmDeleteUserProfile() {
+    public fun confirmDeleteUserProfile() {
         val builder = AlertDialog.Builder(requireActivity())
         builder.setTitle("Confirmació")
         builder.setMessage("Estàs segur que vols eliminar el teu perfil?")

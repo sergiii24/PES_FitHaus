@@ -1,9 +1,11 @@
 package cat.fib.fithaus
 
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
@@ -97,8 +99,7 @@ class RealitzarRutinaPredefinidaActivity : AppCompatActivity() {
                 updateContent()
             }
             else if (posicio!!+1 == limit){
-                //showCongratulations()
-                showHome()
+                showCongratulations()
             }
         }
     }
@@ -125,7 +126,7 @@ class RealitzarRutinaPredefinidaActivity : AppCompatActivity() {
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Enhorabona")
         builder.setMessage("Has completat la rutina d'entrenament predefinida amb èxit")
-        builder.setPositiveButton("Acceptar", null)
+        builder.setPositiveButton("Acceptar", DialogInterface.OnClickListener { dialog, which -> showHome() })
         val dialog: AlertDialog = builder.create()
         dialog.create()
         dialog.show()
@@ -140,6 +141,9 @@ class RealitzarRutinaPredefinidaActivity : AppCompatActivity() {
     private fun updateContent(){
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
+
+        val fragmentContainer = findViewById<FrameLayout>(R.id.fragment_container)
+        fragmentContainer.removeAllViews()
 
         val fragment = RealitzarRutinaPredefinidaFragment()
         fragmentTransaction.add(R.id.fragment_container, fragment)

@@ -235,7 +235,7 @@ class AuthenticationProviders : AppCompatActivity() {
                                                 prefs.apply()
                                                 showSurvey()
                                             } else if (it.status == Status.ERROR) {
-                                                Toast.makeText(this@AuthenticationProviders, "ERROR!", Toast.LENGTH_LONG).show()
+                                                //Toast.makeText(this@AuthenticationProviders, "ERROR!", Toast.LENGTH_LONG).show()
                                             }
                                         })
                                     }
@@ -317,7 +317,7 @@ class AuthenticationProviders : AppCompatActivity() {
                                                 prefs.apply()
                                                 showSurvey()
                                             } else if (it.status == Status.ERROR) {
-                                                Toast.makeText(this, "ERROR!", Toast.LENGTH_LONG).show()
+                                                //Toast.makeText(this, "ERROR!", Toast.LENGTH_LONG).show()
                                             }
                                         })
                                     }

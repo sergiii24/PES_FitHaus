@@ -10,6 +10,7 @@ import android.widget.EditText
 import android.widget.RadioButton
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import cat.fib.fithaus.data.models.User
 import cat.fib.fithaus.ui.dialog.DatePickerFragment
@@ -111,7 +112,8 @@ class CrearPerfilActivity : AppCompatActivity() {
                         prefs.apply()
                         showSurvey()
                     } else if (it.status == Status.ERROR) {
-                        Toast.makeText(this, "ERROR!", Toast.LENGTH_LONG).show()
+                        showErrorField(3)
+                        //Toast.makeText(this, "ERROR!", Toast.LENGTH_LONG).show()
                     }
                 })
             }
@@ -329,6 +331,33 @@ class CrearPerfilActivity : AppCompatActivity() {
     private fun showSurvey(){
         val homeIntent = Intent(this, PreferencesActivity::class.java)
         startActivity(homeIntent)
+    }
+
+    /** Function showErrorField
+     *
+     *  Funció encarregada de mostrar missatges d'error en els camps del perfil d'usuari
+     *
+     *  @param  fieldNumber Indica 1 l'error està relacionat amb el nom d'usuari ja existeix, indica 2 l'error està relacionat amb el correu electrònic, indica 3 si l'error està relacionat amb qualsevol dels dos
+     *  @author Albert Miñana Montecino
+     */
+    private fun showErrorField(fieldNumber: Int) {
+        var message: String = ""
+        if (fieldNumber == 1){
+            message = "El nom d'usuari introduït ja existeix. Si us plau, escolli'n un altre"
+        }
+        else if (fieldNumber == 2){
+            message = "El correu electrònic introduït ja existeix. Si us plau, escolli'n un altre"
+        }
+        else if (fieldNumber == 3){
+            message = "El nom d'usuari o el correu electrònic introduïts ja existeixen. Si us plau, escolli'n uns altres"
+        }
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Advertència")
+        builder.setMessage(message)
+        builder.setPositiveButton("Acceptar", null)
+        val dialog: AlertDialog = builder.create()
+        dialog.create()
+        dialog.show()
     }
 
 }

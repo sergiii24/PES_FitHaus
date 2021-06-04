@@ -1,4 +1,4 @@
-package cat.fib.fithaus.viewmodels
+package cat.fib.fithaus.ui
 
 import android.content.Intent
 import android.os.Bundle
@@ -17,6 +17,7 @@ import cat.fib.fithaus.data.models.Class
 import cat.fib.fithaus.R
 import cat.fib.fithaus.RecyclerViewAdapter
 import cat.fib.fithaus.utils.Status
+import cat.fib.fithaus.viewmodels.ClassViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 // Paràmetres d'inicialització del Fragment

@@ -2,17 +2,20 @@ package cat.fib.fithaus.ui.profile
 
 import android.app.DatePickerDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import cat.fib.fithaus.MainActivity
 import cat.fib.fithaus.R
+import cat.fib.fithaus.RealitzarRutinaPredefinidaActivity
 import cat.fib.fithaus.data.models.User
 import cat.fib.fithaus.ui.dialog.DatePickerFragment
 import cat.fib.fithaus.utils.Status
@@ -204,7 +207,13 @@ class UserFragment : Fragment(R.layout.fragment_user) {
                         prefs.apply()
                         (activity as MainActivity).setNameAndEmail()
                     } else if (it.status == Status.ERROR) {
-                        Toast.makeText(activity, "ERROR!", Toast.LENGTH_LONG).show()
+                        if (it.status.toString().contentEquals("username")){
+                            showErrorField(1)
+                        }
+                        else if (it.status.toString().contentEquals("email")){
+                            showErrorField(2)
+                        }
+                        else Toast.makeText(activity, "ERROR!", Toast.LENGTH_LONG).show()
                     }
                 })
             }
@@ -385,4 +394,30 @@ class UserFragment : Fragment(R.layout.fragment_user) {
         return valida
     }
 
+    /** Function showErrorField
+     *
+     *  Funció encarregada de mostrar missatges d'error en els camps del perfil d'usuari
+     *
+     *  @param  fieldNumber Indica 1 l'error està relacionat amb el nom d'usuari ja existeix, indica 2 l'error està relacionat amb el correu electrònic, indica 3 si l'error està relacionat amb qualsevol dels dos
+     *  @author Albert Miñana Montecino
+     */
+    private fun showErrorField(fieldNumber: Int) {
+        var message: String = ""
+        if (fieldNumber == 1){
+            message = "El nom d'usuari introduït ja existeix. Si us plau, escolli'n un altre"
+        }
+        else if (fieldNumber == 2){
+            message = "El correu electrònic introduït ja existeix. Si us plau, escolli'n un altre"
+        }
+        else if (fieldNumber == 3){
+            message = "El nom d'usuari o el correu electrònic introduïts ja existeixen. Si us plau, escolli'n uns altres"
+        }
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("Advertència")
+        builder.setMessage(message)
+        builder.setPositiveButton("Acceptar", null)
+        val dialog: AlertDialog = builder.create()
+        dialog.create()
+        dialog.show()
+    }
 }
