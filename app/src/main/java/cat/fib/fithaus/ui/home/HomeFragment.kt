@@ -15,9 +15,9 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import cat.fib.fithaus.R
+import cat.fib.fithaus.ui.CercarFiltrarClasseFragment
 import cat.fib.fithaus.ui.CercarFiltrarExerciciFragment
 import cat.fib.fithaus.ui.CercarFiltrarRutinaPredefinidaFragment
-import cat.fib.fithaus.viewmodels.CercarFiltrarClasseFragment
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
 
 class HomeFragment : Fragment() {
