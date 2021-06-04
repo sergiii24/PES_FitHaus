@@ -13,7 +13,4 @@ data class Collection(
     var description: String,
     @ColumnInfo(name = "predef_routines") @SerializedName("predef_routines")
     var predef_routines: ArrayList<Int>
-) {
-
-
-}
+)

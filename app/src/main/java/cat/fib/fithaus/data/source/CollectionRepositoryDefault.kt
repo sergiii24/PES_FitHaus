@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import cat.fib.fithaus.data.api.CollectionService
 import cat.fib.fithaus.data.source.local.CollectionDao
 import cat.fib.fithaus.data.models.Collection
+import cat.fib.fithaus.data.models.Program
 import cat.fib.fithaus.utils.AppExecutors
 import cat.fib.fithaus.utils.Resource
 
@@ -17,10 +18,12 @@ class CollectionRepositoryDefault (
     private val appExecutors: AppExecutors,
 ) : CollectionRepository {
     override fun getCollection(collectionName:String): LiveData<Resource<Collection>> {
-        return object : NetworkDatabaseResource<Collection, Collection>(appExecutors) {
+        return object : NetworkBoundResource<Collection, Collection>(appExecutors) {
             override fun saveCallResult(item: Collection) {
                 collectionDao.insertCollection(item)
             }
+
+            override fun shouldFetch(data: Collection?) = data == null
 
             override fun loadFromDb() = collectionDao.getCollectionByName(collectionName)
 

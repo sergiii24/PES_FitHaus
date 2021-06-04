@@ -12,10 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import cat.fib.fithaus.CardViewItem
-import cat.fib.fithaus.ConsultarRutinaPredefinidaActivity
-import cat.fib.fithaus.RecyclerViewAdapter
-import cat.fib.fithaus.R
+import cat.fib.fithaus.*
 import cat.fib.fithaus.data.models.Program
 import cat.fib.fithaus.utils.Status
 import cat.fib.fithaus.viewmodels.PredefinedRoutineViewModel
@@ -36,7 +33,7 @@ private const val EXTRA_MESSAGE = "cat.fib.fithaus.MESSAGE"
  */
 
 @AndroidEntryPoint
-class FragmentConsultarPrograma : Fragment(), RecyclerViewAdapter.OnItemClickListener {
+class FragmentConsultarPrograma : Fragment(), RecyclerViewNomAdapter.OnItemClickListener {
     private val viewModelPrograma by viewModels<ProgramViewModel>()
 
     private var identificadorPrograma: String? = null      // Identificador del programa
@@ -51,7 +48,7 @@ class FragmentConsultarPrograma : Fragment(), RecyclerViewAdapter.OnItemClickLis
     lateinit var llistat_rutines_text: TextView
 
     lateinit var recyclerView: RecyclerView
-    lateinit var llistat_rutines: ArrayList<CardViewItem>
+    lateinit var llistat_rutines: ArrayList<CardViewNom>
 
     /** Function onCreate
      *
@@ -88,7 +85,8 @@ class FragmentConsultarPrograma : Fragment(), RecyclerViewAdapter.OnItemClickLis
 
         recyclerView = v.findViewById(R.id.recycler_view)
 
-        identificadorPrograma = "3" // Eliminar aquesta línia de codi perquè s'està forçant el paràmetre que li ha d'arribar
+        llistat_rutines = ArrayList<CardViewNom>()
+        //identificadorPrograma = "3" // Eliminar aquesta línia de codi perquè s'està forçant el paràmetre que li ha d'arribar
 
         identificadorPrograma?.let {
             viewModelPrograma.getProgram(it.toInt())
@@ -118,7 +116,7 @@ class FragmentConsultarPrograma : Fragment(), RecyclerViewAdapter.OnItemClickLis
     override fun onItemClick(position: Int) {
         if (position < programa!!.predef_routines.size){
             // El CardViewItem clicat és una rutina
-            val identificadorRutina = programa!!.predef_routines[position]
+            val identificadorRutina = programa!!.predef_routines[position].toString()
             val intent = Intent(activity, ConsultarRutinaPredefinidaActivity::class.java).apply {
                 putExtra(EXTRA_MESSAGE, identificadorRutina)
             }
@@ -152,9 +150,9 @@ class FragmentConsultarPrograma : Fragment(), RecyclerViewAdapter.OnItemClickLis
             val viewModelRutines by viewModels<PredefinedRoutineViewModel>()   // ViewModel de les rutines predefinides del programa
             val identificadorRutina = programa!!.predef_routines[position]
             viewModelRutines.getPredefinedRoutine(identificadorRutina)
-            viewModelRutines.predefinedRoutine.observe(viewLifecycleOwner, Observer {
+            viewModelRutines.predefinedRoutine?.observe(viewLifecycleOwner, Observer {
                 if (it.status == Status.SUCCESS){
-                    val item = CardViewItem(it.data!!.image.toString(), it.data!!.name + " (Rutina)")
+                    val item = CardViewNom(it.data!!.name + " (Rutina)")
                     llistat_rutines.plusAssign(item)
                     setPredefinedRoutinesContent(position+1)
                 }
@@ -172,7 +170,7 @@ class FragmentConsultarPrograma : Fragment(), RecyclerViewAdapter.OnItemClickLis
      *  @author Daniel Cárdenas
      */
     private fun setActivitiesContent(){
-        recyclerView.adapter = RecyclerViewAdapter(llistat_rutines, this)
+        recyclerView.adapter = RecyclerViewNomAdapter(llistat_rutines, this)
         recyclerView.layoutManager = LinearLayoutManager(activity)
         recyclerView.setHasFixedSize(true)
     }
@@ -184,17 +182,17 @@ class FragmentConsultarPrograma : Fragment(), RecyclerViewAdapter.OnItemClickLis
         nivell_asignat.text = "B"
         setmanes_asignades.text = "6"
 
-        llistat_rutines = ArrayList<CardViewItem>()
+        llistat_rutines = ArrayList<CardViewNom>()
         for (i in 0 until 500) {
             val imatge = when (i % 3) {
                 0 -> "http://simpleicon.com/wp-content/uploads/android.png"
                 1 -> "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/647px-Apple_logo_black.svg.png"
                 else -> "https://icons-for-free.com/iconfiles/png/512/microsoft+windows+icon-1320186681671871370.png"
             }
-            val item = CardViewItem(imatge, "Item $i")
+            val item = CardViewNom("Item $i")
             llistat_rutines.plusAssign(item)
         }
-        recyclerView.adapter = RecyclerViewAdapter(llistat_rutines, this)
+        recyclerView.adapter = RecyclerViewNomAdapter(llistat_rutines, this)
         recyclerView.layoutManager = LinearLayoutManager(activity)
         recyclerView.setHasFixedSize(true)
     }

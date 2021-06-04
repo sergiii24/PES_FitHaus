@@ -106,7 +106,7 @@ class CercarFiltrarRutinaPredefinidaFragment : Fragment(), RecyclerViewAdapter.O
      *  @author Albert Miñana Montecino
      */
     override fun onItemClick(position: Int) {
-        val identificadorRutinaPredefinida = llistatRutinesPredefinides!![position].id
+        val identificadorRutinaPredefinida = llistatRutinesPredefinides!![position].id.toString()
         val intent = Intent(activity, ConsultarRutinaPredefinidaActivity::class.java).apply {
             putExtra(EXTRA_MESSAGE, identificadorRutinaPredefinida)
         }

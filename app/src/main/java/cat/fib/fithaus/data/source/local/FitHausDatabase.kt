@@ -4,6 +4,7 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import cat.fib.fithaus.data.models.*
+import cat.fib.fithaus.data.models.Collection
 
 /**
  * The Room Database that contains the Exercise table.

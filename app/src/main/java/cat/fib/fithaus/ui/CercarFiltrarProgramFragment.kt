@@ -102,7 +102,7 @@ class CercarFiltrarProgramFragment : Fragment(), RecyclerViewNomAdapter.OnItemCl
      *  @author Daniel Cárdenas
      */
     override fun onItemClick(position: Int) {
-        val nomIdentificadorPrograma = llistatProgrames!![position].name
+        val nomIdentificadorPrograma = llistatProgrames!![position].id.toString()
         val intent = Intent(activity, ConsultarProgramaActivity::class.java).apply {
             putExtra(EXTRA_MESSAGE, nomIdentificadorPrograma)
         }

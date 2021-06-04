@@ -1,9 +1,10 @@
 package cat.fib.fithaus.di
 
-import cat.fib.fithaus.data.api.ExerciseService
-import cat.fib.fithaus.data.api.ClassService
-import cat.fib.fithaus.data.api.UserService
+import cat.fib.fithaus.data.api.*
 import cat.fib.fithaus.data.source.*
+import cat.fib.fithaus.data.source.CollectionRepository
+import cat.fib.fithaus.data.source.CollectionRepositoryDefault
+import cat.fib.fithaus.data.api.CollectionService
 import cat.fib.fithaus.data.source.local.FitHausDatabase
 import cat.fib.fithaus.utils.AppExecutors
 import dagger.Module
@@ -114,9 +115,9 @@ object ProgramRepositoryModule {
     @Singleton
     @Provides
     fun provideProgramRepository(
-        programService: ProgramService,
-        database: FitHausDatabase,
-        appExecutors: AppExecutors
+            programService: ProgramService,
+            database: FitHausDatabase,
+            appExecutors: AppExecutors
     ): ProgramRepository {
         return ProgramRepositoryDefault(
             database.programDao(), programService, appExecutors
@@ -133,9 +134,9 @@ object CollectionRepositoryModule {
     @Singleton
     @Provides
     fun provideCollectionRepository(
-        collectionService: CollectionService,
-        database: FitHausDatabase,
-        appExecutors: AppExecutors
+            collectionService: CollectionService,
+            database: FitHausDatabase,
+            appExecutors: AppExecutors
     ): CollectionRepository {
         return CollectionRepositoryDefault(
             database.collectionDao(), collectionService, appExecutors

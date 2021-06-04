@@ -4,11 +4,12 @@ import androidx.lifecycle.LiveData
 import cat.fib.fithaus.data.models.Collection
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface CollectionService {
 
-    @GET("/colections/{name}")
-    fun getCollection(@Path("name") collectionName: String): LiveData<ApiResponse<Collection>>
+    @GET("/colections")
+    fun getCollection(@Query("name") collectionName: String): LiveData<ApiResponse<Collection>>
 
     /**
      * @GET declares an HTTP GET request

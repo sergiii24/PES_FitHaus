@@ -17,6 +17,8 @@
         android:theme="@style/Theme.FitHaus">
         <activity android:name=".RealitzarRutinaPredefinidaActivity"></activity>
         <activity android:name=".ConsultarRutinaPredefinidaActivity" />
+        <activity android:name=".ConsultarProgramaActivity" />
+        <activity android:name=".ConsultarColeccioActivity" />
         <activity android:name=".CrearPerfilActivity">
             android:parentActivityName=".AuthenticationProviders">
             <!-- The meta-data tag is required if you support API level 15 and lower -->
