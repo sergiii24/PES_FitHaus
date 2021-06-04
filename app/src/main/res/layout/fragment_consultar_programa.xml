@@ -8,10 +8,6 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -44,6 +40,7 @@
             android:padding="16dp"
             android:text="Descripció"
             android:textSize="16sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/NomProgramaConsultat" />
 
@@ -63,7 +60,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Nivell "
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/nivellProgramaConsultat"
@@ -71,6 +69,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Nivell "
+                android:textColor="@color/black"
                 android:textSize="16sp" />
 
         </LinearLayout>
@@ -91,7 +90,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Setmanes "
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/setmanesProgramaConsultat"
@@ -99,6 +99,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Setmanes "
+                android:textColor="@color/black"
                 android:textSize="16sp" />
         </LinearLayout>
 
@@ -113,7 +114,8 @@
             android:padding="18dp"
             android:text="Llistat de Rutines:"
             android:textAlignment="center"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
